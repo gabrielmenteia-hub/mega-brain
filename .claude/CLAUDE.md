@@ -127,16 +127,20 @@ Configured in `settings.json` (distributed) and `settings.local.json` (local ove
 
 ## Rules (Lazy Loading)
 
-Detailed rules are loaded on-demand via keyword matching from `.claude/rules/`:
+Detailed rules are loaded on-demand via keyword matching from `core/rules/`:
+(Moved out of `.claude/rules/` to prevent auto-loading into context)
 
 | Group | Topics | File |
 |-------|--------|------|
-| PHASE-MANAGEMENT | phases, pipeline, batch | RULE-GROUP-1.md |
-| PERSISTENCE | sessions, save, resume | RULE-GROUP-2.md |
-| OPERATIONS | parallel, templates, KPIs | RULE-GROUP-3.md |
-| PHASE-5 | agents, dossiers, cascading | RULE-GROUP-4.md |
-| VALIDATION | source-sync, integrity | RULE-GROUP-5.md |
-| AUTO-ROUTING | skills, sub-agents, GitHub | RULE-GROUP-6.md |
+| PHASE-MANAGEMENT | phases, pipeline, batch | core/rules/RULE-GROUP-1.md |
+| PERSISTENCE | sessions, save, resume | core/rules/RULE-GROUP-2.md |
+| OPERATIONS | parallel, templates, KPIs | core/rules/RULE-GROUP-3.md |
+| PHASE-5 | agents, dossiers, cascading | core/rules/RULE-GROUP-4.md |
+| VALIDATION | source-sync, integrity | core/rules/RULE-GROUP-5.md |
+| AUTO-ROUTING | skills, sub-agents, GitHub | core/rules/RULE-GROUP-6.md |
+| AGENT-COGNITION | depth-seeking, DNA cascade | core/rules/agent-cognition.md |
+| AGENT-INTEGRITY | traceability, sources | core/rules/agent-integrity.md |
+| EPISTEMIC | anti-hallucination, confidence | core/rules/epistemic-standards.md |
 
 ## Security
 

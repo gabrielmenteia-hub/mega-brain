@@ -1,6 +1,12 @@
 # === LAYER 3 - PERSONAL DATA (100% gitignored) ===
 .data/
 
+# === PIPELINE DATA (Local processing, never public) ===
+processing/
+
+# === ANTIGRAVITY (Local tools, PDFs, planning) ===
+.antigravity/
+
 # === EXTERNAL FRAMEWORKS (NEVER track) ===
 .aios-core/
 bilhon/
