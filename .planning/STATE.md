@@ -3,11 +3,27 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
+stopped_at: Completed 02-platform-scanners/02-01-PLAN.md
+last_updated: "2026-03-14T21:54:37.566Z"
+last_activity: "2026-03-14 — Plan 01-04 complete: health_monitor with run_canary_check(), register_canary_job(), 15/15 tests GREEN. Phase 1 complete."
+progress:
+  total_phases: 6
+  completed_phases: 1
+  total_plans: 7
+  completed_plans: 5
+  percent: 71
+---
+
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
 stopped_at: Completed 01-foundation/01-03-PLAN.md
 last_updated: "2026-03-14T17:49:22.628Z"
 last_activity: "2026-03-14 — Plan 01-02 complete: BaseScraper with httpx async, tenacity retry, Semaphore rate limiting, stealth Playwright"
 progress:
-  total_phases: 6
+  [███████░░░] 71%
   completed_phases: 0
   total_plans: 4
   completed_plans: 3
@@ -68,6 +84,7 @@ Progress: [████████████████████] 100% (P
 *Updated after each plan completion*
 | Phase 01-foundation P03 | 4m | 2 tasks | 4 files |
 | Phase 01-foundation P04 | 5m | 2 tasks | 2 files |
+| Phase 02-platform-scanners P01 | 17 | 2 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -88,6 +105,9 @@ Recent decisions affecting current work:
 - [Phase 01-foundation]: APScheduler singleton via _scheduler global + get_scheduler() — health monitor and scrapers share one scheduler instance
 - [01-04]: run_canary_check() never propagates exceptions — always returns bool; alert field in structlog payloads is machine-readable key for external parsing
 - [01-04]: register_canary_job() uses replace_existing=True — safe to call at startup or on re-registration without duplicate job errors
+- [Phase 02-platform-scanners]: KIWIFY_PLATFORM_ID=3 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify — no seed data in DB schema)
+- [Phase 02-platform-scanners]: UPDATE-then-INSERT upsert pattern for products table — autoincrement id PK from _001 prevents sqlite-utils composite-pk upsert
+- [Phase 02-platform-scanners]: Kiwify fixtures are synthetic HTML — marketplace has no public URL (404), API requires auth token
 
 ### Pending Todos
 
@@ -102,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T17:55:00Z
-Stopped at: Completed 01-foundation/01-04-PLAN.md (Phase 1 complete)
+Last session: 2026-03-14T21:54:37.557Z
+Stopped at: Completed 02-platform-scanners/02-01-PLAN.md
 Resume file: None
