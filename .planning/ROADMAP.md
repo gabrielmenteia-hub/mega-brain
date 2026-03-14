@@ -8,6 +8,7 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 
 - [x] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende ✓ 2026-03-14
 - [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart, ClickBank e Kiwify
+- [ ] **Phase 2.5: Platform Expansion** - Scanners automáticos para 15+ plataformas internacionais e nichos (Gumroad, Kajabi, Teachable, JVZoo, Digistore24, Stan Store, Skool, etc.)
 - [ ] **Phase 3: Product Espionage + Dossiers** - Espionagem profunda de produtos e geração de dossiês com IA
 - [ ] **Phase 4: Pain Radar** - Radar horário de dores e desejos do mercado via fontes sociais e de tendências
 - [ ] **Phase 5: Dashboard** - Interface web para visualizar rankings, dossiês e relatórios de dores
@@ -48,6 +49,23 @@ Plans:
 - [ ] 02-01-PLAN.md — Kiwify scraper (httpx SSR) + base architecture (PlatformScanner, Product dataclass, ProductRepository, migration _002)
 - [ ] 02-02-PLAN.md — ClickBank scraper (httpx marketplace SSR scraping, gravity score ou rank posicional)
 - [ ] 02-03-PLAN.md — Hotmart scraper (Playwright XHR intercept, stealth) + APScheduler jobs + canary DB-based
+
+### Phase 2.5: Platform Expansion
+**Goal**: O sistema descobre e rankeia produtos campeões nas principais plataformas internacionais e de nicho, expandindo a cobertura além de Hotmart/ClickBank/Kiwify
+**Depends on**: Phase 2
+**Requirements**: SCAN-V2-01, SCAN-V2-02, SCAN-V2-03, SCAN-V2-04 (+ plataformas adicionais a definir em requirements)
+**Success Criteria** (what must be TRUE):
+  1. Scanners implementados para: Gumroad, Payhip, Podia, Sellfy, Lemon Squeezy, SendOwl, Etsy
+  2. Scanners implementados para: Kajabi, Teachable, Skool, Mighty Networks, LearnWorlds, Stan Store
+  3. Scanners implementados para: JVZoo, Digistore24
+  4. Todos os novos scanners seguem o padrão PlatformScanner com upsert, fallback selectors e canary checks
+  5. Ranking atualizado diariamente para todas as plataformas
+**Plans**: TBD
+
+Plans:
+- [ ] 02.5-01: Scanners de plataformas de criadores (Gumroad, Payhip, Podia, Sellfy, Lemon Squeezy, SendOwl)
+- [ ] 02.5-02: Scanners de plataformas de cursos BR/intl (Kajabi, Teachable, Skool, LearnWorlds, Stan Store)
+- [ ] 02.5-03: Scanners de marketplaces de afiliados (JVZoo, Digistore24) + Etsy digital products
 
 ### Phase 3: Product Espionage + Dossiers
 **Goal**: Para qualquer produto campeão identificado, o sistema extrai inteligência competitiva completa e gera um dossiê com análise de IA explicando por que o produto vende
@@ -121,12 +139,13 @@ Plans:
 ## Progress
 
 **Execution Order:**
-Phases execute in strict dependency order: 1 → 2 → 3 → 4 → 5 → 6
+Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete | 2026-03-14 |
 | 2. Platform Scanners | 2/3 | In Progress|  |
+| 2.5. Platform Expansion | 0/3 | Not started | - |
 | 3. Product Espionage + Dossiers | 0/5 | Not started | - |
 | 4. Pain Radar | 0/5 | Not started | - |
 | 5. Dashboard | 0/4 | Not started | - |
