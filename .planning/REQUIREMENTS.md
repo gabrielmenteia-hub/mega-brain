@@ -14,10 +14,10 @@
 
 ### Scanner de Produtos
 
-- [ ] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
+- [x] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
 - [x] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
 - [x] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
-- [ ] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
+- [x] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
 - [ ] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
 
 ### Espionagem de Produto
@@ -92,10 +92,10 @@
 | FOUND-02 | Phase 1 | Pending |
 | FOUND-03 | Phase 1 | Complete |
 | FOUND-04 | Phase 1 | Pending |
-| SCAN-01 | Phase 2 | Pending |
+| SCAN-01 | Phase 2 | Complete |
 | SCAN-02 | Phase 2 | Complete |
 | SCAN-03 | Phase 2 | Complete |
-| SCAN-04 | Phase 2 | Pending |
+| SCAN-04 | Phase 2 | Complete |
 | SCAN-05 | Phase 5 | Pending |
 | SPY-01 | Phase 3 | Pending |
 | SPY-02 | Phase 3 | Pending |

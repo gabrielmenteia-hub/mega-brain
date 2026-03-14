@@ -3,6 +3,21 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
+stopped_at: Completed 02-platform-scanners/02-03-PLAN.md
+last_updated: "2026-03-14T22:28:26.631Z"
+last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
+progress:
+  total_phases: 6
+  completed_phases: 2
+  total_plans: 7
+  completed_plans: 7
+---
+
+---
+gsd_state_version: 1.0
+milestone: v1.0
+milestone_name: milestone
+status: executing
 stopped_at: Completed 02-platform-scanners/02-01-PLAN.md
 last_updated: "2026-03-14T21:54:37.566Z"
 last_activity: "2026-03-14 — Plan 01-04 complete: health_monitor with run_canary_check(), register_canary_job(), 15/15 tests GREEN. Phase 1 complete."
@@ -86,6 +101,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 01-foundation P04 | 5m | 2 tasks | 2 files |
 | Phase 02-platform-scanners P01 | 17 | 2 tasks | 11 files |
 | Phase 02-platform-scanners P02 | 28m | 2 tasks | 6 files |
+| Phase 02-platform-scanners P03 | 635 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -113,6 +129,9 @@ Recent decisions affecting current work:
 - [02-02]: CLICKBANK_PLATFORM_ID=2 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify)
 - [02-02]: external_id for ClickBank = 'site' field (vendor ID, e.g. BRAINSONGX) — stable and unique
 - [02-02]: rank = int(gravity) — ClickBank gravity float score stored as int; positional fallback when None
+- [Phase 02-platform-scanners]: HOTMART_PLATFORM_ID=1 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify)
+- [Phase 02-platform-scanners]: Hotmart marketplace confirmed SSR — httpx sufficient, Playwright not needed (live inspection 2026-03-14)
+- [Phase 02-platform-scanners]: register_scanner_jobs() uses CronTrigger.from_crontab() reading scan_schedule from config.settings
 
 ### Pending Todos
 
@@ -127,6 +146,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T22:24:41Z
-Stopped at: Completed 02-platform-scanners/02-02-PLAN.md
+Last session: 2026-03-14T22:28:11.404Z
+Stopped at: Completed 02-platform-scanners/02-03-PLAN.md
 Resume file: None
