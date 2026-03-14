@@ -7,7 +7,7 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 ## Phases
 
 - [x] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende ✓ 2026-03-14
-- [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart e ClickBank
+- [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart, ClickBank e Kiwify
 - [ ] **Phase 3: Product Espionage + Dossiers** - Espionagem profunda de produtos e geração de dossiês com IA
 - [ ] **Phase 4: Pain Radar** - Radar horário de dores e desejos do mercado via fontes sociais e de tendências
 - [ ] **Phase 5: Dashboard** - Interface web para visualizar rankings, dossiês e relatórios de dores
@@ -39,14 +39,15 @@ Plans:
 **Success Criteria** (what must be TRUE):
   1. Sistema varre Hotmart e retorna pelo menos 10 produtos ranqueados por nicho configurado, com dados persistidos em `products`
   2. Sistema varre ClickBank e retorna produtos com gravity score por nicho configurado, com dados persistidos
-  3. Ranking é atualizado automaticamente uma vez ao dia via APScheduler sem intervenção manual
-  4. Scraper de cada plataforma tem fallback selectors e alerta quando estrutura HTML muda (schema drift detection)
-**Plans**: TBD
+  3. Sistema varre Kiwify e retorna produtos ranqueados por nicho configurado, com dados persistidos
+  4. Ranking é atualizado automaticamente uma vez ao dia via APScheduler sem intervenção manual
+  5. Scraper de cada plataforma tem fallback selectors e alerta quando estrutura HTML muda (schema drift detection)
+**Plans**: 3 plans
 
 Plans:
-- [ ] 02-01: Scraper Hotmart (Playwright + stealth)
-- [ ] 02-02: Scraper ClickBank (httpx ou Playwright conforme auditoria)
-- [ ] 02-03: Job de agendamento diário e schema drift alerts
+- [ ] 02-01-PLAN.md — Kiwify scraper (httpx SSR) + base architecture (PlatformScanner, Product dataclass, ProductRepository, migration _002)
+- [ ] 02-02-PLAN.md — ClickBank scraper (httpx marketplace SSR scraping, gravity score ou rank posicional)
+- [ ] 02-03-PLAN.md — Hotmart scraper (Playwright XHR intercept, stealth) + APScheduler jobs + canary DB-based
 
 ### Phase 3: Product Espionage + Dossiers
 **Goal**: Para qualquer produto campeão identificado, o sistema extrai inteligência competitiva completa e gera um dossiê com análise de IA explicando por que o produto vende
@@ -124,7 +125,7 @@ Phases execute in strict dependency order: 1 → 2 → 3 → 4 → 5 → 6
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 3/4 | In Progress|  |
+| 1. Foundation | 4/4 | Complete | 2026-03-14 |
 | 2. Platform Scanners | 0/3 | Not started | - |
 | 3. Product Espionage + Dossiers | 0/5 | Not started | - |
 | 4. Pain Radar | 0/5 | Not started | - |
