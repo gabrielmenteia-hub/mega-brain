@@ -3,15 +3,15 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: "Completed 01-foundation/01-01-PLAN.md"
-last_updated: "2026-03-14T17:29:24Z"
-last_activity: "2026-03-14 — Plan 01-01 complete: MIS data foundation (schema + migrations + test infra)"
+stopped_at: "Completed 01-foundation/01-02-PLAN.md"
+last_updated: "2026-03-14T17:39:06Z"
+last_activity: "2026-03-14 — Plan 01-02 complete: BaseScraper with httpx async, tenacity retry, Semaphore rate limiting, stealth Playwright"
 progress:
   total_phases: 6
   completed_phases: 0
   total_plans: 4
-  completed_plans: 1
-  percent: 4
+  completed_plans: 2
+  percent: 8
 ---
 
 # Project State
@@ -26,11 +26,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 1 of 6 (Foundation)
-Plan: 1 of 4 in current phase
+Plan: 2 of 4 in current phase
 Status: Executing
-Last activity: 2026-03-14 — Plan 01-01 complete: MIS data foundation (schema + migrations + test infra)
+Last activity: 2026-03-14 — Plan 01-02 complete: BaseScraper with httpx async, tenacity retry, Semaphore rate limiting, stealth Playwright
 
-Progress: [█░░░░░░░░░] 4%
+Progress: [██░░░░░░░░] 8%
 
 ## Performance Metrics
 
@@ -43,10 +43,10 @@ Progress: [█░░░░░░░░░] 4%
 
 | Phase | Plans | Total | Avg/Plan |
 |-------|-------|-------|----------|
-| 01-foundation | 1/4 | ~8m | ~8m |
+| 01-foundation | 2/4 | ~18m | ~9m |
 
 **Recent Trend:**
-- Last 5 plans: 01-01 (~8m)
+- Last 5 plans: 01-01 (~8m), 01-02 (~10m)
 - Trend: baseline
 
 *Updated after each plan completion*
@@ -64,6 +64,8 @@ Recent decisions affecting current work:
 - [01-01]: Migration file named _001_initial.py (underscore prefix) — Python cannot import modules starting with a digit
 - [01-01]: DB path in tests uses tmp_path/mis.db (real file) — cleaner than :memory: for FK PRAGMA tests
 - [01-01]: sqlite-utils installed during execution (was missing from global Python env)
+- [01-02]: Tenacity @retry as nested inner function inside fetch() — cleaner ScraperError wrapping after reraise=True
+- [01-02]: h2 package installed (httpx[http2]) — required for HTTP/2 support, was missing from environment
 
 ### Pending Todos
 
@@ -78,6 +80,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T17:29:24Z
-Stopped at: Completed 01-foundation/01-01-PLAN.md
-Resume file: .planning/phases/01-foundation/01-02-PLAN.md
+Last session: 2026-03-14T17:39:06Z
+Stopped at: Completed 01-foundation/01-02-PLAN.md
+Resume file: .planning/phases/01-foundation/01-03-PLAN.md
