@@ -1,18 +1,30 @@
 niches:
   - name: "Marketing Digital"
     slug: "marketing-digital"
+    platforms:
+      hotmart: marketing
+      clickbank: marketing
+      kiwify: marketing
     keywords:
       - "curso de marketing"
       - "trafego pago"
       - "funil de vendas"
   - name: "Emagrecimento"
     slug: "emagrecimento"
+    platforms:
+      hotmart: saude-e-fitness
+      clickbank: health
+      kiwify: saude
     keywords:
       - "emagrecer rapido"
       - "dieta low carb"
       - "perder barriga"
   - name: "Financas Pessoais"
     slug: "financas-pessoais"
+    platforms:
+      hotmart: financas
+      clickbank: investing
+      kiwify: financas
     keywords:
       - "investir dinheiro"
       - "renda passiva"
@@ -21,3 +33,6 @@ settings:
   proxy_url: ""
   request_delay_s: 2.0
   max_retries: 3
+  max_products_per_niche: 50
+  scan_schedule: "0 3 * * *"
+  parallel_scanners: true
