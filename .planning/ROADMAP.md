@@ -6,7 +6,7 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 
 ## Phases
 
-- [ ] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende
+- [x] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende ✓ 2026-03-14
 - [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart e ClickBank
 - [ ] **Phase 3: Product Espionage + Dossiers** - Espionagem profunda de produtos e geração de dossiês com IA
 - [ ] **Phase 4: Pain Radar** - Radar horário de dores e desejos do mercado via fontes sociais e de tendências
@@ -28,9 +28,9 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 
 Plans:
 - [x] 01-01-PLAN.md — Schema SQLite (5 tabelas), migrations sqlite-utils, ScraperError, infraestrutura de testes (Wave 0 + Wave 1)
-- [ ] 01-02-PLAN.md — BaseScraper: fetch() httpx + retry tenacity, fetch_spa() Playwright + stealth, rate limiting por dominio
-- [ ] 01-03-PLAN.md — config.yaml + load_config() com validacao 3-5 nichos, APScheduler skeleton
-- [ ] 01-04-PLAN.md — Health monitor run_canary_check(), alertas structlog, canary job registrado no scheduler
+- [x] 01-02-PLAN.md — BaseScraper: fetch() httpx + retry tenacity, fetch_spa() Playwright + stealth, rate limiting por dominio
+- [x] 01-03-PLAN.md — config.yaml + load_config() com validacao 3-5 nichos, APScheduler skeleton
+- [x] 01-04-PLAN.md — Health monitor run_canary_check(), alertas structlog, canary job registrado no scheduler
 
 ### Phase 2: Platform Scanners
 **Goal**: O sistema descobre e rankeia automaticamente produtos campeões nas principais plataformas, com dados frescos disponíveis diariamente
