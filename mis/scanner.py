@@ -115,9 +115,13 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
     """
     # Lazy imports to avoid circular dependency
     from .scanners.kiwify import KiwifyScanner
+    from .scanners.hotmart import HotmartScanner
+    from .scanners.clickbank import ClickBankScanner
 
     SCANNER_MAP = {
         "kiwify": KiwifyScanner,
+        "hotmart": HotmartScanner,
+        "clickbank": ClickBankScanner,
     }
 
     niches = config.get("niches", [])

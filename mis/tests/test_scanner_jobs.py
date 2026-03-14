@@ -47,16 +47,20 @@ def temp_config_with_schedule(tmp_path):
 
 # ─── Task 1: Jobs registered ──────────────────────────────────────────────────
 
-def test_jobs_registered(temp_config_with_schedule):
+def test_jobs_registered():
     """register_scanner_jobs() adds scanner_hotmart, scanner_clickbank, scanner_kiwify to scheduler."""
-    from mis.config import load_config
     from mis.scheduler import get_scheduler, stop_scheduler, register_scanner_jobs
 
     # Reset scheduler state before test
     stop_scheduler()
 
+    # Pass config dict directly (avoids load_config 3-niche validation requirement)
+    config = {
+        "niches": [],
+        "settings": {"scan_schedule": "0 3 * * *"},
+    }
+
     try:
-        config = load_config(Path(temp_config_with_schedule))
         register_scanner_jobs(config)
 
         scheduler = get_scheduler()
@@ -71,17 +75,21 @@ def test_jobs_registered(temp_config_with_schedule):
 
 # ─── Task 2: Cron trigger ─────────────────────────────────────────────────────
 
-def test_cron_trigger(temp_config_with_schedule):
+def test_cron_trigger():
     """Each scanner job uses CronTrigger matching scan_schedule from config."""
     from apscheduler.triggers.cron import CronTrigger
-    from mis.config import load_config
     from mis.scheduler import get_scheduler, stop_scheduler, register_scanner_jobs
 
     # Reset scheduler state before test
     stop_scheduler()
 
+    # Pass config dict directly with explicit scan_schedule
+    config = {
+        "niches": [],
+        "settings": {"scan_schedule": "0 3 * * *"},
+    }
+
     try:
-        config = load_config(Path(temp_config_with_schedule))
         register_scanner_jobs(config)
 
         scheduler = get_scheduler()
@@ -161,11 +169,15 @@ async def test_platform_canary_stale(tmp_path):
 
 @pytest.mark.asyncio
 async def test_partial_failure(tmp_path):
-    """run_all_scanners() with one scanner raising an exception: other platforms still return results."""
+    """run_all_scanners() with one scanner raising an exception: other platforms still return results.
+
+    Uses asyncio.gather(return_exceptions=True) — a failure in one platform
+    does NOT cancel or raise in others.
+    """
     from unittest.mock import AsyncMock, patch
     from mis.scanner import run_all_scanners, Product
 
-    # Config with 2 platforms per niche
+    # Config with 2 platforms in the same niche
     config = {
         "niches": [
             {
@@ -179,8 +191,6 @@ async def test_partial_failure(tmp_path):
         "settings": {"proxy_url": None},
     }
 
-    # Mock KiwifyScanner.scan_niche to raise an exception
-    # Mock HotmartScanner.scan_niche to return 1 product
     fake_product = Product(
         external_id="E45853768C",
         title="Produto Teste",
@@ -196,10 +206,10 @@ async def test_partial_failure(tmp_path):
     async def hotmart_returns_product(niche_slug, platform_slug, **kwargs):
         return [fake_product]
 
-    # Patch both scanners
+    # Patch scanners where they're imported inside run_all_scanners
     with (
-        patch("mis.scanner.KiwifyScanner") as MockKiwify,
-        patch("mis.scanner.HotmartScanner") as MockHotmart,
+        patch("mis.scanners.kiwify.KiwifyScanner") as MockKiwify,
+        patch("mis.scanners.hotmart.HotmartScanner") as MockHotmart,
     ):
         mock_kiwify_instance = AsyncMock()
         mock_kiwify_instance.scan_niche = kiwify_raises
@@ -215,9 +225,12 @@ async def test_partial_failure(tmp_path):
 
         results = await run_all_scanners(config)
 
-    # Kiwify failed → empty list; Hotmart succeeded → 1 product
-    # At minimum, the output should have both keys and NOT raise an exception
+    # Both keys should be present
     assert isinstance(results, dict), f"Expected dict, got {type(results)}"
+    assert len(results) == 2, f"Expected 2 keys (hotmart + kiwify), got {results.keys()}"
+
     # The failing platform key should map to empty list (not re-raise)
-    for key, products in results.items():
-        assert isinstance(products, list), f"Key {key!r} should map to list, got {type(products)}"
+    assert results.get("saude.kiwify") == [], f"Failed platform should be empty list"
+
+    # The healthy platform should have results
+    assert len(results.get("saude.hotmart", [])) >= 1, "Hotmart should return at least 1 product"

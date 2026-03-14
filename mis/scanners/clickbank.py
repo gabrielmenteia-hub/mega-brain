@@ -295,3 +295,48 @@ class ClickBankScanner(PlatformScanner):
         )
         response.raise_for_status()
         return response.text
+
+
+async def run_clickbank_scan(config: dict) -> None:
+    """Top-level coroutine invoked by the APScheduler job.
+
+    Iterates over niches in config that have a 'clickbank' platform key,
+    scans each, and saves results to the DB.
+
+    Args:
+        config: Loaded config dict (from load_config()).
+    """
+    import structlog as _structlog
+    from mis.db import get_db
+    from mis.product_repository import save_batch
+
+    _log = _structlog.get_logger(__name__)
+    db_path = config.get("settings", {}).get("db_path", "mis.db")
+
+    for niche in config.get("niches", []):
+        niche_slug = niche.get("slug", "")
+        platforms = niche.get("platforms", {})
+        platform_slug = platforms.get("clickbank")
+        if not platform_slug:
+            continue
+
+        niche_id = niche.get("id", 0)
+
+        try:
+            async with ClickBankScanner() as scanner:
+                products = await scanner.scan_niche(niche_slug, platform_slug)
+
+            if products:
+                db = get_db(db_path)
+                save_batch(db, products)
+                _log.info(
+                    "clickbank_scanner.job.complete",
+                    niche=niche_slug,
+                    saved=len(products),
+                )
+        except Exception as exc:
+            _log.error(
+                "clickbank_scanner.job.error",
+                niche=niche_slug,
+                error=str(exc),
+            )
