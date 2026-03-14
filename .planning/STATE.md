@@ -53,16 +53,16 @@ progress:
 See: .planning/PROJECT.md (updated 2026-03-14)
 
 **Core value:** Entregar o mapa completo do que está vendendo e por que está vendendo — sem esforço manual — para que o usuário possa modelar e lançar seus próprios produtos com máxima vantagem competitiva.
-**Current focus:** Phase 1 — Foundation
+**Current focus:** Phase 2 — Platform Scanners
 
 ## Current Position
 
-Phase: 1 of 6 (Foundation)
-Plan: 4 of 4 in current phase — COMPLETE
+Phase: 2 of 6 (Platform Scanners)
+Plan: 2 of 3 in current phase — IN PROGRESS
 Status: Executing
-Last activity: 2026-03-14 — Plan 01-04 complete: health_monitor with run_canary_check(), register_canary_job(), 15/15 tests GREEN. Phase 1 complete.
+Last activity: 2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN.
 
-Progress: [████████████████████] 100% (Phase 1)
+Progress: [████████░░░░░░░░░░░░] 40% (2/6 phases, 7/7 plans complete in P1+P2 so far)
 
 ## Performance Metrics
 
@@ -85,6 +85,7 @@ Progress: [████████████████████] 100% (P
 | Phase 01-foundation P03 | 4m | 2 tasks | 4 files |
 | Phase 01-foundation P04 | 5m | 2 tasks | 2 files |
 | Phase 02-platform-scanners P01 | 17 | 2 tasks | 11 files |
+| Phase 02-platform-scanners P02 | 28m | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -108,6 +109,10 @@ Recent decisions affecting current work:
 - [Phase 02-platform-scanners]: KIWIFY_PLATFORM_ID=3 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify — no seed data in DB schema)
 - [Phase 02-platform-scanners]: UPDATE-then-INSERT upsert pattern for products table — autoincrement id PK from _001 prevents sqlite-utils composite-pk upsert
 - [Phase 02-platform-scanners]: Kiwify fixtures are synthetic HTML — marketplace has no public URL (404), API requires auth token
+- [02-02]: ClickBank marketplace is React SPA with GraphQL API (not SSR) — gravity available without auth via POST /graphql
+- [02-02]: CLICKBANK_PLATFORM_ID=2 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify)
+- [02-02]: external_id for ClickBank = 'site' field (vendor ID, e.g. BRAINSONGX) — stable and unique
+- [02-02]: rank = int(gravity) — ClickBank gravity float score stored as int; positional fallback when None
 
 ### Pending Todos
 
@@ -122,6 +127,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T21:54:37.557Z
-Stopped at: Completed 02-platform-scanners/02-01-PLAN.md
+Last session: 2026-03-14T22:24:41Z
+Stopped at: Completed 02-platform-scanners/02-02-PLAN.md
 Resume file: None
