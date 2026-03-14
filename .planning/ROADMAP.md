@@ -1,123 +1,132 @@
-# Roadmap: Mega Brain Pipeline Hardening
+# Roadmap: Market Intelligence System (MIS)
 
-**Created:** 2026-02-27
-**Last Updated:** 2026-02-27
+## Overview
 
-## Milestones
-
-- ✅ **v1.0 Pipeline Foundation** — Phases 1-3 (shipped 2026-02-27)
-- ⏸️ **v1.1 Autonomous Mode** — Phases 4-6 (paused at phase 6)
-- ✅ **v1.2 Layer Audit** — Phases 7-9 (shipped 2026-02-27)
-- 🚧 **v1.3 NPM Packaging** — Phases 10-12 (in progress)
+O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. A fundação de dados e scraping deve existir antes de qualquer scanner funcionar. Scanners devem produzir dados confiáveis antes de espionagem e dossiês poderem ser gerados. O pipeline de inteligência deve ser validado antes de o dashboard ser construído. A integração ao MEGABRAIN é a última camada — um wrapper sobre um sistema funcionando.
 
 ## Phases
 
-<details>
-<summary>✅ v1.0 Pipeline Foundation (Phases 1-3) — SHIPPED 2026-02-27</summary>
-
-- [x] Phase 1: Data Repair (2/2 plans) — completed 2026-02-27
-- [x] Phase 2: Cascading Validation (1/1 plans) — completed 2026-02-27
-- [x] Phase 3: Checkpoint Hooks (1/1 plans) — completed 2026-02-27
-
-**Archive:** [v1.0-ROADMAP.md](milestones/v1.0-ROADMAP.md)
-
-</details>
-
-<details>
-<summary>⏸️ v1.1 Autonomous Mode (Phases 4-6) — PAUSED</summary>
-
-- [x] Phase 4: Task Orchestrator (1/1 plans) — completed 2026-02-27
-- [x] Phase 5: Autonomous Mode (2/2 plans) — completed 2026-02-27
-- [ ] Phase 6: Integration Test — paused (not started)
-
-</details>
-
-<details>
-<summary>✅ v1.2 Layer Audit (Phases 7-9) — SHIPPED 2026-02-27</summary>
-
-- [x] Phase 7: Full Audit (1/1 plans) — completed 2026-02-27
-- [x] Phase 8: Layer Documentation (1/1 plans) — completed 2026-02-27
-- [x] Phase 9: Layer Validation (1/1 plans) — completed 2026-02-27
-
-**Archive:** [v1.2-ROADMAP.md](milestones/v1.2-ROADMAP.md)
-
-</details>
-
-<details open>
-<summary>🚧 v1.3 NPM Packaging (Phases 10-12) — IN PROGRESS</summary>
-
-- [x] **Phase 10: Audit Resolution** - Resolve all REVIEW items and clean DELETE candidates (completed 2026-02-27)
-- [x] **Phase 11: Package Sync** - Auto-generate files field and sync package.json/.npmignore (completed 2026-02-27)
-- [x] **Phase 12: Validation and Docs** - Validation script, dry-run test, pre-publish gate, README (completed 2026-02-27)
-
-</details>
+- [ ] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende
+- [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart e ClickBank
+- [ ] **Phase 3: Product Espionage + Dossiers** - Espionagem profunda de produtos e geração de dossiês com IA
+- [ ] **Phase 4: Pain Radar** - Radar horário de dores e desejos do mercado via fontes sociais e de tendências
+- [ ] **Phase 5: Dashboard** - Interface web para visualizar rankings, dossiês e relatórios de dores
+- [ ] **Phase 6: MEGABRAIN Integration** - MIS como módulo de primeira classe dentro do MEGABRAIN
 
 ## Phase Details
 
-### Phase 10: Audit Resolution
-**Goal**: The layer audit achieves 100% coverage — every file in the repository is definitively classified, nothing left in REVIEW, and DELETE candidates removed.
-**Depends on**: Phase 9 (v1.2 Layer Validation — shipped)
-**Requirements**: AUDIT-01, AUDIT-02, AUDIT-03, AUDIT-04
+### Phase 1: Foundation
+**Goal**: A infraestrutura que torna possível coletar, armazenar e processar dados de mercado de forma confiável existe e está operacional
+**Depends on**: Nothing (first phase)
+**Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04
 **Success Criteria** (what must be TRUE):
-  1. Running `audit_layers.py` produces a report showing 0 REVIEW items
-  2. Every file that was REVIEW is now classified as L1, L2, L3, NEVER, or DELETE
-  3. All DELETE candidates are removed from the repository (no stale files remain)
-  4. The audit report can be regenerated cleanly, reflecting the updated classifier rules
+  1. `mis.db` existe com todas as tabelas (products, platforms, niches, pains, dossiers) e migrations rodam sem erro
+  2. `BaseScraper` coleta uma URL de teste com rate limiting ativo, retry automático em falha e rotação de headers — sem erros silenciosos
+  3. Arquivo de configuração aceita 3-5 nichos alvo e esses nichos são referenciados consistentemente por todos os módulos
+  4. Health monitor detecta quando um scraper retorna dados vazios em produto canário conhecido e emite alerta legível
 **Plans**: TBD
 
-### Phase 11: Package Sync
-**Goal**: The package.json `files` field and `.npmignore` are automatically derived from the L1 audit — no manual curation, always in sync.
-**Depends on**: Phase 10 (Audit Resolution — 0 REVIEW items required)
-**Requirements**: SYNC-01, SYNC-02, SYNC-03
+Plans:
+- [ ] 01-01: Schema do banco de dados e migrations
+- [ ] 01-02: BaseScraper com rate limiting, retry e anti-bot
+- [ ] 01-03: Configuração de nichos e APScheduler skeleton
+- [ ] 01-04: Health monitor e canary checks
+
+### Phase 2: Platform Scanners
+**Goal**: O sistema descobre e rankeia automaticamente produtos campeões nas principais plataformas, com dados frescos disponíveis diariamente
+**Depends on**: Phase 1
+**Requirements**: SCAN-01, SCAN-02, SCAN-03, SCAN-04
 **Success Criteria** (what must be TRUE):
-  1. A script runs and outputs the exact `files` array that should go into package.json, derived from L1 audit results
-  2. package.json `files` field matches what the L1 audit identifies as publishable content
-  3. `.npmignore` aligns with audit classifications — L2/L3/NEVER/DELETE patterns are excluded
+  1. Sistema varre Hotmart e retorna pelo menos 10 produtos ranqueados por nicho configurado, com dados persistidos em `products`
+  2. Sistema varre ClickBank e retorna produtos com gravity score por nicho configurado, com dados persistidos
+  3. Ranking é atualizado automaticamente uma vez ao dia via APScheduler sem intervenção manual
+  4. Scraper de cada plataforma tem fallback selectors e alerta quando estrutura HTML muda (schema drift detection)
 **Plans**: TBD
 
-### Phase 12: Validation and Docs
-**Goal**: The package is verifiably publish-ready — an automated gate confirms npm pack contents are correct, a dry-run produces the expected file list, and consumers have a clear README.
-**Depends on**: Phase 11 (Package Sync — files field synced)
-**Requirements**: VAL-01, VAL-02, VAL-03, DOC-01
+Plans:
+- [ ] 02-01: Scraper Hotmart (Playwright + stealth)
+- [ ] 02-02: Scraper ClickBank (httpx ou Playwright conforme auditoria)
+- [ ] 02-03: Job de agendamento diário e schema drift alerts
+
+### Phase 3: Product Espionage + Dossiers
+**Goal**: Para qualquer produto campeão identificado, o sistema extrai inteligência competitiva completa e gera um dossiê com análise de IA explicando por que o produto vende
+**Depends on**: Phase 2
+**Requirements**: SPY-01, SPY-02, SPY-03, SPY-04, SPY-05, DOS-01, DOS-02, DOS-03, DOS-04, DOS-05
 **Success Criteria** (what must be TRUE):
-  1. A validation script compares `npm pack --dry-run` output against the L1 classification and reports PASSED or FAILED
-  2. `npm pack --dry-run` produces a file list containing only L1 content (no L2/L3/NEVER files present)
-  3. The pre-publish gate script exits 0 on a clean package and exits 1 if violations are found
-  4. The README contains install instructions, quick start, and feature overview sufficient for a new consumer to get started
+  1. Sistema extrai copy completa da página de vendas de produto selecionado (headlines, argumentos, estrutura narrativa, CTA) e armazena estruturado
+  2. Sistema coleta anúncios ativos do produto via Meta Ad Library e estrutura da oferta (preço, bônus, garantias) de forma persistida
+  3. Sistema coleta reviews, classifica por valência (positivo/negativo) e não passa os dados para IA enquanto completude mínima não é atingida
+  4. IA gera dossiê completo com: fatores de sucesso, dores endereçadas, template de modelagem e score de oportunidade por nicho
+  5. Todo dossiê exibe confidence score indicando qualidade dos dados usados na análise
 **Plans**: TBD
+
+Plans:
+- [ ] 03-01: Scraper de copy e estrutura de oferta (sales page)
+- [ ] 03-02: Coletor de anúncios Meta Ad Library e reviews
+- [ ] 03-03: Data completeness gate e queue de processamento
+- [ ] 03-04: Pipeline de análise IA (copy_analyzer, dossier_generator)
+- [ ] 03-05: Score de oportunidade e confidence score
+
+### Phase 4: Pain Radar
+**Goal**: O sistema monitora automaticamente, a cada hora, as fontes onde o mercado expõe suas dores e desejos, e consolida em relatório por nicho
+**Depends on**: Phase 3
+**Requirements**: RADAR-01, RADAR-02, RADAR-03, RADAR-04, RADAR-05, RADAR-06
+**Success Criteria** (what must be TRUE):
+  1. Google Trends é consultado a cada hora por nicho com normalização por anchor term — resultado armazenado como índice relativo (não volume absoluto)
+  2. Sistema coleta posts e perguntas de Reddit e Quora relacionados aos nichos e persiste sem duplicatas
+  3. Sistema analisa títulos e comentários de vídeos YouTube por nicho respeitando quota diária de 10.000 unidades
+  4. Pipeline do radar é idempotente — re-execução após falha não gera registros duplicados
+  5. Relatório horário consolidado com as principais dores/desejos por nicho é gerado e armazenado a cada ciclo
+**Plans**: TBD
+
+Plans:
+- [ ] 04-01: Scraper Google Trends com normalização por anchor term
+- [ ] 04-02: Coletores Reddit (PRAW) e Quora
+- [ ] 04-03: Coletor YouTube com quota management
+- [ ] 04-04: Idempotência, checkpoint store e job singleton
+- [ ] 04-05: Pain synthesizer e gerador de relatório horário
+
+### Phase 5: Dashboard
+**Goal**: Usuário pode consumir visualmente toda a inteligência gerada — rankings, dossiês e radar de dores — em interface web sem tocar em código
+**Depends on**: Phase 4
+**Requirements**: DASH-01, DASH-02, DASH-03, DASH-04, SCAN-05
+**Success Criteria** (what must be TRUE):
+  1. Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho com dados atualizados do último ciclo
+  2. Página individual de dossiê exibe todos os dados de espionagem e análise IA de forma legível para um produto selecionado
+  3. Feed de dores do mercado mostra relatório horário mais recente por nicho com timestamp de última atualização
+  4. Sistema envia alerta (notificação no dashboard) quando novo produto campeão entra no radar
+**Plans**: TBD
+
+Plans:
+- [ ] 05-01: FastAPI server e estrutura de rotas
+- [ ] 05-02: Página de ranking com filtros (Jinja2 + HTMX)
+- [ ] 05-03: Página de dossiê individual
+- [ ] 05-04: Feed de dores e sistema de alertas
+
+### Phase 6: MEGABRAIN Integration
+**Goal**: MIS é acessível como módulo dentro do MEGABRAIN via comando de agente, com ponto de integração único e limpo
+**Depends on**: Phase 5
+**Requirements**: INT-01, INT-02
+**Success Criteria** (what must be TRUE):
+  1. `mis/` existe como módulo independente com `mis_agent.py` como único arquivo que cruza a fronteira MIS/MEGABRAIN
+  2. Usuário pode invocar `/mis-briefing` dentro do MEGABRAIN e receber resumo dos últimos produtos campeões e dores detectadas
+  3. Dados do MIS (dossiês e relatórios) podem ser exportados em formato compatível com o pipeline de conhecimento do MEGABRAIN
+**Plans**: TBD
+
+Plans:
+- [ ] 06-01: Estrutura de módulo `mis/` e bridge `mis_agent.py`
+- [ ] 06-02: Comando `/mis-briefing` e exportação para MEGABRAIN pipeline
 
 ## Progress
 
-| Phase | Milestone | Plans Complete | Status | Completed |
-|-------|-----------|----------------|--------|-----------|
-| 1. Data Repair | v1.0 | 2/2 | ✅ Complete | 2026-02-27 |
-| 2. Cascading Validation | v1.0 | 1/1 | ✅ Complete | 2026-02-27 |
-| 3. Checkpoint Hooks | v1.0 | 1/1 | ✅ Complete | 2026-02-27 |
-| 4. Task Orchestrator | v1.1 | 1/1 | ✅ Complete | 2026-02-27 |
-| 5. Autonomous Mode | v1.1 | 2/2 | ✅ Complete | 2026-02-27 |
-| 6. Integration Test | v1.1 | 0/? | ⏸️ Paused | - |
-| 7. Full Audit | v1.2 | 1/1 | ✅ Complete | 2026-02-27 |
-| 8. Layer Documentation | v1.2 | 1/1 | ✅ Complete | 2026-02-27 |
-| 9. Layer Validation | v1.2 | 1/1 | ✅ Complete | 2026-02-27 |
-| 10. Audit Resolution | 2/2 | Complete    | 2026-02-27 | - |
-| 11. Package Sync | 2/2 | Complete    | 2026-02-27 | - |
-| 12. Validation and Docs | 2/2 | Complete    | 2026-02-27 | - |
+**Execution Order:**
+Phases execute in strict dependency order: 1 → 2 → 3 → 4 → 5 → 6
 
-## Dependencies
-
-```
-v1.0 (SHIPPED)
-├── Phase 1 ──► Phase 2 ──► Phase 3
-
-v1.1 (PAUSED)
-├── Phase 4 ──► Phase 5 ──► Phase 6 (paused)
-
-v1.2 (SHIPPED)
-└── Phase 7 ──► Phase 8 ──► Phase 9
-
-v1.3 (IN PROGRESS)
-└── Phase 10 ──► Phase 11 ──► Phase 12
-```
-
----
-*Roadmap updated: 2026-02-27 after v1.3 milestone roadmap*
+| Phase | Plans Complete | Status | Completed |
+|-------|----------------|--------|-----------|
+| 1. Foundation | 0/4 | Not started | - |
+| 2. Platform Scanners | 0/3 | Not started | - |
+| 3. Product Espionage + Dossiers | 0/5 | Not started | - |
+| 4. Pain Radar | 0/5 | Not started | - |
+| 5. Dashboard | 0/4 | Not started | - |
+| 6. MEGABRAIN Integration | 0/2 | Not started | - |
