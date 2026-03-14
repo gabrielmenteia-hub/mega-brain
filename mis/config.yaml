@@ -1,0 +1,23 @@
+niches:
+  - name: "Marketing Digital"
+    slug: "marketing-digital"
+    keywords:
+      - "curso de marketing"
+      - "trafego pago"
+      - "funil de vendas"
+  - name: "Emagrecimento"
+    slug: "emagrecimento"
+    keywords:
+      - "emagrecer rapido"
+      - "dieta low carb"
+      - "perder barriga"
+  - name: "Financas Pessoais"
+    slug: "financas-pessoais"
+    keywords:
+      - "investir dinheiro"
+      - "renda passiva"
+      - "independencia financeira"
+settings:
+  proxy_url: ""
+  request_delay_s: 2.0
+  max_retries: 3
