@@ -42,11 +42,11 @@ See: .planning/PROJECT.md (updated 2026-03-14)
 ## Current Position
 
 Phase: 1 of 6 (Foundation)
-Plan: 2 of 4 in current phase
+Plan: 4 of 4 in current phase — COMPLETE
 Status: Executing
-Last activity: 2026-03-14 — Plan 01-02 complete: BaseScraper with httpx async, tenacity retry, Semaphore rate limiting, stealth Playwright
+Last activity: 2026-03-14 — Plan 01-04 complete: health_monitor with run_canary_check(), register_canary_job(), 15/15 tests GREEN. Phase 1 complete.
 
-Progress: [██░░░░░░░░] 8%
+Progress: [████████████████████] 100% (Phase 1)
 
 ## Performance Metrics
 
@@ -67,6 +67,7 @@ Progress: [██░░░░░░░░] 8%
 
 *Updated after each plan completion*
 | Phase 01-foundation P03 | 4m | 2 tasks | 4 files |
+| Phase 01-foundation P04 | 5m | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -85,6 +86,8 @@ Recent decisions affecting current work:
 - [01-02]: h2 package installed (httpx[http2]) — required for HTTP/2 support, was missing from environment
 - [Phase 01-foundation]: config.yaml path relative to mis/config.py via Path(__file__).parent — portable without CWD assumptions
 - [Phase 01-foundation]: APScheduler singleton via _scheduler global + get_scheduler() — health monitor and scrapers share one scheduler instance
+- [01-04]: run_canary_check() never propagates exceptions — always returns bool; alert field in structlog payloads is machine-readable key for external parsing
+- [01-04]: register_canary_job() uses replace_existing=True — safe to call at startup or on re-registration without duplicate job errors
 
 ### Pending Todos
 
@@ -99,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T17:49:22.617Z
-Stopped at: Completed 01-foundation/01-03-PLAN.md
+Last session: 2026-03-14T17:55:00Z
+Stopped at: Completed 01-foundation/01-04-PLAN.md (Phase 1 complete)
 Resume file: None
