@@ -27,7 +27,7 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 **Plans**: 4 plans
 
 Plans:
-- [ ] 01-01-PLAN.md — Schema SQLite (5 tabelas), migrations sqlite-utils, ScraperError, infraestrutura de testes (Wave 0 + Wave 1)
+- [x] 01-01-PLAN.md — Schema SQLite (5 tabelas), migrations sqlite-utils, ScraperError, infraestrutura de testes (Wave 0 + Wave 1)
 - [ ] 01-02-PLAN.md — BaseScraper: fetch() httpx + retry tenacity, fetch_spa() Playwright + stealth, rate limiting por dominio
 - [ ] 01-03-PLAN.md — config.yaml + load_config() com validacao 3-5 nichos, APScheduler skeleton
 - [ ] 01-04-PLAN.md — Health monitor run_canary_check(), alertas structlog, canary job registrado no scheduler
