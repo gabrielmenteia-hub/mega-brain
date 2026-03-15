@@ -22,10 +22,10 @@
 
 ### Espionagem de Produto
 
-- [ ] **SPY-01**: Sistema extrai copy completa da página de vendas (headlines, sub-headlines, argumentos, CTA, estrutura narrativa)
-- [ ] **SPY-02**: Sistema coleta anúncios ativos do produto via Meta Ad Library (criativos e copy)
-- [ ] **SPY-03**: Sistema extrai estrutura da oferta (preço, bônus, garantias, upsells, downsells)
-- [ ] **SPY-04**: Sistema coleta e classifica reviews do produto separando avaliações positivas (4-5★) e negativas (1-3★)
+- [x] **SPY-01**: Sistema extrai copy completa da página de vendas (headlines, sub-headlines, argumentos, CTA, estrutura narrativa)
+- [x] **SPY-02**: Sistema coleta anúncios ativos do produto via Meta Ad Library (criativos e copy)
+- [x] **SPY-03**: Sistema extrai estrutura da oferta (preço, bônus, garantias, upsells, downsells)
+- [x] **SPY-04**: Sistema coleta e classifica reviews do produto separando avaliações positivas (4-5★) e negativas (1-3★)
 - [ ] **SPY-05**: Dados de espionagem só são processados pelo LLM quando completude mínima é atingida (data completeness gate)
 
 ### Dossiê IA
@@ -97,10 +97,10 @@
 | SCAN-03 | Phase 2 | Complete |
 | SCAN-04 | Phase 2 | Complete |
 | SCAN-05 | Phase 5 | Pending |
-| SPY-01 | Phase 3 | Pending |
-| SPY-02 | Phase 3 | Pending |
-| SPY-03 | Phase 3 | Pending |
-| SPY-04 | Phase 3 | Pending |
+| SPY-01 | Phase 3 | Complete |
+| SPY-02 | Phase 3 | Complete |
+| SPY-03 | Phase 3 | Complete |
+| SPY-04 | Phase 3 | Complete |
 | SPY-05 | Phase 3 | Pending |
 | DOS-01 | Phase 3 | Pending |
 | DOS-02 | Phase 3 | Pending |

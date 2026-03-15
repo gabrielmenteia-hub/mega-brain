@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-product-espionage-dossiers/03-01-PLAN.md
-last_updated: "2026-03-15T00:44:49.286Z"
+stopped_at: Completed 03-product-espionage-dossiers/03-02-PLAN.md
+last_updated: "2026-03-15T00:51:23.422Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 12
-  completed_plans: 8
+  completed_plans: 9
 ---
 
 ---
@@ -103,6 +103,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 02-platform-scanners P02 | 28m | 2 tasks | 6 files |
 | Phase 02-platform-scanners P03 | 635 | 2 tasks | 9 files |
 | Phase 03-product-espionage-dossiers P01 | 7 | 2 tasks | 12 files |
+| Phase 03-product-espionage-dossiers P02 | 12 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -136,6 +137,9 @@ Recent decisions affecting current work:
 - [Phase 03-01]: ads_json stored as TEXT column in dossiers (not separate table) for MVP — avoids schema complexity for unstructured Meta Ad Library JSON
 - [Phase 03-01]: db.py run_migrations() chains _001→_002→_003 — callers get full schema with one call
 - [Phase 03-01]: SalesPageScraper uses LLM-as-universal-parser — no platform-specific selectors, works with any sales page URL
+- [Phase 03-02]: MetaAdsScraper nao herda BaseScraper — usa httpx.AsyncClient direto (API REST vs scraping)
+- [Phase 03-02]: ad_reached_countries=BR hardcoded obrigatorio — sem ele Meta API retorna 400
+- [Phase 03-02]: ReviewsScraper retorna [] em ScraperError — reviews nao e gate bloqueante no pipeline
 
 ### Pending Todos
 
@@ -150,6 +154,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T00:44:49.277Z
-Stopped at: Completed 03-product-espionage-dossiers/03-01-PLAN.md
+Last session: 2026-03-15T00:51:23.415Z
+Stopped at: Completed 03-product-espionage-dossiers/03-02-PLAN.md
 Resume file: None
