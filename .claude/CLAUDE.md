@@ -142,6 +142,49 @@ Detailed rules are loaded on-demand via keyword matching from `core/rules/`:
 | AGENT-INTEGRITY | traceability, sources | core/rules/agent-integrity.md |
 | EPISTEMIC | anti-hallucination, confidence | core/rules/epistemic-standards.md |
 
+## MIS Integration
+
+O MIS (Market Intelligence System) é um módulo independente que coleta e analisa produtos campeões e dores de mercado. O único ponto de integração é `mis/mis_agent.py`.
+
+**Localização:** `{MIS_PATH}/mis/` (configurado via env var `MIS_PATH`)
+
+### Como importar
+
+```python
+import sys, os
+sys.path.insert(0, os.environ['MIS_PATH'])
+from mis.mis_agent import get_briefing_data, export_to_megabrain
+```
+
+### Funções disponíveis
+
+```python
+get_briefing_data() -> dict
+# Retorna: {'status': 'ok', 'products': list, 'pains_by_niche': dict,
+#           'unseen_alerts': int, 'health': dict, 'last_cycle': str|None,
+#           'data_stale': bool, 'db_path': str}
+# Em erro: {'status': 'error', 'message': str, 'setup_hint': str}
+
+export_to_megabrain(dest: str | None = None) -> dict
+# Exporta dossies (status=complete) e pain reports (ultimos 7 dias)
+# para dest ou MEGABRAIN_PATH/knowledge/mis/ (env var)
+# Retorna: {'status': 'ok', 'exported': int, 'skipped': int, 'dest': str}
+```
+
+### Variáveis de ambiente necessárias (.env do MEGABRAIN)
+
+```
+MIS_PATH=/caminho/absoluto/para/raiz/do/mis
+MIS_DB_PATH=/caminho/absoluto/para/mis.db
+MEGABRAIN_PATH=/caminho/absoluto/para/megabrain  # para export resolver knowledge/mis/
+```
+
+### Comando disponível
+
+`/mis-briefing` — briefing visual dos produtos campeões e radar de dores
+
+---
+
 ## Security
 
 1. **NEVER** hardcode API keys or tokens in code
