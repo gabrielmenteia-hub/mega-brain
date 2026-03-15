@@ -1,0 +1,54 @@
+{% if dossier and dossier.reviews %}
+  <div class="space-y-6">
+
+    <!-- Síntese IA -->
+    {% if dossier.reviews.synthesis %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Síntese IA</h2>
+      <div class="bg-blue-900/20 border border-blue-700/30 rounded-lg p-4">
+        <p class="text-gray-200 leading-relaxed">{{ dossier.reviews.synthesis }}</p>
+      </div>
+    </section>
+    {% endif %}
+
+    {% if dossier.reviews.total_count %}
+    <p class="text-sm text-gray-500">Baseado em {{ dossier.reviews.total_count }} reviews</p>
+    {% endif %}
+
+    <!-- Positivos -->
+    {% if dossier.reviews.positive %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Pontos Positivos</h2>
+      <ul class="space-y-2">
+        {% for review in dossier.reviews.positive %}
+          <li class="flex items-start gap-2 text-gray-300">
+            <span class="text-yellow-400">⭐</span>
+            <span>{{ review }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- Negativos -->
+    {% if dossier.reviews.negative %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Pontos Negativos</h2>
+      <ul class="space-y-2">
+        {% for review in dossier.reviews.negative %}
+          <li class="flex items-start gap-2 text-gray-300">
+            <span class="text-gray-500">⭐</span>
+            <span>{{ review }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+  </div>
+{% else %}
+  <div class="text-center py-16 text-gray-500">
+    <p class="text-lg">Reviews ainda não coletados</p>
+    <p class="text-sm mt-2">Os reviews serão analisados na próxima execução do pipeline.</p>
+  </div>
+{% endif %}

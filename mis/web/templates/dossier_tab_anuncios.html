@@ -1,0 +1,30 @@
+{% if dossier and dossier.ads %}
+  <div class="space-y-4">
+    <h2 class="text-lg font-semibold text-white">Anúncios coletados ({{ dossier.ads | length }})</h2>
+    {% for ad in dossier.ads %}
+      <div class="bg-gray-800 rounded-lg p-4 space-y-2">
+        {% if ad.copy %}
+          <p class="text-gray-200 leading-relaxed">{{ ad.copy }}</p>
+        {% elif ad.text %}
+          <p class="text-gray-200 leading-relaxed">{{ ad.text }}</p>
+        {% endif %}
+        <div class="flex items-center gap-4 text-xs text-gray-500">
+          {% if ad.date %}
+            <span>{{ ad.date }}</span>
+          {% endif %}
+          {% if ad.platform %}
+            <span>{{ ad.platform }}</span>
+          {% endif %}
+          {% if ad.url %}
+            <a href="{{ ad.url }}" target="_blank" rel="noopener" class="hover:text-gray-300 transition-colors">Ver anúncio ↗</a>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <div class="text-center py-16 text-gray-500">
+    <p class="text-lg">Nenhum anúncio coletado</p>
+    <p class="text-sm mt-2">Os anúncios serão coletados na próxima execução do pipeline.</p>
+  </div>
+{% endif %}

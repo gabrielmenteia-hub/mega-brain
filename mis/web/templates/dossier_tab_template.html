@@ -1,0 +1,22 @@
+{% if dossier and dossier.dossier and dossier.dossier.template %}
+  <div class="space-y-4">
+    <div class="flex items-center justify-between">
+      <h2 class="text-lg font-semibold text-white">Template de Produto</h2>
+      <button
+        class="bg-gray-700 hover:bg-gray-600 text-gray-200 text-sm px-3 py-1.5 rounded transition-colors"
+        data-clipboard="{{ dossier.dossier.template }}"
+        onclick="navigator.clipboard.writeText(this.dataset.clipboard).then(() => { this.textContent = 'Copiado!'; setTimeout(() => this.textContent = 'Copiar', 2000); })"
+      >
+        Copiar
+      </button>
+    </div>
+    <div class="bg-gray-800 rounded-lg p-5">
+      <pre class="text-gray-300 text-sm leading-relaxed whitespace-pre-wrap">{{ dossier.dossier.template }}</pre>
+    </div>
+  </div>
+{% else %}
+  <div class="text-center py-16 text-gray-500">
+    <p class="text-lg">Template ainda não gerado</p>
+    <p class="text-sm mt-2">O template será criado quando a análise completa estiver disponível.</p>
+  </div>
+{% endif %}

@@ -1,0 +1,48 @@
+{% if dossier and dossier.dossier %}
+  <div class="space-y-6">
+
+    <!-- Por que está vendendo -->
+    {% if dossier.dossier.analysis %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Por que está vendendo</h2>
+      <p class="text-gray-300 leading-relaxed">{{ dossier.dossier.analysis }}</p>
+    </section>
+    {% endif %}
+
+    <!-- Dores endereçadas -->
+    {% if dossier.dossier.pains %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Dores endereçadas</h2>
+      <ul class="space-y-2">
+        {% for pain in dossier.dossier.pains %}
+          <li class="flex items-start gap-2 text-gray-300">
+            <span class="text-red-400 mt-0.5">•</span>
+            <span>{{ pain }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    <!-- Fatores de sucesso -->
+    {% if dossier.dossier.success_factors %}
+    <section>
+      <h2 class="text-lg font-semibold text-white mb-3">Fatores de sucesso</h2>
+      <ul class="space-y-2">
+        {% for factor in dossier.dossier.success_factors %}
+          <li class="flex items-start gap-2 text-gray-300">
+            <span class="text-green-400 mt-0.5">✓</span>
+            <span>{{ factor }}</span>
+          </li>
+        {% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+  </div>
+{% else %}
+  <div class="text-center py-16 text-gray-500">
+    <p class="text-lg">Análise em andamento — dados sendo processados</p>
+    <p class="text-sm mt-2">Volte em breve para ver os insights deste produto.</p>
+  </div>
+{% endif %}
