@@ -141,12 +141,12 @@ def get_briefing_data() -> dict[str, Any]:
         except Exception:
             unseen_alerts = 0
 
-        # --- Last cycle (most recent dossier created_at) ---
+        # --- Last cycle (most recent dossier generated_at) ---
         last_cycle: str | None = None
         try:
             with sqlite3.connect(db_path) as conn:
                 row = conn.execute(
-                    "SELECT MAX(created_at) FROM dossiers"
+                    "SELECT MAX(generated_at) FROM dossiers"
                 ).fetchone()
                 last_cycle = row[0] if row and row[0] else None
         except Exception:
@@ -226,7 +226,7 @@ def _compute_health(
         today_str = datetime.now(timezone.utc).date().isoformat()
         with sqlite3.connect(db_path) as conn:
             row = conn.execute(
-                "SELECT COUNT(*) FROM dossiers WHERE created_at >= ?",
+                "SELECT COUNT(*) FROM dossiers WHERE generated_at >= ?",
                 [today_str],
             ).fetchone()
             dossiers_today = (row[0] > 0) if row else False
@@ -296,6 +296,7 @@ def export_to_megabrain(dest: str | None = None) -> dict[str, Any]:
                 d.opportunity_score,
                 d.confidence_score,
                 d.created_at,
+                d.generated_at,
                 p.id          AS product_id,
                 p.external_id,
                 p.title       AS product_name,
@@ -305,7 +306,7 @@ def export_to_megabrain(dest: str | None = None) -> dict[str, Any]:
             JOIN products p  ON p.id  = d.product_id
             JOIN platforms pl ON pl.id = p.platform_id
             JOIN niches    n  ON n.id  = p.niche_id
-            WHERE d.status = 'complete'
+            WHERE d.status = 'done'
         """
         with sqlite3.connect(db_path) as conn:
             cursor = conn.execute(sql)
@@ -442,7 +443,7 @@ def _render_dossier_markdown(row: dict) -> str:
         except (json.JSONDecodeError, TypeError):
             dossier_data = {}
 
-    date_str = (row.get("created_at") or "")[:10]
+    date_str = (row.get("generated_at") or row.get("created_at") or "")[:10]
     score = row.get("opportunity_score") or 0.0
 
     frontmatter = (
