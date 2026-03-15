@@ -163,7 +163,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 08-01-PLAN.md — Audit BaseScraper proxy rotation, audit health_monitor canary scope, write Phase 1 VERIFICATION.md
+- [ ] 08-01-PLAN.md — Proxy rotation (proxy_list + _select_proxy) no BaseScraper, schema integrity canary no health_monitor, re-verificacao VERIFICATION.md Phase 1
 
 ## Progress
 
