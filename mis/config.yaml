@@ -9,6 +9,13 @@ niches:
       - "curso de marketing"
       - "trafego pago"
       - "funil de vendas"
+    radar:
+      anchor_term: "marketing digital"
+      subreddits:
+        - "marketing"
+        - "digital_marketing"
+        - "Entrepreneur"
+      relevance_language: "pt"
   - name: "Emagrecimento"
     slug: "emagrecimento"
     platforms:
@@ -19,6 +26,13 @@ niches:
       - "emagrecer rapido"
       - "dieta low carb"
       - "perder barriga"
+    radar:
+      anchor_term: "emagrecer rapido"
+      subreddits:
+        - "loseit"
+        - "Dieta"
+        - "intermittentfasting"
+      relevance_language: "pt"
   - name: "Financas Pessoais"
     slug: "financas-pessoais"
     platforms:
@@ -29,6 +43,13 @@ niches:
       - "investir dinheiro"
       - "renda passiva"
       - "independencia financeira"
+    radar:
+      anchor_term: "independencia financeira"
+      subreddits:
+        - "financaspessoais"
+        - "investimentos"
+        - "personalfinance"
+      relevance_language: "pt"
 settings:
   proxy_url: ""
   request_delay_s: 2.0
@@ -36,6 +57,8 @@ settings:
   max_products_per_niche: 50
   scan_schedule: "0 3 * * *"
   parallel_scanners: true
+  youtube_quota_daily_limit: 9000
+  radar_synthesizer_offset_min: 30
 
 spy:
   max_concurrent_spy: 3
