@@ -1,22 +1,21 @@
-"""APScheduler skeleton for MIS.
+"""APScheduler for MIS.
 
 Phase 1: Only the health check job is registered.
-Phase 2+: Platform scraper jobs are added here.
+Phase 2: Platform scanner jobs (register_scanner_jobs).
+Phase 3: Spy pipeline chained after scan (register_scan_and_spy_job / _scan_and_spy_job).
 
-Usage in Phase 2:
-    from mis.scheduler import get_scheduler
-    scheduler = get_scheduler()
-    scheduler.add_job(
-        scrape_hotmart,
-        "interval",
-        hours=6,
-        id="hotmart_scraper",
-        replace_existing=True,
-    )
+Public scan+spy entry point:
+    _scan_and_spy_job() — runs run_all_scanners, then run_spy_batch for top SPY_TOP_N
+    register_scan_and_spy_job(config) — registers _scan_and_spy_job in APScheduler
+
+SPY_TOP_N is imported from spy_orchestrator (hardcoded=10, not configurable).
 """
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
 import structlog
+
+from .scanner import run_all_scanners
+from .spy_orchestrator import run_spy_batch, SPY_TOP_N
 
 log = structlog.get_logger()
 
@@ -58,6 +57,79 @@ def _on_job_event(event) -> None:
         )
     else:
         log.info("scheduler.job.executed", job_id=event.job_id)
+
+
+async def _scan_and_spy_job() -> None:
+    """Scan all platforms, then spy the top SPY_TOP_N products per platform.
+
+    This is the combined scan+spy pipeline job. Called by the scheduler or
+    directly in tests.
+
+    Collects products from run_all_scanners(), selects the top SPY_TOP_N by
+    rank per platform key, and dispatches to run_spy_batch().
+
+    Products to spy are identified by their DB ID. If a Product in the scanner
+    result does not have a DB ID attribute, it is skipped with a warning log.
+    The Product dataclass from scanner.py has external_id + rank but no DB ID —
+    the scheduler passes the product rank as a proxy; actual DB lookup happens
+    inside run_spy() per product.
+
+    Note: This function does not read spy config — max_concurrent_spy is applied
+    inside run_spy_batch() via _get_spy_config().
+    """
+    from .config import load_config
+
+    log.info("scan_and_spy_job.start")
+    try:
+        config = load_config()
+    except Exception as e:
+        log.error("scan_and_spy_job.config_error", error=str(e))
+        config = {}
+
+    results = await run_all_scanners(config)
+
+    products_to_spy: list[dict] = []
+    for platform_key, platform_products in results.items():
+        top_products = platform_products[:SPY_TOP_N]
+        for p in top_products:
+            # If Product has a DB id (product_id_in_db attr or id attr), use it.
+            # Otherwise try to resolve via external_id from DB.
+            db_id = getattr(p, "product_id_in_db", None) or getattr(p, "id", None)
+            if db_id is None:
+                log.warning(
+                    "scan_and_spy_job.product_no_db_id",
+                    platform_key=platform_key,
+                    external_id=getattr(p, "external_id", "unknown"),
+                )
+                continue
+            products_to_spy.append({"id": db_id, "rank": getattr(p, "rank", 999)})
+
+    if products_to_spy:
+        log.info("scan_and_spy_job.spy_start", count=len(products_to_spy))
+        await run_spy_batch(products_to_spy)
+    else:
+        log.info("scan_and_spy_job.no_products")
+
+    log.info("scan_and_spy_job.done", spied=len(products_to_spy))
+
+
+def register_scan_and_spy_job(config: dict) -> None:
+    """Register the combined scan+spy job in APScheduler.
+
+    Reads scan_schedule from config.settings. Replaces existing job safely.
+    """
+    from apscheduler.triggers.cron import CronTrigger
+
+    scan_schedule = config.get("settings", {}).get("scan_schedule", "0 3 * * *")
+    trigger = CronTrigger.from_crontab(scan_schedule)
+    scheduler = get_scheduler()
+    scheduler.add_job(
+        _scan_and_spy_job,
+        trigger,
+        id="scan_and_spy",
+        replace_existing=True,
+    )
+    log.info("scan_and_spy_job.registered", schedule=scan_schedule)
 
 
 def register_scanner_jobs(config: dict) -> None:
