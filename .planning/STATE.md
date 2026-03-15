@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-product-espionage-dossiers/03-04-PLAN.md
-last_updated: "2026-03-15T01:04:49.216Z"
+stopped_at: Completed 03-product-espionage-dossiers/03-05-PLAN.md
+last_updated: "2026-03-15T01:18:57.409Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
-  completed_phases: 2
+  completed_phases: 3
   total_plans: 12
-  completed_plans: 11
+  completed_plans: 12
 ---
 
 ---
@@ -106,6 +106,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 03-product-espionage-dossiers P02 | 12 | 2 tasks | 6 files |
 | Phase 03-product-espionage-dossiers P03 | 5 | 1 tasks | 2 files |
 | Phase 03-product-espionage-dossiers P04 | 10 | 2 tasks | 9 files |
+| Phase 03-product-espionage-dossiers P05 | 10 | 2 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -147,6 +148,9 @@ Recent decisions affecting current work:
 - [Phase 03-03]: min_reviews=10 configurable default — gate contract is (gate_passed, confidence_score) tuple for downstream LLM pipeline
 - [Phase 03-product-espionage-dossiers]: Env var ANTHROPIC_API_KEY injetada via monkeypatch nos testes — evita dependência de credenciais reais
 - [Phase 03-product-espionage-dossiers]: cost_usd calculado com preços claude-sonnet-4-6 (input 0.000003/token, output 0.000015/token)
+- [Phase 03-product-espionage-dossiers]: SPY_TOP_N=10 hardcoded in spy_orchestrator — not configurable by user decision
+- [Phase 03-product-espionage-dossiers]: MIS_DB_PATH env var as DB path source in orchestrator — enables clean test isolation
+- [Phase 03-product-espionage-dossiers]: run_spy_url uses PRAGMA foreign_keys=OFF for null platform/niche product insertion
 
 ### Pending Todos
 
@@ -161,6 +165,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T01:04:49.208Z
-Stopped at: Completed 03-product-espionage-dossiers/03-04-PLAN.md
+Last session: 2026-03-15T01:18:57.400Z
+Stopped at: Completed 03-product-espionage-dossiers/03-05-PLAN.md
 Resume file: None
