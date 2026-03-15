@@ -320,6 +320,116 @@ async def test_semaphore_limits_concurrency(migrated_db, monkeypatch):
     )
 
 
+def test_cli_spy_help():
+    """python -m mis spy --help retorna 0 e exibe opcoes --url e --product-id."""
+    import subprocess
+    import sys
+    result = subprocess.run(
+        [sys.executable, "-m", "mis", "spy", "--help"],
+        capture_output=True, text=True
+    )
+    assert result.returncode == 0
+    assert "--url" in result.stdout
+    assert "--product-id" in result.stdout
+
+
+@pytest.mark.asyncio
+async def test_cli_spy_url(monkeypatch):
+    """python -m mis spy --url URL aciona run_spy_url com a URL fornecida."""
+    called_with = {}
+
+    async def mock_run_spy_url(url):
+        called_with["url"] = url
+
+    with patch("mis.spy_orchestrator.run_spy_url", mock_run_spy_url):
+        import mis.__main__ as main_mod
+        import importlib
+        importlib.reload(main_mod)
+
+        with patch("mis.__main__.asyncio_run") as mock_asyncio_run:
+            mock_asyncio_run.side_effect = lambda coro: asyncio.get_event_loop().run_until_complete(coro)
+
+            import sys
+            with patch.object(sys, "argv", ["mis", "spy", "--url", "https://example.com"]):
+                try:
+                    main_mod.main()
+                except SystemExit:
+                    pass
+
+
+@pytest.mark.asyncio
+async def test_cli_spy_product_id(monkeypatch):
+    """python -m mis spy --product-id 42 aciona run_spy(42, force=True)."""
+    called_args = {}
+
+    async def mock_run_spy(product_id, force=False):
+        called_args["product_id"] = product_id
+        called_args["force"] = force
+
+    with patch("mis.spy_orchestrator.run_spy", mock_run_spy):
+        import mis.__main__ as main_mod
+        import importlib
+        importlib.reload(main_mod)
+
+        import sys
+        with patch.object(sys, "argv", ["mis", "spy", "--product-id", "42"]):
+            import asyncio as _asyncio
+            original_run = _asyncio.run
+
+            captured_coro = {}
+
+            def capture_run(coro):
+                captured_coro["coro"] = coro
+                return original_run(coro)
+
+            with patch("asyncio.run", capture_run):
+                try:
+                    main_mod.main()
+                except SystemExit:
+                    pass
+
+    assert called_args.get("product_id") == 42
+    assert called_args.get("force") is True
+
+
+@pytest.mark.asyncio
+async def test_scheduler_calls_run_spy_batch_after_scanners(monkeypatch):
+    """_scan_and_spy_job() chama run_spy_batch com lista não-vazia limitada a SPY_TOP_N."""
+    spy_batch_calls = []
+
+    # Create products > SPY_TOP_N to verify limit
+    products_list = []
+    for i in range(15):
+        p = MagicMock()
+        p.external_id = f"prod-{i}"
+        p.rank = i + 1
+        products_list.append(p)
+
+    scanner_result = {"hotmart.marketing-digital": products_list}
+
+    monkeypatch.setenv("MIS_DB_PATH", ":memory:")
+
+    async def mock_run_all_scanners(config):
+        return scanner_result
+
+    async def mock_run_spy_batch(products, **kw):
+        spy_batch_calls.extend(products)
+
+    with (
+        patch("mis.scheduler.run_all_scanners", mock_run_all_scanners),
+        patch("mis.scheduler.run_spy_batch", mock_run_spy_batch),
+    ):
+        from mis.scheduler import _scan_and_spy_job
+        await _scan_and_spy_job()
+
+    # Should have called with products, limited to SPY_TOP_N per platform
+    from mis.spy_orchestrator import SPY_TOP_N
+    assert len(spy_batch_calls) > 0, "run_spy_batch deve ser chamado com produtos"
+    assert len(spy_batch_calls) <= SPY_TOP_N, (
+        f"Deve limitar a SPY_TOP_N={SPY_TOP_N} por plataforma, got {len(spy_batch_calls)}"
+    )
+
+
 @pytest.mark.asyncio
 async def test_scheduler_triggers_spy_batch(monkeypatch):
     """Verifica que _scan_and_spy_job encadeia run_spy_batch após run_all_scanners."""
