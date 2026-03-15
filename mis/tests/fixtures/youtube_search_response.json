@@ -1,0 +1,7 @@
+{
+  "kind": "youtube#searchListResponse",
+  "items": [
+    {"id": {"kind": "youtube#video", "videoId": "vid001"}, "snippet": {"title": "Como emagrecer em 30 dias", "description": "..."}},
+    {"id": {"kind": "youtube#video", "videoId": "vid002"}, "snippet": {"title": "Dieta low carb resultado", "description": "..."}}
+  ]
+}
