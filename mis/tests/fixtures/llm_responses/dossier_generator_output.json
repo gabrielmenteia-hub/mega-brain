@@ -1,0 +1,19 @@
+{
+  "why_it_sells": [
+    "Endereça dor financeira específica com solução imediata e provada",
+    "Prova social massiva com números concretos de resultados"
+  ],
+  "pains_addressed": [
+    {"pain": "Não consegue aumentar renda com emprego fixo", "source": "copy"},
+    {"pain": "Medo de investir e perder dinheiro", "source": "review"}
+  ],
+  "modeling_template": {
+    "sections": ["Hook da dor", "Amplificação", "Solução revelada", "Prova social", "Oferta irresistível", "CTA urgente"],
+    "key_arguments": ["Método testado por N pessoas", "Garantia total", "Resultados rápidos"],
+    "offer_structure": {"price_anchor": "alto", "bonus_count": 3, "guarantee_days": 30}
+  },
+  "opportunity_score": {
+    "score": 78,
+    "justification": "Mercado aquecido com alta demanda comprovada por volume de reviews positivos e anúncios ativos. Margem para diferenciação pela abordagem."
+  }
+}
