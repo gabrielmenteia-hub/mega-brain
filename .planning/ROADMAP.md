@@ -64,7 +64,7 @@ Plans:
 
 Plans:
 - [ ] 02.5-01: Scanners de plataformas de criadores (Gumroad, Payhip, Podia, Sellfy, Lemon Squeezy, SendOwl)
-- [ ] 02.5-02: Scanners de plataformas de cursos BR/intl (Kajabi, Teachable, Skool, LearnWorlds, Stan Store)
+- [ ] 02.5-02: Scanners de plataformas de cursos BR/intl (Kajabi, Teachable, Skool, Mighty Networks, LearnWorlds, Stan Store)
 - [ ] 02.5-03: Scanners de marketplaces de afiliados (JVZoo, Digistore24) + Etsy digital products
 
 ### Phase 3: Product Espionage + Dossiers
@@ -96,14 +96,14 @@ Plans:
   3. Sistema analisa títulos e comentários de vídeos YouTube por nicho respeitando quota diária de 10.000 unidades
   4. Pipeline do radar é idempotente — re-execução após falha não gera registros duplicados
   5. Relatório horário consolidado com as principais dores/desejos por nicho é gerado e armazenado a cada ciclo
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 04-01: Scraper Google Trends com normalização por anchor term
-- [ ] 04-02: Coletores Reddit (PRAW) e Quora
-- [ ] 04-03: Coletor YouTube com quota management
-- [ ] 04-04: Idempotência, checkpoint store e job singleton
-- [ ] 04-05: Pain synthesizer e gerador de relatório horário
+- [ ] 04-01-PLAN.md — Migration _004 (pain_signals, pain_reports, youtube_quota_log) + config.yaml radar fields + Wave 0 test scaffolds
+- [ ] 04-02-PLAN.md — TrendsCollector (pytrends-modern) + RedditCollector (PRAW executor) + QuoraCollector (fetch_spa)
+- [ ] 04-03-PLAN.md — YouTubeCollector (google-api-python-client) + quota guard persistido em banco
+- [ ] 04-04-PLAN.md — Synthesizer LLM (claude-sonnet-4-6) + pain_reports idempotente + prompt pt-BR
+- [ ] 04-05-PLAN.md — register_radar_jobs() no scheduler + CLI 'radar --niche' + cleanup job 30 dias
 
 ### Phase 5: Dashboard
 **Goal**: Usuário pode consumir visualmente toda a inteligência gerada — rankings, dossiês e radar de dores — em interface web sem tocar em código
