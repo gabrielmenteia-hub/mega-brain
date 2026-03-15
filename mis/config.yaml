@@ -36,3 +36,7 @@ settings:
   max_products_per_niche: 50
   scan_schedule: "0 3 * * *"
   parallel_scanners: true
+
+spy:
+  max_concurrent_spy: 3
+  min_reviews: 10
