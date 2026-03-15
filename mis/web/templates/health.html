@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+
+{% block title %}System Health — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-white mb-4">System Health</h1>
+
+  <div class="bg-gray-900 rounded-lg p-6 mb-4">
+    <div class="flex items-center gap-3 mb-4">
+      <span class="w-3 h-3 rounded-full bg-green-500"></span>
+      <span class="text-green-400 font-medium">Sistema operacional</span>
+    </div>
+
+    {% if jobs %}
+    <div>
+      <h2 class="text-sm text-gray-400 uppercase mb-3">Jobs Agendados</h2>
+      <ul class="space-y-2">
+        {% for job in jobs %}
+        <li class="flex items-center justify-between bg-gray-800 rounded px-4 py-2 text-sm">
+          <span class="text-gray-200">{{ job.id }}</span>
+          <span class="text-gray-400">{{ job.next_run_time or 'Paused' }}</span>
+        </li>
+        {% endfor %}
+      </ul>
+    </div>
+    {% else %}
+    <p class="text-gray-500 text-sm">Nenhum job agendado disponivel.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}

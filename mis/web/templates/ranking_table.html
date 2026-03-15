@@ -1,0 +1,36 @@
+<table class="w-full text-sm text-left">
+  <thead class="bg-gray-800 text-gray-400 uppercase text-xs">
+    <tr>
+      <th class="px-4 py-3">#</th>
+      <th class="px-4 py-3">Produto</th>
+      <th class="px-4 py-3">Plataforma</th>
+      <th class="px-4 py-3">Nicho</th>
+      <th class="px-4 py-3">Score</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors">
+      <td class="px-4 py-3 text-gray-400">{{ product.rank or loop.index }}</td>
+      <td class="px-4 py-3">
+        <a href="/dossier/{{ product.id }}" class="text-blue-400 hover:text-blue-300 transition-colors">
+          {{ product.title }}
+        </a>
+        {% if not product.has_dossier %}
+        <span class="bg-yellow-600 text-xs px-1 rounded ml-1">Pendente</span>
+        {% endif %}
+      </td>
+      <td class="px-4 py-3 text-gray-300">{{ product.platform_name or product.platform_slug }}</td>
+      <td class="px-4 py-3 text-gray-300">{{ product.niche_name or product.niche_slug }}</td>
+      <td class="px-4 py-3 text-gray-300">{{ product.opportunity_score or '-' }}</td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="5" class="px-4 py-6 text-center text-gray-500">Sem dados ainda</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="px-4 py-2 text-xs text-gray-600">
+  Ultima atualizacao: {{ last_updated or 'Sem dados ainda' }}
+</div>

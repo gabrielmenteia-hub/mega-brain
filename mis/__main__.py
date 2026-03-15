@@ -4,10 +4,12 @@ Usage:
     python -m mis spy --url <URL>
     python -m mis spy --product-id <ID>
     python -m mis radar --niche <SLUG>
+    python -m mis dashboard [--host HOST] [--port PORT]
 
 Subcommands:
-    spy    Spy on a product by URL or by its DB product-id.
-    radar  Run a full pain radar cycle for a specific niche.
+    spy        Spy on a product by URL or by its DB product-id.
+    radar      Run a full pain radar cycle for a specific niche.
+    dashboard  Start the web dashboard server.
 """
 import argparse
 import asyncio
@@ -52,6 +54,25 @@ def main() -> None:
         help="Niche slug as configured in config.yaml (e.g. 'emagrecimento')",
     )
 
+    # ── dashboard subcommand ────────────────────────────────────────────────
+    dashboard_parser = subparsers.add_parser(
+        "dashboard",
+        help="Start the web dashboard server",
+    )
+    dashboard_parser.add_argument(
+        "--host",
+        default="127.0.0.1",
+        metavar="HOST",
+        help="Bind host (default: 127.0.0.1)",
+    )
+    dashboard_parser.add_argument(
+        "--port",
+        type=int,
+        default=8000,
+        metavar="PORT",
+        help="Bind port (default: 8000)",
+    )
+
     # ── Parse and dispatch ──────────────────────────────────────────────────
     args = parser.parse_args()
 
@@ -63,6 +84,8 @@ def main() -> None:
         _handle_spy(args)
     elif args.command == "radar":
         _handle_radar(args)
+    elif args.command == "dashboard":
+        _handle_dashboard(args)
     else:
         parser.print_help()
         sys.exit(1)
@@ -102,6 +125,19 @@ def _handle_radar(args) -> None:
     else:
         print(f"No report generated for niche '{args.niche}' (no signals or niche not found)")
         sys.exit(1)
+
+
+def _handle_dashboard(args) -> None:
+    """Handle the dashboard subcommand."""
+    import os
+
+    import uvicorn
+
+    from mis.web.app import create_app
+
+    db_path = os.environ.get("MIS_DB_PATH", "data/mis.db")
+    app = create_app(db_path=db_path)
+    uvicorn.run(app, host=args.host, port=args.port)
 
 
 if __name__ == "__main__":
