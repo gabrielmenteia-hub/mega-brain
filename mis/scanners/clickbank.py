@@ -308,7 +308,7 @@ async def run_clickbank_scan(config: dict) -> None:
     """
     import structlog as _structlog
     from mis.db import get_db
-    from mis.product_repository import save_batch
+    from mis.scanner import save_batch_with_alerts
 
     _log = _structlog.get_logger(__name__)
     db_path = config.get("settings", {}).get("db_path", "mis.db")
@@ -328,7 +328,7 @@ async def run_clickbank_scan(config: dict) -> None:
 
             if products:
                 db = get_db(db_path)
-                save_batch(db, products)
+                save_batch_with_alerts(db, db_path, products)
                 _log.info(
                     "clickbank_scanner.job.complete",
                     niche=niche_slug,

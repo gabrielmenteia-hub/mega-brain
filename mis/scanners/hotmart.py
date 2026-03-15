@@ -198,7 +198,7 @@ async def run_hotmart_scan(config: dict) -> None:
         config: Loaded config dict (from load_config()).
     """
     from mis.db import get_db, run_migrations
-    from mis.product_repository import save_batch
+    from mis.scanner import save_batch_with_alerts
 
     db_path = config.get("settings", {}).get("db_path", "mis.db")
 
@@ -217,7 +217,7 @@ async def run_hotmart_scan(config: dict) -> None:
 
             if products:
                 db = get_db(db_path)
-                save_batch(db, products)
+                save_batch_with_alerts(db, db_path, products)
                 log.info(
                     "hotmart_scanner.job.complete",
                     niche=niche_slug,
