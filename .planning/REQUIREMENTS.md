@@ -54,8 +54,8 @@
 
 ### Integração MEGABRAIN
 
-- [x] **INT-01**: MIS é integrado ao MEGABRAIN como módulo independente (`mis/`) com único ponto de integração (`mis_agent.py`)
-- [x] **INT-02**: Usuário pode invocar análise do MIS via agente/comando dentro do MEGABRAIN
+- [ ] **INT-01**: MIS é integrado ao MEGABRAIN como módulo independente (`mis/`) com único ponto de integração (`mis_agent.py`)
+- [ ] **INT-02**: Usuário pode invocar análise do MIS via agente/comando dentro do MEGABRAIN
 
 ## v2 Requirements
 
@@ -88,10 +88,10 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 1 | Complete (01-01) |
-| FOUND-02 | Phase 1 | Pending |
-| FOUND-03 | Phase 1 | Complete |
-| FOUND-04 | Phase 1 | Pending |
+| FOUND-01 | Phase 8 | Pending |
+| FOUND-02 | Phase 8 | Pending |
+| FOUND-03 | Phase 8 | Pending |
+| FOUND-04 | Phase 8 | Pending |
 | SCAN-01 | Phase 2 | Complete |
 | SCAN-02 | Phase 2 | Complete |
 | SCAN-03 | Phase 2 | Complete |
@@ -117,13 +117,14 @@
 | DASH-02 | Phase 5 | Complete |
 | DASH-03 | Phase 5 | Complete |
 | DASH-04 | Phase 5 | Complete |
-| INT-01 | Phase 6 | Complete |
-| INT-02 | Phase 6 | Complete |
+| INT-01 | Phase 7 | Pending |
+| INT-02 | Phase 7 | Pending |
 
 **Coverage:**
 - v1 requirements: 31 total
 - Mapped to phases: 31
 - Unmapped: 0 ✓
+- Pending (gap closure): FOUND-01, FOUND-02, FOUND-03, FOUND-04 (Phase 8), INT-01, INT-02 (Phase 7), RADAR-04 (deferred v2)
 
 ---
 *Requirements defined: 2026-03-14*

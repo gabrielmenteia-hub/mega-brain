@@ -137,10 +137,38 @@ Plans:
 - [ ] 06-01-PLAN.md — Bridge mis_agent.py com get_briefing_data() e export_to_megabrain() + testes (INT-01)
 - [ ] 06-02-PLAN.md — CLI export subcommand + skill /mis-briefing JARVIS-style + CLAUDE.md MIS Integration (INT-02)
 
+### Phase 7: MIS Integration Bug Fixes
+**Goal**: Os 3 bugs críticos de integração identificados no audit v1.0 são corrigidos — export_to_megabrain exporta dossiês reais, health score calcula corretamente, e o pipeline automático scan→spy→dossiê funciona de ponta a ponta
+**Depends on**: Phase 6
+**Requirements**: INT-01, INT-02
+**Gap Closure**: Closes gaps from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. `export_to_megabrain()` exporta dossiês com `status='done'` (não 'complete') e retorna contagem > 0 quando dossiês existem
+  2. `get_briefing_data()` calcula health score corretamente — `last_cycle` e `dossiers_today` retornam valores reais (coluna `generated_at` usada ao invés de `created_at`)
+  3. `_scan_and_spy_job()` salva produtos no banco via `save_batch_with_alerts()` antes de tentar espionar — pipeline automático scan→spy→dossiê executa end-to-end
+**Plans**: 1 plan
+
+Plans:
+- [ ] 07-01-PLAN.md — Fix export status filter, fix created_at→generated_at, fix _scan_and_spy_job save + testes
+
+### Phase 8: Foundation Verification
+**Goal**: Phase 1 é retroativamente verificada — FOUND-02 (proxy rotation) e FOUND-04 (health monitor) são confirmados ou implementados, e VERIFICATION.md da Phase 1 é criado documentando o estado real
+**Depends on**: Phase 7
+**Requirements**: FOUND-01, FOUND-02, FOUND-03, FOUND-04
+**Gap Closure**: Closes gaps from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. `BaseScraper` implementa proxy rotation (lista de proxies configurável) além de rate limiting e retry já existentes — ou confirma que proxy rotation está presente e documentada
+  2. `run_canary_check()` em `health_monitor.py` cobre verificações de Phase 1 (schema integrity, scraper liveness) e não apenas plataformas (Phase 2)
+  3. VERIFICATION.md da Phase 1 existe com status passed ou gaps_found refletindo estado real do código
+**Plans**: 1 plan
+
+Plans:
+- [ ] 08-01-PLAN.md — Audit BaseScraper proxy rotation, audit health_monitor canary scope, write Phase 1 VERIFICATION.md
+
 ## Progress
 
 **Execution Order:**
-Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6
+Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -151,3 +179,5 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | 4. Pain Radar | 5/5 | Complete   | 2026-03-15 |
 | 5. Dashboard | 4/5 | In Progress|  |
 | 6. MEGABRAIN Integration | 1/2 | Complete    | 2026-03-15 |
+| 7. MIS Integration Bug Fixes | 0/1 | Not started | - |
+| 8. Foundation Verification | 0/1 | Not started | - |
