@@ -14,7 +14,10 @@ from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.events import EVENT_JOB_ERROR, EVENT_JOB_EXECUTED
 import structlog
 
-from .scanner import run_all_scanners
+import os
+
+from .db import get_db
+from .scanner import run_all_scanners, save_batch_with_alerts
 from .spy_orchestrator import run_spy_batch, SPY_TOP_N
 
 log = structlog.get_logger()
@@ -88,21 +91,28 @@ async def _scan_and_spy_job() -> None:
 
     results = await run_all_scanners(config)
 
+    db_path = os.environ.get("MIS_DB_PATH", "data/mis.db")
+    db = get_db(db_path)
+
     products_to_spy: list[dict] = []
     for platform_key, platform_products in results.items():
+        if not platform_products:
+            continue
+        save_batch_with_alerts(db, db_path, platform_products)
         top_products = platform_products[:SPY_TOP_N]
         for p in top_products:
-            # If Product has a DB id (product_id_in_db attr or id attr), use it.
-            # Otherwise try to resolve via external_id from DB.
-            db_id = getattr(p, "product_id_in_db", None) or getattr(p, "id", None)
-            if db_id is None:
+            rows = list(db.execute(
+                "SELECT id FROM products WHERE platform_id=? AND external_id=?",
+                [p.platform_id, p.external_id],
+            ))
+            if not rows:
                 log.warning(
                     "scan_and_spy_job.product_no_db_id",
                     platform_key=platform_key,
                     external_id=getattr(p, "external_id", "unknown"),
                 )
                 continue
-            products_to_spy.append({"id": db_id, "rank": getattr(p, "rank", 999)})
+            products_to_spy.append({"id": rows[0][0], "rank": getattr(p, "rank", 999)})
 
     if products_to_spy:
         log.info("scan_and_spy_job.spy_start", count=len(products_to_spy))

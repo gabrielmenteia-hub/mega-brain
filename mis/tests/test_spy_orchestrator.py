@@ -410,9 +410,14 @@ async def test_scheduler_calls_run_spy_batch_after_scanners(monkeypatch):
     async def mock_run_spy_batch(products, **kw):
         spy_batch_calls.extend(products)
 
+    mock_db = MagicMock()
+    mock_db.execute.return_value = iter([[i + 100] for i in range(len(products_list))])
+
     with (
         patch("mis.scheduler.run_all_scanners", mock_run_all_scanners),
         patch("mis.scheduler.run_spy_batch", mock_run_spy_batch),
+        patch("mis.scheduler.save_batch_with_alerts"),
+        patch("mis.scheduler.get_db", return_value=mock_db),
     ):
         from mis.scheduler import _scan_and_spy_job
         await _scan_and_spy_job()
@@ -444,9 +449,14 @@ async def test_scheduler_triggers_spy_batch(monkeypatch):
     async def mock_run_spy_batch(products, **kw):
         spy_batch_calls.extend(products)
 
+    mock_db = MagicMock()
+    mock_db.execute.return_value = iter([[999]])
+
     with (
         patch("mis.scheduler.run_all_scanners", mock_run_all_scanners),
         patch("mis.scheduler.run_spy_batch", mock_run_spy_batch),
+        patch("mis.scheduler.save_batch_with_alerts"),
+        patch("mis.scheduler.get_db", return_value=mock_db),
     ):
         from mis.scheduler import _scan_and_spy_job
         await _scan_and_spy_job()
