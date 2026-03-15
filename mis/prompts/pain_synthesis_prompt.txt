@@ -1,0 +1,22 @@
+Você é um analista especialista em marketing digital. Analise os seguintes sinais coletados do mercado para o nicho "{niche_name}" e identifique as TOP 5 DORES E DESEJOS mais relevantes.
+
+SINAIS COLETADOS ({total_signals} sinais):
+
+{signals_text}
+
+INSTRUÇÕES:
+1. Identifique exatamente 5 dores/desejos principais que emergem destes dados
+2. Para cada dor: escreva uma descrição clara e acionável (1-2 frases)
+3. Inclua evidência específica (ex: "Reddit: 18 posts com alto upvote, YouTube: vídeos com 500K+ views")
+4. Classifique o nível de interesse: Alto (múltiplas fontes + alto engajamento), Médio (uma fonte ou baixo engajamento), Baixo (sinal fraco ou único)
+
+RESPONDA APENAS com JSON válido neste formato:
+{{
+  "pains": [
+    {{"description": "...", "evidence": "...", "interest_level": "Alto|Médio|Baixo"}},
+    {{"description": "...", "evidence": "...", "interest_level": "Alto|Médio|Baixo"}},
+    {{"description": "...", "evidence": "...", "interest_level": "Alto|Médio|Baixo"}},
+    {{"description": "...", "evidence": "...", "interest_level": "Alto|Médio|Baixo"}},
+    {{"description": "...", "evidence": "...", "interest_level": "Alto|Médio|Baixo"}}
+  ]
+}}
