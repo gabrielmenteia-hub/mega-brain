@@ -131,11 +131,11 @@ Plans:
   1. `mis/` existe como módulo independente com `mis_agent.py` como único arquivo que cruza a fronteira MIS/MEGABRAIN
   2. Usuário pode invocar `/mis-briefing` dentro do MEGABRAIN e receber resumo dos últimos produtos campeões e dores detectadas
   3. Dados do MIS (dossiês e relatórios) podem ser exportados em formato compatível com o pipeline de conhecimento do MEGABRAIN
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 06-01: Estrutura de módulo `mis/` e bridge `mis_agent.py`
-- [ ] 06-02: Comando `/mis-briefing` e exportação para MEGABRAIN pipeline
+- [ ] 06-01-PLAN.md — Bridge mis_agent.py com get_briefing_data() e export_to_megabrain() + testes (INT-01)
+- [ ] 06-02-PLAN.md — CLI export subcommand + skill /mis-briefing JARVIS-style + CLAUDE.md MIS Integration (INT-02)
 
 ## Progress
 
