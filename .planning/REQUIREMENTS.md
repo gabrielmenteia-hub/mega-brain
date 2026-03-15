@@ -30,10 +30,10 @@
 
 ### Dossiê IA
 
-- [ ] **DOS-01**: IA gera análise explicando por que o produto está vendendo (fatores de sucesso identificados nos dados)
-- [ ] **DOS-02**: IA mapeia as dores endereçadas pelo produto com base na copy e reviews coletados
-- [ ] **DOS-03**: IA gera template de modelagem com estrutura pronta para criar produto próprio baseado no campeão
-- [ ] **DOS-04**: IA atribui score de oportunidade por nicho (quão atrativa é a entrada nesse mercado)
+- [x] **DOS-01**: IA gera análise explicando por que o produto está vendendo (fatores de sucesso identificados nos dados)
+- [x] **DOS-02**: IA mapeia as dores endereçadas pelo produto com base na copy e reviews coletados
+- [x] **DOS-03**: IA gera template de modelagem com estrutura pronta para criar produto próprio baseado no campeão
+- [x] **DOS-04**: IA atribui score de oportunidade por nicho (quão atrativa é a entrada nesse mercado)
 - [x] **DOS-05**: Dossiê exibe confidence score indicando qualidade/completude dos dados usados na análise
 
 ### Radar de Dores (Horário)
@@ -102,10 +102,10 @@
 | SPY-03 | Phase 3 | Complete |
 | SPY-04 | Phase 3 | Complete |
 | SPY-05 | Phase 3 | Complete |
-| DOS-01 | Phase 3 | Pending |
-| DOS-02 | Phase 3 | Pending |
-| DOS-03 | Phase 3 | Pending |
-| DOS-04 | Phase 3 | Pending |
+| DOS-01 | Phase 3 | Complete |
+| DOS-02 | Phase 3 | Complete |
+| DOS-03 | Phase 3 | Complete |
+| DOS-04 | Phase 3 | Complete |
 | DOS-05 | Phase 3 | Complete |
 | RADAR-01 | Phase 4 | Pending |
 | RADAR-02 | Phase 4 | Pending |

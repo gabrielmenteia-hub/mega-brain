@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-product-espionage-dossiers/03-03-PLAN.md
-last_updated: "2026-03-15T00:52:09.312Z"
+stopped_at: Completed 03-product-espionage-dossiers/03-04-PLAN.md
+last_updated: "2026-03-15T01:04:49.216Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 2
   total_plans: 12
-  completed_plans: 10
+  completed_plans: 11
 ---
 
 ---
@@ -105,6 +105,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 03-product-espionage-dossiers P01 | 7 | 2 tasks | 12 files |
 | Phase 03-product-espionage-dossiers P02 | 12 | 2 tasks | 6 files |
 | Phase 03-product-espionage-dossiers P03 | 5 | 1 tasks | 2 files |
+| Phase 03-product-espionage-dossiers P04 | 10 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -144,6 +145,8 @@ Recent decisions affecting current work:
 - [Phase 03-03]: copy is blocking at 100-char threshold — prevents LLM from running on empty or trivial pages
 - [Phase 03-03]: confidence_score independent of gate_passed — enables partial dossier generation (confidence>0, gate=False) when copy present but reviews insufficient
 - [Phase 03-03]: min_reviews=10 configurable default — gate contract is (gate_passed, confidence_score) tuple for downstream LLM pipeline
+- [Phase 03-product-espionage-dossiers]: Env var ANTHROPIC_API_KEY injetada via monkeypatch nos testes — evita dependência de credenciais reais
+- [Phase 03-product-espionage-dossiers]: cost_usd calculado com preços claude-sonnet-4-6 (input 0.000003/token, output 0.000015/token)
 
 ### Pending Todos
 
@@ -158,6 +161,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T00:51:57.228Z
-Stopped at: Completed 03-product-espionage-dossiers/03-03-PLAN.md
+Last session: 2026-03-15T01:04:49.208Z
+Stopped at: Completed 03-product-espionage-dossiers/03-04-PLAN.md
 Resume file: None
