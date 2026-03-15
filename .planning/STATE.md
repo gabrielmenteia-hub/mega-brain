@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 04-pain-radar/04-04-PLAN.md
-last_updated: "2026-03-15T15:41:05.721Z"
+stopped_at: Completed 04-pain-radar/04-05-PLAN.md
+last_updated: "2026-03-15T15:52:03.004Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 17
-  completed_plans: 16
+  completed_plans: 17
 ---
 
 ---
@@ -111,6 +111,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 04-pain-radar P03 | 10 | 1 tasks | 3 files |
 | Phase 04-pain-radar P02 | 13 | 2 tasks | 7 files |
 | Phase 04-pain-radar P04 | 14 | 1 tasks | 3 files |
+| Phase 04-pain-radar P05 | 7 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -166,6 +167,8 @@ Recent decisions affecting current work:
 - [Phase 04-02]: QuoraCollector uses len(html)<5000 threshold for empty SPA shell detection — React app shell is 2-4KB without content
 - [Phase 04-pain-radar]: sqlite3 direct connection used for upsert instead of sqlite_utils.Database — context manager protocol not supported in installed version
 - [Phase 04-pain-radar]: pain_synthesis_prompt.txt uses double braces {{}} for JSON literal in format string to avoid KeyError in Python str.format()
+- [Phase 04-pain-radar]: Explicit remove-before-add in register_radar_jobs — APScheduler 3.x replace_existing only works on running scheduler, not paused
+- [Phase 04-pain-radar]: db_path from MIS_DB_PATH env var in register_radar_jobs — consistent with spy_orchestrator pattern
 
 ### Pending Todos
 
@@ -180,6 +183,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T15:41:05.713Z
-Stopped at: Completed 04-pain-radar/04-04-PLAN.md
+Last session: 2026-03-15T15:52:02.995Z
+Stopped at: Completed 04-pain-radar/04-05-PLAN.md
 Resume file: None
