@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-megabrain-integration/06-01-PLAN.md
-last_updated: "2026-03-15T20:26:30.959Z"
+stopped_at: Completed 06-megabrain-integration/06-02-PLAN.md
+last_updated: "2026-03-15T20:36:55.859Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
-  completed_phases: 5
+  completed_phases: 6
   total_plans: 24
-  completed_plans: 23
+  completed_plans: 24
 ---
 
 ---
@@ -118,6 +118,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 05-dashboard P04 | 5 | 2 tasks | 11 files |
 | Phase 05-dashboard P05 | 6m | 2 tasks | 9 files |
 | Phase 06-megabrain-integration P01 | 4m | 1 tasks | 2 files |
+| Phase 06-megabrain-integration P02 | 8 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -187,6 +188,8 @@ Recent decisions affecting current work:
 - [Phase 05-dashboard]: save_batch_with_alerts captures pre-upsert ranks to detect genuine new top-20 entries; brand-new products with rank<=20 also trigger alerts
 - [Phase 06-01]: order_by='opportunity_score' rejected — list_dossiers_by_rank uses p.{order_by} prefix (products table only); sorted in Python after fetching top-100
 - [Phase 06-01]: MD5 of rendered Markdown content used for idempotency in export_to_megabrain() — avoids mtime drift on re-export
+- [Phase 06-02]: SKILL.md uses execution-script pattern (Claude runs Bash) not agent pattern for MIS data fetch
+- [Phase 06-02]: export --dest defaults to None, resolved inside export_to_megabrain() — clean CLI/logic separation
 
 ### Pending Todos
 
@@ -201,6 +204,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T20:26:30.947Z
-Stopped at: Completed 06-megabrain-integration/06-01-PLAN.md
+Last session: 2026-03-15T20:36:55.849Z
+Stopped at: Completed 06-megabrain-integration/06-02-PLAN.md
 Resume file: None

@@ -55,7 +55,7 @@
 ### Integração MEGABRAIN
 
 - [x] **INT-01**: MIS é integrado ao MEGABRAIN como módulo independente (`mis/`) com único ponto de integração (`mis_agent.py`)
-- [ ] **INT-02**: Usuário pode invocar análise do MIS via agente/comando dentro do MEGABRAIN
+- [x] **INT-02**: Usuário pode invocar análise do MIS via agente/comando dentro do MEGABRAIN
 
 ## v2 Requirements
 
@@ -118,7 +118,7 @@
 | DASH-03 | Phase 5 | Complete |
 | DASH-04 | Phase 5 | Complete |
 | INT-01 | Phase 6 | Complete |
-| INT-02 | Phase 6 | Pending |
+| INT-02 | Phase 6 | Complete |
 
 **Coverage:**
 - v1 requirements: 31 total
