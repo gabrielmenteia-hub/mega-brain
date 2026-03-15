@@ -26,7 +26,7 @@
 - [x] **SPY-02**: Sistema coleta anúncios ativos do produto via Meta Ad Library (criativos e copy)
 - [x] **SPY-03**: Sistema extrai estrutura da oferta (preço, bônus, garantias, upsells, downsells)
 - [x] **SPY-04**: Sistema coleta e classifica reviews do produto separando avaliações positivas (4-5★) e negativas (1-3★)
-- [ ] **SPY-05**: Dados de espionagem só são processados pelo LLM quando completude mínima é atingida (data completeness gate)
+- [x] **SPY-05**: Dados de espionagem só são processados pelo LLM quando completude mínima é atingida (data completeness gate)
 
 ### Dossiê IA
 
@@ -34,7 +34,7 @@
 - [ ] **DOS-02**: IA mapeia as dores endereçadas pelo produto com base na copy e reviews coletados
 - [ ] **DOS-03**: IA gera template de modelagem com estrutura pronta para criar produto próprio baseado no campeão
 - [ ] **DOS-04**: IA atribui score de oportunidade por nicho (quão atrativa é a entrada nesse mercado)
-- [ ] **DOS-05**: Dossiê exibe confidence score indicando qualidade/completude dos dados usados na análise
+- [x] **DOS-05**: Dossiê exibe confidence score indicando qualidade/completude dos dados usados na análise
 
 ### Radar de Dores (Horário)
 
@@ -101,12 +101,12 @@
 | SPY-02 | Phase 3 | Complete |
 | SPY-03 | Phase 3 | Complete |
 | SPY-04 | Phase 3 | Complete |
-| SPY-05 | Phase 3 | Pending |
+| SPY-05 | Phase 3 | Complete |
 | DOS-01 | Phase 3 | Pending |
 | DOS-02 | Phase 3 | Pending |
 | DOS-03 | Phase 3 | Pending |
 | DOS-04 | Phase 3 | Pending |
-| DOS-05 | Phase 3 | Pending |
+| DOS-05 | Phase 3 | Complete |
 | RADAR-01 | Phase 4 | Pending |
 | RADAR-02 | Phase 4 | Pending |
 | RADAR-03 | Phase 4 | Pending |
