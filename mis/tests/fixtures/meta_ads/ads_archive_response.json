@@ -1,0 +1,22 @@
+{
+  "data": [
+    {
+      "page_name": "Produto Digital X",
+      "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=123",
+      "ad_creative_bodies": ["Descubra o método que vai transformar sua vida..."],
+      "ad_delivery_start_time": "2026-01-15"
+    },
+    {
+      "page_name": "Produto Digital X Oficial",
+      "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=456",
+      "ad_creative_bodies": ["Mais de 50.000 alunos transformados. Acesse agora!"],
+      "ad_delivery_start_time": "2026-02-01"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "abc123",
+      "after": "def456"
+    }
+  }
+}
