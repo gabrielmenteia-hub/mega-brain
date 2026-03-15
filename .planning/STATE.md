@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 3 context gathered
-last_updated: "2026-03-14T23:41:22.426Z"
+stopped_at: Completed 03-product-espionage-dossiers/03-01-PLAN.md
+last_updated: "2026-03-15T00:44:49.286Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
-  total_phases: 6
+  total_phases: 7
   completed_phases: 2
-  total_plans: 7
-  completed_plans: 7
+  total_plans: 12
+  completed_plans: 8
 ---
 
 ---
@@ -102,6 +102,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 02-platform-scanners P01 | 17 | 2 tasks | 11 files |
 | Phase 02-platform-scanners P02 | 28m | 2 tasks | 6 files |
 | Phase 02-platform-scanners P03 | 635 | 2 tasks | 9 files |
+| Phase 03-product-espionage-dossiers P01 | 7 | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -132,6 +133,9 @@ Recent decisions affecting current work:
 - [Phase 02-platform-scanners]: HOTMART_PLATFORM_ID=1 (convention: 1=Hotmart, 2=ClickBank, 3=Kiwify)
 - [Phase 02-platform-scanners]: Hotmart marketplace confirmed SSR — httpx sufficient, Playwright not needed (live inspection 2026-03-14)
 - [Phase 02-platform-scanners]: register_scanner_jobs() uses CronTrigger.from_crontab() reading scan_schedule from config.settings
+- [Phase 03-01]: ads_json stored as TEXT column in dossiers (not separate table) for MVP — avoids schema complexity for unstructured Meta Ad Library JSON
+- [Phase 03-01]: db.py run_migrations() chains _001→_002→_003 — callers get full schema with one call
+- [Phase 03-01]: SalesPageScraper uses LLM-as-universal-parser — no platform-specific selectors, works with any sales page URL
 
 ### Pending Todos
 
@@ -146,6 +150,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-14T23:41:22.415Z
-Stopped at: Phase 3 context gathered
-Resume file: .planning/phases/03-product-espionage-dossiers/03-CONTEXT.md
+Last session: 2026-03-15T00:44:49.277Z
+Stopped at: Completed 03-product-espionage-dossiers/03-01-PLAN.md
+Resume file: None
