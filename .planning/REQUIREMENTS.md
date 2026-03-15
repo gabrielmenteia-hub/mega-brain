@@ -18,7 +18,7 @@
 - [x] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
 - [x] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
 - [x] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
-- [ ] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
+- [x] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
 
 ### Espionagem de Produto
 
@@ -47,10 +47,10 @@
 
 ### Dashboard Web
 
-- [ ] **DASH-01**: Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho
-- [ ] **DASH-02**: Dashboard exibe página individual de dossiê por produto com todos os dados de espionagem e análise IA
-- [ ] **DASH-03**: Dashboard exibe feed de dores do mercado com atualização horária por nicho
-- [ ] **DASH-04**: Sistema envia alerta quando novo produto campeão entra no radar
+- [x] **DASH-01**: Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho
+- [x] **DASH-02**: Dashboard exibe página individual de dossiê por produto com todos os dados de espionagem e análise IA
+- [x] **DASH-03**: Dashboard exibe feed de dores do mercado com atualização horária por nicho
+- [x] **DASH-04**: Sistema envia alerta quando novo produto campeão entra no radar
 
 ### Integração MEGABRAIN
 
@@ -96,7 +96,7 @@
 | SCAN-02 | Phase 2 | Complete |
 | SCAN-03 | Phase 2 | Complete |
 | SCAN-04 | Phase 2 | Complete |
-| SCAN-05 | Phase 5 | Pending |
+| SCAN-05 | Phase 5 | Complete |
 | SPY-01 | Phase 3 | Complete |
 | SPY-02 | Phase 3 | Complete |
 | SPY-03 | Phase 3 | Complete |
@@ -113,10 +113,10 @@
 | RADAR-04 | Phase 4 | Pending |
 | RADAR-05 | Phase 4 | Complete |
 | RADAR-06 | Phase 4 | Complete |
-| DASH-01 | Phase 5 | Pending |
-| DASH-02 | Phase 5 | Pending |
-| DASH-03 | Phase 5 | Pending |
-| DASH-04 | Phase 5 | Pending |
+| DASH-01 | Phase 5 | Complete |
+| DASH-02 | Phase 5 | Complete |
+| DASH-03 | Phase 5 | Complete |
+| DASH-04 | Phase 5 | Complete |
 | INT-01 | Phase 6 | Pending |
 | INT-02 | Phase 6 | Pending |
 

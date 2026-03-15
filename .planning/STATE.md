@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-dashboard/05-02-PLAN.md
-last_updated: "2026-03-15T18:23:00.993Z"
+stopped_at: Completed 05-dashboard/05-03-PLAN.md
+last_updated: "2026-03-15T18:30:31.248Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 22
-  completed_plans: 19
+  completed_plans: 20
 ---
 
 ---
@@ -114,6 +114,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 04-pain-radar P05 | 7 | 2 tasks | 3 files |
 | Phase 05-dashboard P01 | 12 | 2 tasks | 9 files |
 | Phase 05-dashboard P02 | 15 | 2 tasks | 6 files |
+| Phase 05-dashboard P03 | 18 | 1 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -176,6 +177,8 @@ Recent decisions affecting current work:
 - [Phase 05-02]: get_db() changed to use isolation_level=None (autocommit) — multi-connection pattern in web repositories requires writes to be immediately visible
 - [Phase 05-02]: alert_repository uses sqlite3.connect directly — avoids WAL write-lock conflicts when tests use uncommitted get_db connections
 - [Phase 05-02]: created_at column added to dossiers in _005 migration — was missing from _003 (status+dossier_json only)
+- [Phase 05-dashboard]: db_path != ':memory:' guard in create_app — sqlite_utils creates isolated in-memory DB per call; test conftest uses real tmp file
+- [Phase 05-dashboard]: app.state injection for db_path and templates — avoids global state, enables clean TestClient testing
 
 ### Pending Todos
 
@@ -190,6 +193,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T18:22:49.070Z
-Stopped at: Completed 05-dashboard/05-02-PLAN.md
+Last session: 2026-03-15T18:30:31.236Z
+Stopped at: Completed 05-dashboard/05-03-PLAN.md
 Resume file: None
