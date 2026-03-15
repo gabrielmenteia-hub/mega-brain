@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 05-dashboard/05-01-PLAN.md
-last_updated: "2026-03-15T18:04:54.352Z"
+stopped_at: Completed 05-dashboard/05-02-PLAN.md
+last_updated: "2026-03-15T18:23:00.993Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 4
   total_plans: 22
-  completed_plans: 18
+  completed_plans: 19
 ---
 
 ---
@@ -113,6 +113,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 04-pain-radar P04 | 14 | 1 tasks | 3 files |
 | Phase 04-pain-radar P05 | 7 | 2 tasks | 3 files |
 | Phase 05-dashboard P01 | 12 | 2 tasks | 9 files |
+| Phase 05-dashboard P02 | 15 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -172,6 +173,9 @@ Recent decisions affecting current work:
 - [Phase 04-pain-radar]: db_path from MIS_DB_PATH env var in register_radar_jobs — consistent with spy_orchestrator pattern
 - [Phase 05-dashboard]: Deferred imports inside test functions (not module level) for repository tests — allows pytest collection while still failing RED at runtime
 - [Phase 05-dashboard]: fastapi[standard] + uvicorn + jinja2 + aiofiles installed as web layer dependencies during Wave 0 test scaffold
+- [Phase 05-02]: get_db() changed to use isolation_level=None (autocommit) — multi-connection pattern in web repositories requires writes to be immediately visible
+- [Phase 05-02]: alert_repository uses sqlite3.connect directly — avoids WAL write-lock conflicts when tests use uncommitted get_db connections
+- [Phase 05-02]: created_at column added to dossiers in _005 migration — was missing from _003 (status+dossier_json only)
 
 ### Pending Todos
 
@@ -186,6 +190,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T18:04:54.339Z
-Stopped at: Completed 05-dashboard/05-01-PLAN.md
+Last session: 2026-03-15T18:22:49.070Z
+Stopped at: Completed 05-dashboard/05-02-PLAN.md
 Resume file: None
