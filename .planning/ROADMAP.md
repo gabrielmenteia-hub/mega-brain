@@ -114,13 +114,14 @@ Plans:
   2. Página individual de dossiê exibe todos os dados de espionagem e análise IA de forma legível para um produto selecionado
   3. Feed de dores do mercado mostra relatório horário mais recente por nicho com timestamp de última atualização
   4. Sistema envia alerta (notificação no dashboard) quando novo produto campeão entra no radar
-**Plans**: 4 plans
+**Plans**: 5 plans
 
 Plans:
 - [ ] 05-01-PLAN.md — Test scaffolds Wave 0: 9 arquivos em tests/web/ com contratos failing (21+ testes RED)
-- [ ] 05-02-PLAN.md — Fundação web: migration _005 (alerts) + 3 repositórios + FastAPI app + Ranking page (DASH-01, SCAN-05)
-- [ ] 05-03-PLAN.md — Dossiê individual com tabs HTMX + Feed de dores por nicho (DASH-02, DASH-03)
-- [ ] 05-04-PLAN.md — Sistema de alertas: página + badge polling + trigger top-20 no scanner (DASH-04)
+- [ ] 05-02-PLAN.md — Camada de dados: migration _005 (alerts) + 3 repositórios (alert, dossier, pain) + db.py atualizado
+- [ ] 05-03-PLAN.md — Web layer: FastAPI app factory + Ranking page + subcomando dashboard CLI (DASH-01, SCAN-05)
+- [ ] 05-04-PLAN.md — Dossiê individual com tabs HTMX + Feed de dores por nicho (DASH-02, DASH-03)
+- [ ] 05-05-PLAN.md — Sistema de alertas: página + badge polling + trigger top-20 nos 3 scanners (DASH-04)
 
 ### Phase 6: MEGABRAIN Integration
 **Goal**: MIS é acessível como módulo dentro do MEGABRAIN via comando de agente, com ponto de integração único e limpo
@@ -148,5 +149,5 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | 2.5. Platform Expansion | 0/3 | Not started | - |
 | 3. Product Espionage + Dossiers | 4/5 | In Progress|  |
 | 4. Pain Radar | 5/5 | Complete   | 2026-03-15 |
-| 5. Dashboard | 0/4 | Not started | - |
+| 5. Dashboard | 0/5 | Not started | - |
 | 6. MEGABRAIN Integration | 0/2 | Not started | - |
