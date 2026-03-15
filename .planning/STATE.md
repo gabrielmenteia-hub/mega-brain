@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 6 context gathered
-last_updated: "2026-03-15T19:37:42.050Z"
+stopped_at: Completed 06-megabrain-integration/06-01-PLAN.md
+last_updated: "2026-03-15T20:26:30.959Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 5
-  total_plans: 22
-  completed_plans: 22
+  total_plans: 24
+  completed_plans: 23
 ---
 
 ---
@@ -117,6 +117,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 05-dashboard P03 | 18 | 1 tasks | 11 files |
 | Phase 05-dashboard P04 | 5 | 2 tasks | 11 files |
 | Phase 05-dashboard P05 | 6m | 2 tasks | 9 files |
+| Phase 06-megabrain-integration P01 | 4m | 1 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -184,6 +185,8 @@ Recent decisions affecting current work:
 - [Phase 05-dashboard]: pain_repository uses niche_id not niche_slug — feed route resolves ID via sqlite3 lookup before calling repository
 - [Phase 05-dashboard]: alerts_badge.html is a partial fragment (no extends base.html) — required for HTMX outerHTML swap to replace span correctly
 - [Phase 05-dashboard]: save_batch_with_alerts captures pre-upsert ranks to detect genuine new top-20 entries; brand-new products with rank<=20 also trigger alerts
+- [Phase 06-01]: order_by='opportunity_score' rejected — list_dossiers_by_rank uses p.{order_by} prefix (products table only); sorted in Python after fetching top-100
+- [Phase 06-01]: MD5 of rendered Markdown content used for idempotency in export_to_megabrain() — avoids mtime drift on re-export
 
 ### Pending Todos
 
@@ -198,6 +201,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T19:37:42.024Z
-Stopped at: Phase 6 context gathered
-Resume file: .planning/phases/06-megabrain-integration/06-CONTEXT.md
+Last session: 2026-03-15T20:26:30.947Z
+Stopped at: Completed 06-megabrain-integration/06-01-PLAN.md
+Resume file: None
