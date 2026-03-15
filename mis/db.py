@@ -12,7 +12,24 @@ Usage:
 """
 import sqlite_utils
 
-from .migrations._001_initial import run_migrations  # noqa: F401 (re-exported)
+from .migrations._001_initial import run_migrations as _run_001
+from .migrations._002_product_enrichment import run_migration_002 as _run_002
+from .migrations._003_spy_dossiers import run_migration_003 as _run_003
+
+
+def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
+    """Apply all migrations in order.
+
+    Runs _001 (initial schema), _002 (product enrichment), and _003 (spy
+    dossiers) sequentially. Each migration is idempotent — safe to call on
+    an already-migrated database.
+
+    Args:
+        db_path: Path to the SQLite database file.
+    """
+    _run_001(db_path)
+    _run_002(db_path)
+    _run_003(db_path)
 
 
 def get_db(db_path: str) -> sqlite_utils.Database:

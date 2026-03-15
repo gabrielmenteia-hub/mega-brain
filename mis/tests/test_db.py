@@ -10,10 +10,13 @@ from mis.db import get_db, run_migrations
 
 
 def test_all_tables_exist(db_path):
-    """After run_migrations(), exactly 5 tables must exist."""
+    """After run_migrations(), exactly 7 tables must exist (includes _003 spy tables)."""
     run_migrations(db_path)
     db = sqlite_utils.Database(db_path)
-    assert set(db.table_names()) == {"platforms", "niches", "products", "pains", "dossiers"}
+    assert set(db.table_names()) == {
+        "platforms", "niches", "products", "pains", "dossiers",
+        "reviews", "llm_calls",
+    }
 
 
 def test_migration_idempotent(db_path):
@@ -21,8 +24,11 @@ def test_migration_idempotent(db_path):
     run_migrations(db_path)
     run_migrations(db_path)  # second call must not fail
     db = sqlite_utils.Database(db_path)
-    # Tables must still exist after the second run
-    assert set(db.table_names()) == {"platforms", "niches", "products", "pains", "dossiers"}
+    # All 7 tables must still exist after the second run
+    assert set(db.table_names()) == {
+        "platforms", "niches", "products", "pains", "dossiers",
+        "reviews", "llm_calls",
+    }
 
 
 def test_foreign_key_constraint(db_path):
