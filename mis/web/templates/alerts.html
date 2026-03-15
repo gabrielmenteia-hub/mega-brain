@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block title %}Alertas — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-4xl mx-auto">
+  <div class="flex items-center gap-3 mb-6">
+    <h1 class="text-2xl font-bold text-white">Alertas</h1>
+    {% if unseen_count > 0 %}
+    <span class="bg-red-500 text-white text-xs font-bold rounded-full px-2 py-0.5">
+      {{ unseen_count }} novos
+    </span>
+    {% endif %}
+  </div>
+
+  {% for alert in alerts %}
+  <div class="bg-gray-900 border border-gray-800 rounded-lg p-4 mb-3
+              {% if alert.seen %}opacity-50{% endif %}">
+    <div class="flex items-start justify-between gap-4">
+      <div class="flex-1">
+        <a href="/dossier/{{ alert.product_id }}"
+           class="text-blue-400 hover:text-blue-300 font-medium transition-colors">
+          {{ alert.product_title }}
+        </a>
+        <div class="text-sm text-gray-400 mt-1 flex flex-wrap gap-3">
+          <span>Nicho: <span class="text-gray-200">{{ alert.niche_slug }}</span></span>
+          <span>Plataforma: <span class="text-gray-200">{{ alert.platform_slug }}</span></span>
+          <span>Posição alcançada: <span class="text-yellow-400 font-semibold">#{{ alert.position }}</span></span>
+          <span>{{ alert.created_at[:16] }}</span>
+        </div>
+      </div>
+
+      {% if not alert.seen %}
+      <form method="post" action="/alerts/{{ alert.id }}/mark-seen" class="shrink-0">
+        <button type="submit"
+                class="bg-gray-700 hover:bg-gray-600 text-gray-200 text-xs
+                       px-3 py-1.5 rounded transition-colors">
+          Marcar como visto
+        </button>
+      </form>
+      {% endif %}
+    </div>
+  </div>
+  {% else %}
+  <div class="text-gray-500 text-center py-12">
+    Nenhum alerta recente.
+  </div>
+  {% endfor %}
+</div>
+{% endblock %}
