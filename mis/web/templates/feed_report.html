@@ -1,0 +1,99 @@
+{% if report %}
+  <div class="space-y-6">
+
+    <!-- Header with timestamp and signal count -->
+    <div class="flex items-center justify-between flex-wrap gap-3">
+      <div class="text-sm text-gray-400">
+        {% if report.cycle_at %}
+          <span>Ciclo: {{ report.cycle_at[:16].replace("T", " ") }}</span>
+          {% if time_ago %}
+            <span class="ml-2 text-gray-500">({{ time_ago }})</span>
+          {% endif %}
+        {% endif %}
+      </div>
+      <span class="text-sm text-gray-400">
+        Baseado em {{ report.signal_count or 0 }} sinais coletados
+      </span>
+    </div>
+
+    <!-- History selector -->
+    {% if history and history | length > 1 %}
+    <div class="flex items-center gap-2">
+      <label for="report-selector" class="text-sm text-gray-400">Histórico:</label>
+      <select
+        id="report-selector"
+        name="report_id"
+        hx-get="/feed/niche/{{ niche_slug }}"
+        hx-include="this"
+        hx-target="#feed-report-wrapper"
+        class="bg-gray-800 border border-gray-700 text-gray-200 text-sm rounded px-3 py-1.5 focus:outline-none focus:border-blue-500"
+      >
+        {% for h in history %}
+          <option value="{{ h.id }}" {% if h.id == report.id %}selected{% endif %}>
+            {{ h.cycle_at[:16].replace("T", " ") }}
+          </option>
+        {% endfor %}
+      </select>
+    </div>
+    {% endif %}
+
+    <!-- Search -->
+    <div>
+      <input
+        type="text"
+        name="q"
+        placeholder="Filtrar dores..."
+        hx-get="/feed/niche/{{ niche_slug }}"
+        hx-trigger="keyup changed delay:300ms"
+        hx-target="#pains-list"
+        hx-select="#pains-list"
+        class="w-full bg-gray-800 border border-gray-700 text-gray-200 text-sm rounded-lg px-4 py-2.5 focus:outline-none focus:border-blue-500 placeholder-gray-500"
+      />
+    </div>
+
+    <!-- Pains list -->
+    <div id="pains-list" class="space-y-4">
+      {% if report.report and report.report.pains %}
+        {% for pain in report.report.pains %}
+          <div class="bg-gray-800 rounded-lg p-4 space-y-2">
+            <div class="flex items-start gap-3">
+              <!-- Interest level badge -->
+              {% set level = pain.interest_level | lower if pain.interest_level else "" %}
+              {% if level == "alto" or level == "high" %}
+                <span class="bg-red-900/40 text-red-300 border border-red-700/40 text-xs px-2 py-0.5 rounded-full whitespace-nowrap mt-0.5">Alto</span>
+              {% elif level == "médio" or level == "medio" or level == "medium" %}
+                <span class="bg-yellow-900/40 text-yellow-300 border border-yellow-700/40 text-xs px-2 py-0.5 rounded-full whitespace-nowrap mt-0.5">Médio</span>
+              {% else %}
+                <span class="bg-gray-700/60 text-gray-400 border border-gray-600/40 text-xs px-2 py-0.5 rounded-full whitespace-nowrap mt-0.5">Baixo</span>
+              {% endif %}
+
+              <p class="text-gray-200 leading-relaxed">{{ pain.description }}</p>
+            </div>
+
+            <!-- Sources -->
+            {% if pain.sources %}
+              <div class="flex flex-wrap gap-2 pl-2 pt-1">
+                {% for source in pain.sources[:3] %}
+                  <a href="{{ source }}" target="_blank" rel="noopener"
+                     class="text-xs text-blue-400 hover:text-blue-300 transition-colors truncate max-w-xs">
+                    {{ source | truncate(60, True) }}
+                  </a>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        {% else %}
+          <p class="text-gray-500 text-center py-8">Nenhuma dor identificada neste ciclo</p>
+        {% endfor %}
+      {% else %}
+        <p class="text-gray-500 text-center py-8">Nenhuma dor identificada neste ciclo</p>
+      {% endif %}
+    </div>
+
+  </div>
+{% else %}
+  <div class="text-center py-16 text-gray-500">
+    <p class="text-lg">Nenhum relatório disponível para este nicho ainda.</p>
+    <p class="text-sm mt-2">Execute o Pain Radar para gerar o primeiro relatório.</p>
+  </div>
+{% endif %}

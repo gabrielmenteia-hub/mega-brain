@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Feed de Dores — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-5xl mx-auto">
+
+  <div class="mb-6 flex items-center justify-between flex-wrap gap-4">
+    <h1 class="text-2xl font-bold text-white">Feed de Dores</h1>
+    {% if niches %}
+      <span class="text-sm text-gray-400">{{ niches | length }} nicho{{ 's' if niches | length != 1 else '' }} monitorado{{ 's' if niches | length != 1 else '' }}</span>
+    {% endif %}
+  </div>
+
+  {% if niches %}
+    <!-- Niche tabs -->
+    <div class="border-b border-gray-800 mb-6">
+      <nav class="flex gap-1 -mb-px overflow-x-auto" aria-label="Nichos">
+        {% for n in niches %}
+          <button
+            hx-get="/feed/niche/{{ n.slug }}"
+            hx-target="#feed-report-wrapper"
+            hx-swap="innerHTML"
+            class="px-4 py-2.5 text-sm font-medium whitespace-nowrap border-b-2 transition-colors focus:outline-none
+              {% if active_niche == n.slug %}
+                border-blue-500 text-blue-400
+              {% else %}
+                border-transparent text-gray-400 hover:text-gray-200 hover:border-gray-600
+              {% endif %}"
+          >
+            {{ n.name }}
+          </button>
+        {% endfor %}
+      </nav>
+    </div>
+
+    <!-- Report wrapper -->
+    <div id="feed-report-wrapper">
+      {% include "feed_report.html" %}
+    </div>
+
+  {% else %}
+    <div class="text-center py-24 text-gray-500">
+      <p class="text-lg">Nenhum nicho configurado</p>
+      <p class="text-sm mt-2">Configure nichos em <code class="text-gray-400">mis/config.yaml</code> para começar.</p>
+    </div>
+  {% endif %}
+
+</div>
+{% endblock %}

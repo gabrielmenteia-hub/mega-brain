@@ -8,6 +8,7 @@ from fastapi.templating import Jinja2Templates
 
 from mis.db import run_migrations
 from mis.web.routes.dossier import router as dossier_router
+from mis.web.routes.feed import router as feed_router
 from mis.web.routes.health import router as health_router
 from mis.web.routes.ranking import router as ranking_router
 
@@ -48,6 +49,7 @@ def create_app(db_path: str) -> FastAPI:
     # Routers
     app.include_router(ranking_router)
     app.include_router(dossier_router)
+    app.include_router(feed_router)
     app.include_router(health_router)
 
     @app.get("/", include_in_schema=False)
