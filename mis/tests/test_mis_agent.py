@@ -51,8 +51,8 @@ def _seed_db(db_path: str, n_products: int = 12) -> None:
             if i <= 5:
                 conn.execute(
                     "INSERT OR IGNORE INTO dossiers "
-                    "(product_id, status, opportunity_score, confidence_score, dossier_json, created_at) "
-                    "VALUES (?, 'complete', ?, 0.9, ?, ?)",
+                    "(product_id, status, opportunity_score, confidence_score, dossier_json, generated_at) "
+                    "VALUES (?, 'done', ?, 0.9, ?, ?)",
                     [
                         i,
                         round(1.0 - i * 0.05, 2),  # scores: 0.95, 0.90, 0.85, 0.80, 0.75
@@ -166,7 +166,7 @@ def test_incremental_export(tmp_path, monkeypatch):
     # First export — should export N > 0 files
     result1 = agent_mod.export_to_megabrain(dest=dest)
     assert result1["status"] == "ok"
-    assert result1["exported"] >= 0  # may be 0 if no complete dossiers yet
+    assert result1["exported"] > 0  # must export at least 1 dossier with status='done'
     first_count = result1["exported"] + result1["skipped"]
 
     # Second identical export — all files already exist with same content
@@ -175,3 +175,58 @@ def test_incremental_export(tmp_path, monkeypatch):
     # skipped should equal total files (no new exports)
     assert result2["exported"] == 0
     assert result2["skipped"] == first_count
+
+
+def test_health_with_dossier_today(tmp_path, monkeypatch):
+    """get_briefing_data() returns last_cycle non-null and dossiers_today=True when a dossier was generated today."""
+    import json
+    import sqlite3
+    from datetime import datetime, timezone
+    from unittest.mock import AsyncMock, patch
+
+    db_file = str(tmp_path / "mis.db")
+    monkeypatch.setenv("MIS_DB_PATH", db_file)
+
+    from mis.db import run_migrations
+
+    run_migrations(db_file)
+
+    today_iso = datetime.now(timezone.utc).isoformat()
+
+    with sqlite3.connect(db_file) as conn:
+        # Insert platform, niche, product
+        conn.execute(
+            "INSERT OR IGNORE INTO platforms (id, name, slug) VALUES (1, 'Hotmart', 'hotmart')"
+        )
+        conn.execute(
+            "INSERT OR IGNORE INTO niches (id, name, slug) VALUES (1, 'Marketing', 'marketing')"
+        )
+        conn.execute(
+            "INSERT OR IGNORE INTO products (id, external_id, title, url, platform_id, niche_id, rank) "
+            "VALUES (1, 'prod_today', 'Product Today', 'https://example.com/1', 1, 1, 1)"
+        )
+        # Insert dossier with generated_at = today
+        conn.execute(
+            "INSERT OR IGNORE INTO dossiers "
+            "(product_id, status, opportunity_score, confidence_score, dossier_json, generated_at) "
+            "VALUES (?, 'done', 0.95, 0.9, ?, ?)",
+            [
+                1,
+                json.dumps({"why_sells": "Test", "copy": "Copy", "ads": [], "reviews": [], "template": "T"}),
+                today_iso,
+            ],
+        )
+        conn.commit()
+
+    import importlib
+    import mis.mis_agent as agent_mod
+
+    importlib.reload(agent_mod)
+
+    # Mock run_canary_check to avoid network calls and timeout in tests
+    with patch("mis.health_monitor.run_canary_check", new=AsyncMock(return_value=False)):
+        result = agent_mod.get_briefing_data()
+
+    assert result["status"] == "ok"
+    assert result["last_cycle"] is not None, "last_cycle must be non-null when dossier exists"
+    assert result["health"]["dossiers_today"] is True, "dossiers_today must be True when a dossier was generated today"
