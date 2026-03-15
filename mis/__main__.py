@@ -5,11 +5,13 @@ Usage:
     python -m mis spy --product-id <ID>
     python -m mis radar --niche <SLUG>
     python -m mis dashboard [--host HOST] [--port PORT]
+    python -m mis export [--dest PATH]
 
 Subcommands:
     spy        Spy on a product by URL or by its DB product-id.
     radar      Run a full pain radar cycle for a specific niche.
     dashboard  Start the web dashboard server.
+    export     Export dossiers and pain reports to MEGABRAIN knowledge pipeline.
 """
 import argparse
 import asyncio
@@ -73,6 +75,18 @@ def main() -> None:
         help="Bind port (default: 8000)",
     )
 
+    # ── export subcommand ────────────────────────────────────────────────────
+    export_parser = subparsers.add_parser(
+        "export",
+        help="Export dossiers and pain reports to MEGABRAIN knowledge pipeline",
+    )
+    export_parser.add_argument(
+        "--dest",
+        default=None,
+        metavar="PATH",
+        help="Destination directory (default: MEGABRAIN_PATH/knowledge/mis/)",
+    )
+
     # ── Parse and dispatch ──────────────────────────────────────────────────
     args = parser.parse_args()
 
@@ -86,6 +100,8 @@ def main() -> None:
         _handle_radar(args)
     elif args.command == "dashboard":
         _handle_dashboard(args)
+    elif args.command == "export":
+        _handle_export(args)
     else:
         parser.print_help()
         sys.exit(1)
@@ -138,6 +154,22 @@ def _handle_dashboard(args) -> None:
     db_path = os.environ.get("MIS_DB_PATH", "data/mis.db")
     app = create_app(db_path=db_path)
     uvicorn.run(app, host=args.host, port=args.port)
+
+
+def _handle_export(args) -> None:
+    """Handle the export subcommand."""
+    from mis.mis_agent import export_to_megabrain
+
+    result = export_to_megabrain(dest=args.dest)
+    if result["status"] == "ok":
+        print(
+            f"Exported: {result['exported']} dossiers/reports, "
+            f"{result['skipped']} skipped to {result['dest']}"
+        )
+    else:
+        print(f"Export failed: {result['message']}")
+        print(f"Hint: {result.get('setup_hint', '')}")
+        sys.exit(1)
 
 
 if __name__ == "__main__":
