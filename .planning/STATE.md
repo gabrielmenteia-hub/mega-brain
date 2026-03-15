@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 06-megabrain-integration/06-02-PLAN.md
-last_updated: "2026-03-15T20:40:52.403Z"
+stopped_at: Completed 07-mis-integration-bugfixes/07-01-PLAN.md
+last_updated: "2026-03-15T22:03:16.453Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
-  total_phases: 7
-  completed_phases: 6
-  total_plans: 24
-  completed_plans: 24
+  total_phases: 9
+  completed_phases: 7
+  total_plans: 25
+  completed_plans: 25
 ---
 
 ---
@@ -119,6 +119,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 05-dashboard P05 | 6m | 2 tasks | 9 files |
 | Phase 06-megabrain-integration P01 | 4m | 1 tasks | 2 files |
 | Phase 06-megabrain-integration P02 | 8 | 2 tasks | 3 files |
+| Phase 07-mis-integration-bugfixes P01 | 12 | 3 tasks | 5 files |
 
 ## Accumulated Context
 
@@ -190,6 +191,8 @@ Recent decisions affecting current work:
 - [Phase 06-01]: MD5 of rendered Markdown content used for idempotency in export_to_megabrain() — avoids mtime drift on re-export
 - [Phase 06-02]: SKILL.md uses execution-script pattern (Claude runs Bash) not agent pattern for MIS data fetch
 - [Phase 06-02]: export --dest defaults to None, resolved inside export_to_megabrain() — clean CLI/logic separation
+- [Phase 07-mis-integration-bugfixes]: export_to_megabrain uses WHERE status='done' — matches dossier lifecycle value set by spy_orchestrator
+- [Phase 07-mis-integration-bugfixes]: generated_at is canonical timestamp for dossier age queries — created_at (migration _005) is for created_at backfill only
 
 ### Pending Todos
 
@@ -204,6 +207,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T20:36:55.849Z
-Stopped at: Completed 06-megabrain-integration/06-02-PLAN.md
+Last session: 2026-03-15T22:03:16.428Z
+Stopped at: Completed 07-mis-integration-bugfixes/07-01-PLAN.md
 Resume file: None
