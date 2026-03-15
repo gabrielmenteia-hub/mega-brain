@@ -77,14 +77,14 @@ Plans:
   3. Sistema coleta reviews, classifica por valência (positivo/negativo) e não passa os dados para IA enquanto completude mínima não é atingida
   4. IA gera dossiê completo com: fatores de sucesso, dores endereçadas, template de modelagem e score de oportunidade por nicho
   5. Todo dossiê exibe confidence score indicando qualidade dos dados usados na análise
-**Plans**: TBD
+**Plans**: 5 plans
 
 Plans:
-- [ ] 03-01: Scraper de copy e estrutura de oferta (sales page)
-- [ ] 03-02: Coletor de anúncios Meta Ad Library e reviews
-- [ ] 03-03: Data completeness gate e queue de processamento
-- [ ] 03-04: Pipeline de análise IA (copy_analyzer, dossier_generator)
-- [ ] 03-05: Score de oportunidade e confidence score
+- [ ] 03-01-PLAN.md — Migration _003 + SalesPageScraper platform-agnostic (copy + oferta em uma chamada LLM)
+- [ ] 03-02-PLAN.md — MetaAdsScraper (API oficial) + ReviewsScraper (plataformas nativas + Google fallback)
+- [ ] 03-03-PLAN.md — SpyData dataclass + data completeness gate + confidence score
+- [ ] 03-04-PLAN.md — Pipeline LLM: copy_analyzer + dossier_generator com tracking de tokens
+- [ ] 03-05-PLAN.md — spy_orchestrator end-to-end + CLI + hook APScheduler pós-scanner
 
 ### Phase 4: Pain Radar
 **Goal**: O sistema monitora automaticamente, a cada hora, as fontes onde o mercado expõe suas dores e desejos, e consolida em relatório por nicho
@@ -146,7 +146,7 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | 1. Foundation | 4/4 | Complete | 2026-03-14 |
 | 2. Platform Scanners | 2/3 | In Progress|  |
 | 2.5. Platform Expansion | 0/3 | Not started | - |
-| 3. Product Espionage + Dossiers | 0/5 | Not started | - |
+| 3. Product Espionage + Dossiers | 0/5 | Planned | - |
 | 4. Pain Radar | 0/5 | Not started | - |
 | 5. Dashboard | 0/4 | Not started | - |
 | 6. MEGABRAIN Integration | 0/2 | Not started | - |
