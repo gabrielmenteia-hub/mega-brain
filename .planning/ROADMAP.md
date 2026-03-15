@@ -114,13 +114,13 @@ Plans:
   2. Página individual de dossiê exibe todos os dados de espionagem e análise IA de forma legível para um produto selecionado
   3. Feed de dores do mercado mostra relatório horário mais recente por nicho com timestamp de última atualização
   4. Sistema envia alerta (notificação no dashboard) quando novo produto campeão entra no radar
-**Plans**: TBD
+**Plans**: 4 plans
 
 Plans:
-- [ ] 05-01: FastAPI server e estrutura de rotas
-- [ ] 05-02: Página de ranking com filtros (Jinja2 + HTMX)
-- [ ] 05-03: Página de dossiê individual
-- [ ] 05-04: Feed de dores e sistema de alertas
+- [ ] 05-01-PLAN.md — Test scaffolds Wave 0: 9 arquivos em tests/web/ com contratos failing (21+ testes RED)
+- [ ] 05-02-PLAN.md — Fundação web: migration _005 (alerts) + 3 repositórios + FastAPI app + Ranking page (DASH-01, SCAN-05)
+- [ ] 05-03-PLAN.md — Dossiê individual com tabs HTMX + Feed de dores por nicho (DASH-02, DASH-03)
+- [ ] 05-04-PLAN.md — Sistema de alertas: página + badge polling + trigger top-20 no scanner (DASH-04)
 
 ### Phase 6: MEGABRAIN Integration
 **Goal**: MIS é acessível como módulo dentro do MEGABRAIN via comando de agente, com ponto de integração único e limpo
