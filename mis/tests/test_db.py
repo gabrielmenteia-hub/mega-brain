@@ -10,14 +10,17 @@ from mis.db import get_db, run_migrations
 
 
 def test_all_tables_exist(db_path):
-    """After run_migrations(), exactly 10 tables must exist (includes _003 spy + _004 radar tables)."""
+    """After run_migrations(), all 11 domain tables must exist (includes _003 spy + _004 radar + _005 alerts)."""
     run_migrations(db_path)
     db = sqlite_utils.Database(db_path)
-    assert set(db.table_names()) == {
+    expected = {
         "platforms", "niches", "products", "pains", "dossiers",
         "reviews", "llm_calls",
         "pain_signals", "pain_reports", "youtube_quota_log",
+        "alerts",
     }
+    # Use issubset to allow SQLite system tables (e.g. sqlite_sequence)
+    assert expected.issubset(set(db.table_names()))
 
 
 def test_migration_idempotent(db_path):
@@ -25,12 +28,14 @@ def test_migration_idempotent(db_path):
     run_migrations(db_path)
     run_migrations(db_path)  # second call must not fail
     db = sqlite_utils.Database(db_path)
-    # All 10 tables must still exist after the second run
-    assert set(db.table_names()) == {
+    # All 11 domain tables must still exist after the second run
+    expected = {
         "platforms", "niches", "products", "pains", "dossiers",
         "reviews", "llm_calls",
         "pain_signals", "pain_reports", "youtube_quota_log",
+        "alerts",
     }
+    assert expected.issubset(set(db.table_names()))
 
 
 def test_foreign_key_constraint(db_path):

@@ -10,6 +10,8 @@ Usage:
     db = get_db("/path/to/mis.db")
     db["products"].rows_where("platform_id = ?", [1])
 """
+import sqlite3
+
 import sqlite_utils
 
 from .migrations._001_initial import run_migrations as _run_001
@@ -37,15 +39,19 @@ def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
 
 
 def get_db(db_path: str) -> sqlite_utils.Database:
-    """Return a sqlite-utils Database with WAL mode and foreign keys enabled.
+    """Return a sqlite-utils Database with WAL mode, foreign keys, and autocommit.
+
+    Uses isolation_level=None (autocommit) so that writes are immediately
+    visible to other connections without an explicit commit call. This is
+    required for multi-connection patterns used by the web repository layer.
 
     Args:
         db_path: Path to the SQLite database file. Use ':memory:' for in-memory DBs.
 
     Returns:
-        A sqlite_utils.Database instance with PRAGMAs applied.
+        A sqlite_utils.Database instance with PRAGMAs and autocommit applied.
     """
-    db = sqlite_utils.Database(db_path)
-    db.execute("PRAGMA journal_mode=WAL")
-    db.execute("PRAGMA foreign_keys=ON")
-    return db
+    conn = sqlite3.connect(db_path, isolation_level=None)
+    conn.execute("PRAGMA journal_mode=WAL")
+    conn.execute("PRAGMA foreign_keys=ON")
+    return sqlite_utils.Database(conn)

@@ -57,3 +57,11 @@ def run_migration_005(db_path: str) -> None:
         "CREATE INDEX IF NOT EXISTS idx_alerts_seen "
         "ON alerts(seen, expires_at)"
     )
+
+    # Add created_at to dossiers if absent (backfill from generated_at column
+    # added in _001 — this column was missing from _003 which only added status,
+    # dossier_json, ads_json, incomplete, updated_at).
+    if "dossiers" in db.table_names():
+        existing_cols = {col.name for col in db["dossiers"].columns}
+        if "created_at" not in existing_cols:
+            db["dossiers"].add_column("created_at", str)
