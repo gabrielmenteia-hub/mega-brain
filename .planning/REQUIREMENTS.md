@@ -38,12 +38,12 @@
 
 ### Radar de Dores (Horário)
 
-- [ ] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
-- [ ] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
-- [ ] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
+- [x] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
+- [x] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
+- [x] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
 - [ ] **RADAR-04**: Sistema coleta comentários de anúncios patrocinados no Meta por nicho
-- [ ] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
-- [ ] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
+- [x] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
+- [x] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
 
 ### Dashboard Web
 
@@ -107,12 +107,12 @@
 | DOS-03 | Phase 3 | Complete |
 | DOS-04 | Phase 3 | Complete |
 | DOS-05 | Phase 3 | Complete |
-| RADAR-01 | Phase 4 | Pending |
-| RADAR-02 | Phase 4 | Pending |
-| RADAR-03 | Phase 4 | Pending |
+| RADAR-01 | Phase 4 | Complete |
+| RADAR-02 | Phase 4 | Complete |
+| RADAR-03 | Phase 4 | Complete |
 | RADAR-04 | Phase 4 | Pending |
-| RADAR-05 | Phase 4 | Pending |
-| RADAR-06 | Phase 4 | Pending |
+| RADAR-05 | Phase 4 | Complete |
+| RADAR-06 | Phase 4 | Complete |
 | DASH-01 | Phase 5 | Pending |
 | DASH-02 | Phase 5 | Pending |
 | DASH-03 | Phase 5 | Pending |

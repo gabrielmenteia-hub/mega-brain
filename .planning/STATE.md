@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 03-product-espionage-dossiers/03-05-PLAN.md
-last_updated: "2026-03-15T01:23:49.070Z"
+stopped_at: Completed 04-pain-radar/04-01-PLAN.md
+last_updated: "2026-03-15T15:07:23.230Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 7
   completed_phases: 3
-  total_plans: 12
-  completed_plans: 12
+  total_plans: 17
+  completed_plans: 13
 ---
 
 ---
@@ -107,6 +107,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 03-product-espionage-dossiers P03 | 5 | 1 tasks | 2 files |
 | Phase 03-product-espionage-dossiers P04 | 10 | 2 tasks | 9 files |
 | Phase 03-product-espionage-dossiers P05 | 10 | 2 tasks | 5 files |
+| Phase 04-pain-radar P01 | 10 | 2 tasks | 12 files |
 
 ## Accumulated Context
 
@@ -151,6 +152,9 @@ Recent decisions affecting current work:
 - [Phase 03-product-espionage-dossiers]: SPY_TOP_N=10 hardcoded in spy_orchestrator — not configurable by user decision
 - [Phase 03-product-espionage-dossiers]: MIS_DB_PATH env var as DB path source in orchestrator — enables clean test isolation
 - [Phase 03-product-espionage-dossiers]: run_spy_url uses PRAGMA foreign_keys=OFF for null platform/niche product insertion
+- [Phase 04-01]: INSERT OR IGNORE as upsert pattern for pain_signals — UNIQUE index on url_hash sufficient for idempotency without sqlite-utils pk-based upsert
+- [Phase 04-01]: Wave 0 test scaffolds import at module level to enforce ImportError as RED failure mode — ensures pytest collection validates when modules exist
+- [Phase 04-01]: config.yaml radar block uses relevance_language=pt for all niches — project targets BR market
 
 ### Pending Todos
 
@@ -165,6 +169,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T01:18:57.400Z
-Stopped at: Completed 03-product-espionage-dossiers/03-05-PLAN.md
+Last session: 2026-03-15T15:07:23.223Z
+Stopped at: Completed 04-pain-radar/04-01-PLAN.md
 Resume file: None
