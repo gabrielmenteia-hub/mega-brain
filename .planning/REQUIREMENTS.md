@@ -41,7 +41,7 @@
 - [x] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
 - [x] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
 - [x] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
-- [ ] **RADAR-04**: Sistema coleta comentários de anúncios patrocinados no Meta por nicho
+- [x] **RADAR-04**: Sistema coleta comentários de anúncios patrocinados no Meta por nicho
 - [x] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
 - [x] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
 
@@ -110,7 +110,7 @@
 | RADAR-01 | Phase 10 | Complete |
 | RADAR-02 | Phase 10 | Complete |
 | RADAR-03 | Phase 10 | Complete |
-| RADAR-04 | Phase 12 | Pending |
+| RADAR-04 | Phase 12 | Complete |
 | RADAR-05 | Phase 10 | Complete |
 | RADAR-06 | Phase 10 | Complete |
 | DASH-01 | Phase 10 | Complete |
