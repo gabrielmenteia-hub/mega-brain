@@ -103,3 +103,22 @@ def test_replace_existing_safe(isolated_scheduler):
         count_after_second = len(isolated_scheduler.get_jobs())
 
     assert count_after_first == count_after_second
+
+
+def test_radar_meta_ads_job_registered(isolated_scheduler):
+    """radar_meta_ads job is registered after Phase 12."""
+    config = _make_mock_config()
+    with patch("mis.radar.get_scheduler", return_value=isolated_scheduler):
+        from mis.radar import register_radar_jobs
+        register_radar_jobs(config)
+    job_ids = {job.id for job in isolated_scheduler.get_jobs()}
+    assert "radar_meta_ads" in job_ids
+
+
+def test_six_jobs_registered(isolated_scheduler):
+    """register_radar_jobs() registers exactly 6 jobs after Phase 12."""
+    config = _make_mock_config()
+    with patch("mis.radar.get_scheduler", return_value=isolated_scheduler):
+        from mis.radar import register_radar_jobs
+        register_radar_jobs(config)
+    assert len(isolated_scheduler.get_jobs()) == 6

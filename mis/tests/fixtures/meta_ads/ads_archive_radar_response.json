@@ -1,0 +1,35 @@
+{
+  "data": [
+    {
+      "page_name": "Emagrecimento Total",
+      "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=radar001",
+      "ad_creative_bodies": [
+        "Descubra o método definitivo para emagrecer sem sofrimento.",
+        "Mais de 30.000 pessoas já transformaram o corpo com esse programa."
+      ],
+      "ad_delivery_start_time": "2026-01-10"
+    },
+    {
+      "page_name": "Dieta Express BR",
+      "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=radar002",
+      "ad_creative_bodies": [
+        "Perca até 10kg em 30 dias com o nosso protocolo exclusivo."
+      ],
+      "ad_delivery_start_time": "2026-02-05"
+    },
+    {
+      "page_name": "Saude e Forma Vida",
+      "ad_snapshot_url": "https://www.facebook.com/ads/archive/render_ad/?id=radar003",
+      "ad_creative_bodies": [
+        "Cardapio low carb completo. Acesse grátis e comece hoje!"
+      ],
+      "ad_delivery_start_time": "2026-03-01"
+    }
+  ],
+  "paging": {
+    "cursors": {
+      "before": "radar_before_cursor",
+      "after": "radar_after_cursor"
+    }
+  }
+}
