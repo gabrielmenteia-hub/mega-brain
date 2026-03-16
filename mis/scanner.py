@@ -193,6 +193,7 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
     niches = config.get("niches", [])
     settings = config.get("settings", {})
     proxy_url: Optional[str] = settings.get("proxy_url") or None
+    proxy_list: list[str] = settings.get("proxy_list") or []
 
     tasks: list[tuple[str, asyncio.Task]] = []
 
@@ -202,7 +203,7 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
         platform_slug: str,
         key: str,
     ) -> tuple[str, list[Product]]:
-        async with scanner_cls(proxy_url=proxy_url) as scanner:
+        async with scanner_cls(proxy_url=proxy_url, proxy_list=proxy_list) as scanner:
             products = await scanner.scan_niche(niche_slug, platform_slug)
         return key, products
 

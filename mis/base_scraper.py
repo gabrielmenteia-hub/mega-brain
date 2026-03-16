@@ -55,8 +55,17 @@ class BaseScraper:
             html = await scraper.fetch("https://example.com")
     """
 
-    def __init__(self, proxy_url: Optional[str] = None) -> None:
-        self._proxy = proxy_url
+    def __init__(
+        self,
+        proxy_url: Optional[str] = None,
+        proxy_list: Optional[list[str]] = None,
+    ) -> None:
+        # proxy_list takes precedence over proxy_url
+        self._proxy_list: list[str] = proxy_list if proxy_list else (
+            [proxy_url] if proxy_url else []
+        )
+        # Preserve single-proxy backward compat for __aenter__ client
+        self._proxy: Optional[str] = proxy_url if not proxy_list else None
         self._client: Optional[httpx.AsyncClient] = None
 
     async def __aenter__(self) -> "BaseScraper":
@@ -71,6 +80,13 @@ class BaseScraper:
     async def __aexit__(self, *_) -> None:
         if self._client is not None:
             await self._client.aclose()
+
+    def _select_proxy(self) -> Optional[str]:
+        """Seleciona aleatoriamente um proxy da lista. Retorna None se lista vazia."""
+        import random
+        if not self._proxy_list:
+            return None
+        return random.choice(self._proxy_list)
 
     def _get_semaphore(self, domain: str) -> asyncio.Semaphore:
         """Return the Semaphore for this domain, creating it lazily."""
@@ -111,18 +127,39 @@ class BaseScraper:
             async with self._get_semaphore(domain):
                 headers = self._build_headers()
                 t0 = time.monotonic()
-                response = await self._client.get(url, headers=headers)
-                response.raise_for_status()
-                duration_ms = int((time.monotonic() - t0) * 1000)
-                log.info(
-                    "fetch.ok",
-                    url=url,
-                    status_code=response.status_code,
-                    duration_ms=duration_ms,
-                    domain=domain,
-                )
-                await asyncio.sleep(delay)
-                return response.text
+                if self._proxy_list:
+                    proxy = self._select_proxy()
+                    async with httpx.AsyncClient(
+                        http2=True,
+                        follow_redirects=True,
+                        timeout=httpx.Timeout(30.0),
+                        proxy=proxy,
+                    ) as temp_client:
+                        response = await temp_client.get(url, headers=headers)
+                        response.raise_for_status()
+                        duration_ms = int((time.monotonic() - t0) * 1000)
+                        log.info(
+                            "fetch.ok",
+                            url=url,
+                            status_code=response.status_code,
+                            duration_ms=duration_ms,
+                            domain=domain,
+                        )
+                        await asyncio.sleep(delay)
+                        return response.text
+                else:
+                    response = await self._client.get(url, headers=headers)
+                    response.raise_for_status()
+                    duration_ms = int((time.monotonic() - t0) * 1000)
+                    log.info(
+                        "fetch.ok",
+                        url=url,
+                        status_code=response.status_code,
+                        duration_ms=duration_ms,
+                        domain=domain,
+                    )
+                    await asyncio.sleep(delay)
+                    return response.text
 
         try:
             return await _do_fetch()

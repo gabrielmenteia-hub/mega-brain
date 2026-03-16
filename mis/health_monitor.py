@@ -153,3 +153,41 @@ async def run_platform_canary(
             error=str(exc),
         )
         return False
+
+
+async def run_schema_integrity_check(db_path: str) -> bool:
+    """Verifica integridade do schema — todas as 5 tabelas da Phase 1 existem.
+
+    Retorna True se schema integro, False se alguma tabela esta ausente.
+    Emite alert='SCHEMA_INTEGRITY_FAILED' via structlog.
+    Nunca propaga excecoes.
+
+    Args:
+        db_path: Caminho para o arquivo SQLite.
+    """
+    import sqlite3
+
+    REQUIRED_TABLES = {"products", "platforms", "niches", "pains", "dossiers"}
+    try:
+        with sqlite3.connect(db_path) as conn:
+            rows = conn.execute(
+                "SELECT name FROM sqlite_master WHERE type='table'"
+            ).fetchall()
+        existing = {row[0] for row in rows}
+        missing = REQUIRED_TABLES - existing
+        if missing:
+            log.error(
+                "health.schema_integrity.failed",
+                alert="SCHEMA_INTEGRITY_FAILED",
+                missing_tables=sorted(missing),
+            )
+            return False
+        log.info("health.schema_integrity.ok", tables=sorted(REQUIRED_TABLES))
+        return True
+    except Exception as exc:
+        log.error(
+            "health.schema_integrity.error",
+            alert="SCHEMA_INTEGRITY_FAILED",
+            error=str(exc),
+        )
+        return False

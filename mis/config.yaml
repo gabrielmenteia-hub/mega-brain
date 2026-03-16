@@ -52,6 +52,7 @@ niches:
       relevance_language: "pt"
 settings:
   proxy_url: ""
+  proxy_list: []
   request_delay_s: 2.0
   max_retries: 3
   max_products_per_niche: 50
