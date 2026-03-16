@@ -145,21 +145,22 @@ def register_radar_jobs(config: dict) -> None:
     scheduler = get_scheduler()
     db_path = _get_db_path()
 
-    # Sync wrappers that drive async coroutines via asyncio.run()
-    def _trends_job():
-        asyncio.run(_run_all_trends(config, db_path))
+    # Async wrappers — AsyncIOExecutor detects async def via iscoroutinefunction_partial
+    # and schedules them via create_task() instead of run_in_executor() (DEFECT-3 fix)
+    async def _trends_job():
+        await _run_all_trends(config, db_path)
 
-    def _reddit_quora_job():
-        asyncio.run(_run_all_reddit_quora(config, db_path))
+    async def _reddit_quora_job():
+        await _run_all_reddit_quora(config, db_path)
 
-    def _youtube_job():
-        asyncio.run(_run_all_youtube(config, db_path))
+    async def _youtube_job():
+        await _run_all_youtube(config, db_path)
 
-    def _synthesizer_job():
-        asyncio.run(_run_all_synthesizers(config, db_path))
+    async def _synthesizer_job():
+        await _run_all_synthesizers(config, db_path)
 
-    def _cleanup_job():
-        _run_cleanup(db_path)
+    async def _cleanup_job():
+        await asyncio.to_thread(_run_cleanup, db_path)
 
     _job_specs = [
         ("radar_trends", _trends_job, CronTrigger(minute=0)),
