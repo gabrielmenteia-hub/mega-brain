@@ -179,10 +179,23 @@ Plans:
 Plans:
 - [ ] 09-01-PLAN.md — Lifespan hook FastAPI + proxy_list forwarding em PlatformScanner + testes
 
+### Phase 10: Critical Runtime Fixes
+**Goal**: Os 2 defects críticos identificados no audit de integração v1.0 são corrigidos — niche_id é corretamente resolvido via DB antes de cada scan, e os radar jobs são convertidos para async nativo compatível com AsyncIOScheduler
+**Depends on**: Phase 9
+**Requirements**: SCAN-01, SCAN-02, SCAN-03, DASH-01, RADAR-01, RADAR-02, RADAR-03, RADAR-05, RADAR-06
+**Gap Closure**: Closes DEFECT-1 (niche_id=0) and DEFECT-3 (asyncio.run in AsyncIOScheduler) from v1.0 audit
+**Success Criteria** (what must be TRUE):
+  1. `run_all_scanners()` resolve `niche_id` via `SELECT id FROM niches WHERE slug=?` — produtos salvos com niche_id correto e visíveis no dashboard ranking
+  2. Todos os 5 radar job wrappers convertidos de `sync + asyncio.run()` para `async def` — jobs disparam sem RuntimeError no AsyncIOScheduler
+  3. Testes RED → GREEN cobrindo ambos os fixes; suite completa continua green
+
+Plans:
+- [ ] 10-01-PLAN.md — Fix niche_id resolution in run_all_scanners() (DEFECT-1) + Fix radar async wrappers (DEFECT-3) + tests
+
 ## Progress
 
 **Execution Order:**
-Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8 → 9
+Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -196,3 +209,4 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | 7. MIS Integration Bug Fixes | 1/1 | Complete   | 2026-03-15 |
 | 8. Foundation Verification | 0/1 | Complete    | 2026-03-16 |
 | 9. Production Wiring & Proxy Fix | 1/1 | Complete   | 2026-03-16 |
+| 10. Critical Runtime Fixes | 0/1 | Not started | - |
