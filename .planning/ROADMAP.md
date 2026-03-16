@@ -7,7 +7,7 @@ O MIS é construído em dependência estrita: cada fase desbloqueia a próxima. 
 ## Phases
 
 - [x] **Phase 1: Foundation** - Infraestrutura de dados, scraping e agendamento que tudo depende ✓ 2026-03-14
-- [ ] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart, ClickBank e Kiwify
+- [x] **Phase 2: Platform Scanners** - Varredura e ranking de produtos campeões em Hotmart, ClickBank e Kiwify (completed 2026-03-16)
 - [ ] **Phase 2.5: Platform Expansion** - Scanners automáticos para 15+ plataformas internacionais e nichos (Gumroad, Kajabi, Teachable, JVZoo, Digistore24, Stan Store, Skool, etc.)
 - [ ] **Phase 3: Product Espionage + Dossiers** - Espionagem profunda de produtos e geração de dossiês com IA
 - [x] **Phase 4: Pain Radar** - Radar horário de dores e desejos do mercado via fontes sociais e de tendências (completed 2026-03-15)
@@ -231,7 +231,7 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete | 2026-03-14 |
-| 2. Platform Scanners | 3/3 | Complete | 2026-03-14 |
+| 2. Platform Scanners | 3/3 | Complete    | 2026-03-16 |
 | 2.5. Platform Expansion | 0/3 | Not started | - |
 | 3. Product Espionage + Dossiers | 5/5 | Complete | 2026-03-14 |
 | 4. Pain Radar | 5/5 | Complete | 2026-03-15 |
