@@ -200,10 +200,14 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
 
     # Resolve niche slugs to DB IDs before dispatching coroutines (DEFECT-1 fix)
     _db_path = os.environ.get("MIS_DB_PATH", "data/mis.db")
-    _conn = _sqlite3.connect(_db_path)
-    _rows = _conn.execute("SELECT id, slug FROM niches").fetchall()
-    _conn.close()
-    niche_id_map: dict[str, int] = {slug: nid for nid, slug in _rows}
+    try:
+        _conn = _sqlite3.connect(_db_path)
+        _rows = _conn.execute("SELECT id, slug FROM niches").fetchall()
+        _conn.close()
+        niche_id_map: dict[str, int] = {slug: nid for nid, slug in _rows}
+    except Exception as _db_err:
+        log.warning("scanner.niche_id_map.db_unavailable", db_path=_db_path, error=str(_db_err))
+        niche_id_map = None  # type: ignore[assignment]
 
     tasks: list[tuple[str, asyncio.Task]] = []
 
@@ -222,7 +226,7 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
 
     for niche in niches:
         niche_slug = niche.get("slug", "")
-        if niche_slug not in niche_id_map:
+        if niche_id_map is not None and niche_slug not in niche_id_map:
             log.warning(
                 "scanner.niche.slug_not_in_db",
                 niche_slug=niche_slug,
@@ -264,11 +268,12 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
         else:
             _, products = result
             # Inject resolved niche_id into each product (DEFECT-1 fix)
-            niche_slug_for_key = key.split(".")[0]
-            resolved_id = niche_id_map.get(niche_slug_for_key)
-            if resolved_id is not None:
-                for p in products:
-                    p.niche_id = resolved_id
+            if niche_id_map is not None:
+                niche_slug_for_key = key.split(".")[0]
+                resolved_id = niche_id_map.get(niche_slug_for_key)
+                if resolved_id is not None:
+                    for p in products:
+                        p.niche_id = resolved_id
             output[key] = products
 
     return output
