@@ -190,23 +190,56 @@ Plans:
   3. Testes RED → GREEN cobrindo ambos os fixes; suite completa continua green
 
 Plans:
-- [ ] 10-01-PLAN.md — Fix niche_id resolution in run_all_scanners() (DEFECT-1) + Fix radar async wrappers (DEFECT-3) + tests
+- [x] 10-01-PLAN.md — Fix niche_id resolution in run_all_scanners() (DEFECT-1) + Fix radar async wrappers (DEFECT-3) + tests
+
+### Phase 11: Health Monitor Wiring & Tech Debt
+**Goal**: Os gaps de observabilidade identificados no audit v1.0 são fechados — run_schema_integrity_check() e run_platform_canary() entram no caminho de execução de produção, bugs latentes são corrigidos e código morto é removido
+**Depends on**: Phase 10
+**Requirements**: FOUND-02, FOUND-04
+**Gap Closure**: Closes partial gaps from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. `run_schema_integrity_check(db_path)` é chamado automaticamente no startup do servidor (lifespan) — alerta quando tabelas estão faltando
+  2. `run_platform_canary()` é registrado no APScheduler — dados obsoletos de plataforma são detectados automaticamente
+  3. `fetch_spa()` usa `_select_proxy()` para selecionar proxy da lista — proxy_list funciona tanto para httpx quanto para Playwright
+  4. `_compute_health()` em mis_agent.py não usa `asyncio.run()` — seguro para chamada em contexto async
+  5. `register_scanner_jobs()` e funções `run_*_scan` são removidos ou documentados como código morto; `datetime.utcnow()` substituído por `datetime.now(timezone.utc)` nos 3 arquivos afetados
+  6. Suite completa de testes continua green
+
+Plans:
+- [ ] 11-01-PLAN.md — Wire schema integrity + platform canary into production; fix fetch_spa proxy; fix asyncio.run in _compute_health; clean dead code + datetime deprecation
+
+### Phase 12: Meta Ads Pain Radar (RADAR-04)
+**Goal**: O sistema coleta comentários de anúncios patrocinados no Meta por nicho — fechando o único requisito v1 que foi explicitamente excluído do escopo das fases anteriores
+**Depends on**: Phase 11
+**Requirements**: RADAR-04
+**Gap Closure**: Closes RADAR-04 from v1.0 milestone audit
+**Success Criteria** (what must be TRUE):
+  1. `MetaAdsRadarCollector.collect_ad_comments(niche_slug)` retorna lista de comentários de anúncios patrocinados filtrados por nicho — persiste em `pain_signals` com `source='meta_ads'`
+  2. Coletor funciona com `META_ACCESS_TOKEN` configurado e degrada graciosamente sem token (retorna `[]` sem propagar exceção)
+  3. Comentários coletados são incluídos na janela de síntese do `synthesizer.py` — aparecem no `pain_reports` horário
+  4. Job `radar_meta_ads` registrado no APScheduler via `register_radar_jobs()` — coleta automática a cada hora
+  5. Testes RED → GREEN cobrindo happy path, graceful degradation sem token, e idempotência via `url_hash` UNIQUE
+
+Plans:
+- [ ] 12-01-PLAN.md — MetaAdsRadarCollector + APScheduler job + synthesizer integration + tests
 
 ## Progress
 
 **Execution Order:**
-Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10
+Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8 → 9 → 10 → 11 → 12
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
 | 1. Foundation | 4/4 | Complete | 2026-03-14 |
-| 2. Platform Scanners | 2/3 | In Progress|  |
+| 2. Platform Scanners | 3/3 | Complete | 2026-03-14 |
 | 2.5. Platform Expansion | 0/3 | Not started | - |
-| 3. Product Espionage + Dossiers | 4/5 | In Progress|  |
-| 4. Pain Radar | 5/5 | Complete   | 2026-03-15 |
-| 5. Dashboard | 4/5 | In Progress|  |
-| 6. MEGABRAIN Integration | 1/2 | Complete    | 2026-03-15 |
-| 7. MIS Integration Bug Fixes | 1/1 | Complete   | 2026-03-15 |
-| 8. Foundation Verification | 0/1 | Complete    | 2026-03-16 |
-| 9. Production Wiring & Proxy Fix | 1/1 | Complete   | 2026-03-16 |
-| 10. Critical Runtime Fixes | 1/1 | Complete    | 2026-03-16 |
+| 3. Product Espionage + Dossiers | 5/5 | Complete | 2026-03-14 |
+| 4. Pain Radar | 5/5 | Complete | 2026-03-15 |
+| 5. Dashboard | 5/5 | Complete | 2026-03-15 |
+| 6. MEGABRAIN Integration | 2/2 | Complete | 2026-03-15 |
+| 7. MIS Integration Bug Fixes | 1/1 | Complete | 2026-03-15 |
+| 8. Foundation Verification | 1/1 | Complete | 2026-03-16 |
+| 9. Production Wiring & Proxy Fix | 1/1 | Complete | 2026-03-16 |
+| 10. Critical Runtime Fixes | 1/1 | Complete | 2026-03-16 |
+| 11. Health Monitor Wiring & Tech Debt | 0/1 | Not started | - |
+| 12. Meta Ads Pain Radar (RADAR-04) | 0/1 | Not started | - |

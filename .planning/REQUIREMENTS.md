@@ -8,9 +8,9 @@
 ### Foundation
 
 - [x] **FOUND-01**: Sistema possui schema de banco de dados com tabelas para produtos, plataformas, nichos, dores e dossiês
-- [x] **FOUND-02**: BaseScraper implementa rate limiting, retry automático, rotação de proxies e headers anti-bot
+- [ ] **FOUND-02**: BaseScraper implementa rate limiting, retry automático, rotação de proxies e headers anti-bot
 - [x] **FOUND-03**: Usuário pode configurar 3–5 nichos alvo em arquivo de configuração
-- [x] **FOUND-04**: Health monitor detecta e alerta quando scrapers quebram silenciosamente (canary checks)
+- [ ] **FOUND-04**: Health monitor detecta e alerta quando scrapers quebram silenciosamente (canary checks)
 
 ### Scanner de Produtos
 
@@ -89,9 +89,9 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOUND-01 | Phase 8 | Complete |
-| FOUND-02 | Phase 9 | Complete |
+| FOUND-02 | Phase 11 | Pending |
 | FOUND-03 | Phase 8 | Complete |
-| FOUND-04 | Phase 8 | Complete |
+| FOUND-04 | Phase 11 | Pending |
 | SCAN-01 | Phase 10 | Complete |
 | SCAN-02 | Phase 10 | Complete |
 | SCAN-03 | Phase 10 | Complete |
@@ -110,7 +110,7 @@
 | RADAR-01 | Phase 10 | Complete |
 | RADAR-02 | Phase 10 | Complete |
 | RADAR-03 | Phase 10 | Complete |
-| RADAR-04 | Phase 4 | Pending |
+| RADAR-04 | Phase 12 | Pending |
 | RADAR-05 | Phase 10 | Complete |
 | RADAR-06 | Phase 10 | Complete |
 | DASH-01 | Phase 10 | Complete |
