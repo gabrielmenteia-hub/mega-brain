@@ -75,3 +75,22 @@ async def test_client_closed_on_exit():
         async with BaseScraper() as s:
             pass
         assert s._client.is_closed
+
+
+@pytest.mark.asyncio
+async def test_proxy_rotation_selects_from_list():
+    """Verifica que proxy_list com 3 proxies resulta em selecao aleatoria diversa."""
+    proxies = ["http://proxy1:8080", "http://proxy2:8080", "http://proxy3:8080"]
+    scraper = BaseScraper(proxy_list=proxies)
+    selected = set()
+    for _ in range(20):
+        p = scraper._select_proxy()
+        selected.add(p)
+    assert len(selected) > 1, "Esperava mais de 1 proxy unico em 20 draws"
+
+
+@pytest.mark.asyncio
+async def test_proxy_rotation_no_proxy_returns_none():
+    """Verifica que sem proxy_list, _select_proxy retorna None."""
+    scraper = BaseScraper()
+    assert scraper._select_proxy() is None
