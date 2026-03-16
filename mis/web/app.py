@@ -1,12 +1,18 @@
 """FastAPI application factory for the MIS dashboard."""
+from contextlib import asynccontextmanager
 from pathlib import Path
 
+import structlog
 from fastapi import FastAPI
 from fastapi.responses import RedirectResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
 
+from mis.config import load_config
 from mis.db import run_migrations
+from mis.health_monitor import register_canary_job
+from mis.radar import register_radar_jobs
+from mis.scheduler import get_scheduler, register_scan_and_spy_job
 from mis.web.routes.alerts import router as alerts_router
 from mis.web.routes.dossier import router as dossier_router
 from mis.web.routes.feed import router as feed_router
@@ -15,6 +21,8 @@ from mis.web.routes.ranking import router as ranking_router
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 STATIC_DIR = Path(__file__).parent / "static"
+
+_log = structlog.get_logger(__name__)
 
 
 def create_app(db_path: str) -> FastAPI:
@@ -28,10 +36,46 @@ def create_app(db_path: str) -> FastAPI:
     Returns:
         Configured FastAPI application instance.
     """
+
+    @asynccontextmanager
+    async def lifespan(app: FastAPI):
+        # Startup: load config, register jobs, start scheduler
+        try:
+            config = load_config()
+        except Exception as exc:
+            _log.warning("lifespan.config_error", error=str(exc))
+            config = {}
+
+        for name, fn, args in [
+            ("register_scan_and_spy_job", register_scan_and_spy_job, [config]),
+            ("register_radar_jobs", register_radar_jobs, [config]),
+            ("register_canary_job", register_canary_job, []),
+        ]:
+            try:
+                fn(*args)
+            except Exception as exc:
+                _log.warning("lifespan.register_failed", job=name, error=str(exc))
+
+        try:
+            get_scheduler().start()
+            _log.info("lifespan.scheduler_started")
+        except Exception as exc:
+            _log.warning("lifespan.scheduler_start_failed", error=str(exc))
+
+        yield
+
+        # Teardown: stop scheduler
+        try:
+            get_scheduler().shutdown(wait=False)
+            _log.info("lifespan.scheduler_stopped")
+        except Exception as exc:
+            _log.warning("lifespan.scheduler_stop_failed", error=str(exc))
+
     app = FastAPI(
         title="MIS Dashboard",
         docs_url=None,
         redoc_url=None,
+        lifespan=lifespan,
     )
 
     # Run migrations at startup (skip for :memory: — separate connections
