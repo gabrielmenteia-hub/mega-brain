@@ -58,6 +58,8 @@
 | INFRA-01 | Phase 13 | Pending |
 | INFRA-02 | Phase 13 | Pending |
 | INFRA-03 | Phase 13 | Pending |
+| DEBT-01 | Phase 13 | Pending |
+| DEBT-02 | Phase 13 | Pending |
 | SCAN-BR-01 | Phase 14 | Pending |
 | SCAN-BR-02 | Phase 14 | Pending |
 | SCAN-BR-03 | Phase 14 | Pending |
@@ -70,8 +72,6 @@
 | DASH-V2-01 | Phase 17 | Pending |
 | DASH-V2-02 | Phase 17 | Pending |
 | DASH-V2-03 | Phase 17 | Pending |
-| DEBT-01 | Phase 13 | Pending |
-| DEBT-02 | Phase 13 | Pending |
 
 **Coverage:**
 - v2.0 requirements: 17 total
@@ -80,4 +80,4 @@
 
 ---
 *Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 after initial definition*
+*Last updated: 2026-03-16 — traceability updated after ROADMAP.md v2.0 creation*
