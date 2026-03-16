@@ -1,131 +1,83 @@
 # Requirements: Market Intelligence System (MIS)
 
-**Defined:** 2026-03-14
-**Core Value:** Entregar o mapa completo do que está vendendo e por que está vendendo — sem esforço manual — para que o usuário possa modelar e lançar seus próprios produtos com máxima vantagem competitiva.
+**Defined:** 2026-03-16
+**Milestone:** v2.0 Platform Expansion
+**Core Value:** Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo e por que está vendendo — para que ele possa modelar e lançar seus próprios produtos com máxima vantagem competitiva.
 
-## v1 Requirements
+## v2.0 Requirements
 
-### Foundation
+### INFRA — Pré-condições (bloqueantes)
 
-- [x] **FOUND-01**: Sistema possui schema de banco de dados com tabelas para produtos, plataformas, nichos, dores e dossiês
-- [x] **FOUND-02**: BaseScraper implementa rate limiting, retry automático, rotação de proxies e headers anti-bot
-- [x] **FOUND-03**: Usuário pode configurar 3–5 nichos alvo em arquivo de configuração
-- [x] **FOUND-04**: Health monitor detecta e alerta quando scrapers quebram silenciosamente (canary checks)
+- [ ] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 16 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
+- [ ] **INFRA-02**: `mis/platform_ids.py` centraliza todos os IDs de plataforma como constantes nomeadas (elimina risco de collision entre scanners)
+- [ ] **INFRA-03**: Campo `rank_type` adicionado à tabela `products` para identificar a semântica do rank por plataforma (posição, gravity, EPC, upvotes, enrollment, etc.)
 
-### Scanner de Produtos
+### SCAN-BR — Scanners Brasil
 
-- [x] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
-- [x] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
-- [x] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
-- [x] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
-- [x] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
+- [ ] **SCAN-BR-01**: `EduzzScanner` varre marketplace Eduzz por nicho e persiste top produtos por posição
+- [ ] **SCAN-BR-02**: `MonetizzeScanner` varre marketplace Monetizze por nicho e persiste top produtos
+- [ ] **SCAN-BR-03**: `PerfectPayScanner` varre marketplace PerfectPay por nicho (após verificação de URL live)
+- [ ] **SCAN-BR-04**: `BraipScanner` varre marketplace Braip por nicho (após verificação de URL live)
 
-### Espionagem de Produto
+### SCAN-INTL — Scanners Internacionais
 
-- [x] **SPY-01**: Sistema extrai copy completa da página de vendas (headlines, sub-headlines, argumentos, CTA, estrutura narrativa)
-- [x] **SPY-02**: Sistema coleta anúncios ativos do produto via Meta Ad Library (criativos e copy)
-- [x] **SPY-03**: Sistema extrai estrutura da oferta (preço, bônus, garantias, upsells, downsells)
-- [x] **SPY-04**: Sistema coleta e classifica reviews do produto separando avaliações positivas (4-5★) e negativas (1-3★)
-- [x] **SPY-05**: Dados de espionagem só são processados pelo LLM quando completude mínima é atingida (data completeness gate)
+- [ ] **SCAN-INTL-01**: `ProductHuntScanner` busca trending products via GraphQL API usando `PH_ACCESS_TOKEN`
+- [ ] **SCAN-INTL-02**: `UdemyScanner` busca top cursos por nicho via REST `/api-2.0/courses/`
+- [ ] **SCAN-INTL-03**: `JVZooScanner` varre marketplace JVZoo por nicho (com contorno Incapsula ou fallback SSR)
+- [ ] **SCAN-INTL-04**: `GumroadScanner` varre `gumroad.com/discover` por nicho ordenado por popular
+- [ ] **SCAN-INTL-05**: `AppSumoScanner` varre `appsumo.com/products` por nicho (SSR-first, Playwright fallback)
 
-### Dossiê IA
+### DASH-V2 — Dashboard Cross-Platform
 
-- [x] **DOS-01**: IA gera análise explicando por que o produto está vendendo (fatores de sucesso identificados nos dados)
-- [x] **DOS-02**: IA mapeia as dores endereçadas pelo produto com base na copy e reviews coletados
-- [x] **DOS-03**: IA gera template de modelagem com estrutura pronta para criar produto próprio baseado no campeão
-- [x] **DOS-04**: IA atribui score de oportunidade por nicho (quão atrativa é a entrada nesse mercado)
-- [x] **DOS-05**: Dossiê exibe confidence score indicando qualidade/completude dos dados usados na análise
+- [ ] **DASH-V2-01**: View `/ranking/unified` exibe top produtos por nicho consolidados de todas as plataformas usando normalização por percentil
+- [ ] **DASH-V2-02**: View unificada filtra por nicho (obrigatório) e suporta toggle "multi-platform only" (produtos em 2+ plataformas)
+- [ ] **DASH-V2-03**: View unificada exibe badges de plataforma, unified score e rank bruto por plataforma
 
-### Radar de Dores (Horário)
+### DEBT — Tech Debt v1.0
 
-- [x] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
-- [x] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
-- [x] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
-- [x] **RADAR-04**: Sistema coleta comentários de anúncios patrocinados no Meta por nicho
-- [x] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
-- [x] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
+- [ ] **DEBT-01**: `nyquist_compliant: false` corrigido ou removido em todos os 12 `VALIDATION.md`
+- [ ] **DEBT-02**: Docstring `radar/__init__.py:141` atualizada de "5 jobs" → "6 jobs"
 
-### Dashboard Web
+## Out of Scope (v2.0)
 
-- [x] **DASH-01**: Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho
-- [x] **DASH-02**: Dashboard exibe página individual de dossiê por produto com todos os dados de espionagem e análise IA
-- [x] **DASH-03**: Dashboard exibe feed de dores do mercado com atualização horária por nicho
-- [x] **DASH-04**: Sistema envia alerta quando novo produto campeão entra no radar
-
-### Integração MEGABRAIN
-
-- [x] **INT-01**: MIS é integrado ao MEGABRAIN como módulo independente (`mis/`) com único ponto de integração (`mis_agent.py`)
-- [x] **INT-02**: Usuário pode invocar análise do MIS via agente/comando dentro do MEGABRAIN
-
-## v2 Requirements
-
-### Expansão de Plataformas
-
-- **SCAN-V2-01**: Scanner da Eduzz (BR)
-- **SCAN-V2-02**: Scanner do JVZoo (gringa)
-- **SCAN-V2-03**: Scanner do Udemy por categoria
-- **SCAN-V2-04**: Scanner do Product Hunt e AppSumo (ferramentas/SaaS)
-
-### Features Avançadas
-
-- **ADV-01**: Exportação de dossiê em PDF
-- **ADV-02**: Comparação lado a lado de 2+ produtos concorrentes
-- **ADV-03**: Histórico de evolução de produto (tracking de mudanças na copy/oferta ao longo do tempo)
-- **ADV-04**: Notificações via WhatsApp/Telegram além do dashboard
-
-## Out of Scope
-
-| Feature | Reason |
-|---------|--------|
-| Automação de criação do produto final | O sistema inspira; a criação é do usuário — escopo separado |
-| Integração com plataformas de pagamento | Fora do objetivo de inteligência de mercado |
-| Scraping de grupos privados (Facebook, WhatsApp) | Bloqueado por ToS e LGPD |
-| SEO intelligence completo (backlinks, domain authority) | Território do SEMrush/Ahrefs — escopo creep para v1 |
-| Monitoramento sub-minuto / real-time | Infra muito cara; horário é suficiente para o caso de uso |
-| Interface mobile nativa | Web responsiva suficiente para MVP |
+| Feature | Razão |
+|---------|-------|
+| Kajabi scanner | Sem marketplace público — white-label hosting, cada criador no próprio subdomínio |
+| Teachable scanner | Sem marketplace público — mesmo padrão do Kajabi |
+| Stan Store scanner | Link-in-bio tool sem ranking centralizado |
+| Skool scanner | SPA sem dados de vendas — contagem de membros não é proxy confiável |
+| ADV-01: PDF export | Deferido para v3.0 |
+| ADV-02: Comparação lado a lado | Deferido para v3.0 |
+| ADV-03: Histórico de evolução | Deferido para v3.0 |
+| ADV-04: Notificações WhatsApp/Telegram | Deferido para v3.0 |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FOUND-01 | Phase 8 | Complete |
-| FOUND-02 | Phase 11 | Complete |
-| FOUND-03 | Phase 8 | Complete |
-| FOUND-04 | Phase 11 | Complete |
-| SCAN-01 | Phase 10 | Complete |
-| SCAN-02 | Phase 10 | Complete |
-| SCAN-03 | Phase 10 | Complete |
-| SCAN-04 | Phase 9 | Complete |
-| SCAN-05 | Phase 5 | Complete |
-| SPY-01 | Phase 3 | Complete |
-| SPY-02 | Phase 3 | Complete |
-| SPY-03 | Phase 3 | Complete |
-| SPY-04 | Phase 3 | Complete |
-| SPY-05 | Phase 3 | Complete |
-| DOS-01 | Phase 3 | Complete |
-| DOS-02 | Phase 3 | Complete |
-| DOS-03 | Phase 3 | Complete |
-| DOS-04 | Phase 3 | Complete |
-| DOS-05 | Phase 3 | Complete |
-| RADAR-01 | Phase 10 | Complete |
-| RADAR-02 | Phase 10 | Complete |
-| RADAR-03 | Phase 10 | Complete |
-| RADAR-04 | Phase 12 | Complete |
-| RADAR-05 | Phase 10 | Complete |
-| RADAR-06 | Phase 10 | Complete |
-| DASH-01 | Phase 10 | Complete |
-| DASH-02 | Phase 5 | Complete |
-| DASH-03 | Phase 5 | Complete |
-| DASH-04 | Phase 5 | Complete |
-| INT-01 | Phase 7 | Complete |
-| INT-02 | Phase 7 | Complete |
+| INFRA-01 | Phase 13 | Pending |
+| INFRA-02 | Phase 13 | Pending |
+| INFRA-03 | Phase 13 | Pending |
+| SCAN-BR-01 | Phase 14 | Pending |
+| SCAN-BR-02 | Phase 14 | Pending |
+| SCAN-BR-03 | Phase 14 | Pending |
+| SCAN-BR-04 | Phase 14 | Pending |
+| SCAN-INTL-01 | Phase 15 | Pending |
+| SCAN-INTL-02 | Phase 15 | Pending |
+| SCAN-INTL-03 | Phase 16 | Pending |
+| SCAN-INTL-04 | Phase 16 | Pending |
+| SCAN-INTL-05 | Phase 16 | Pending |
+| DASH-V2-01 | Phase 17 | Pending |
+| DASH-V2-02 | Phase 17 | Pending |
+| DASH-V2-03 | Phase 17 | Pending |
+| DEBT-01 | Phase 13 | Pending |
+| DEBT-02 | Phase 13 | Pending |
 
 **Coverage:**
-- v1 requirements: 31 total
-- Mapped to phases: 31
+- v2.0 requirements: 17 total
+- Mapped to phases: 17
 - Unmapped: 0 ✓
-- Pending (gap closure): SCAN-01, SCAN-02, SCAN-03, DASH-01, RADAR-01–03, RADAR-05–06 (Phase 10), RADAR-04 (deferred v2)
 
 ---
-*Requirements defined: 2026-03-14*
-*Last updated: 2026-03-14 after initial definition*
+*Requirements defined: 2026-03-16*
+*Last updated: 2026-03-16 after initial definition*
