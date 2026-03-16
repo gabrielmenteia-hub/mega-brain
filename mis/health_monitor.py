@@ -155,6 +155,36 @@ async def run_platform_canary(
         return False
 
 
+def register_platform_canary_jobs(db_path: str) -> None:
+    """Register per-platform canary jobs in the global APScheduler.
+
+    Creates 3 interval jobs (canary_hotmart, canary_clickbank, canary_kiwify)
+    running every 25 hours. Safe to call multiple times (replace_existing=True).
+
+    Args:
+        db_path: Path to the SQLite database file passed as kwarg to each job.
+    """
+    from .scheduler import get_scheduler
+
+    scheduler = get_scheduler()
+    platforms = [(1, "hotmart"), (2, "clickbank"), (3, "kiwify")]
+    for pid, name in platforms:
+        scheduler.add_job(
+            run_platform_canary,
+            trigger="interval",
+            hours=25,
+            id=f"canary_{name}",
+            kwargs={
+                "db_path": db_path,
+                "platform_id": pid,
+                "platform_name": name,
+                "threshold_hours": 25,
+            },
+            replace_existing=True,
+        )
+    log.info("health.platform_canary.registered", platforms=3)
+
+
 async def run_schema_integrity_check(db_path: str) -> bool:
     """Verifica integridade do schema — todas as 5 tabelas da Phase 1 existem.
 

@@ -10,7 +10,7 @@ from fastapi.templating import Jinja2Templates
 
 from mis.config import load_config
 from mis.db import run_migrations
-from mis.health_monitor import register_canary_job
+from mis.health_monitor import register_canary_job, register_platform_canary_jobs, run_schema_integrity_check
 from mis.radar import register_radar_jobs
 from mis.scheduler import get_scheduler, register_scan_and_spy_job
 from mis.web.routes.alerts import router as alerts_router
@@ -46,10 +46,16 @@ def create_app(db_path: str) -> FastAPI:
             _log.warning("lifespan.config_error", error=str(exc))
             config = {}
 
+        try:
+            await run_schema_integrity_check(db_path)
+        except Exception as exc:
+            _log.warning("lifespan.schema_check_failed", error=str(exc))
+
         for name, fn, args in [
             ("register_scan_and_spy_job", register_scan_and_spy_job, [config]),
             ("register_radar_jobs", register_radar_jobs, [config]),
             ("register_canary_job", register_canary_job, []),
+            ("register_platform_canary_jobs", register_platform_canary_jobs, [db_path]),
         ]:
             try:
                 fn(*args)
