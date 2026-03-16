@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Completed 07-mis-integration-bugfixes/07-01-PLAN.md
-last_updated: "2026-03-15T22:20:42.455Z"
+stopped_at: Completed 08-foundation-verification/08-01-PLAN.md
+last_updated: "2026-03-16T00:19:15.622Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 9
-  completed_phases: 7
-  total_plans: 25
-  completed_plans: 25
+  completed_phases: 8
+  total_plans: 26
+  completed_plans: 26
 ---
 
 ---
@@ -120,6 +120,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 06-megabrain-integration P01 | 4m | 1 tasks | 2 files |
 | Phase 06-megabrain-integration P02 | 8 | 2 tasks | 3 files |
 | Phase 07-mis-integration-bugfixes P01 | 12 | 3 tasks | 5 files |
+| Phase 08-foundation-verification P01 | 13 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -193,6 +194,9 @@ Recent decisions affecting current work:
 - [Phase 06-02]: export --dest defaults to None, resolved inside export_to_megabrain() — clean CLI/logic separation
 - [Phase 07-mis-integration-bugfixes]: export_to_megabrain uses WHERE status='done' — matches dossier lifecycle value set by spy_orchestrator
 - [Phase 07-mis-integration-bugfixes]: generated_at is canonical timestamp for dossier age queries — created_at (migration _005) is for created_at backfill only
+- [Phase 08-01]: Temporary httpx.AsyncClient per-request for proxy rotation in BaseScraper — ensures each request uses a fresh connection with the selected proxy, no state leakage
+- [Phase 08-01]: proxy_list takes precedence over proxy_url; proxy_url auto-wrapped in list for backward compat
+- [Phase 08-01]: run_schema_integrity_check uses sqlite_master SELECT + never-propagate-exceptions contract consistent with run_platform_canary pattern
 
 ### Pending Todos
 
@@ -207,6 +211,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-15T22:03:16.428Z
-Stopped at: Completed 07-mis-integration-bugfixes/07-01-PLAN.md
+Last session: 2026-03-16T00:19:15.605Z
+Stopped at: Completed 08-foundation-verification/08-01-PLAN.md
 Resume file: None
