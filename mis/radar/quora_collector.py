@@ -8,7 +8,7 @@ This is by design — Quora is NOT a blocking data source for the MVP.
 """
 import hashlib
 import json
-from datetime import datetime
+from datetime import datetime, timezone
 
 import sqlite_utils
 import structlog
@@ -90,7 +90,7 @@ def _extract_questions(html: str, niche_slug: str) -> list[dict]:
             "niche_slug": niche_slug,
             "score": 0,
             "extra_json": "{}",
-            "collected_at": datetime.utcnow().isoformat(),
+            "collected_at": datetime.now(timezone.utc).isoformat(),
         })
 
     return signals

@@ -10,7 +10,7 @@ import asyncio
 import hashlib
 import json
 import random
-from datetime import datetime
+from datetime import datetime, timezone
 
 import sqlite_utils
 import structlog
@@ -75,7 +75,7 @@ async def collect_trends_signal(
             "score": peak_index,
             "peak_index": peak_index,
             "extra_json": json.dumps({"anchor": anchor, "keyword": keyword}),
-            "collected_at": datetime.utcnow().isoformat(),
+            "collected_at": datetime.now(timezone.utc).isoformat(),
         }
 
         # Delay between calls to respect rate limits

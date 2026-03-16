@@ -8,7 +8,7 @@ Requirements: RADAR-05, RADAR-06
 """
 import json
 import re
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 
 import anthropic
@@ -157,7 +157,7 @@ def _upsert_report(db_path: str, niche_id: int, cycle_at: str, report: dict) -> 
                 report_json = excluded.report_json,
                 created_at  = excluded.created_at
             """,
-            [niche_id, cycle_at, json.dumps(report), datetime.utcnow().isoformat()],
+            [niche_id, cycle_at, json.dumps(report), datetime.now(timezone.utc).isoformat()],
         )
         conn.commit()
     finally:

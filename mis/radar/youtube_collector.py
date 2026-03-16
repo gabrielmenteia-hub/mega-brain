@@ -8,7 +8,7 @@ import asyncio
 import hashlib
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 import sqlite_utils
 import structlog
@@ -38,7 +38,7 @@ def get_quota_used_today(db_path: str, reset_hour_utc: int = 7) -> int:
     if "youtube_quota_log" not in db.table_names():
         return 0
 
-    today = datetime.utcnow()
+    today = datetime.now(timezone.utc)
     reset_dt = today.replace(hour=reset_hour_utc, minute=0, second=0, microsecond=0)
     if today.hour < reset_hour_utc:
         # Reset hasn't happened yet today — use yesterday's reset as the cutoff
@@ -62,7 +62,7 @@ def log_quota_usage(db_path: str, units: int, operation: str) -> None:
     db["youtube_quota_log"].insert({
         "units": units,
         "operation": operation,
-        "logged_at": datetime.utcnow().isoformat(),
+        "logged_at": datetime.now(timezone.utc).isoformat(),
     })
 
 
@@ -142,7 +142,7 @@ def _sync_collect_youtube(keyword: str, lang: str, api_key: str) -> tuple:
                     "top_comments": top_comments,
                     "like_count": like_count,
                 }),
-                "collected_at": datetime.utcnow().isoformat(),
+                "collected_at": datetime.now(timezone.utc).isoformat(),
             })
 
         return signals, units_used

@@ -109,7 +109,7 @@ def _run_cleanup(db_path: str) -> None:
     """Delete pain_signals older than 30 days to keep DB size manageable."""
     import sqlite3
 
-    cutoff = (datetime.utcnow() - timedelta(days=30)).isoformat()
+    cutoff = (datetime.now(timezone.utc) - timedelta(days=30)).isoformat()
     conn = sqlite3.connect(db_path)
     try:
         conn.execute("DELETE FROM pain_signals WHERE collected_at < ?", [cutoff])

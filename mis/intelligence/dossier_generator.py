@@ -9,7 +9,7 @@ Requirements: DOS-02, DOS-03, DOS-04
 """
 import json
 import os
-from datetime import datetime
+from datetime import datetime, timezone
 from pathlib import Path
 
 import structlog
@@ -80,7 +80,7 @@ async def generate_dossier(
         "input_tokens": response.usage.input_tokens,
         "output_tokens": response.usage.output_tokens,
         "cost_usd": round(cost_usd, 6),
-        "created_at": datetime.utcnow().isoformat(),
+        "created_at": datetime.now(timezone.utc).isoformat(),
     })
 
     result_text = response.content[0].text

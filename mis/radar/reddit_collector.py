@@ -67,7 +67,7 @@ def _sync_collect_reddit(niche: dict) -> list[dict]:
                         "niche_slug": niche_slug,
                         "score": int(post.score),
                         "extra_json": "{}",
-                        "collected_at": datetime.utcnow().isoformat(),
+                        "collected_at": datetime.now(timezone.utc).isoformat(),
                     })
             except Exception as sub_exc:
                 log.error(
