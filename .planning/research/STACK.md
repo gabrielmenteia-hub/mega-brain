@@ -1,88 +1,305 @@
 # Technology Stack
 
-**Project:** Market Intelligence System (MIS) — MEGABRAIN Module
-**Researched:** 2026-03-14
-**Overall Confidence:** MEDIUM (FastAPI/PostgreSQL/Redis verified via official docs; scraping libs and scheduler versions from training data, flagged explicitly)
+**Project:** Market Intelligence System (MIS) — v2.0 Platform Expansion
+**Researched:** 2026-03-16
+**Scope:** NEW capabilities only for 13 additional platforms. Do NOT re-research the existing v1.0 stack.
+**Overall Confidence:** MEDIUM — web tools unavailable during research; findings based on training data (cutoff August 2025) cross-referenced with existing codebase patterns.
 
 ---
 
-## Recommended Stack
+## Context: What Already Exists (Do Not Change)
 
-### Core Framework
+The following is **validated and shipped in v1.0**. Do not re-evaluate:
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| Python | 3.11+ | Runtime | Already used by MEGABRAIN; 3.11 has best perf/stability balance. Avoid 3.12 for now — minor ecosystem gaps with some scraping libs. |
-| FastAPI | 0.111+ | REST API + dashboard backend | Verified: high-performance async, auto-generates OpenAPI docs, native Pydantic validation. Ideal for serving intelligence data to the frontend. |
-| Pydantic v2 | 2.x | Data models + validation | FastAPI dependency; v2 is 5-50x faster than v1 for validation-heavy pipelines. Use for all scraped data schemas. |
+```
+httpx[http2]>=0.28.1          # SSR fetch + JSON/GraphQL APIs
+playwright>=1.58.0            # SPA rendering
+playwright-stealth>=2.0.2     # Anti-bot fingerprint suppression
+tenacity>=9.1.4               # Retry with exponential backoff
+structlog>=25.5.0             # Structured JSON logging
+fake-useragent>=2.2.0         # User-Agent rotation
+sqlite-utils>=3.39            # SQLite ORM-lite
+apscheduler>=3.11.2           # AsyncIOScheduler for hourly jobs
+PyYAML>=6.0.3                 # config.yaml parsing
+python-dotenv>=1.2.1          # .env loading
+beautifulsoup4>=4.12.3        # HTML parsing
+lxml>=5.0.0                   # Fast HTML/XML parser (bs4 backend)
+anthropic>=0.79.0             # claude-sonnet-4-6 for LLM tasks
+markdownify>=0.12.0           # HTML -> Markdown for LLM consumption
+```
 
-### Scraping Layer
+**BaseScraper** provides: `fetch()` (httpx GET/POST), `fetch_spa()` (Playwright+stealth), rate limiting,
+proxy rotation, retry. All new scanners subclass `PlatformScanner` which composes `BaseScraper`.
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| Playwright (Python) | 1.40+ | JS-rendered pages (Hotmart, Kiwify, Eduzz, ClickBank) | MEDIUM confidence. Industry standard for SPA scraping. Handles login flows, dynamic content, anti-bot challenges better than Selenium. Async-native. |
-| httpx | 0.27+ | Static HTML pages + API calls (YouTube Data API, Reddit API) | MEDIUM confidence. Async HTTP client, drop-in replacement for `requests` with native `async/await`. Use for pages that don't need JS execution — much faster than Playwright. |
-| BeautifulSoup4 | 4.12+ | HTML parsing after fetch | MEDIUM confidence. Stable, battle-tested. Pair with `lxml` parser for speed. Do NOT use `html.parser` — 3x slower on large pages. |
-| PRAW | 7.7+ | Reddit API official wrapper | MEDIUM confidence. Official Reddit API access — correct way to pull subreddit posts/comments. Reddit's API has 100 req/min rate limit on free tier. |
-| youtube-data-api | via google-api-python-client 2.x | YouTube search + comments | MEDIUM confidence. Official Google client. YouTube Data API v3 quotas: 10,000 units/day free. Comment scraping = 1 unit each. Plan carefully. |
-| pytrends | 4.9+ | Google Trends data | LOW confidence — version from training data. Unofficial Google Trends client. No official API exists. Google can block it — add exponential backoff. |
-| Scrapy | 2.11+ | High-volume structured scraping (JVZoo, AppSumo, Product Hunt) | MEDIUM confidence. Best for multi-page crawls with built-in rate limiting, item pipelines, and retry logic. Use for platforms with pagination patterns. |
+---
 
-### Data Pipeline & Scheduling
+## Platform Integration Analysis: The 13 New Platforms
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| APScheduler | 3.10+ | Hourly job scheduling | MEDIUM confidence. Lightweight, no external dependencies, runs in-process. Perfect for hourly radar cycle without needing Celery's complexity. Use `AsyncIOScheduler` with `AsyncIOExecutor`. |
-| SQLAlchemy | 2.0+ | ORM + database abstraction | MEDIUM confidence. SQLAlchemy 2.0 has native async support. Lets you start with SQLite locally and migrate to PostgreSQL in prod without changing queries. |
+### Classification by Integration Method
 
-**Why NOT Celery:** Celery requires Redis/RabbitMQ as broker AND result backend, adds ~200MB overhead, and is designed for distributed workloads. For a single-machine hourly pipeline, APScheduler is sufficient and dramatically simpler. Revisit Celery only if scraping jobs need to scale to multiple workers across machines.
+| Platform | Region | Integration Method | Auth Required | Playwright Needed | Confidence |
+|----------|--------|-------------------|---------------|-------------------|------------|
+| **Eduzz** | BR | httpx SSR HTML | No | No | MEDIUM |
+| **Monetizze** | BR | httpx SSR HTML | No | No | MEDIUM |
+| **PerfectPay** | BR | httpx SSR HTML | No | Possibly | LOW |
+| **Braip** | BR | httpx SSR HTML | No | No | LOW |
+| **JVZoo** | US | httpx SSR HTML (no-auth) or REST API (affiliate key) | Optional | No | MEDIUM |
+| **Udemy** | Global | Public REST API (Affiliate) | API key + ClientID | No | HIGH |
+| **Product Hunt** | US | Public GraphQL API | Bearer token (free) | No | HIGH |
+| **AppSumo** | US | httpx SSR or SPA | No | Possibly | MEDIUM |
+| **Gumroad** | US | httpx SSR HTML (/discover) | No | No | MEDIUM |
+| **Kajabi** | US | No public marketplace | — | — | MEDIUM |
+| **Teachable** | US | httpx SSR HTML (if marketplace page exists) | No | No | LOW |
+| **Skool** | US | Playwright (React SPA) | No | Yes | MEDIUM |
+| **Stan Store** | US | Playwright (likely SPA) | No | Likely | LOW |
 
-**Why NOT Prefect/Airflow:** Prefect and Airflow are designed for complex DAG orchestration with UI visibility. For this project's scope (hourly cron + simple pipeline), APScheduler is 90% less setup with equivalent results.
+---
 
-### Database
+## Detailed Platform Integration Approach
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| SQLite | 3.45+ (stdlib) | Development + single-user prod | Verified: SQLite supports up to 281TB, ACID-compliant, zero-config. For a single-user intelligence system running locally, SQLite is sufficient. No server process needed — matches MEGABRAIN's file-based philosophy. |
-| PostgreSQL | 16+ | Production / multi-user deployment | Verified: Best-in-class for analytics with JSONB support, GIN indexes for full-text search on scraped content, parallel query execution. Migrate from SQLite to PostgreSQL when concurrent users or data volume demands it. |
-| Redis | 7.x | Rate-limit state, job deduplication, short-term cache | Verified: In-memory key-value store. Use it specifically for: (1) storing last-crawled timestamps per source to avoid duplicate scrapes, (2) caching API responses to avoid re-fetching within the same hour, (3) Celery broker if you ever scale. Optional for MVP — SQLite can serve the same role at smaller scale. |
+### Group 1: Public REST / GraphQL APIs (Zero New Libraries)
 
-**Recommended progression:** Start with SQLite-only (zero ops overhead). Add Redis when rate-limit coordination becomes complex. Add PostgreSQL when deploying to a server or sharing with a team.
+#### Udemy Affiliate API
+- **Endpoint:** `https://www.udemy.com/api-2.0/courses/` with `?ordering=highest-rated&subcategory={slug}`
+- **Auth:** HTTP Basic Auth with `{ClientID}:{ClientSecret}` — requires free affiliate account signup at udemy.com/affiliate
+- **Response:** JSON with `title`, `url`, `price`, `rating`, `num_reviews`, `primary_subcategory`
+- **New library needed:** None — httpx Basic Auth via `httpx.BasicAuth(client_id, secret)` works natively
+- **Env vars needed:** `UDEMY_CLIENT_ID`, `UDEMY_CLIENT_SECRET`
+- **Rate limit:** ~500 requests/hour per token (MEDIUM confidence — verify on signup)
+- **Ranking signal:** `num_reviews * rating` as proxy for bestseller rank; Udemy does not expose a
+  direct "bestseller score" in the public API
 
-### AI/LLM Integration
+#### Product Hunt API (GraphQL)
+- **Endpoint:** `https://api.producthunt.com/v2/api/graphql`
+- **Auth:** Bearer token — Developer Token from producthunt.com/v2/oauth/applications (free registration,
+  no approval needed for read-only access)
+- **New library needed:** None — same POST GraphQL pattern already used in `ClickBankScanner._post_graphql()`
+- **Env vars needed:** `PRODUCT_HUNT_API_TOKEN`
+- **Query pattern:** `posts(order: VOTES, after: null, first: 50)` filtered by topic
+- **Rate limit:** 900 req/min (generous) — MEDIUM confidence
+- **Ranking signal:** `votesCount` descending
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| openai (SDK) | 1.x | Dossier generation, copy analysis, pain synthesis | MEDIUM confidence. MEGABRAIN already uses OpenAI for pipeline processing. Use `gpt-4o-mini` for bulk analysis (cheap, fast) and `gpt-4o` for final dossier synthesis. Structured outputs via `response_format={"type": "json_object"}` for reliable data extraction. |
-| anthropic (SDK) | 0.28+ | Alternative for long-context analysis | LOW confidence — version from training data. Claude's 200K context window makes it better than GPT-4 for analyzing full sales pages + all reviews in a single prompt. Use selectively for product dossier generation where full context matters. |
+#### JVZoo Marketplace
+- **No-auth path (recommended):** `https://www.jvzoo.com/marketplace/search?q={keyword}&sort=bestsellers`
+  — SSR HTML, publicly accessible, parseable with BeautifulSoup4
+- **API path (optional):** `https://www.jvzoo.com/api/listproducts` — requires affiliate account and
+  API key; unlocks conversion rate data
+- **Recommended approach:** SSR HTML scraping — avoids mandatory account requirement. Degrade to
+  positional rank if conversion rate is unavailable.
+- **New library needed:** None
+- **Env vars needed:** `JVZOO_API_KEY` (optional — degrade gracefully without it)
 
-**Why NOT LangChain:** LangChain adds abstraction overhead that doesn't pay off for this use case. Direct SDK calls to OpenAI/Anthropic are simpler, easier to debug, and better aligned with MEGABRAIN's existing pattern (raw API calls in `extract_*.py` scripts). LangChain is valuable for RAG pipelines — not needed here.
+#### Gumroad Discover
+- **URL:** `https://gumroad.com/discover?sort=hot&query={keyword}`
+- **Rendering:** SSR HTML (Gumroad is a simpler platform; training data confirms SSR pages)
+- **API note:** Gumroad OAuth API (`https://api.gumroad.com/v2/products`) only returns the
+  authenticated user's own products — not useful for marketplace scanning
+- **New library needed:** None
+- **Ranking signal:** Positional rank on "hot" sort
 
-### Dashboard Frontend
+---
 
-| Technology | Version | Purpose | Why |
-|------------|---------|---------|-----|
-| FastAPI + Jinja2 | bundled | Server-side rendered dashboard | MEDIUM confidence. For a single-user internal tool, SSR with Jinja2 templates served by FastAPI eliminates a separate frontend build system. Much less complexity than a React SPA. |
-| HTMX | 1.9+ | Dynamic UI updates without a JS framework | MEDIUM confidence. Lets you add real-time product table updates, filter controls, and dossier rendering with minimal JavaScript. Pairs perfectly with FastAPI/Jinja2. Avoids React/Vue build complexity for an internal tool. |
-| Tailwind CSS (CDN) | 3.x | Styling | LOW confidence. Use via CDN (no build step needed). Fast to prototype a clean dashboard. For an internal tool, CDN-loaded Tailwind is entirely sufficient. |
-| Chart.js | 4.x | Trend charts, scoring charts | LOW confidence — version from training. Lightweight charting library loaded via CDN. No build step, works with HTMX. Use for Google Trends graphs and product ranking charts. |
+### Group 2: SSR HTML — httpx Sufficient (No New Libraries)
 
-**Why NOT Streamlit:** Streamlit is excellent for data science notebooks but generates poor UX for navigation-heavy dashboards (multiple products, dossier views, filter panels). Its state management becomes painful. FastAPI+HTMX gives full control at similar code volume.
+#### Eduzz
+- **URL:** `https://eduzz.com/marketplace?categoria={slug}`
+- **Rendering:** SSR HTML — BR platforms of this generation typically use server-side rendering
+- **Parser:** BeautifulSoup4 with `lxml` (already in stack)
+- **New library needed:** None
+- **Ranking signal:** Positional rank from listing order (Eduzz does not expose a numeric gravity score)
+- **Confidence:** MEDIUM — verify by fetching and checking for JS hydration markers before building parser
 
-**Why NOT React/Next.js:** The project is Python-first and single-user. Adding a Node.js frontend build pipeline creates unnecessary overhead. HTMX + FastAPI achieves 95% of the UX with 20% of the complexity.
+#### Monetizze
+- **URL:** `https://monetizze.com.br/marketplace` with category filter
+- **Rendering:** SSR HTML
+- **Parser:** BeautifulSoup4 with `lxml`
+- **New library needed:** None
+- **Ranking signal:** Positional rank
 
-### Supporting Libraries
+#### Braip
+- **URL:** `https://braip.com/marketplace`
+- **Rendering:** Assumed SSR (Braip is a smaller BR platform; unlikely to use heavy SPA stack)
+- **New library needed:** None
+- **Confidence:** LOW — verify rendering empirically before building parser
 
-| Library | Version | Purpose | When to Use |
-|---------|---------|---------|-------------|
-| tenacity | 8.x | Retry logic with exponential backoff | All HTTP calls to external platforms — rate limits are guaranteed to hit |
-| fake-useragent | 1.4+ | Rotate User-Agent strings | All Playwright/httpx scrapers — reduces bot detection |
-| loguru | 0.7+ | Structured logging | Replace `print()` in all pipeline scripts — disk + stdout, rotation, JSON format |
-| python-dotenv | 1.0+ | Environment variable loading | `.env` file support — consistent with MEGABRAIN pattern |
-| Pydantic-settings | 2.x | Typed config management | Load and validate all config from env vars with type safety |
-| aiohttp | 3.9+ | Async HTTP when httpx not sufficient | Only if httpx proves insufficient for specific cases (e.g., streaming responses) |
-| Jinja2 | 3.1+ | Template rendering | FastAPI dependency — already included |
-| WeasyPrint | 60+ | PDF dossier export | Render HTML templates to PDF — use for downloadable product dossiers |
+#### Teachable
+- **Architecture concern:** Teachable courses live on individual creator subdomains
+  (e.g. `mycourse.teachable.com`), not a unified public marketplace like Hotmart. There is no canonical
+  `teachable.com/marketplace` browse page.
+- **Fallback:** If Teachable has a "featured courses" or "top courses" editorial page at teachable.com,
+  scrape that. If not, skip for v2.0.
+- **Recommendation:** Deprioritize. Verify existence of a rankable listing page before allocating a
+  platform ID. If no page exists, mark as Out of Scope for v2.0.
+- **Confidence:** LOW
+
+#### PerfectPay
+- **URL:** `https://perfectpay.com.br` — marketplace URL uncertain
+- **Rendering:** Unknown — assume SSR first, fall back to `fetch_spa()` if empty
+- **New library needed:** None
+- **Confidence:** LOW — verify URL and rendering method before implementing
+
+---
+
+### Group 3: React SPAs — Playwright Required (Already in Stack)
+
+#### Skool
+- **URL:** `https://www.skool.com/discover`
+- **Rendering:** React SPA — page is client-side rendered; httpx returns a shell HTML
+- **Approach:** `fetch_spa()` (Playwright + stealth) — already implemented in BaseScraper
+- **New library needed:** None — `fetch_spa()` already handles this
+- **Ranking signal:** Member count or activity score from discover feed
+- **Risk:** CAPTCHA exposure — stealth plugin + 3.0s domain delay should mitigate
+
+#### AppSumo
+- **URL:** `https://appsumo.com/browse/?sort=most-liked`
+- **Rendering:** AppSumo uses Next.js — may be SSR-rendered (Next.js supports SSR) or client-hydrated.
+  Try `fetch()` first; fall back to `fetch_spa()` if content is empty.
+- **New library needed:** None
+- **Ranking signal:** `most-liked` or `trending` sort parameter
+
+#### Stan Store
+- **URL:** `https://stan.store/explore` (if public explore page exists — verify)
+- **Rendering:** Likely React SPA (Stan Store is a modern creator platform)
+- **Approach:** `fetch_spa()` via Playwright
+- **New library needed:** None
+- **Confidence:** LOW — Stan Store is a newer platform; verify public listing page exists and check
+  for bot detection before implementing
+
+---
+
+### Group 4: Skip for v2.0
+
+#### Kajabi
+- **Architecture:** Kajabi is a creator-owned site builder, not a unified marketplace. There is no
+  `kajabi.com/marketplace` browse page analogous to Hotmart or ClickBank.
+- **Affiliate program:** Kajabi's affiliate marketplace is gated behind login — not publicly scrapeable.
+- **Decision:** **Skip for v2.0.** No public listing page provides rankable product data without auth.
+  Document as a known gap. Revisit in v3.0 only if a public directory emerges.
+- **Confidence:** MEDIUM — based on Kajabi's product architecture as a hosted course platform
+
+---
+
+## Stack Additions for v2.0
+
+### New Python Libraries: Zero
+
+All 13 platforms can be integrated using the **existing library stack**. No new pip packages are required.
+
+| Pattern | Existing Tool |
+|---------|--------------|
+| REST API with Basic Auth (Udemy) | `httpx.BasicAuth` — built into httpx |
+| GraphQL API with Bearer token (Product Hunt) | `httpx` POST — same `_post_graphql()` pattern as ClickBank |
+| SSR HTML (Eduzz, Monetizze, JVZoo, Gumroad, Braip) | `httpx` + `beautifulsoup4` + `lxml` |
+| React SPA (Skool, Stan Store, AppSumo fallback) | `playwright` + `playwright-stealth` |
+| XML responses (JVZoo API path, if taken) | stdlib `xml.etree.ElementTree` — no pip install |
+
+### New Environment Variables (Add to .env)
+
+```bash
+# Udemy Affiliate API (required for Udemy scanner — get at udemy.com/affiliate)
+UDEMY_CLIENT_ID=
+UDEMY_CLIENT_SECRET=
+
+# Product Hunt API (required for Product Hunt scanner — get at producthunt.com/v2/oauth/applications)
+PRODUCT_HUNT_API_TOKEN=
+
+# JVZoo API (optional — enables conversion rate data; scanner degrades gracefully without)
+JVZOO_API_KEY=
+```
+
+### DOMAIN_DELAYS Extension in base_scraper.py
+
+The `DOMAIN_DELAYS` dict must be extended. Existing entries are untouched:
+
+```python
+# ADD to DOMAIN_DELAYS in mis/base_scraper.py
+"eduzz.com": 2.5,
+"monetizze.com.br": 2.5,
+"perfectpay.com.br": 2.5,
+"braip.com": 2.5,
+"jvzoo.com": 2.0,
+"www.udemy.com": 1.5,         # API endpoint — generous rate limit
+"api.producthunt.com": 1.0,   # 900 req/min — conservative floor
+"appsumo.com": 3.0,           # Next.js — conservative until rendering confirmed
+"gumroad.com": 2.0,
+"www.skool.com": 3.0,         # React SPA + CAPTCHA risk
+"stan.store": 3.0,
+```
+
+### SCANNER_MAP Extension in scanner.py
+
+```python
+# ADD to SCANNER_MAP in mis/scanner.py run_all_scanners()
+"eduzz": EduzzScanner,
+"monetizze": MonetizzeScanner,
+"perfectpay": PerfectPayScanner,
+"braip": BraipScanner,
+"jvzoo": JVZooScanner,
+"udemy": UdemyScanner,
+"producthunt": ProductHuntScanner,
+"appsumo": AppSumoScanner,
+"gumroad": GumroadScanner,
+"skool": SkoolScanner,
+"stanstore": StanStoreScanner,
+# teachable: pending — verify marketplace page exists
+# kajabi: skip v2.0 — no public marketplace
+```
+
+---
+
+## Platform ID Allocation for v2.0
+
+Current IDs: 1=Hotmart, 2=ClickBank, 3=Kiwify. New allocations:
+
+| ID | Platform | Status |
+|----|----------|--------|
+| 4 | Eduzz | Implement |
+| 5 | JVZoo | Implement |
+| 6 | Udemy | Implement |
+| 7 | Product Hunt | Implement |
+| 8 | AppSumo | Implement |
+| 9 | Gumroad | Implement |
+| 10 | Skool | Implement |
+| 11 | Stan Store | Implement |
+| 12 | Monetizze | Implement |
+| 13 | PerfectPay | Implement |
+| 14 | Braip | Implement |
+| 15 | Teachable | Pending — verify marketplace page |
+| 16 | Kajabi | Skip v2.0 — no public marketplace |
+
+---
+
+## Scanner Implementation Patterns for New Platforms
+
+### Pattern A: REST API with Basic Auth (Udemy model)
+
+```python
+class UdemyScanner(PlatformScanner):
+    async def scan_niche(self, niche_slug, platform_slug, niche_id=0):
+        import os
+        client_id = os.environ.get("UDEMY_CLIENT_ID")
+        client_secret = os.environ.get("UDEMY_CLIENT_SECRET")
+        if not client_id or not client_secret:
+            log.warning("udemy_scanner.missing_credentials")
+            return []
+        # httpx GET with Basic Auth — no new libraries needed
+        # ... params, parse JSON, return list[Product]
+```
+
+### Pattern B: GraphQL API with Bearer Token (Product Hunt model)
+
+Identical to `ClickBankScanner._post_graphql()` — POST JSON body to GraphQL endpoint via httpx,
+add `Authorization: Bearer {token}` header. Copy the method verbatim, change the URL and query.
+
+### Pattern C: SSR HTML (Eduzz, Monetizze, Braip, JVZoo, Gumroad model)
+
+Identical to `HotmartScanner` pattern — `fetch()` + BeautifulSoup4 parsing + multi-selector fallback
++ `alert="schema_drift"` log on parse failure + return `[]` on any unrecoverable error.
+
+### Pattern D: SPA with Playwright (Skool, Stan Store, AppSumo model)
+
+Use `fetch_spa()` from `PlatformScanner` (delegated to `BaseScraper`). No new base class code needed.
+Parse the rendered HTML with BeautifulSoup4 as normal.
 
 ---
 
@@ -90,131 +307,79 @@
 
 | Category | Recommended | Alternative | Why Not |
 |----------|-------------|-------------|---------|
-| Browser automation | Playwright | Selenium | Playwright is 3x faster, native async, better anti-bot handling, smaller API surface |
-| HTTP client | httpx | requests | `requests` is synchronous — blocks the event loop in async pipelines |
-| Scheduler | APScheduler | Celery | Celery requires message broker, adds ops complexity for single-machine use |
-| Scheduler | APScheduler | Prefect/Airflow | Prefect/Airflow are overengineered for hourly single-machine jobs |
-| Database (dev) | SQLite | PostgreSQL | SQLite requires zero ops; migrate to PG when actually needed |
-| Dashboard | FastAPI+HTMX | Streamlit | Streamlit UX degrades on multi-view dashboards; poor control over layout |
-| Dashboard | FastAPI+HTMX | React SPA | React adds Node.js build pipeline — not justified for internal single-user tool |
-| LLM orchestration | Direct SDK | LangChain | LangChain abstraction adds debug complexity without benefit for direct API calls |
-| Reddit | PRAW | Playwright scrape | PRAW is the official API wrapper; official API = no ToS violation, structured data |
-| Google Trends | pytrends | Playwright scrape | pytrends is cleaner; Playwright on Trends is fragile |
+| Product Hunt data | GraphQL API (free token) | HTML scraping | API gives structured `votesCount`; HTML parsing is fragile |
+| Udemy data | Official Affiliate API | HTML scraping | Official API stable and rate-limited; scraping Udemy HTML likely violates ToS |
+| JVZoo data | SSR HTML (no auth) | JVZoo REST API (account required) | API requires vendor account; public SSR marketplace gives same data without auth |
+| Kajabi coverage | Skip v2.0 | Scrape individual creator pages | No unified marketplace; individual pages require an external seed list |
+| GraphQL client | Raw httpx POST | `gql` library | `gql` adds a dependency for zero functional gain; ClickBank proves raw POST is sufficient |
+| XML parsing (JVZoo API) | stdlib `xml.etree.ElementTree` | `xmltodict` | stdlib covers simple XML; avoids a dependency |
+| AppSumo rendering | Try httpx first, fall back to Playwright | Playwright always | Next.js can render SSR; try the cheaper path before committing to browser automation |
 
 ---
 
-## Anti-Recommendations (Explicit Do-Nots)
+## What NOT to Add
 
-| Technology | Why to Avoid |
-|------------|-------------|
-| Selenium | Deprecated in favor of Playwright for Python; slower, no async |
-| Scrapy-Splash | Extra Docker dependency for JS rendering; Playwright is simpler and more capable |
-| Beautiful Soup with html.parser | Use `lxml` parser — 3x faster on large product pages |
-| SQLite in multi-threaded write mode | SQLite has write-locking issues under concurrent writes — use WAL mode (`PRAGMA journal_mode=WAL`) or switch to PostgreSQL |
-| requests library (sync) | Blocks async event loop; use httpx instead |
-| LangChain | Unnecessary abstraction; direct OpenAI/Anthropic SDK calls are cleaner for this use case |
-| Celery (at MVP stage) | Overkill for single-machine hourly jobs; adds Redis/RabbitMQ ops overhead |
-| React/Vue SPA | Adds Node.js build pipeline complexity for an internal single-user dashboard |
-| Scrapy for JS-rendered pages | Scrapy is HTML-first; don't force JS execution through Scrapy-Splash — use Playwright |
-
----
-
-## Integration with MEGABRAIN
-
-The MIS plugs into MEGABRAIN as a module under `core/intelligence/` or as a sibling module:
-
-```
-MEGABRAIN/
-├── core/
-│   └── intelligence/       # Existing Python pipeline scripts
-├── mis/                    # NEW: Market Intelligence System
-│   ├── scrapers/           # Per-platform scraper modules
-│   ├── pipeline/           # APScheduler jobs
-│   ├── analysis/           # LLM analysis prompts + runners
-│   ├── models/             # SQLAlchemy models
-│   ├── api/                # FastAPI app
-│   └── dashboard/          # Jinja2 templates + static
-```
-
-**Integration points:**
-- Shares `.env` / environment config with MEGABRAIN
-- Reads/writes to SQLite (or PostgreSQL) — separate DB from MEGABRAIN's JSON-file state
-- Dossiers exported as YAML/JSON can be consumed by MEGABRAIN's existing knowledge pipeline
-- JARVIS agent can invoke MIS via CLI or HTTP endpoint
+| Library | Reason to Avoid |
+|---------|----------------|
+| `scrapy` | Decided against in v1.0; mixing Scrapy with PlatformScanner/BaseScraper creates two incompatible paradigms |
+| `selenium` | Playwright already covers all SPA rendering needs; Selenium has no async support |
+| `requests` | Synchronous — blocks the event loop; httpx is already present |
+| `gql` | Python GraphQL client; raw POST via httpx is sufficient (ClickBank scanner proves this) |
+| `xmltodict` | stdlib `xml.etree.ElementTree` covers any JVZoo XML parsing needed |
+| `aiofiles` | No async file I/O needed in scanners |
+| `redis` | Deferred to v3.0; SQLite WAL mode handles concurrent reads at this scale |
+| `celery` | APScheduler covers all scheduling needs; no distributed workers needed |
+| `pydantic` | Not in current stack; sqlite-utils + Python dataclasses cover all data needs |
 
 ---
 
-## Installation
+## Confidence Assessment
+
+| Platform / Claim | Confidence | Notes |
+|-----------------|------------|-------|
+| Udemy has a public Affiliate API | HIGH | Well-documented, stable for years; Basic Auth pattern is standard |
+| Product Hunt has a public GraphQL API | HIGH | PH API v2 is publicly documented; verify read-only token requirements |
+| Existing stack covers all integration patterns | HIGH | Verified against v1.0 codebase — BaseScraper, Playwright, BeautifulSoup4 all present and working |
+| Eduzz/Monetizze are SSR HTML | MEDIUM | BR platforms of this generation typically use SSR; must verify empirically |
+| JVZoo SSR marketplace is scrapeable | MEDIUM | JVZoo marketplace has been publicly accessible historically; verify current structure |
+| Gumroad /discover is SSR | MEDIUM | Gumroad is a simpler platform; training data suggests SSR rendering |
+| Skool Discover is a React SPA | MEDIUM | Skool uses modern React stack; likely needs Playwright — verify before committing |
+| AppSumo rendering method | MEDIUM | Next.js app — may be SSR; try httpx first before falling back to Playwright |
+| Kajabi has no public marketplace | MEDIUM | Based on Kajabi's hosted site-builder architecture; verify before finalizing skip |
+| PerfectPay / Braip / Stan Store rendering | LOW | Less well-known platforms; rendering method must be verified empirically |
+| Teachable has a rankable marketplace page | LOW | Creator-subdomain architecture makes a unified listing page unlikely |
+
+---
+
+## Verification Checklist (Run Before Implementation)
+
+For each LOW/MEDIUM confidence platform, perform this check before writing the scanner:
 
 ```bash
-# Core runtime
-pip install fastapi[standard] pydantic pydantic-settings sqlalchemy
-
-# Scraping
-pip install playwright httpx beautifulsoup4 lxml scrapy praw
-pip install google-api-python-client pytrends
-
-# Install Playwright browsers (one-time)
-playwright install chromium
-
-# Scheduling
-pip install apscheduler
-
-# LLM
-pip install openai anthropic
-
-# Utilities
-pip install tenacity fake-useragent loguru python-dotenv weasyprint
-
-# Dev
-pip install pytest httpx pytest-asyncio
+# 1. Fetch the candidate listing URL with httpx
+python -c "
+import httpx, asyncio
+async def check(url):
+    async with httpx.AsyncClient(follow_redirects=True) as c:
+        r = await c.get(url, headers={'User-Agent': 'Mozilla/5.0'})
+        print(r.status_code, len(r.text), 'hydration' in r.text.lower())
+asyncio.run(check('https://eduzz.com/marketplace'))
+"
+# If content is empty or contains only hydration markers -> needs Playwright (fetch_spa)
+# If content has product HTML -> httpx sufficient
 ```
 
-```bash
-# For Redis (optional, for rate-limit state at scale)
-# Install Redis server separately, then:
-pip install redis
-```
-
----
-
-## Confidence Summary
-
-| Component | Confidence | Source |
-|-----------|------------|--------|
-| FastAPI + Pydantic | HIGH | Official fastapi.tiangolo.com docs verified |
-| PostgreSQL for analytics | HIGH | Official postgresql.org docs verified |
-| SQLite for local dev | HIGH | Official sqlite.org docs verified |
-| Redis as cache/broker | HIGH | Official redis.io docs verified |
-| Playwright (concept) | MEDIUM | Training data; official docs blocked during research |
-| httpx over requests | MEDIUM | Training data; well-established community consensus |
-| APScheduler over Celery | MEDIUM | Training data; architecture reasoning sound |
-| PRAW for Reddit | MEDIUM | Training data; Reddit's official Python wrapper |
-| pytrends | LOW | Training data; unofficial library, version unverified |
-| HTMX + Jinja2 for dashboard | MEDIUM | Training data; pattern well-established in Python community |
-| youtube-data-api quotas | MEDIUM | Training data; quota numbers stable over years |
-| Playwright version 1.40+ | LOW | Training data; version unverified — check pypi.org/project/playwright |
-| APScheduler version 3.10+ | LOW | Training data; version unverified — check pypi.org/project/apscheduler |
-| WeasyPrint for PDF | LOW | Training data; known to have system-level dependencies (libcairo, libpango) |
-
----
-
-## Version Verification Checklist
-
-Before building, verify current versions for LOW/MEDIUM confidence items:
-
-- [ ] `pip index versions playwright` — confirm 1.40+
-- [ ] `pip index versions apscheduler` — confirm 3.x stable (v4 is in beta as of training cutoff)
-- [ ] `pip index versions pytrends` — confirm active maintenance
-- [ ] Check APScheduler docs — v4 (AsyncIO-native) may be stable by now; if so, prefer v4 API
-- [ ] Check Reddit API ToS — free tier rate limits may have changed since 2023 changes
+This takes 2 minutes per platform and prevents building the wrong integration method.
 
 ---
 
 ## Sources
 
-- FastAPI official documentation: https://fastapi.tiangolo.com/ (verified 2026-03-14)
-- PostgreSQL about page: https://www.postgresql.org/about/ (verified 2026-03-14)
-- SQLite about page: https://www.sqlite.org/about.html (verified 2026-03-14)
-- Redis documentation: https://redis.io/docs/latest/get-started/ (verified 2026-03-14)
-- All other library recommendations: training data (knowledge cutoff August 2025) — see confidence flags above
+- Existing codebase: `mis/base_scraper.py`, `mis/scanners/clickbank.py`, `mis/scanners/hotmart.py`,
+  `mis/scanner.py`, `mis/requirements.txt` — verified 2026-03-16
+- Udemy Affiliate API: training data (knowledge cutoff August 2025) — HIGH confidence, API stable for years
+- Product Hunt API v2: training data — HIGH confidence, publicly documented
+- Platform rendering methods (non-API): training data — MEDIUM/LOW confidence as noted per-platform
+- **Important:** WebSearch and WebFetch tools were unavailable during this research session. All
+  platform-specific claims derive from training data. Run the verification checklist above before
+  implementing each scanner to confirm rendering method and URL structure.
