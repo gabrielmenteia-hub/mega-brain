@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 9 context gathered
-last_updated: "2026-03-16T02:31:24.566Z"
+stopped_at: Completed 09-production-wiring-proxy-fix/09-01-PLAN.md
+last_updated: "2026-03-16T03:10:31.388Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 10
-  completed_phases: 8
-  total_plans: 26
-  completed_plans: 26
+  completed_phases: 9
+  total_plans: 27
+  completed_plans: 27
 ---
 
 ---
@@ -121,6 +121,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 06-megabrain-integration P02 | 8 | 2 tasks | 3 files |
 | Phase 07-mis-integration-bugfixes P01 | 12 | 3 tasks | 5 files |
 | Phase 08-foundation-verification P01 | 13 | 3 tasks | 7 files |
+| Phase 09-production-wiring-proxy-fix P01 | 14 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -197,6 +198,9 @@ Recent decisions affecting current work:
 - [Phase 08-01]: Temporary httpx.AsyncClient per-request for proxy rotation in BaseScraper — ensures each request uses a fresh connection with the selected proxy, no state leakage
 - [Phase 08-01]: proxy_list takes precedence over proxy_url; proxy_url auto-wrapped in list for backward compat
 - [Phase 08-01]: run_schema_integrity_check uses sqlite_master SELECT + never-propagate-exceptions contract consistent with run_platform_canary pattern
+- [Phase 09-01]: Top-level imports in app.py confirmed safe (no circular imports) — enables mis.web.app.X patch paths and cleaner code
+- [Phase 09-01]: register_scanner_jobs() NOT included in lifespan — double-scan redundancy (locked decision)
+- [Phase 09-01]: Lifespan errors soft-logged as warnings — scheduler failure must not prevent server from starting
 
 ### Pending Todos
 
@@ -211,6 +215,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T02:31:24.538Z
-Stopped at: Phase 9 context gathered
+Last session: 2026-03-16T03:10:31.372Z
+Stopped at: Completed 09-production-wiring-proxy-fix/09-01-PLAN.md
 Resume file: None
