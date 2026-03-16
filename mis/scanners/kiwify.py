@@ -227,9 +227,10 @@ class KiwifyScanner(PlatformScanner):
     def __init__(
         self,
         proxy_url: Optional[str] = None,
+        proxy_list: Optional[list[str]] = None,
         niche_id: int = 0,
     ) -> None:
-        super().__init__(proxy_url=proxy_url)
+        super().__init__(proxy_url=proxy_url, proxy_list=proxy_list)
         self._default_niche_id = niche_id
 
     async def scan_niche(

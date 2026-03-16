@@ -60,12 +60,12 @@ class PlatformScanner(ABC):
             products = await scanner.scan_niche("emagrecimento", "saude")
     """
 
-    def __init__(self, proxy_url: Optional[str] = None) -> None:
+    def __init__(self, proxy_url: Optional[str] = None, proxy_list: Optional[list[str]] = None) -> None:
         # Lazy import to avoid circular dependency issues
         from .base_scraper import BaseScraper
         # Re-use BaseScraper init by composition rather than inheritance
         # to avoid MRO issues with ABC + BaseScraper
-        self._base = BaseScraper(proxy_url=proxy_url)
+        self._base = BaseScraper(proxy_url=proxy_url, proxy_list=proxy_list)
 
     async def __aenter__(self) -> "PlatformScanner":
         await self._base.__aenter__()

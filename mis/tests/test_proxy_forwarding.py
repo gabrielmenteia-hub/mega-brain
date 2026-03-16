@@ -45,19 +45,17 @@ def test_proxy_list_reaches_base_scraper():
 
 
 @pytest.mark.asyncio
-async def test_run_all_scanners_proxy_list_no_typeerror(tmp_path):
+async def test_run_all_scanners_proxy_list_no_typeerror():
     """run_all_scanners with proxy_list must not raise TypeError."""
-    import asyncio
     from mis.scanner import run_all_scanners
 
-    db_path = str(tmp_path / "mis.db")
-
     # Minimal config with proxy_list populated
+    # platforms is a dict {platform_name: platform_slug} per run_all_scanners()
     config = {
         "niches": [
             {
                 "slug": "emagrecimento",
-                "platforms": [{"name": "hotmart", "slug": "saude"}],
+                "platforms": {"hotmart": "saude"},
             }
         ],
         "settings": {
@@ -66,8 +64,8 @@ async def test_run_all_scanners_proxy_list_no_typeerror(tmp_path):
         },
     }
 
-    # Mock all scanner scan_niche methods to avoid real HTTP calls
+    # Mock scan_niche to avoid real HTTP calls; patch the async context manager
     with patch("mis.scanners.hotmart.HotmartScanner.scan_niche", new_callable=AsyncMock, return_value=[]):
-        # RED: TypeError before fix
-        result = await run_all_scanners(config=config, db_path=db_path)
+        # RED: TypeError before fix (proxy_list not accepted)
+        result = await run_all_scanners(config=config)
         assert isinstance(result, dict)
