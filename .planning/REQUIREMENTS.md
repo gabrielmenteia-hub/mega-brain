@@ -14,9 +14,9 @@
 
 ### Scanner de Produtos
 
-- [ ] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
-- [ ] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
-- [ ] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
+- [x] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
+- [x] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
+- [x] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
 - [x] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
 - [x] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
 
@@ -38,16 +38,16 @@
 
 ### Radar de Dores (Horário)
 
-- [ ] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
-- [ ] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
-- [ ] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
+- [x] **RADAR-01**: Sistema monitora Google Trends por nicho a cada hora, com normalização por anchor term estável
+- [x] **RADAR-02**: Sistema coleta perguntas e posts de Reddit e Quora relacionados aos nichos configurados
+- [x] **RADAR-03**: Sistema analisa títulos e comentários de vídeos no YouTube por nicho (com quota management)
 - [ ] **RADAR-04**: Sistema coleta comentários de anúncios patrocinados no Meta por nicho
-- [ ] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
-- [ ] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
+- [x] **RADAR-05**: Pipeline do radar é idempotente (re-execução não gera duplicatas)
+- [x] **RADAR-06**: Relatório horário consolidado é gerado com as principais dores/desejos detectados por nicho
 
 ### Dashboard Web
 
-- [ ] **DASH-01**: Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho
+- [x] **DASH-01**: Dashboard exibe ranking de produtos campeões filtrável por plataforma e nicho
 - [x] **DASH-02**: Dashboard exibe página individual de dossiê por produto com todos os dados de espionagem e análise IA
 - [x] **DASH-03**: Dashboard exibe feed de dores do mercado com atualização horária por nicho
 - [x] **DASH-04**: Sistema envia alerta quando novo produto campeão entra no radar
@@ -92,9 +92,9 @@
 | FOUND-02 | Phase 9 | Complete |
 | FOUND-03 | Phase 8 | Complete |
 | FOUND-04 | Phase 8 | Complete |
-| SCAN-01 | Phase 10 | Pending |
-| SCAN-02 | Phase 10 | Pending |
-| SCAN-03 | Phase 10 | Pending |
+| SCAN-01 | Phase 10 | Complete |
+| SCAN-02 | Phase 10 | Complete |
+| SCAN-03 | Phase 10 | Complete |
 | SCAN-04 | Phase 9 | Complete |
 | SCAN-05 | Phase 5 | Complete |
 | SPY-01 | Phase 3 | Complete |
@@ -107,13 +107,13 @@
 | DOS-03 | Phase 3 | Complete |
 | DOS-04 | Phase 3 | Complete |
 | DOS-05 | Phase 3 | Complete |
-| RADAR-01 | Phase 10 | Pending |
-| RADAR-02 | Phase 10 | Pending |
-| RADAR-03 | Phase 10 | Pending |
+| RADAR-01 | Phase 10 | Complete |
+| RADAR-02 | Phase 10 | Complete |
+| RADAR-03 | Phase 10 | Complete |
 | RADAR-04 | Phase 4 | Pending |
-| RADAR-05 | Phase 10 | Pending |
-| RADAR-06 | Phase 10 | Pending |
-| DASH-01 | Phase 10 | Pending |
+| RADAR-05 | Phase 10 | Complete |
+| RADAR-06 | Phase 10 | Complete |
+| DASH-01 | Phase 10 | Complete |
 | DASH-02 | Phase 5 | Complete |
 | DASH-03 | Phase 5 | Complete |
 | DASH-04 | Phase 5 | Complete |

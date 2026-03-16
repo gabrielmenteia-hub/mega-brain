@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 10 context gathered
-last_updated: "2026-03-16T03:51:12.144Z"
+stopped_at: Completed 10-critical-runtime-fixes/10-01-PLAN.md
+last_updated: "2026-03-16T05:12:54.049Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 11
-  completed_phases: 9
-  total_plans: 27
-  completed_plans: 27
+  completed_phases: 10
+  total_plans: 28
+  completed_plans: 28
 ---
 
 ---
@@ -122,6 +122,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 07-mis-integration-bugfixes P01 | 12 | 3 tasks | 5 files |
 | Phase 08-foundation-verification P01 | 13 | 3 tasks | 7 files |
 | Phase 09-production-wiring-proxy-fix P01 | 14 | 3 tasks | 7 files |
+| Phase 10-critical-runtime-fixes P01 | 25 | 4 tasks | 4 files |
 
 ## Accumulated Context
 
@@ -201,6 +202,8 @@ Recent decisions affecting current work:
 - [Phase 09-01]: Top-level imports in app.py confirmed safe (no circular imports) — enables mis.web.app.X patch paths and cleaner code
 - [Phase 09-01]: register_scanner_jobs() NOT included in lifespan — double-scan redundancy (locked decision)
 - [Phase 09-01]: Lifespan errors soft-logged as warnings — scheduler failure must not prevent server from starting
+- [Phase 10-critical-runtime-fixes]: niche_id_map=None fallback when DB unavailable — preserves old behavior in environments without MIS_DB_PATH
+- [Phase 10-critical-runtime-fixes]: asyncio.to_thread(_run_cleanup) for cleanup job — _run_cleanup is sync, must not block event loop in AsyncIOScheduler
 
 ### Pending Todos
 
@@ -215,6 +218,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T03:51:12.125Z
-Stopped at: Phase 10 context gathered
-Resume file: .planning/phases/10-critical-runtime-fixes/10-CONTEXT.md
+Last session: 2026-03-16T05:12:54.033Z
+Stopped at: Completed 10-critical-runtime-fixes/10-01-PLAN.md
+Resume file: None
