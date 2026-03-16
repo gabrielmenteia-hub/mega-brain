@@ -94,3 +94,52 @@ async def test_proxy_rotation_no_proxy_returns_none():
     """Verifica que sem proxy_list, _select_proxy retorna None."""
     scraper = BaseScraper()
     assert scraper._select_proxy() is None
+
+
+@pytest.mark.asyncio
+async def test_fetch_spa_uses_select_proxy_not_self_proxy():
+    """fetch_spa() must use _select_proxy() for proxy rotation, not self._proxy directly.
+
+    When proxy_list is provided, fetch_spa() must call _select_proxy() and pass the
+    result to chromium.launch(), not use self._proxy (which is None when proxy_list is set).
+    """
+    from unittest.mock import AsyncMock, MagicMock, patch
+
+    proxies = ["http://proxy1:8080", "http://proxy2:8080"]
+    scraper = BaseScraper(proxy_list=proxies)
+
+    # self._proxy must be None (proxy_list takes precedence)
+    assert scraper._proxy is None
+
+    captured_launch_kwargs = {}
+
+    mock_page = AsyncMock()
+    mock_page.content = AsyncMock(return_value="<html>SPA content</html>")
+
+    mock_browser = AsyncMock()
+    mock_browser.new_page = AsyncMock(return_value=mock_page)
+
+    async def fake_launch(**kwargs):
+        captured_launch_kwargs.update(kwargs)
+        return mock_browser
+
+    mock_chromium = MagicMock()
+    mock_chromium.launch = fake_launch
+
+    mock_pw = AsyncMock()
+    mock_pw.__aenter__ = AsyncMock(return_value=mock_pw)
+    mock_pw.__aexit__ = AsyncMock(return_value=False)
+    mock_pw.chromium = mock_chromium
+
+    mock_stealth = MagicMock()
+    mock_stealth.apply_stealth_async = AsyncMock()
+    with patch("mis.base_scraper.async_playwright", return_value=mock_pw), \
+         patch("mis.base_scraper._PlaywrightStealth", return_value=mock_stealth), \
+         patch("asyncio.sleep", new=AsyncMock()):
+        await scraper.fetch_spa("https://example.com")
+
+    # Assert proxy kwarg was set to a server from the proxy_list (not None)
+    proxy_kwarg = captured_launch_kwargs.get("proxy")
+    assert proxy_kwarg is not None, "proxy kwarg must not be None when proxy_list is set"
+    assert "server" in proxy_kwarg
+    assert proxy_kwarg["server"] in proxies

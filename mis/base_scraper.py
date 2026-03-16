@@ -11,6 +11,8 @@ from typing import Optional
 
 import httpx
 import structlog
+from playwright.async_api import async_playwright
+from playwright_stealth import Stealth as _PlaywrightStealth
 from tenacity import (
     retry,
     stop_after_attempt,
@@ -177,24 +179,23 @@ class BaseScraper:
         """Fetch a JS-rendered page via Playwright + playwright-stealth.
 
         stealth_async() is called BEFORE page.goto() to suppress automation fingerprints.
+        Uses _select_proxy() for proxy rotation (same as fetch() with httpx).
 
         Raises:
             ScraperError: After all retries exhausted.
         """
-        from playwright.async_api import async_playwright
-        from playwright_stealth import stealth_async
-
         domain = httpx.URL(url).host
         delay = DOMAIN_DELAYS.get(domain, DEFAULT_DELAY)
 
         async with self._get_semaphore(domain):
             async with async_playwright() as pw:
+                selected = self._select_proxy()
                 browser = await pw.chromium.launch(
-                    proxy={"server": self._proxy} if self._proxy else None
+                    proxy={"server": selected} if selected else None
                 )
                 try:
                     page = await browser.new_page()
-                    await stealth_async(page)
+                    await _PlaywrightStealth().apply_stealth_async(page)
                     await page.goto(url, wait_until="networkidle")
                     content = await page.content()
                 finally:

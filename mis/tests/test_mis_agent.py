@@ -177,6 +177,42 @@ def test_incremental_export(tmp_path, monkeypatch):
     assert result2["skipped"] == first_count
 
 
+def test_compute_health_is_async_safe(tmp_path, monkeypatch):
+    """_compute_health() must be async def and use await run_canary_check() without nested asyncio.run()."""
+    import asyncio
+    import inspect
+    from unittest.mock import AsyncMock
+
+    db_file = str(tmp_path / "mis.db")
+    monkeypatch.setenv("MIS_DB_PATH", db_file)
+
+    from mis.db import run_migrations
+    run_migrations(db_file)
+
+    import importlib
+    import mis.mis_agent as agent_mod
+    importlib.reload(agent_mod)
+
+    # _compute_health must be a coroutine function (async def)
+    assert inspect.iscoroutinefunction(agent_mod._compute_health), \
+        "_compute_health must be async def"
+
+    # It must accept an AsyncMock for run_canary_check (not MagicMock)
+    mock_canary = AsyncMock(return_value=True)
+
+    result = asyncio.run(agent_mod._compute_health(
+        db_path=db_file,
+        last_cycle=None,
+        data_stale=True,
+        unseen_alerts=0,
+        run_canary_check=mock_canary,
+    ))
+    # mock was awaited (not called via asyncio.run inside)
+    mock_canary.assert_awaited_once()
+    assert isinstance(result, dict)
+    assert result["scraper_ok"] is True
+
+
 def test_health_with_dossier_today(tmp_path, monkeypatch):
     """get_briefing_data() returns last_cycle non-null and dossiers_today=True when a dossier was generated today."""
     import json

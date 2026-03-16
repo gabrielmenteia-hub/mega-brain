@@ -164,13 +164,13 @@ def get_briefing_data() -> dict[str, Any]:
                 data_stale = True
 
         # --- Health score (0-100) ---
-        health = _compute_health(
+        health = asyncio.run(_compute_health(
             db_path=db_path,
             last_cycle=last_cycle,
             data_stale=data_stale,
             unseen_alerts=unseen_alerts,
             run_canary_check=run_canary_check,
-        )
+        ))
 
         return {
             "status": "ok",
@@ -192,7 +192,7 @@ def get_briefing_data() -> dict[str, Any]:
         }
 
 
-def _compute_health(
+async def _compute_health(
     db_path: str,
     last_cycle: str | None,
     data_stale: bool,
@@ -210,10 +210,10 @@ def _compute_health(
     Returns:
         dict with keys: score, scraper_ok, cycle_fresh, dossiers_today, alerts_ok
     """
-    # Scraper canary (async)
+    # Scraper canary (async) — await directly, no nested asyncio.run
     scraper_ok = False
     try:
-        scraper_ok = asyncio.run(run_canary_check())
+        scraper_ok = await run_canary_check()
     except Exception:
         scraper_ok = False
 
