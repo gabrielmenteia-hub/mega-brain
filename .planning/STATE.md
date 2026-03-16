@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v1.0
 milestone_name: milestone
 status: executing
-stopped_at: Phase 11 context gathered
-last_updated: "2026-03-16T06:20:50.960Z"
+stopped_at: Completed 11-health-monitor-wiring-tech-debt/11-01-PLAN.md
+last_updated: "2026-03-16T17:19:56.429Z"
 last_activity: "2026-03-14 — Plan 02-02 complete: ClickBankScanner via GraphQL API, gravity scores without auth, 5/5 tests GREEN, 25/25 full suite GREEN."
 progress:
   total_phases: 13
-  completed_phases: 10
-  total_plans: 28
-  completed_plans: 28
+  completed_phases: 11
+  total_plans: 29
+  completed_plans: 29
 ---
 
 ---
@@ -123,6 +123,7 @@ Progress: [████████░░░░░░░░░░░░] 40% (2/
 | Phase 08-foundation-verification P01 | 13 | 3 tasks | 7 files |
 | Phase 09-production-wiring-proxy-fix P01 | 14 | 3 tasks | 7 files |
 | Phase 10-critical-runtime-fixes P01 | 25 | 4 tasks | 4 files |
+| Phase 11-health-monitor-wiring-tech-debt P01 | 24 | 3 tasks | 15 files |
 
 ## Accumulated Context
 
@@ -204,6 +205,9 @@ Recent decisions affecting current work:
 - [Phase 09-01]: Lifespan errors soft-logged as warnings — scheduler failure must not prevent server from starting
 - [Phase 10-critical-runtime-fixes]: niche_id_map=None fallback when DB unavailable — preserves old behavior in environments without MIS_DB_PATH
 - [Phase 10-critical-runtime-fixes]: asyncio.to_thread(_run_cleanup) for cleanup job — _run_cleanup is sync, must not block event loop in AsyncIOScheduler
+- [Phase 11-health-monitor-wiring-tech-debt]: register_platform_canary_jobs uses lazy import of get_scheduler (same pattern as register_canary_job)
+- [Phase 11-health-monitor-wiring-tech-debt]: stealth_async (playwright_stealth 1.x) replaced with Stealth().apply_stealth_async() — new 2.x API
+- [Phase 11-health-monitor-wiring-tech-debt]: _compute_health is async def — callers use one asyncio.run() at the sync/async boundary
 
 ### Pending Todos
 
@@ -218,6 +222,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16T06:20:50.931Z
-Stopped at: Phase 11 context gathered
-Resume file: .planning/phases/11-health-monitor-wiring-tech-debt/11-CONTEXT.md
+Last session: 2026-03-16T17:19:56.416Z
+Stopped at: Completed 11-health-monitor-wiring-tech-debt/11-01-PLAN.md
+Resume file: None
