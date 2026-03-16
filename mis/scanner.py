@@ -190,10 +190,20 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
         "clickbank": ClickBankScanner,
     }
 
+    import os
+    import sqlite3 as _sqlite3
+
     niches = config.get("niches", [])
     settings = config.get("settings", {})
     proxy_url: Optional[str] = settings.get("proxy_url") or None
     proxy_list: list[str] = settings.get("proxy_list") or []
+
+    # Resolve niche slugs to DB IDs before dispatching coroutines (DEFECT-1 fix)
+    _db_path = os.environ.get("MIS_DB_PATH", "data/mis.db")
+    _conn = _sqlite3.connect(_db_path)
+    _rows = _conn.execute("SELECT id, slug FROM niches").fetchall()
+    _conn.close()
+    niche_id_map: dict[str, int] = {slug: nid for nid, slug in _rows}
 
     tasks: list[tuple[str, asyncio.Task]] = []
 
@@ -212,6 +222,12 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
 
     for niche in niches:
         niche_slug = niche.get("slug", "")
+        if niche_slug not in niche_id_map:
+            log.warning(
+                "scanner.niche.slug_not_in_db",
+                niche_slug=niche_slug,
+            )
+            continue
         platforms = niche.get("platforms")
         if not platforms:
             log.warning(
@@ -247,6 +263,12 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
             output[key] = []
         else:
             _, products = result
+            # Inject resolved niche_id into each product (DEFECT-1 fix)
+            niche_slug_for_key = key.split(".")[0]
+            resolved_id = niche_id_map.get(niche_slug_for_key)
+            if resolved_id is not None:
+                for p in products:
+                    p.niche_id = resolved_id
             output[key] = products
 
     return output
