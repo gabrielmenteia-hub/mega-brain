@@ -13,6 +13,7 @@ from .reddit_collector import collect_reddit_signals
 from .quora_collector import collect_quora_signals
 from .youtube_collector import collect_youtube_signals
 from .synthesizer import synthesize_niche_pains
+from .meta_ads_collector import collect_ad_comments
 
 log = structlog.get_logger()
 
@@ -105,6 +106,17 @@ async def _run_all_synthesizers(config: dict, db_path: str) -> None:
             log.error("radar.synthesizer.error", niche=niche_slug, error=str(e))
 
 
+async def _run_all_meta_ads(config: dict, db_path: str) -> None:
+    """Run Meta Ads collection for all niches. Errors per niche are logged, not raised."""
+    niches = config.get("niches", [])
+    for niche in niches:
+        try:
+            signals = await collect_ad_comments(niche, db_path)
+            log.info("radar.meta_ads.done", niche=niche.get("slug"), count=len(signals))
+        except Exception as e:
+            log.error("radar.meta_ads.error", niche=niche.get("slug"), error=str(e))
+
+
 def _run_cleanup(db_path: str) -> None:
     """Delete pain_signals older than 30 days to keep DB size manageable."""
     import sqlite3
@@ -162,12 +174,16 @@ def register_radar_jobs(config: dict) -> None:
     async def _cleanup_job():
         await asyncio.to_thread(_run_cleanup, db_path)
 
+    async def _meta_ads_job():
+        await _run_all_meta_ads(config, db_path)
+
     _job_specs = [
         ("radar_trends", _trends_job, CronTrigger(minute=0)),
         ("radar_reddit_quora", _reddit_quora_job, CronTrigger(minute=0)),
         ("radar_youtube", _youtube_job, CronTrigger(hour="*/4", minute=0)),
         ("radar_synthesizer", _synthesizer_job, CronTrigger(minute=30)),
         ("radar_cleanup", _cleanup_job, CronTrigger(hour=3, minute=0)),
+        ("radar_meta_ads", _meta_ads_job, CronTrigger(minute=0)),
     ]
 
     for job_id, func, trigger in _job_specs:
@@ -179,7 +195,7 @@ def register_radar_jobs(config: dict) -> None:
             scheduler.remove_job(job_id)
         scheduler.add_job(func, trigger, id=job_id, replace_existing=True)
 
-    log.info("scheduler.radar_jobs_registered", job_count=5)
+    log.info("scheduler.radar_jobs_registered", job_count=6)
 
 
 async def run_radar_cycle(niche_slug: str, config: dict, db_path: str) -> dict | None:
