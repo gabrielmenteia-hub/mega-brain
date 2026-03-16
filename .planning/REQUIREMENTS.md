@@ -8,7 +8,7 @@
 ### Foundation
 
 - [x] **FOUND-01**: Sistema possui schema de banco de dados com tabelas para produtos, plataformas, nichos, dores e dossiês
-- [x] **FOUND-02**: BaseScraper implementa rate limiting, retry automático, rotação de proxies e headers anti-bot
+- [ ] **FOUND-02**: BaseScraper implementa rate limiting, retry automático, rotação de proxies e headers anti-bot
 - [x] **FOUND-03**: Usuário pode configurar 3–5 nichos alvo em arquivo de configuração
 - [x] **FOUND-04**: Health monitor detecta e alerta quando scrapers quebram silenciosamente (canary checks)
 
@@ -17,7 +17,7 @@
 - [x] **SCAN-01**: Sistema varre e rankeia produtos mais vendidos na Hotmart por nicho configurado
 - [x] **SCAN-02**: Sistema varre e rankeia produtos mais vendidos na Kiwify por nicho configurado
 - [x] **SCAN-03**: Sistema varre e rankeia produtos com maior gravity score no ClickBank por nicho configurado
-- [x] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
+- [ ] **SCAN-04**: Ranking é atualizado automaticamente em ciclo periódico (diário)
 - [x] **SCAN-05**: Usuário pode filtrar ranking por plataforma e nicho no dashboard
 
 ### Espionagem de Produto
@@ -89,13 +89,13 @@
 | Requirement | Phase | Status |
 |-------------|-------|--------|
 | FOUND-01 | Phase 8 | Complete |
-| FOUND-02 | Phase 8 | Complete |
+| FOUND-02 | Phase 9 | Pending |
 | FOUND-03 | Phase 8 | Complete |
 | FOUND-04 | Phase 8 | Complete |
 | SCAN-01 | Phase 2 | Complete |
 | SCAN-02 | Phase 2 | Complete |
 | SCAN-03 | Phase 2 | Complete |
-| SCAN-04 | Phase 2 | Complete |
+| SCAN-04 | Phase 9 | Pending |
 | SCAN-05 | Phase 5 | Complete |
 | SPY-01 | Phase 3 | Complete |
 | SPY-02 | Phase 3 | Complete |
@@ -124,7 +124,7 @@
 - v1 requirements: 31 total
 - Mapped to phases: 31
 - Unmapped: 0 ✓
-- Pending (gap closure): FOUND-01, FOUND-02, FOUND-03, FOUND-04 (Phase 8), INT-01, INT-02 (Phase 7), RADAR-04 (deferred v2)
+- Pending (gap closure): FOUND-02, SCAN-04 (Phase 9), RADAR-04 (deferred v2)
 
 ---
 *Requirements defined: 2026-03-14*

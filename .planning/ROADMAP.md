@@ -165,10 +165,24 @@ Plans:
 Plans:
 - [ ] 08-01-PLAN.md — Proxy rotation (proxy_list + _select_proxy) no BaseScraper, schema integrity canary no health_monitor, re-verificacao VERIFICATION.md Phase 1
 
+### Phase 9: Production Wiring & Proxy Fix
+**Goal**: Os 2 gaps críticos identificados no audit v1.0 são corrigidos — scheduler é iniciado automaticamente quando o servidor sobe, e proxy_list é corretamente propagado por toda a cadeia PlatformScanner → BaseScraper
+**Depends on**: Phase 8
+**Requirements**: SCAN-04, FOUND-02
+**Gap Closure**: Closes gaps from v1.0 milestone audit (SCAN-04 unsatisfied, FOUND-02 partial, INT-GAP-01, INT-GAP-02)
+**Success Criteria** (what must be TRUE):
+  1. `python -m mis dashboard` inicia o servidor E registra todos os APScheduler jobs — scans diários e radar horário disparam automaticamente sem CLI manual
+  2. Configurar `proxy_list` não-vazio em `config.yaml` não levanta `TypeError` — `PlatformScanner` e seus 3 subclasses aceitam e propagam `proxy_list` para `BaseScraper`
+  3. Flow "Automated Scan → Persist → Dashboard" funciona end-to-end quando servidor sobe
+  4. Testes RED → GREEN para ambos os paths (lifespan hook e proxy forwarding)
+
+Plans:
+- [ ] 09-01-PLAN.md — Lifespan hook FastAPI + proxy_list forwarding em PlatformScanner + testes
+
 ## Progress
 
 **Execution Order:**
-Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8
+Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 → 6 → 7 → 8 → 9
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
@@ -181,3 +195,4 @@ Phases execute in strict dependency order: 1 → 2 → 2.5 → 3 → 4 → 5 →
 | 6. MEGABRAIN Integration | 1/2 | Complete    | 2026-03-15 |
 | 7. MIS Integration Bug Fixes | 1/1 | Complete   | 2026-03-15 |
 | 8. Foundation Verification | 0/1 | Complete    | 2026-03-16 |
+| 9. Production Wiring & Proxy Fix | 0/1 | Not started | - |
