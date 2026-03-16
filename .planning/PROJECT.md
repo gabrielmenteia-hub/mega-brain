@@ -6,6 +6,15 @@ Sistema de inteligência de mercado integrado ao MEGABRAIN que varre automaticam
 
 **Shipped v1.0** — 2026-03-16 | 12 fases | 30 planos | 31/31 requisitos | 167 testes GREEN | 89 arquivos Python | 11.393 LOC
 
+## Current Milestone: v2.0 Platform Expansion
+
+**Goal:** Expandir cobertura para 15+ plataformas globais e BR, unificar o ranking cross-platform no dashboard, e liquidar o tech debt remanescente do v1.0.
+
+**Target features:**
+- Scanners para Eduzz, JVZoo, Udemy, Product Hunt, AppSumo, Gumroad, Kajabi, Teachable, Skool, Stan Store, Monetizze, PerfectPay, Braip
+- Ranking cross-platform unificado (view consolidada por nicho, independente de plataforma)
+- Tech debt: nyquist_compliant validation + docstring desatualizada
+
 ## Core Value
 
 Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo e por que está vendendo — para que ele possa modelar e lançar seus próprios produtos com máxima vantagem competitiva.
@@ -31,11 +40,17 @@ Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo
 
 ### Active (v2.0)
 
-- [ ] SCAN-V2: Scanners para Eduzz, JVZoo, Udemy, Product Hunt, AppSumo, Gumroad, Kajabi, Teachable, Skool, Stan Store (15+ plataformas)
-- [ ] ADV-01: Exportação de dossiê em PDF
-- [ ] ADV-02: Comparação lado a lado de 2+ produtos concorrentes
-- [ ] ADV-03: Histórico de evolução de produto (tracking de mudanças na copy/oferta)
-- [ ] ADV-04: Notificações via WhatsApp/Telegram além do dashboard
+- [ ] SCAN-V2: Scanners para Eduzz, JVZoo, Udemy, Product Hunt, AppSumo, Gumroad, Kajabi, Teachable, Skool, Stan Store, Monetizze, PerfectPay, Braip (15+ plataformas)
+- [ ] DASH-V2: Ranking cross-platform unificado — view consolidada por nicho, independente de plataforma
+- [ ] DEBT-01: Corrigir nyquist_compliant: false em todos os VALIDATION.md
+- [ ] DEBT-02: Corrigir docstring radar/__init__.py:141 ("5 jobs" → "6 jobs")
+
+### Future (v3.0+)
+
+- ADV-01: Exportação de dossiê em PDF
+- ADV-02: Comparação lado a lado de 2+ produtos concorrentes
+- ADV-03: Histórico de evolução de produto (tracking de mudanças na copy/oferta)
+- ADV-04: Notificações via WhatsApp/Telegram além do dashboard
 
 ### Out of Scope
 
@@ -87,4 +102,4 @@ Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo
 | MIS_PATH aponta para parent de mis/ | from mis.mis_agent import... requer package sob o path | ⚠️ Documentação ambígua no SKILL.md |
 
 ---
-*Last updated: 2026-03-16 after v1.0 milestone*
+*Last updated: 2026-03-16 after v2.0 milestone start*
