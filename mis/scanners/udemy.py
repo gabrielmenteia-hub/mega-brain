@@ -16,16 +16,12 @@ When API is available (legacy tokens may still work):
 - rating = avg_rating 0-5 scale (float or None)
 - thumbnail_url = image_480x270 field
 - url = "https://www.udemy.com" + course["url"] (API returns relative paths)
-
-NOTE: This is a stub implementation (TDD RED phase).
-scan_niche() checks credentials and makes GET request, handles errors,
-but does NOT parse the response body (returns [] intentionally).
-Full implementation is in plan 15-02.
 """
 from __future__ import annotations
 
 import base64
 import os
+from typing import Optional
 
 import structlog
 
@@ -35,6 +31,45 @@ from mis.platform_ids import UDEMY_PLATFORM_ID
 log = structlog.get_logger(__name__)
 
 UDEMY_API_URL = "https://www.udemy.com/api-2.0/courses/"
+
+
+def _parse_course(course: dict, rank: int, niche_id: int) -> Optional[Product]:
+    """Parse a Udemy course dict into a Product.
+
+    Args:
+        course:   Course dict from Udemy REST API results array.
+        rank:     Ordinal position (1-based) in most-reviewed ordering.
+        niche_id: FK to niches table.
+
+    Returns:
+        Product if course_id present, None otherwise.
+    """
+    course_id = course.get("id")
+    if not course_id:
+        return None
+
+    url_path = course.get("url") or ""
+    url = "https://www.udemy.com" + url_path
+
+    price_raw = (course.get("price_detail") or {}).get("amount")
+    price = float(price_raw) if price_raw is not None else None
+
+    rating_raw = course.get("avg_rating")
+    rating = float(rating_raw) if rating_raw is not None else None
+
+    thumbnail_url = course.get("image_480x270") or None
+
+    return Product(
+        external_id=str(course_id),
+        title=course.get("title") or str(course_id),
+        url=url,
+        platform_id=UDEMY_PLATFORM_ID,
+        niche_id=niche_id,
+        rank=rank,
+        price=price,
+        rating=rating,
+        thumbnail_url=thumbnail_url,
+    )
 
 
 class UdemyScanner(PlatformScanner):
@@ -58,11 +93,8 @@ class UdemyScanner(PlatformScanner):
     ) -> list[Product]:
         """Scan Udemy for top courses in a category and return ranked products.
 
-        NOTE: This is a STUB implementation for TDD RED phase.
-        Checks credentials; if present, makes GET request; handles
-        HTTP errors (especially 401 for deprecated API) but does NOT
-        parse the response body (returns [] intentionally).
-        Full parse implementation is in plan 15-02.
+        Uses platform_slug as the Udemy category (e.g. "Marketing", "Health & Fitness").
+        Handles HTTP 401/403/404 as api_discontinued gracefully.
 
         Args:
             niche_slug:    MIS niche slug (e.g. "marketing-digital") — for logging
@@ -70,7 +102,8 @@ class UdemyScanner(PlatformScanner):
             niche_id:      FK to niches table (default 0)
 
         Returns:
-            [] always in stub phase (RED). Will return products after GREEN implementation.
+            List of Product objects sorted by rank (1=top).
+            Returns [] if credentials missing, API discontinued, or any error occurs.
         """
         import httpx as _httpx
 
@@ -95,7 +128,7 @@ class UdemyScanner(PlatformScanner):
             "Accept": "application/json",
         }
         params = {
-            "search": niche_slug,
+            "search": platform_slug,
             "ordering": "most-reviewed",
             "category": platform_slug,
             "page_size": 20,
@@ -121,8 +154,9 @@ class UdemyScanner(PlatformScanner):
                     reason="Udemy Affiliate API deprecated 2025-01-01",
                 )
                 return []
-            log.error(
-                "udemy_scanner.fetch_failed",
+            log.warning(
+                "udemy_scanner.schema_drift",
+                alert="schema_drift",
                 niche=niche_slug,
                 platform_slug=platform_slug,
                 status_code=exc.response.status_code,
@@ -130,13 +164,31 @@ class UdemyScanner(PlatformScanner):
             )
             return []
         except Exception as exc:
-            log.error(
-                "udemy_scanner.fetch_failed",
+            log.warning(
+                "udemy_scanner.schema_drift",
+                alert="schema_drift",
                 niche=niche_slug,
                 platform_slug=platform_slug,
                 error=str(exc),
             )
             return []
 
-        # Intentional stub return — full parse in plan 15-02
-        return []
+        data = response.json()
+        results = data.get("results") or []
+
+        if not results:
+            return []
+
+        products: list[Product] = []
+        for rank, course in enumerate(results, start=1):
+            product = _parse_course(course, rank=rank, niche_id=niche_id)
+            if product is not None:
+                products.append(product)
+
+        log.info(
+            "udemy_scanner.scan_complete",
+            niche=niche_slug,
+            platform_slug=platform_slug,
+            count=len(products),
+        )
+        return products
