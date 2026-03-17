@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v2.0
+milestone_name: Platform Expansion
+status: planning
+stopped_at: Completed 13-01-PLAN.md
+last_updated: "2026-03-17T02:19:23.687Z"
+last_activity: 2026-03-16 — Milestone v2.0 roadmap criado, 17 requisitos mapeados em 5 fases (13–17)
+progress:
+  total_phases: 5
+  completed_phases: 1
+  total_plans: 1
+  completed_plans: 1
+  percent: 100
+---
+
 # Project State
 
 ## Project Reference
@@ -14,7 +30,7 @@ Plan: 0 of TBD in current phase
 Status: Ready to plan
 Last activity: 2026-03-16 — Milestone v2.0 roadmap criado, 17 requisitos mapeados em 5 fases (13–17)
 
-Progress: [░░░░░░░░░░] 0% (v2.0) | v1.0 completo (30/30 planos)
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -34,6 +50,7 @@ Progress: [░░░░░░░░░░] 0% (v2.0) | v1.0 completo (30/30 plan
 - v1.0 final trend: Stable (~10–25m/plan for complex phases)
 
 *Updated after each plan completion*
+| Phase 13 P01 | 12 | 3 tasks | 17 files |
 
 ## Accumulated Context
 
@@ -47,6 +64,8 @@ Recent decisions affecting v2.0:
 - [v2.0 Research]: platform_ids.py como fonte única de verdade para IDs — elimina risco de collision entre 16 scanner files
 - [v2.0 Research]: PLAYWRIGHT_SEMAPHORE(3) necessário antes de Gumroad/AppSumo — OOM risk com AsyncIOScheduler e múltiplos contextos
 - [v2.0 Research]: Udemy usa /api-2.0/courses/ (não HTML) — Cloudflare Enterprise bloqueia httpx em scraping direto
+- [Phase 13]: db.conn.commit() required after INSERT OR IGNORE in sqlite_utils — implicit transactions not auto-committed on GC
+- [Phase 13]: rank_type semantics per platform: positional (BR+Gumroad/AppSumo), gravity (ClickBank/JVZoo), upvotes (Product Hunt), enrollment (Udemy)
 
 ### Pending Todos
 
@@ -60,6 +79,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-16
-Stopped at: v2.0 ROADMAP.md criado — 5 fases (13–17), 17 requisitos mapeados, coverage 100%
+Last session: 2026-03-17T02:19:07.487Z
+Stopped at: Completed 13-01-PLAN.md
 Resume file: None

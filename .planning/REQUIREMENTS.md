@@ -8,9 +8,9 @@
 
 ### INFRA — Pré-condições (bloqueantes)
 
-- [ ] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 12 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
-- [ ] **INFRA-02**: `mis/platform_ids.py` centraliza todos os IDs de plataforma como constantes nomeadas (elimina risco de collision entre scanners)
-- [ ] **INFRA-03**: Campo `rank_type` adicionado à tabela `products` para identificar a semântica do rank por plataforma (posição, gravity, EPC, upvotes, enrollment, etc.)
+- [x] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 12 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
+- [x] **INFRA-02**: `mis/platform_ids.py` centraliza todos os IDs de plataforma como constantes nomeadas (elimina risco de collision entre scanners)
+- [x] **INFRA-03**: Campo `rank_type` adicionado à tabela `products` para identificar a semântica do rank por plataforma (posição, gravity, EPC, upvotes, enrollment, etc.)
 
 ### SCAN-BR — Scanners Brasil
 
@@ -35,8 +35,8 @@
 
 ### DEBT — Tech Debt v1.0
 
-- [ ] **DEBT-01**: `nyquist_compliant: false` corrigido ou removido em todos os 12 `VALIDATION.md`
-- [ ] **DEBT-02**: Docstring `radar/__init__.py:141` atualizada de "5 jobs" → "6 jobs"
+- [x] **DEBT-01**: `nyquist_compliant: false` corrigido ou removido em todos os 12 `VALIDATION.md`
+- [x] **DEBT-02**: Docstring `radar/__init__.py:141` atualizada de "5 jobs" → "6 jobs"
 
 ## Out of Scope (v2.0)
 
@@ -55,11 +55,11 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 13 | Pending |
-| INFRA-02 | Phase 13 | Pending |
-| INFRA-03 | Phase 13 | Pending |
-| DEBT-01 | Phase 13 | Pending |
-| DEBT-02 | Phase 13 | Pending |
+| INFRA-01 | Phase 13 | Complete |
+| INFRA-02 | Phase 13 | Complete |
+| INFRA-03 | Phase 13 | Complete |
+| DEBT-01 | Phase 13 | Complete |
+| DEBT-02 | Phase 13 | Complete |
 | SCAN-BR-01 | Phase 14 | Pending |
 | SCAN-BR-02 | Phase 14 | Pending |
 | SCAN-BR-03 | Phase 14 | Pending |
