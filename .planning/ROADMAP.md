@@ -140,7 +140,7 @@ Plans:
 **Plans**: 1 plan
 
 Plans:
-- [ ] 19-01-PLAN.md — null slug guard + styled badges + REQUIREMENTS.md correction + fallback docs
+- [ ] 19-01-PLAN.md — null slug guard + fallback docstring + styled badges + REQUIREMENTS.md correction
 
 ## Progress
 
