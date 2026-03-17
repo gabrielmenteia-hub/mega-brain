@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Completed 16-international-high-friction/16-01-PLAN.md
-last_updated: "2026-03-17T19:12:29.444Z"
+stopped_at: Completed 16-international-high-friction/16-02-PLAN.md
+last_updated: "2026-03-17T19:28:51.537Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
-  completed_phases: 3
+  completed_phases: 4
   total_plans: 8
-  completed_plans: 7
+  completed_plans: 8
   percent: 100
 ---
 
@@ -73,6 +73,7 @@ Progress: [██████████] 100%
 | Phase 15-international-api-based P02 | 12 | 2 tasks | 2 files |
 | Phase 15-international-api-based P03 | 10 | 2 tasks | 4 files |
 | Phase 16-international-high-friction P01 | 11 | 2 tasks | 5 files |
+| Phase 16-international-high-friction P02 | 13 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -102,6 +103,8 @@ Recent decisions affecting v2.0:
 - [Phase 16-01]: JVZooScanner SSR-only sem Playwright — JVZoo renderiza no servidor, sem JS execution necessario
 - [Phase 16-01]: PLAYWRIGHT_SEMAPHORE adquirido antes de _get_semaphore(domain) em fetch_spa() — previne deadlock (Pitfall 3)
 - [Phase 16-01]: Deteccao Incapsula dupla: ScraperError (403/503) + corpo HTML ('incapsula'/'incident id') — soft-block retorna 200 com HTML de desafio
+- [Phase 16-02]: GumroadScanner usa Playwright direto (nao fetch_spa) para scroll loop interativo — PLAYWRIGHT_SEMAPHORE adquirido explicitamente
+- [Phase 16-02]: AppSumoScanner usa __NEXT_DATA__ JSON (Next.js SSR) como path principal com CSS fallback /products/ links
 
 ### Pending Todos
 
@@ -115,6 +118,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T19:12:29.435Z
-Stopped at: Completed 16-international-high-friction/16-01-PLAN.md
+Last session: 2026-03-17T19:28:51.526Z
+Stopped at: Completed 16-international-high-friction/16-02-PLAN.md
 Resume file: None
