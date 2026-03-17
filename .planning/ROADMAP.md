@@ -3,7 +3,7 @@
 ## Milestones
 
 - ✅ **v1.0 MIS MVP** — Phases 1–12 (shipped 2026-03-16) — [Archive](.planning/milestones/v1.0-ROADMAP.md)
-- 🚧 **v2.0 Platform Expansion** — Phases 13–17 (in progress)
+- 🚧 **v2.0 Platform Expansion** — Phases 13–19 (in progress)
 
 ## Phases
 
@@ -114,6 +114,34 @@ Plans:
 Plans:
 - [ ] 17-01-PLAN.md — list_unified_ranking() + percentile engine (TDD) + rotas /ranking/unified + templates + tabs
 
+### Phase 18: Nyquist Sign-off
+**Goal**: Assinar os VALIDATION.md das novas phases v2.0 (13, 15, 17) que ficaram com `nyquist_compliant: false` após execução — completando a cobertura de validação do milestone
+**Depends on**: Phase 17
+**Requirements**: (tech debt cleanup — sem REQ-ID novo)
+**Gap Closure**: Closes tech debt items from v2.0 audit (phases 13, 15, 17 VALIDATION.md unsigned)
+**Success Criteria** (what must be TRUE):
+  1. `grep -r "nyquist_compliant: false" .planning/phases/` retorna zero resultados em todas as phases v2.0
+  2. VALIDATION.md de phases 13, 15, 17 assinados com `nyquist_compliant: true` e data de aprovação
+**Plans**: 1 plan
+
+Plans:
+- [ ] 18-01-PLAN.md — Sign off VALIDATION.md phases 13, 15, 17
+
+### Phase 19: Code Quality Cleanup
+**Goal**: Fechar os 4 itens de qualidade de código acumulados no audit v2.0 — null slug guard, styled platform badges, documentação de fallback scanners, e correção de REQUIREMENTS.md INFRA-03
+**Depends on**: Phase 18
+**Requirements**: (tech debt cleanup — sem REQ-ID novo)
+**Gap Closure**: Closes code quality tech debt items from v2.0 audit
+**Success Criteria** (what must be TRUE):
+  1. `scanner.py` tem guard `if platform_slug is None: continue` no loop de despacho (com comentário)
+  2. `unified_table.html` exibe platform badges como elementos HTML estilizados (`<span>` com classe CSS)
+  3. `REQUIREMENTS.md` descreve INFRA-03 como "tabela platforms" (não "tabela products")
+  4. Comportamento fallback dos scanners BR documentado em scanner.py ou README
+**Plans**: 1 plan
+
+Plans:
+- [ ] 19-01-PLAN.md — null slug guard + styled badges + REQUIREMENTS.md correction + fallback docs
+
 ## Progress
 
 **Execution Order:**
@@ -128,3 +156,5 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 15. International API-Based | 3/3 | Complete    | 2026-03-17 | - |
 | 16. International High-Friction | 2/2 | Complete    | 2026-03-17 | - |
 | 17. Unified Cross-Platform Ranking | 1/1 | Complete    | 2026-03-17 | - |
+| 18. Nyquist Sign-off | v2.0 | 0/1 | Not started | - |
+| 19. Code Quality Cleanup | v2.0 | 0/1 | Not started | - |
