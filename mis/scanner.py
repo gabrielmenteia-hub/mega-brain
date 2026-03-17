@@ -183,11 +183,15 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
     from .scanners.kiwify import KiwifyScanner
     from .scanners.hotmart import HotmartScanner
     from .scanners.clickbank import ClickBankScanner
+    from .scanners.eduzz import EduzzScanner
+    from .scanners.monetizze import MonetizzeScanner
 
     SCANNER_MAP = {
         "kiwify": KiwifyScanner,
         "hotmart": HotmartScanner,
         "clickbank": ClickBankScanner,
+        "eduzz": EduzzScanner,
+        "monetizze": MonetizzeScanner,
     }
 
     import os
@@ -256,6 +260,16 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
 
     results_raw = await asyncio.gather(*coroutines, return_exceptions=True)
 
+    # Build platform_id map from DB for mark_stale() calls
+    try:
+        _conn2 = _sqlite3.connect(_db_path)
+        _platform_rows = _conn2.execute("SELECT id, slug FROM platforms").fetchall()
+        _conn2.close()
+        platform_id_map: dict[str, int] = {slug: pid for pid, slug in _platform_rows}
+    except Exception as _db_err2:
+        log.warning("scanner.platform_id_map.db_unavailable", db_path=_db_path, error=str(_db_err2))
+        platform_id_map = {}
+
     output: dict[str, list[Product]] = {}
     for key, result in zip(keys, results_raw):
         if isinstance(result, Exception):
@@ -274,6 +288,26 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
                 if resolved_id is not None:
                     for p in products:
                         p.niche_id = resolved_id
+
+            # If scanner returned empty list, mark existing products as stale
+            if not products:
+                niche_slug_for_key = key.split(".")[0]
+                platform_name_for_key = key.split(".")[-1]
+                resolved_niche_id = (niche_id_map or {}).get(niche_slug_for_key)
+                resolved_platform_id = platform_id_map.get(platform_name_for_key)
+                if resolved_niche_id is not None and resolved_platform_id is not None:
+                    try:
+                        from .db import get_db
+                        from .product_repository import mark_stale
+                        _stale_db = get_db(_db_path)
+                        mark_stale(_stale_db, resolved_platform_id, resolved_niche_id)
+                    except Exception as _stale_err:
+                        log.warning(
+                            "scanner.mark_stale.failed",
+                            key=key,
+                            error=str(_stale_err),
+                        )
+
             output[key] = products
 
     return output
