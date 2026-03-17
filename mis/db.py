@@ -19,14 +19,16 @@ from .migrations._002_product_enrichment import run_migration_002 as _run_002
 from .migrations._003_spy_dossiers import run_migration_003 as _run_003
 from .migrations._004_pain_radar import run_migration_004 as _run_004
 from .migrations._005_alerts import run_migration_005 as _run_005
+from .migrations._006_v2_platforms import run_migration_006 as _run_006
 
 
 def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
     """Apply all migrations in order.
 
     Runs _001 (initial schema), _002 (product enrichment), _003 (spy
-    dossiers), _004 (pain radar), and _005 (alerts) sequentially. Each
-    migration is idempotent — safe to call on an already-migrated database.
+    dossiers), _004 (pain radar), _005 (alerts), and _006 (v2 platforms)
+    sequentially. Each migration is idempotent — safe to call on an
+    already-migrated database.
 
     Args:
         db_path: Path to the SQLite database file.
@@ -36,6 +38,7 @@ def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
     _run_003(db_path)
     _run_004(db_path)
     _run_005(db_path)
+    _run_006(db_path)
 
 
 def get_db(db_path: str) -> sqlite_utils.Database:
