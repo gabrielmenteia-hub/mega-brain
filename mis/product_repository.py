@@ -51,6 +51,7 @@ def upsert_product(db: sqlite_utils.Database, product: "Product") -> None:
                commission_pct = :commission_pct,
                rating         = :rating,
                thumbnail_url  = :thumbnail_url,
+               is_stale       = 0,
                updated_at     = :updated_at
          WHERE platform_id = :platform_id
            AND external_id = :external_id
@@ -84,6 +85,7 @@ def upsert_product(db: sqlite_utils.Database, product: "Product") -> None:
                 "commission_pct": product.commission_pct,
                 "rating": product.rating,
                 "thumbnail_url": product.thumbnail_url,
+                "is_stale": 0,
                 "updated_at": updated_at,
             },
             alter=True,
@@ -110,4 +112,26 @@ def save_batch(db: sqlite_utils.Database, products: list["Product"]) -> None:
     log.info(
         "product_repository.save_batch.saved",
         count=len(products),
+    )
+
+
+def mark_stale(db: sqlite_utils.Database, platform_id: int, niche_id: int) -> None:
+    """Mark all products for a platform+niche as is_stale=True.
+
+    Called by fallback scanners when scan_niche() returns [].
+    Preserves existing data — apenas marca como desatualizado.
+
+    Args:
+        db:          sqlite-utils Database instance.
+        platform_id: FK da plataforma.
+        niche_id:    FK do nicho.
+    """
+    db.execute(
+        "UPDATE products SET is_stale = 1 WHERE platform_id = ? AND niche_id = ?",
+        [platform_id, niche_id],
+    )
+    log.info(
+        "product_repository.mark_stale",
+        platform_id=platform_id,
+        niche_id=niche_id,
     )
