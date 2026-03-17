@@ -109,10 +109,10 @@ Plans:
   2. Filtro por nicho em `/ranking/unified` funciona — exibe apenas produtos do nicho selecionado de todas as plataformas
   3. Toggle "multi-platform only" filtra para produtos presentes em 2+ plataformas simultaneamente
   4. Cada produto na view exibe badge de plataforma, unified score e rank bruto da plataforma original
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 17-01: list_unified_ranking() + rota /ranking/unified + template
+- [ ] 17-01-PLAN.md — list_unified_ranking() + percentile engine (TDD) + rotas /ranking/unified + templates + tabs
 
 ## Progress
 
@@ -127,4 +127,4 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 14. BR Scanners | 2/2 | Complete    | 2026-03-17 | - |
 | 15. International API-Based | 3/3 | Complete    | 2026-03-17 | - |
 | 16. International High-Friction | 2/2 | Complete    | 2026-03-17 | - |
-| 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
+| 17. Unified Cross-Platform Ranking | v2.0 | 0/1 | Not started | - |
