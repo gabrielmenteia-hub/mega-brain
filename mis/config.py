@@ -18,7 +18,14 @@ log = structlog.get_logger(__name__)
 
 CONFIG_PATH = Path(__file__).parent / "config.yaml"
 
-VALID_PLATFORMS = {"hotmart", "clickbank", "kiwify"}
+VALID_PLATFORMS = {
+    # v1.0
+    "hotmart", "clickbank", "kiwify",
+    # v2.0 BR
+    "eduzz", "monetizze", "perfectpay", "braip",
+    # v2.0 International
+    "product_hunt", "udemy", "jvzoo", "gumroad", "appsumo",
+}
 
 SETTINGS_DEFAULTS = {
     "proxy_url": "",
