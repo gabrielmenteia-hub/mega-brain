@@ -189,6 +189,9 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
     from .scanners.braip import BraipScanner
     from .scanners.product_hunt import ProductHuntScanner
     from .scanners.udemy import UdemyScanner
+    from .scanners.jvzoo import JVZooScanner
+    from .scanners.gumroad import GumroadScanner
+    from .scanners.appsumo import AppSumoScanner
 
     SCANNER_MAP = {
         "kiwify": KiwifyScanner,
@@ -200,6 +203,9 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
         "braip": BraipScanner,
         "product_hunt": ProductHuntScanner,
         "udemy": UdemyScanner,
+        "jvzoo": JVZooScanner,
+        "gumroad": GumroadScanner,
+        "appsumo": AppSumoScanner,
     }
 
     import os

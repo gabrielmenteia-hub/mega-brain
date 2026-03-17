@@ -42,6 +42,8 @@ DOMAIN_DELAYS: dict[str, float] = {
     "api.producthunt.com": 1.0,   # API oficial com rate limit documentado
     "www.udemy.com": 0.5,          # REST API com autenticacao
     "www.jvzoomarket.com": 2.0,    # SSR marketplace com bot detection Incapsula
+    "gumroad.com": 2.0,            # SPA com scroll — delay conservador
+    "appsumo.com": 2.0,            # SSR/Next.js
 }
 DEFAULT_DELAY: float = 2.0
 

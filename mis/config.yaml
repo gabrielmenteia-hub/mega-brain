@@ -11,6 +11,9 @@ niches:
       monetizze: null         # 403 sem login, sem marketplace publico
       product_hunt: trending  # scanner ignora o slug — retorna trending geral da plataforma
       udemy: "Marketing"      # categoria oficial Udemy Affiliate API
+      jvzoo: "84"             # JVZoo usa category ID numerico — 84=Affiliate Marketing, generico
+      gumroad: marketing      # tag discover Gumroad
+      appsumo: marketing-sales  # categoria AppSumo /browse/software/marketing-sales/
     keywords:
       - "curso de marketing"
       - "trafego pago"
@@ -34,6 +37,9 @@ niches:
       monetizze: null         # 403 sem login, sem marketplace publico
       product_hunt: trending  # scanner ignora o slug — retorna trending geral da plataforma
       udemy: "Health & Fitness"  # categoria oficial Udemy
+      jvzoo: "84"             # JVZoo nao tem categoria saude especifica — usar MMO generico
+      gumroad: health         # tag discover Gumroad
+      appsumo: health-fitness  # categoria AppSumo /browse/software/health-fitness/
     keywords:
       - "emagrecer rapido"
       - "dieta low carb"
@@ -57,6 +63,9 @@ niches:
       monetizze: null         # 403 sem login, sem marketplace publico
       product_hunt: trending  # scanner ignora o slug — retorna trending geral da plataforma
       udemy: "Finance & Accounting"  # categoria oficial Udemy
+      jvzoo: "84"             # JVZoo — mesmo motivo, sem categoria financas especifica
+      gumroad: finance        # tag discover Gumroad
+      appsumo: finance        # categoria AppSumo /browse/software/finance/
     keywords:
       - "investir dinheiro"
       - "renda passiva"
