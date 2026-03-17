@@ -74,14 +74,16 @@ Plans:
 **Depends on**: Phase 13
 **Requirements**: SCAN-INTL-01, SCAN-INTL-02
 **Success Criteria** (what must be TRUE):
-  1. `python -m mis scan --platform product_hunt` retorna trending products com votesCount como rank sem erro
-  2. `python -m mis scan --platform udemy` retorna top cursos por nicho via REST API sem erro
+  1. `python -m mis scan --platform product_hunt` retorna trending products com rank posicional sem erro
+  2. `python -m mis scan --platform udemy` retorna top cursos por nicho via REST API sem erro (ou degrada com api_discontinued)
   3. Scanner Product Hunt degrada graciosamente quando `PRODUCT_HUNT_API_TOKEN` está ausente (retorna lista vazia, sem exception)
   4. Scanner Udemy degrada graciosamente quando `UDEMY_CLIENT_ID`/`UDEMY_CLIENT_SECRET` estão ausentes
-**Plans**: TBD
+**Plans**: 3 plans
 
 Plans:
-- [ ] 15-01: ProductHuntScanner + UdemyScanner
+- [ ] 15-01-PLAN.md — Wave 0 TDD: fixtures JSON + stubs ProductHuntScanner + UdemyScanner (RED cycle)
+- [ ] 15-02-PLAN.md — Implementacao completa ProductHuntScanner + UdemyScanner (GREEN cycle)
+- [ ] 15-03-PLAN.md — Wiring: SCANNER_MAP + config.yaml slugs + DOMAIN_DELAYS + env.example
 
 ### Phase 16: International High-Friction
 **Goal**: Três plataformas internacionais de alta fricção (bot detection / SPA rendering) integradas com estratégias de mitigação documentadas
@@ -123,6 +125,6 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 1–12 (Foundation → Meta Ads) | v1.0 | 30/30 | ✅ Complete | 2026-03-16 |
 | 13. Infrastructure + Tech Debt | 1/1 | Complete    | 2026-03-17 | - |
 | 14. BR Scanners | 2/2 | Complete    | 2026-03-17 | - |
-| 15. International API-Based | v2.0 | 0/TBD | Not started | - |
+| 15. International API-Based | v2.0 | 0/3 | Not started | - |
 | 16. International High-Friction | v2.0 | 0/TBD | Not started | - |
 | 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
