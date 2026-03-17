@@ -49,10 +49,10 @@
   3. Cada plataforma no DB tem campo `rank_type` preenchido descrevendo a semântica do rank (positional, gravity, enrollment, upvotes)
   4. `grep -r "nyquist_compliant: false"` retorna zero resultados em todos os VALIDATION.md
   5. Docstring `radar/__init__.py:141` lê "6 jobs" (não "5 jobs")
-**Plans**: TBD
+**Plans**: 1 plan
 
 Plans:
-- [ ] 13-01: Migration _006, platform_ids.py, rank_type schema + DEBT corrections
+- [ ] 13-01-PLAN.md — Migration _006 + platform_ids.py + rank_type + nyquist sign-off + DEBT-02
 
 ### Phase 14: BR Scanners
 **Goal**: Quatro plataformas brasileiras de infoprodutos produzindo dados reais de ranking no sistema — usando o padrão SSR estabelecido pelo v1.0
@@ -121,7 +121,7 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | Phase | Milestone | Plans Complete | Status | Completed |
 |-------|-----------|----------------|--------|-----------|
 | 1–12 (Foundation → Meta Ads) | v1.0 | 30/30 | ✅ Complete | 2026-03-16 |
-| 13. Infrastructure + Tech Debt | v2.0 | 0/TBD | Not started | - |
+| 13. Infrastructure + Tech Debt | v2.0 | 0/1 | Not started | - |
 | 14. BR Scanners | v2.0 | 0/TBD | Not started | - |
 | 15. International API-Based | v2.0 | 0/TBD | Not started | - |
 | 16. International High-Friction | v2.0 | 0/TBD | Not started | - |
