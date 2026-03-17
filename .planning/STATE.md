@@ -4,7 +4,7 @@ milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
 stopped_at: Completed 14-br-scanners/14-02-PLAN.md
-last_updated: "2026-03-17T04:06:56.388Z"
+last_updated: "2026-03-17T04:11:49.301Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
