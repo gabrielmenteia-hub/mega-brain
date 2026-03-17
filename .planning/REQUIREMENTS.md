@@ -14,8 +14,8 @@
 
 ### SCAN-BR — Scanners Brasil
 
-- [ ] **SCAN-BR-01**: `EduzzScanner` varre marketplace Eduzz por nicho e persiste top produtos por posição
-- [ ] **SCAN-BR-02**: `MonetizzeScanner` varre marketplace Monetizze por nicho e persiste top produtos
+- [x] **SCAN-BR-01**: `EduzzScanner` varre marketplace Eduzz por nicho e persiste top produtos por posição
+- [x] **SCAN-BR-02**: `MonetizzeScanner` varre marketplace Monetizze por nicho e persiste top produtos
 - [ ] **SCAN-BR-03**: `PerfectPayScanner` varre marketplace PerfectPay por nicho (após verificação de URL live)
 - [ ] **SCAN-BR-04**: `BraipScanner` varre marketplace Braip por nicho (após verificação de URL live)
 
@@ -60,8 +60,8 @@
 | INFRA-03 | Phase 13 | Complete |
 | DEBT-01 | Phase 13 | Complete |
 | DEBT-02 | Phase 13 | Complete |
-| SCAN-BR-01 | Phase 14 | Pending |
-| SCAN-BR-02 | Phase 14 | Pending |
+| SCAN-BR-01 | Phase 14 | Complete |
+| SCAN-BR-02 | Phase 14 | Complete |
 | SCAN-BR-03 | Phase 14 | Pending |
 | SCAN-BR-04 | Phase 14 | Pending |
 | SCAN-INTL-01 | Phase 15 | Pending |
