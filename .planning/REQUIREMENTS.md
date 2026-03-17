@@ -29,9 +29,9 @@
 
 ### DASH-V2 — Dashboard Cross-Platform
 
-- [ ] **DASH-V2-01**: View `/ranking/unified` exibe top produtos por nicho consolidados de todas as plataformas usando normalização por percentil
-- [ ] **DASH-V2-02**: View unificada filtra por nicho (obrigatório) e suporta toggle "multi-platform only" (produtos em 2+ plataformas)
-- [ ] **DASH-V2-03**: View unificada exibe badges de plataforma, unified score e rank bruto por plataforma
+- [x] **DASH-V2-01**: View `/ranking/unified` exibe top produtos por nicho consolidados de todas as plataformas usando normalização por percentil
+- [x] **DASH-V2-02**: View unificada filtra por nicho (obrigatório) e suporta toggle "multi-platform only" (produtos em 2+ plataformas)
+- [x] **DASH-V2-03**: View unificada exibe badges de plataforma, unified score e rank bruto por plataforma
 
 ### DEBT — Tech Debt v1.0
 
@@ -69,9 +69,9 @@
 | SCAN-INTL-03 | Phase 16 | Complete |
 | SCAN-INTL-04 | Phase 16 | Complete |
 | SCAN-INTL-05 | Phase 16 | Complete |
-| DASH-V2-01 | Phase 17 | Pending |
-| DASH-V2-02 | Phase 17 | Pending |
-| DASH-V2-03 | Phase 17 | Pending |
+| DASH-V2-01 | Phase 17 | Complete |
+| DASH-V2-02 | Phase 17 | Complete |
+| DASH-V2-03 | Phase 17 | Complete |
 
 **Coverage:**
 - v2.0 requirements: 17 total

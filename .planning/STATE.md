@@ -4,7 +4,7 @@ milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
 stopped_at: Completed 17-unified-cross-platform-ranking/17-01-PLAN.md
-last_updated: "2026-03-17T22:36:02.420Z"
+last_updated: "2026-03-17T22:48:34.188Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
