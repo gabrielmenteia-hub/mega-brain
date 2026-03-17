@@ -16,7 +16,6 @@ import pytest
 import respx
 from pathlib import Path
 from httpx import Response
-import structlog.testing
 
 from mis.scanners.udemy import UdemyScanner, UDEMY_API_URL
 from mis.platform_ids import UDEMY_PLATFORM_ID
@@ -94,22 +93,24 @@ async def test_field_types(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_missing_credentials(monkeypatch):
+async def test_missing_credentials(monkeypatch, capsys):
     """UDEMY_CLIENT_ID or UDEMY_CLIENT_SECRET absent -> result == [], alert='missing_credentials'.
 
     GREEN: This test PASSES with the stub (credential check is implemented).
+
+    NOTE: structlog is configured with PrintLoggerFactory + JSONRenderer in base_scraper.py.
+    We verify the structured log via capsys (stdout JSON) rather than capture_logs().
     """
     monkeypatch.delenv("UDEMY_CLIENT_ID", raising=False)
     monkeypatch.delenv("UDEMY_CLIENT_SECRET", raising=False)
 
-    with structlog.testing.capture_logs() as cap:
-        async with UdemyScanner() as scanner:
-            result = await scanner.scan_niche("marketing-digital", "Marketing", niche_id=1)
+    async with UdemyScanner() as scanner:
+        result = await scanner.scan_niche("marketing-digital", "Marketing", niche_id=1)
 
     assert result == [], f"Expected [], got {result}"
-    alerts = [e for e in cap if e.get("alert") == "missing_credentials"]
-    assert len(alerts) >= 1, (
-        f"Expected at least 1 event with alert='missing_credentials', got: {cap}"
+    captured = capsys.readouterr()
+    assert "missing_credentials" in captured.out, (
+        f"Expected 'missing_credentials' in stdout log, got: {captured.out!r}"
     )
 
 
@@ -138,10 +139,13 @@ async def test_empty_results(monkeypatch):
 
 @pytest.mark.asyncio
 @respx.mock
-async def test_api_discontinued_fallback(monkeypatch):
+async def test_api_discontinued_fallback(monkeypatch, capsys):
     """respx returns HTTP 401 -> result == [], log contains alert='api_discontinued'.
 
     GREEN: This test PASSES with the stub (HTTP error handling is implemented).
+
+    NOTE: structlog is configured with PrintLoggerFactory + JSONRenderer in base_scraper.py.
+    We verify the structured log via capsys (stdout JSON) rather than capture_logs().
     """
     monkeypatch.setenv("UDEMY_CLIENT_ID", "test-client-id")
     monkeypatch.setenv("UDEMY_CLIENT_SECRET", "test-client-secret")
@@ -150,14 +154,13 @@ async def test_api_discontinued_fallback(monkeypatch):
         return_value=Response(401, json={"detail": "Authentication credentials were not provided."})
     )
 
-    with structlog.testing.capture_logs() as cap:
-        async with UdemyScanner() as scanner:
-            result = await scanner.scan_niche("marketing-digital", "Marketing", niche_id=1)
+    async with UdemyScanner() as scanner:
+        result = await scanner.scan_niche("marketing-digital", "Marketing", niche_id=1)
 
     assert result == [], f"Expected [], got {result}"
-    alerts = [e for e in cap if e.get("alert") == "api_discontinued"]
-    assert len(alerts) >= 1, (
-        f"Expected at least 1 event with alert='api_discontinued', got: {cap}"
+    captured = capsys.readouterr()
+    assert "api_discontinued" in captured.out, (
+        f"Expected 'api_discontinued' in stdout log, got: {captured.out!r}"
     )
 
 

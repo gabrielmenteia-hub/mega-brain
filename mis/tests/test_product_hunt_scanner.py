@@ -16,7 +16,6 @@ import pytest
 import respx
 from pathlib import Path
 from httpx import Response
-import structlog.testing
 
 from mis.scanners.product_hunt import ProductHuntScanner, PRODUCT_HUNT_GRAPHQL_URL
 from mis.platform_ids import PRODUCT_HUNT_PLATFORM_ID
@@ -86,21 +85,23 @@ async def test_field_types(monkeypatch):
 
 
 @pytest.mark.asyncio
-async def test_missing_credentials(monkeypatch):
+async def test_missing_credentials(monkeypatch, capsys):
     """PRODUCT_HUNT_API_TOKEN absent -> result == [], log contains alert='missing_credentials'.
 
     GREEN: This test PASSES with the stub (credential check is implemented).
+
+    NOTE: structlog is configured with PrintLoggerFactory + JSONRenderer in base_scraper.py.
+    We verify the structured log via capsys (stdout JSON) rather than capture_logs().
     """
     monkeypatch.delenv("PRODUCT_HUNT_API_TOKEN", raising=False)
 
-    with structlog.testing.capture_logs() as cap:
-        async with ProductHuntScanner() as scanner:
-            result = await scanner.scan_niche("marketing-digital", "trending", niche_id=1)
+    async with ProductHuntScanner() as scanner:
+        result = await scanner.scan_niche("marketing-digital", "trending", niche_id=1)
 
     assert result == [], f"Expected [], got {result}"
-    alerts = [e for e in cap if e.get("alert") == "missing_credentials"]
-    assert len(alerts) >= 1, (
-        f"Expected at least 1 event with alert='missing_credentials', got: {cap}"
+    captured = capsys.readouterr()
+    assert "missing_credentials" in captured.out, (
+        f"Expected 'missing_credentials' in stdout log, got: {captured.out!r}"
     )
 
 
