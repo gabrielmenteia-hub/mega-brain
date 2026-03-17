@@ -126,5 +126,5 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 13. Infrastructure + Tech Debt | 1/1 | Complete    | 2026-03-17 | - |
 | 14. BR Scanners | 2/2 | Complete    | 2026-03-17 | - |
 | 15. International API-Based | 3/3 | Complete    | 2026-03-17 | - |
-| 16. International High-Friction | 2/2 | Complete   | 2026-03-17 | - |
+| 16. International High-Friction | 2/2 | Complete    | 2026-03-17 | - |
 | 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
