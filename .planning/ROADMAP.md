@@ -94,11 +94,11 @@ Plans:
   2. `python -m mis scan --platform gumroad` navega o discover page via Playwright scroll loop e persiste produtos por nicho
   3. `python -m mis scan --platform appsumo` retorna produtos sem OOM — `PLAYWRIGHT_SEMAPHORE` limita concorrência a 3 contextos
   4. Nenhum dos três scanners causa crash de memória em scan de 5 nichos simultâneos
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 16-01: JVZooScanner (reconhecimento + implementação)
-- [ ] 16-02: GumroadScanner + AppSumoScanner
+- [ ] 16-01-PLAN.md — PLAYWRIGHT_SEMAPHORE em base_scraper.py + JVZooScanner TDD (fetch-only, detecção Incapsula)
+- [ ] 16-02-PLAN.md — GumroadScanner (fetch_spa + scroll loop) + AppSumoScanner (SSR-first) + wiring SCANNER_MAP + config.yaml
 
 ### Phase 17: Unified Cross-Platform Ranking
 **Goal**: Dashboard exibe ranking consolidado cross-platform com percentile normalization — entrega principal do v2.0
@@ -126,5 +126,5 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 13. Infrastructure + Tech Debt | 1/1 | Complete    | 2026-03-17 | - |
 | 14. BR Scanners | 2/2 | Complete    | 2026-03-17 | - |
 | 15. International API-Based | 3/3 | Complete    | 2026-03-17 | - |
-| 16. International High-Friction | v2.0 | 0/TBD | Not started | - |
+| 16. International High-Friction | v2.0 | 0/2 | Not started | - |
 | 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
