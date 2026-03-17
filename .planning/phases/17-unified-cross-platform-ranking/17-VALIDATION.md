@@ -1,9 +1,9 @@
 ---
 phase: 17
 slug: unified-cross-platform-ranking
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: approved
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-17
 ---
 
@@ -38,21 +38,21 @@ created: 2026-03-17
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 17-01-01 | 01 | 0 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py -x -q` | ❌ W0 | ⬜ pending |
-| 17-01-02 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_unified_score_order -x` | ❌ W0 | ⬜ pending |
-| 17-01-03 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_percentile_positional -x` | ❌ W0 | ⬜ pending |
-| 17-01-04 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_percentile_gravity -x` | ❌ W0 | ⬜ pending |
-| 17-01-05 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_null_rank_excluded -x` | ❌ W0 | ⬜ pending |
-| 17-01-06 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_min_products_threshold -x` | ❌ W0 | ⬜ pending |
-| 17-01-07 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_single_platform_warning -x` | ❌ W0 | ⬜ pending |
-| 17-01-08 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_pagination -x` | ❌ W0 | ⬜ pending |
-| 17-01-09 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_niche_filter -x` | ❌ W0 | ⬜ pending |
-| 17-01-10 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_multi_platform_filter -x` | ❌ W0 | ⬜ pending |
-| 17-01-11 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_title_normalization -x` | ❌ W0 | ⬜ pending |
-| 17-01-12 | 01 | 1 | DASH-V2-03 | unit | `pytest mis/tests/test_unified_ranking.py::test_result_fields -x` | ❌ W0 | ⬜ pending |
-| 17-01-13 | 01 | 1 | DASH-V2-03 | unit | `pytest mis/tests/test_unified_ranking.py::test_stale_included -x` | ❌ W0 | ⬜ pending |
-| 17-01-14 | 01 | 2 | DASH-V2-01 | manual | `python -m mis dashboard` → acessa /ranking/unified | N/A | ⬜ pending |
-| 17-01-15 | 01 | 2 | DASH-V2-03 | manual | Verificar tabs "Por Plataforma" | "Unificado" visíveis | N/A | ⬜ pending |
+| 17-01-01 | 01 | 0 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py -x -q` | ❌ W0 | ✅ green |
+| 17-01-02 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_unified_score_order -x` | ❌ W0 | ✅ green |
+| 17-01-03 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_percentile_positional -x` | ❌ W0 | ✅ green |
+| 17-01-04 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_percentile_gravity -x` | ❌ W0 | ✅ green |
+| 17-01-05 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_null_rank_excluded -x` | ❌ W0 | ✅ green |
+| 17-01-06 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_min_products_threshold -x` | ❌ W0 | ✅ green |
+| 17-01-07 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_single_platform_warning -x` | ❌ W0 | ✅ green |
+| 17-01-08 | 01 | 1 | DASH-V2-01 | unit | `pytest mis/tests/test_unified_ranking.py::test_pagination -x` | ❌ W0 | ✅ green |
+| 17-01-09 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_niche_filter -x` | ❌ W0 | ✅ green |
+| 17-01-10 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_multi_platform_filter -x` | ❌ W0 | ✅ green |
+| 17-01-11 | 01 | 1 | DASH-V2-02 | unit | `pytest mis/tests/test_unified_ranking.py::test_title_normalization -x` | ❌ W0 | ✅ green |
+| 17-01-12 | 01 | 1 | DASH-V2-03 | unit | `pytest mis/tests/test_unified_ranking.py::test_result_fields -x` | ❌ W0 | ✅ green |
+| 17-01-13 | 01 | 1 | DASH-V2-03 | unit | `pytest mis/tests/test_unified_ranking.py::test_stale_included -x` | ❌ W0 | ✅ green |
+| 17-01-14 | 01 | 2 | DASH-V2-01 | manual | `python -m mis dashboard` → acessa /ranking/unified | N/A | ⚠️ manual-verified |
+| 17-01-15 | 01 | 2 | DASH-V2-03 | manual | Verificar tabs "Por Plataforma" | "Unificado" visíveis | N/A | ⚠️ manual-verified |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -60,7 +60,7 @@ created: 2026-03-17
 
 ## Wave 0 Requirements
 
-- [ ] `mis/tests/test_unified_ranking.py` — 12 testes stub (RED) cobrindo todos os 3 requirements
+- [x] `mis/tests/test_unified_ranking.py` — 12 testes stub (RED) cobrindo todos os 3 requirements
 
 *Nenhuma instalação de framework necessária — pytest + conftest.py já existem.*
 
@@ -78,11 +78,11 @@ created: 2026-03-17
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** signed off 2026-03-17
