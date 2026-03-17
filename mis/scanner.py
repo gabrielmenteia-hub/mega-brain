@@ -4,6 +4,18 @@ Provides:
 - Product dataclass with all required and optional fields
 - PlatformScanner ABC extending BaseScraper with abstract scan_niche()
 - run_all_scanners() coroutine that runs all configured scanners in parallel
+
+Fallback Scanner Pattern (BR Platforms):
+    Eduzz, Monetizze, and PerfectPay require authentication — their public
+    marketplaces are not accessible. These scanners implement the fallback
+    pattern: scan_niche() always returns [] and emits a structured warning
+    log with alert='marketplace_unavailable'. run_all_scanners() detects the
+    empty return and calls mark_stale() to flag existing DB records.
+
+    When a marketplace becomes publicly accessible:
+        1. Re-implement scan_niche() in the scanner class.
+        2. Remove the marketplace_unavailable log.warning() call.
+        3. Add fixtures and tests following the Phase 14 pattern.
 """
 from __future__ import annotations
 
@@ -265,6 +277,10 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
                     platform=platform_name,
                     niche=niche_slug,
                 )
+                continue
+            if platform_slug is None:
+                # Null slug: platform opted in to config.yaml but no category mapping
+                # provided. Passing None to scan_niche() is not supported — skip.
                 continue
             key = f"{niche_slug}.{platform_name}"
             keys.append(key)
