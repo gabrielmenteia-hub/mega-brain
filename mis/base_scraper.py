@@ -41,11 +41,17 @@ DOMAIN_DELAYS: dict[str, float] = {
     "marketplace.braip.com": 2.0,
     "api.producthunt.com": 1.0,   # API oficial com rate limit documentado
     "www.udemy.com": 0.5,          # REST API com autenticacao
+    "www.jvzoomarket.com": 2.0,    # SSR marketplace com bot detection Incapsula
 }
 DEFAULT_DELAY: float = 2.0
 
 # Module-level semaphore registry — populated lazily per domain
 _SEMAPHORE: dict[str, asyncio.Semaphore] = {}
+
+# Global Playwright concurrency limit — prevents OOM with 5+ parallel niches.
+# Each Playwright context uses ~50-100MB RAM. Limit=3 is safe for 8GB machines.
+# CRITICAL: acquire PLAYWRIGHT_SEMAPHORE BEFORE per-domain semaphore to prevent deadlock.
+PLAYWRIGHT_SEMAPHORE = asyncio.Semaphore(3)
 
 
 class BaseScraper:
@@ -190,18 +196,19 @@ class BaseScraper:
         domain = httpx.URL(url).host
         delay = DOMAIN_DELAYS.get(domain, DEFAULT_DELAY)
 
-        async with self._get_semaphore(domain):
-            async with async_playwright() as pw:
-                selected = self._select_proxy()
-                browser = await pw.chromium.launch(
-                    proxy={"server": selected} if selected else None
-                )
-                try:
-                    page = await browser.new_page()
-                    await _PlaywrightStealth().apply_stealth_async(page)
-                    await page.goto(url, wait_until="networkidle")
-                    content = await page.content()
-                finally:
-                    await browser.close()
-            await asyncio.sleep(delay)
-            return content
+        async with PLAYWRIGHT_SEMAPHORE:                 # OOM prevention (global, max 3 contexts)
+            async with self._get_semaphore(domain):      # rate limiting (per-domain)
+                async with async_playwright() as pw:
+                    selected = self._select_proxy()
+                    browser = await pw.chromium.launch(
+                        proxy={"server": selected} if selected else None
+                    )
+                    try:
+                        page = await browser.new_page()
+                        await _PlaywrightStealth().apply_stealth_async(page)
+                        await page.goto(url, wait_until="networkidle")
+                        content = await page.content()
+                    finally:
+                        await browser.close()
+        await asyncio.sleep(delay)
+        return content

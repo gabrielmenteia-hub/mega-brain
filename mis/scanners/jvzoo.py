@@ -66,8 +66,7 @@ class JVZooScanner(PlatformScanner):
             )
             return []
 
-        # STUB: parsing nao implementado ainda
-        return []
+        return self._parse_listings(html, niche_id)
 
     def _parse_listings(self, html: str, niche_id: int) -> list[Product]:
         """Parse JVZoo listings HTML and return Product list.
@@ -79,4 +78,45 @@ class JVZooScanner(PlatformScanner):
         Returns:
             List of Product sorted by rank (1-based, gravity order).
         """
-        return []  # STUB
+        from bs4 import BeautifulSoup
+
+        soup = BeautifulSoup(html, "html.parser")
+        listings = soup.find_all("div", class_="product-listing")
+        products: list[Product] = []
+
+        for rank, listing in enumerate(listings, start=1):
+            link = listing.find("a", href=lambda h: h and "marketframe?pid=" in h)
+            if not link:
+                continue
+
+            href = link.get("href", "")
+            pid_match = re.search(r"pid=(\d+)", href)
+            if not pid_match:
+                continue
+
+            external_id = pid_match.group(1)
+            title = link.get_text(strip=True) or external_id
+
+            price_tag = listing.find("span", class_="price")
+            price: Optional[float] = None
+            if price_tag:
+                try:
+                    price = float(
+                        price_tag.get_text(strip=True).replace("$", "").replace(",", "")
+                    )
+                except (ValueError, AttributeError):
+                    price = None
+
+            products.append(
+                Product(
+                    external_id=external_id,
+                    title=title,
+                    url=f"https://www.jvzoomarket.com{href}",
+                    platform_id=JVZOO_PLATFORM_ID,
+                    niche_id=niche_id,
+                    rank=rank,
+                    price=price,
+                )
+            )
+
+        return products
