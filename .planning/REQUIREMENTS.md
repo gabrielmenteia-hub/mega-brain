@@ -23,7 +23,7 @@
 
 - [x] **SCAN-INTL-01**: `ProductHuntScanner` busca trending products via GraphQL API usando `PH_ACCESS_TOKEN`
 - [x] **SCAN-INTL-02**: `UdemyScanner` busca top cursos por nicho via REST `/api-2.0/courses/`
-- [ ] **SCAN-INTL-03**: `JVZooScanner` varre marketplace JVZoo por nicho (com contorno Incapsula ou fallback SSR)
+- [x] **SCAN-INTL-03**: `JVZooScanner` varre marketplace JVZoo por nicho (com contorno Incapsula ou fallback SSR)
 - [ ] **SCAN-INTL-04**: `GumroadScanner` varre `gumroad.com/discover` por nicho ordenado por popular
 - [ ] **SCAN-INTL-05**: `AppSumoScanner` varre `appsumo.com/products` por nicho (SSR-first, Playwright fallback)
 
@@ -66,7 +66,7 @@
 | SCAN-BR-04 | Phase 14 | Complete |
 | SCAN-INTL-01 | Phase 15 | Complete |
 | SCAN-INTL-02 | Phase 15 | Complete |
-| SCAN-INTL-03 | Phase 16 | Pending |
+| SCAN-INTL-03 | Phase 16 | Complete |
 | SCAN-INTL-04 | Phase 16 | Pending |
 | SCAN-INTL-05 | Phase 16 | Pending |
 | DASH-V2-01 | Phase 17 | Pending |
