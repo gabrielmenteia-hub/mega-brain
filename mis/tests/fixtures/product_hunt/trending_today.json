@@ -1,0 +1,51 @@
+{
+  "data": {
+    "posts": {
+      "edges": [
+        {
+          "node": {
+            "id": "123456",
+            "name": "Jarvis AI Assistant",
+            "tagline": "Your personal AI assistant that works for you",
+            "slug": "jarvis-ai-assistant",
+            "url": "https://www.producthunt.com/posts/jarvis-ai-assistant",
+            "votesCount": 450,
+            "thumbnail": {
+              "url": "https://ph-files.imgix.net/abc123/jarvis-thumb.png?auto=format"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "234567",
+            "name": "Notion AI Plus",
+            "tagline": "Supercharge your Notion workspace with AI",
+            "slug": "notion-ai-plus",
+            "url": "https://www.producthunt.com/posts/notion-ai-plus",
+            "votesCount": 380,
+            "thumbnail": {
+              "url": "https://ph-files.imgix.net/def456/notion-thumb.png?auto=format"
+            }
+          }
+        },
+        {
+          "node": {
+            "id": "345678",
+            "name": "Cursor IDE",
+            "tagline": "The AI-first code editor",
+            "slug": "cursor-ide",
+            "url": "https://www.producthunt.com/posts/cursor-ide",
+            "votesCount": 310,
+            "thumbnail": {
+              "url": "https://ph-files.imgix.net/ghi789/cursor-thumb.png?auto=format"
+            }
+          }
+        }
+      ],
+      "pageInfo": {
+        "endCursor": "eyJpZCI6MzQ1Njc4fQ==",
+        "hasNextPage": true
+      }
+    }
+  }
+}

@@ -1,0 +1,43 @@
+{
+  "count": 100,
+  "next": "https://www.udemy.com/api-2.0/courses/?page=2",
+  "previous": null,
+  "results": [
+    {
+      "id": 1234567,
+      "title": "Complete Digital Marketing Course 2024",
+      "url": "/course/complete-digital-marketing-course/",
+      "price_detail": {
+        "amount": 19.99,
+        "currency": "USD",
+        "price_string": "$19.99"
+      },
+      "avg_rating": 4.6,
+      "image_480x270": "https://img-c.udemycdn.com/course/480x270/1234567_abc1_3.jpg"
+    },
+    {
+      "id": 7654321,
+      "title": "Digital Marketing Masterclass - Social Media Marketing",
+      "url": "/course/digital-marketing-masterclass-course/",
+      "price_detail": {
+        "amount": 12.99,
+        "currency": "USD",
+        "price_string": "$12.99"
+      },
+      "avg_rating": 4.4,
+      "image_480x270": "https://img-c.udemycdn.com/course/480x270/7654321_xyz2_4.jpg"
+    },
+    {
+      "id": 9876543,
+      "title": "The Complete Email Marketing Course",
+      "url": "/course/the-complete-email-marketing-course/",
+      "price_detail": {
+        "amount": 29.99,
+        "currency": "USD",
+        "price_string": "$29.99"
+      },
+      "avg_rating": 4.8,
+      "image_480x270": "https://img-c.udemycdn.com/course/480x270/9876543_mno3_2.jpg"
+    }
+  ]
+}
