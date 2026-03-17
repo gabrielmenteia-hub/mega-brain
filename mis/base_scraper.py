@@ -39,6 +39,8 @@ DOMAIN_DELAYS: dict[str, float] = {
     "kiwify.com.br": 2.0,
     "clickbank.com": 2.0,
     "marketplace.braip.com": 2.0,
+    "api.producthunt.com": 1.0,   # API oficial com rate limit documentado
+    "www.udemy.com": 0.5,          # REST API com autenticacao
 }
 DEFAULT_DELAY: float = 2.0
 
