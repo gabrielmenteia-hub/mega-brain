@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Phase 17 planned — 17-01-PLAN.md created
-last_updated: "2026-03-17T20:16:15.260Z"
+stopped_at: Completed 17-unified-cross-platform-ranking/17-01-PLAN.md
+last_updated: "2026-03-17T22:36:02.420Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
-  completed_phases: 4
+  completed_phases: 5
   total_plans: 9
-  completed_plans: 8
+  completed_plans: 9
   percent: 100
 ---
 
@@ -74,6 +74,7 @@ Progress: [██████████] 100%
 | Phase 15-international-api-based P03 | 10 | 2 tasks | 4 files |
 | Phase 16-international-high-friction P01 | 11 | 2 tasks | 5 files |
 | Phase 16-international-high-friction P02 | 13 | 2 tasks | 9 files |
+| Phase 17-unified-cross-platform-ranking P01 | 9 | 3 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -105,6 +106,9 @@ Recent decisions affecting v2.0:
 - [Phase 16-01]: Deteccao Incapsula dupla: ScraperError (403/503) + corpo HTML ('incapsula'/'incident id') — soft-block retorna 200 com HTML de desafio
 - [Phase 16-02]: GumroadScanner usa Playwright direto (nao fetch_spa) para scroll loop interativo — PLAYWRIGHT_SEMAPHORE adquirido explicitamente
 - [Phase 16-02]: AppSumoScanner usa __NEXT_DATA__ JSON (Next.js SSR) como path principal com CSS fallback /products/ links
+- [Phase 17-01]: Paginacao em Python (nao SQL): threshold e multi-platform filters operam sobre conjunto completo antes de paginar
+- [Phase 17-01]: MIN_PRODUCTS_PER_PLATFORM=5 como constante de modulo — limiar configuravel sem migracao de schema
+- [Phase 17-01]: multi_platform_only como int=0 na rota FastAPI — checkbox HTML unchecked nao envia campo
 
 ### Pending Todos
 
@@ -118,6 +122,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T20:16:15.250Z
-Stopped at: Phase 17 planned — 17-01-PLAN.md created
-Resume file: .planning/phases/17-unified-cross-platform-ranking/17-01-PLAN.md
+Last session: 2026-03-17T22:36:02.411Z
+Stopped at: Completed 17-unified-cross-platform-ranking/17-01-PLAN.md
+Resume file: None
