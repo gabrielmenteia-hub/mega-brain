@@ -63,11 +63,11 @@ Plans:
   2. `python -m mis scan --platform monetizze` retorna produtos rankeados por nicho sem erro
   3. Dashboard `/ranking` exibe produtos das plataformas BR (Eduzz, Monetizze, PerfectPay, Braip) com filtro por plataforma funcional
   4. Cada novo scanner tem suite de testes GREEN com mocks SSR que cobrem o caminho de parsing principal
-**Plans**: TBD
+**Plans**: 2 plans
 
 Plans:
-- [ ] 14-01: EduzzScanner + MonetizzeScanner
-- [ ] 14-02: PerfectPayScanner + BraipScanner
+- [ ] 14-01-PLAN.md — Migration _007_is_stale + upsert/mark_stale + EduzzScanner + MonetizzeScanner
+- [ ] 14-02-PLAN.md — PerfectPayScanner + BraipScanner (window.__NUXT__) + config.yaml slugs
 
 ### Phase 15: International API-Based
 **Goal**: Duas plataformas internacionais com APIs oficiais integradas, trazendo dados de mercado global para o sistema
@@ -122,7 +122,7 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 |-------|-----------|----------------|--------|-----------|
 | 1–12 (Foundation → Meta Ads) | v1.0 | 30/30 | ✅ Complete | 2026-03-16 |
 | 13. Infrastructure + Tech Debt | 1/1 | Complete    | 2026-03-17 | - |
-| 14. BR Scanners | v2.0 | 0/TBD | Not started | - |
+| 14. BR Scanners | v2.0 | 0/2 | Not started | - |
 | 15. International API-Based | v2.0 | 0/TBD | Not started | - |
 | 16. International High-Friction | v2.0 | 0/TBD | Not started | - |
 | 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
