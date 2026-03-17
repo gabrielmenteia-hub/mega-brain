@@ -185,6 +185,8 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
     from .scanners.clickbank import ClickBankScanner
     from .scanners.eduzz import EduzzScanner
     from .scanners.monetizze import MonetizzeScanner
+    from .scanners.perfectpay import PerfectPayScanner
+    from .scanners.braip import BraipScanner
 
     SCANNER_MAP = {
         "kiwify": KiwifyScanner,
@@ -192,6 +194,8 @@ async def run_all_scanners(config: dict) -> dict[str, list[Product]]:
         "clickbank": ClickBankScanner,
         "eduzz": EduzzScanner,
         "monetizze": MonetizzeScanner,
+        "perfectpay": PerfectPayScanner,
+        "braip": BraipScanner,
     }
 
     import os
