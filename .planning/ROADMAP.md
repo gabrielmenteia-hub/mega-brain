@@ -33,7 +33,7 @@
 
 - [x] **Phase 13: Infrastructure + Tech Debt** — Migração de plataformas, platform_ids.py, rank_type schema, DEBT v1.0 (completed 2026-03-17)
 - [x] **Phase 14: BR Scanners** — Eduzz, Monetizze, PerfectPay, Braip (padrão SSR idêntico ao v1.0) (completed 2026-03-17)
-- [ ] **Phase 15: International API-Based** — Product Hunt (GraphQL), Udemy (REST) — APIs oficiais/semi-oficiais
+- [x] **Phase 15: International API-Based** — Product Hunt (GraphQL), Udemy (REST) — APIs oficiais/semi-oficiais (completed 2026-03-17)
 - [ ] **Phase 16: International High-Friction** — JVZoo, Gumroad, AppSumo — bot detection + SPA rendering
 - [ ] **Phase 17: Unified Cross-Platform Ranking** — View consolidada por nicho com percentile normalization
 
@@ -125,6 +125,6 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 1–12 (Foundation → Meta Ads) | v1.0 | 30/30 | ✅ Complete | 2026-03-16 |
 | 13. Infrastructure + Tech Debt | 1/1 | Complete    | 2026-03-17 | - |
 | 14. BR Scanners | 2/2 | Complete    | 2026-03-17 | - |
-| 15. International API-Based | 2/3 | In Progress|  | - |
+| 15. International API-Based | 3/3 | Complete   | 2026-03-17 | - |
 | 16. International High-Friction | v2.0 | 0/TBD | Not started | - |
 | 17. Unified Cross-Platform Ranking | v2.0 | 0/TBD | Not started | - |
