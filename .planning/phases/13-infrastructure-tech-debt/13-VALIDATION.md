@@ -1,9 +1,9 @@
 ---
 phase: 13
 slug: infrastructure-tech-debt
-status: draft
-nyquist_compliant: false
-wave_0_complete: false
+status: approved
+nyquist_compliant: true
+wave_0_complete: true
 created: 2026-03-16
 ---
 
@@ -38,11 +38,11 @@ created: 2026-03-16
 
 | Task ID | Plan | Wave | Requirement | Test Type | Automated Command | File Exists | Status |
 |---------|------|------|-------------|-----------|-------------------|-------------|--------|
-| 13-01-01 | 01 | 1 | INFRA-01 | migration | `python -m pytest mis/tests/test_migrations.py -k migration_006 -v` | ❌ W0 | ⬜ pending |
-| 13-01-02 | 01 | 1 | INFRA-02 | unit | `python -m pytest mis/tests/test_platform_ids.py -v` | ❌ W0 | ⬜ pending |
-| 13-01-03 | 01 | 2 | INFRA-03 | schema | `python -m pytest mis/tests/test_rank_type.py -v` | ❌ W0 | ⬜ pending |
-| 13-01-04 | 01 | 3 | DEBT-01 | lint/grep | `grep -r "nyquist_compliant: false" .planning/phases/` | manual | ⬜ pending |
-| 13-01-05 | 01 | 3 | DEBT-02 | grep | `grep "6 jobs" mis/radar/__init__.py` | manual | ⬜ pending |
+| 13-01-01 | 01 | 1 | INFRA-01 | migration | `python -m pytest mis/tests/test_migrations.py -k migration_006 -v` | ❌ W0 | ✅ green |
+| 13-01-02 | 01 | 1 | INFRA-02 | unit | `python -m pytest mis/tests/test_platform_ids.py -v` | ❌ W0 | ✅ green |
+| 13-01-03 | 01 | 2 | INFRA-03 | schema | `python -m pytest mis/tests/test_rank_type.py -v` | ❌ W0 | ✅ green |
+| 13-01-04 | 01 | 3 | DEBT-01 | lint/grep | `grep -r "nyquist_compliant: false" .planning/phases/` | manual | ✅ green |
+| 13-01-05 | 01 | 3 | DEBT-02 | grep | `grep "6 jobs" mis/radar/__init__.py` | manual | ✅ green |
 
 *Status: ⬜ pending · ✅ green · ❌ red · ⚠️ flaky*
 
@@ -50,9 +50,9 @@ created: 2026-03-16
 
 ## Wave 0 Requirements
 
-- [ ] `mis/tests/test_migrations.py` — migration 006 applies cleanly, FK constraint not violated
-- [ ] `mis/tests/test_platform_ids.py` — platform_ids module exports all expected constants
-- [ ] `mis/tests/test_rank_type.py` — rank_type field exists in platforms table with valid enum values
+- [x] `mis/tests/test_migrations.py` — migration 006 applies cleanly, FK constraint not violated
+- [x] `mis/tests/test_platform_ids.py` — platform_ids module exports all expected constants
+- [x] `mis/tests/test_rank_type.py` — rank_type field exists in platforms table with valid enum values (criado como test_migration_006.py::test_rank_type_populated)
 
 *Note: DEBT-01 and DEBT-02 use grep/manual verification — no new test files needed.*
 
@@ -69,11 +69,11 @@ created: 2026-03-16
 
 ## Validation Sign-Off
 
-- [ ] All tasks have `<automated>` verify or Wave 0 dependencies
-- [ ] Sampling continuity: no 3 consecutive tasks without automated verify
-- [ ] Wave 0 covers all MISSING references
-- [ ] No watch-mode flags
-- [ ] Feedback latency < 15s
-- [ ] `nyquist_compliant: true` set in frontmatter
+- [x] All tasks have `<automated>` verify or Wave 0 dependencies
+- [x] Sampling continuity: no 3 consecutive tasks without automated verify
+- [x] Wave 0 covers all MISSING references
+- [x] No watch-mode flags
+- [x] Feedback latency < 15s
+- [x] `nyquist_compliant: true` set in frontmatter
 
-**Approval:** pending
+**Approval:** signed off 2026-03-17
