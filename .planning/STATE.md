@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Completed 15-international-api-based/15-01-PLAN.md
-last_updated: "2026-03-17T13:48:17.109Z"
+stopped_at: Completed 15-international-api-based/15-02-PLAN.md
+last_updated: "2026-03-17T14:03:26.442Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
   completed_phases: 2
   total_plans: 6
-  completed_plans: 4
+  completed_plans: 5
   percent: 100
 ---
 
@@ -70,6 +70,7 @@ Progress: [██████████] 100%
 | Phase 14 P01 | 8 | 2 tasks (TDD) | 11 files |
 | Phase 14-br-scanners P02 | 10 | 2 tasks | 9 files |
 | Phase 15 P01 | 9 | 2 tasks | 6 files |
+| Phase 15-international-api-based P02 | 12 | 2 tasks | 2 files |
 
 ## Accumulated Context
 
@@ -92,6 +93,7 @@ Recent decisions affecting v2.0:
 - [Phase 14-02]: config.yaml null entries for perfectpay/eduzz/monetizze are explicit opt-in — absence would mean scanner ignored by scheduler
 - [Phase 15]: thumbnail usa thumbnail['url'] (não 'imageUrl') — schema Media oficial Product Hunt define url:String!
 - [Phase 15]: capsys em vez de capture_logs() para testes de log — base_scraper configura structlog com PrintLoggerFactory+JSONRenderer antes dos testes
+- [Phase 15-02]: rank calculado globalmente na lista concatenada (pagina1 + pagina2) — nao reinicia em cada pagina
 
 ### Pending Todos
 
@@ -105,6 +107,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T13:48:17.099Z
-Stopped at: Completed 15-international-api-based/15-01-PLAN.md
+Last session: 2026-03-17T14:03:20.711Z
+Stopped at: Completed 15-international-api-based/15-02-PLAN.md
 Resume file: None
