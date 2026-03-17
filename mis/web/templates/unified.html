@@ -1,0 +1,68 @@
+{% extends "base.html" %}
+
+{% block title %}Ranking Unificado — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+  {% include "ranking_tabs.html" %}
+  <h1 class="text-2xl font-bold text-white mb-4">Ranking Unificado</h1>
+
+  {% if warning_single_platform %}
+  <div class="mb-3 p-3 bg-yellow-900 text-yellow-200 text-sm rounded">
+    Dados de 1 plataforma — ranking reflete apenas uma fonte
+  </div>
+  {% endif %}
+
+  <div class="flex flex-wrap gap-4 mb-4">
+    <div>
+      <label class="block text-xs text-gray-400 mb-1">Nicho</label>
+      <select name="niche"
+              hx-get="/ranking/unified/table"
+              hx-target="#unified-table-wrapper"
+              hx-swap="innerHTML"
+              hx-include="[name='niche'],[name='multi_platform_only'],[name='per_page'],[name='page']"
+              class="bg-gray-800 text-gray-200 border border-gray-700 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500">
+        <option value="">Todos</option>
+        {% for n in niches %}
+        <option value="{{ n.slug }}" {% if selected_niche == n.slug %}selected{% endif %}>{{ n.name }}</option>
+        {% endfor %}
+      </select>
+    </div>
+
+    <div>
+      <label class="block text-xs text-gray-400 mb-1">Por pagina</label>
+      <select name="per_page"
+              hx-get="/ranking/unified/table"
+              hx-target="#unified-table-wrapper"
+              hx-swap="innerHTML"
+              hx-include="[name='niche'],[name='multi_platform_only'],[name='per_page'],[name='page']"
+              class="bg-gray-800 text-gray-200 border border-gray-700 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500">
+        <option value="10" {% if per_page == 10 %}selected{% endif %}>10</option>
+        <option value="20" {% if per_page == 20 %}selected{% endif %}>20</option>
+        <option value="50" {% if per_page == 50 %}selected{% endif %}>50</option>
+      </select>
+    </div>
+
+    <div class="flex items-end gap-2 pb-0.5">
+      <label class="flex items-center gap-2 text-sm text-gray-300 cursor-pointer">
+        <input type="checkbox"
+               name="multi_platform_only"
+               value="1"
+               {% if multi_platform_only %}checked{% endif %}
+               hx-get="/ranking/unified/table"
+               hx-target="#unified-table-wrapper"
+               hx-swap="innerHTML"
+               hx-include="[name='niche'],[name='multi_platform_only'],[name='per_page'],[name='page']"
+               class="accent-blue-500">
+        Multi-plataforma
+      </label>
+    </div>
+
+    <input type="hidden" name="page" value="{{ page }}">
+  </div>
+
+  <div id="unified-table-wrapper" class="bg-gray-900 rounded-lg overflow-hidden">
+    {% include "unified_table.html" %}
+  </div>
+</div>
+{% endblock %}

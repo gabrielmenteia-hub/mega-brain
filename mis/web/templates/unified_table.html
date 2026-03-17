@@ -1,0 +1,44 @@
+<table class="w-full text-sm text-left">
+  <thead class="bg-gray-800 text-gray-400 uppercase text-xs">
+    <tr>
+      <th class="px-4 py-3">#</th>
+      <th class="px-4 py-3">Produto</th>
+      <th class="px-4 py-3">Plataforma</th>
+      <th class="px-4 py-3">Score</th>
+      <th class="px-4 py-3">Rank Original</th>
+    </tr>
+  </thead>
+  <tbody>
+    {% for product in products %}
+    <tr class="border-b border-gray-800 hover:bg-gray-900 transition-colors {% if product.is_stale %}text-gray-500{% endif %}">
+      <td class="px-4 py-3 text-gray-400">{{ loop.index + (page - 1) * per_page }}</td>
+      <td class="px-4 py-3">
+        <a href="/dossier/{{ product.id }}" class="text-blue-400 hover:text-blue-300 transition-colors">
+          {{ product.title }}
+        </a>
+        {% if not product.has_dossier %}
+        <span class="bg-yellow-600 text-xs px-1 rounded ml-1">Pendente</span>
+        {% endif %}
+      </td>
+      <td class="px-4 py-3 text-gray-300">
+        {{ product.platform_name }}{% if product.is_stale %} <span title="Dados desatualizados">&#9888;&#65039;</span>{% endif %}
+      </td>
+      <td class="px-4 py-3 text-gray-300">{{ "%.1f"|format(product.unified_score) }}</td>
+      <td class="px-4 py-3 text-gray-300">
+        {% if product.rank_type == 'positional' %}#{{ product.rank|int }}
+        {% elif product.rank_type == 'gravity' %}{{ "%.1f"|format(product.rank) }} gravity
+        {% elif product.rank_type == 'upvotes' %}#{{ product.rank|int }} upvotes
+        {% elif product.rank_type == 'enrollment' %}{{ product.rank|int }} alunos
+        {% else %}{{ product.rank }}{% endif %}
+      </td>
+    </tr>
+    {% else %}
+    <tr>
+      <td colspan="5" class="px-4 py-6 text-center text-gray-500">Sem dados ainda</td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+<div class="px-4 py-2 text-xs text-gray-600">
+  Ultima atualizacao: {{ last_updated or 'Sem dados ainda' }}
+</div>

@@ -1,0 +1,10 @@
+<div class="flex gap-1 mb-4 border-b border-gray-700">
+  <a href="/ranking"
+     class="px-4 py-2 text-sm {% if '/ranking/unified' not in request.url.path %}text-white border-b-2 border-blue-500{% else %}text-gray-400 hover:text-white{% endif %}">
+    Por Plataforma
+  </a>
+  <a href="/ranking/unified"
+     class="px-4 py-2 text-sm {% if '/ranking/unified' in request.url.path %}text-white border-b-2 border-blue-500{% else %}text-gray-400 hover:text-white{% endif %}">
+    Unificado
+  </a>
+</div>

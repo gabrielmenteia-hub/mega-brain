@@ -128,3 +128,60 @@ async def ranking_table(
         name="ranking_table.html",
         context=context,
     )
+
+
+def _get_unified_context(
+    db_path: str,
+    niche: str | None,
+    multi_platform_only: int,
+    per_page: int,
+    page: int,
+) -> dict:
+    """Build context dict for unified ranking routes."""
+    from mis.product_repository import list_unified_ranking
+
+    return list_unified_ranking(
+        db_path,
+        niche=niche,
+        multi_platform_only=multi_platform_only,
+        per_page=per_page,
+        page=page,
+    )
+
+
+@router.get("/ranking/unified", response_class=HTMLResponse)
+async def unified_ranking(
+    request: Request,
+    niche: str | None = None,
+    multi_platform_only: int = 0,
+    per_page: int = 20,
+    page: int = 1,
+) -> HTMLResponse:
+    """Return the unified ranking page or unified_table partial for HTMX."""
+    db_path = request.app.state.db_path
+    templates = request.app.state.templates
+    context = _get_unified_context(db_path, niche, multi_platform_only, per_page, page)
+    if is_htmx(request):
+        return templates.TemplateResponse(
+            request=request, name="unified_table.html", context=context
+        )
+    return templates.TemplateResponse(
+        request=request, name="unified.html", context=context
+    )
+
+
+@router.get("/ranking/unified/table", response_class=HTMLResponse)
+async def unified_ranking_table(
+    request: Request,
+    niche: str | None = None,
+    multi_platform_only: int = 0,
+    per_page: int = 20,
+    page: int = 1,
+) -> HTMLResponse:
+    """Return unified_table partial — always without base layout."""
+    db_path = request.app.state.db_path
+    templates = request.app.state.templates
+    context = _get_unified_context(db_path, niche, multi_platform_only, per_page, page)
+    return templates.TemplateResponse(
+        request=request, name="unified_table.html", context=context
+    )
