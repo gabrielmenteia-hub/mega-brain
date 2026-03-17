@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Completed 17-unified-cross-platform-ranking/17-01-PLAN.md
-last_updated: "2026-03-17T22:48:34.188Z"
+stopped_at: Completed 18-nyquist-signoff/18-01-PLAN.md
+last_updated: "2026-03-17T23:27:39.675Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
-  total_phases: 5
-  completed_phases: 5
-  total_plans: 9
-  completed_plans: 9
+  total_phases: 7
+  completed_phases: 6
+  total_plans: 11
+  completed_plans: 10
   percent: 100
 ---
 
@@ -75,6 +75,7 @@ Progress: [██████████] 100%
 | Phase 16-international-high-friction P01 | 11 | 2 tasks | 5 files |
 | Phase 16-international-high-friction P02 | 13 | 2 tasks | 9 files |
 | Phase 17-unified-cross-platform-ranking P01 | 9 | 3 tasks | 7 files |
+| Phase 18 P01 | 8 | 3 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -109,6 +110,8 @@ Recent decisions affecting v2.0:
 - [Phase 17-01]: Paginacao em Python (nao SQL): threshold e multi-platform filters operam sobre conjunto completo antes de paginar
 - [Phase 17-01]: MIN_PRODUCTS_PER_PLATFORM=5 como constante de modulo — limiar configuravel sem migracao de schema
 - [Phase 17-01]: multi_platform_only como int=0 na rota FastAPI — checkbox HTML unchecked nao envia campo
+- [Phase 18]: Sign-off retroativo aceito para phases 13/15/17 com base em evidencias de VERIFICATION.md (scores 5/5, 9/9, 7/7)
+- [Phase 18]: Tasks 17-01-14 e 17-01-15 marcadas como manual-verified — verificacao visual de browser nao automatizavel
 
 ### Pending Todos
 
@@ -122,6 +125,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T22:36:02.411Z
-Stopped at: Completed 17-unified-cross-platform-ranking/17-01-PLAN.md
+Last session: 2026-03-17T23:27:39.662Z
+Stopped at: Completed 18-nyquist-signoff/18-01-PLAN.md
 Resume file: None

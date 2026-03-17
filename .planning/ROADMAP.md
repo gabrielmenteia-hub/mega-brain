@@ -156,5 +156,5 @@ Note: Phases 14 and 15 can execute in parallel (both depend only on Phase 13).
 | 15. International API-Based | 3/3 | Complete    | 2026-03-17 | - |
 | 16. International High-Friction | 2/2 | Complete    | 2026-03-17 | - |
 | 17. Unified Cross-Platform Ranking | 1/1 | Complete    | 2026-03-17 | - |
-| 18. Nyquist Sign-off | v2.0 | 0/1 | Not started | - |
+| 18. Nyquist Sign-off | 1/1 | Complete   | 2026-03-17 | - |
 | 19. Code Quality Cleanup | v2.0 | 0/1 | Not started | - |
