@@ -16,8 +16,8 @@
 
 - [x] **SCAN-BR-01**: `EduzzScanner` varre marketplace Eduzz por nicho e persiste top produtos por posição
 - [x] **SCAN-BR-02**: `MonetizzeScanner` varre marketplace Monetizze por nicho e persiste top produtos
-- [ ] **SCAN-BR-03**: `PerfectPayScanner` varre marketplace PerfectPay por nicho (após verificação de URL live)
-- [ ] **SCAN-BR-04**: `BraipScanner` varre marketplace Braip por nicho (após verificação de URL live)
+- [x] **SCAN-BR-03**: `PerfectPayScanner` varre marketplace PerfectPay por nicho (após verificação de URL live)
+- [x] **SCAN-BR-04**: `BraipScanner` varre marketplace Braip por nicho (após verificação de URL live)
 
 ### SCAN-INTL — Scanners Internacionais
 
@@ -62,8 +62,8 @@
 | DEBT-02 | Phase 13 | Complete |
 | SCAN-BR-01 | Phase 14 | Complete |
 | SCAN-BR-02 | Phase 14 | Complete |
-| SCAN-BR-03 | Phase 14 | Pending |
-| SCAN-BR-04 | Phase 14 | Pending |
+| SCAN-BR-03 | Phase 14 | Complete |
+| SCAN-BR-04 | Phase 14 | Complete |
 | SCAN-INTL-01 | Phase 15 | Pending |
 | SCAN-INTL-02 | Phase 15 | Pending |
 | SCAN-INTL-03 | Phase 16 | Pending |

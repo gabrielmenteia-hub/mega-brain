@@ -3,11 +3,27 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
+stopped_at: Completed 14-br-scanners/14-02-PLAN.md
+last_updated: "2026-03-17T04:06:56.388Z"
+last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
+progress:
+  total_phases: 5
+  completed_phases: 2
+  total_plans: 3
+  completed_plans: 3
+  percent: 100
+---
+
+---
+gsd_state_version: 1.0
+milestone: v2.0
+milestone_name: Platform Expansion
+status: in-progress
 stopped_at: Completed 14-br-scanners/14-01-PLAN.md
 last_updated: "2026-03-17T03:50:08Z"
 last_activity: 2026-03-17 — Phase 14 Plan 01 concluido: EduzzScanner + MonetizzeScanner fallback + is_stale migration + mark_stale wiring
 progress:
-  total_phases: 5
+  [██████████] 100%
   completed_phases: 1
   total_plans: 2
   completed_plans: 2
@@ -52,6 +68,7 @@ Progress: [██████████] 100%
 *Updated after each plan completion*
 | Phase 13 P01 | 12 | 3 tasks | 17 files |
 | Phase 14 P01 | 8 | 2 tasks (TDD) | 11 files |
+| Phase 14-br-scanners P02 | 10 | 2 tasks | 9 files |
 
 ## Accumulated Context
 
@@ -70,6 +87,8 @@ Recent decisions affecting v2.0:
 - [Phase 14-01]: EduzzScanner e MonetizzeScanner sao fallback-only — marketplaces exigem autenticacao, sem vitrine publica confirmada
 - [Phase 14-01]: mark_stale() wiring em run_all_scanners() quando scan retorna [] — is_stale funciona em producao, nao apenas em testes
 - [Phase 14-01]: Fallback scanner pattern estabelecido — reutilizavel para PerfectPay e Braip em 14-02
+- [Phase 14-02]: Braip window.__NUXT__ is Nuxt 2 IIFE — parse with variable binding resolution (params+args->var_map), not raw JSON
+- [Phase 14-02]: config.yaml null entries for perfectpay/eduzz/monetizze are explicit opt-in — absence would mean scanner ignored by scheduler
 
 ### Pending Todos
 
@@ -83,6 +102,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T03:50:08Z
-Stopped at: Completed 14-br-scanners/14-01-PLAN.md
-Resume file: .planning/phases/14-br-scanners/14-01-SUMMARY.md
+Last session: 2026-03-17T04:06:56.380Z
+Stopped at: Completed 14-br-scanners/14-02-PLAN.md
+Resume file: None
