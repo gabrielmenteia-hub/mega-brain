@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Phase 15 context gathered
-last_updated: "2026-03-17T04:32:28.261Z"
+stopped_at: Completed 15-international-api-based/15-01-PLAN.md
+last_updated: "2026-03-17T13:48:17.109Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 5
   completed_phases: 2
-  total_plans: 3
-  completed_plans: 3
+  total_plans: 6
+  completed_plans: 4
   percent: 100
 ---
 
@@ -69,6 +69,7 @@ Progress: [██████████] 100%
 | Phase 13 P01 | 12 | 3 tasks | 17 files |
 | Phase 14 P01 | 8 | 2 tasks (TDD) | 11 files |
 | Phase 14-br-scanners P02 | 10 | 2 tasks | 9 files |
+| Phase 15 P01 | 9 | 2 tasks | 6 files |
 
 ## Accumulated Context
 
@@ -89,6 +90,8 @@ Recent decisions affecting v2.0:
 - [Phase 14-01]: Fallback scanner pattern estabelecido — reutilizavel para PerfectPay e Braip em 14-02
 - [Phase 14-02]: Braip window.__NUXT__ is Nuxt 2 IIFE — parse with variable binding resolution (params+args->var_map), not raw JSON
 - [Phase 14-02]: config.yaml null entries for perfectpay/eduzz/monetizze are explicit opt-in — absence would mean scanner ignored by scheduler
+- [Phase 15]: thumbnail usa thumbnail['url'] (não 'imageUrl') — schema Media oficial Product Hunt define url:String!
+- [Phase 15]: capsys em vez de capture_logs() para testes de log — base_scraper configura structlog com PrintLoggerFactory+JSONRenderer antes dos testes
 
 ### Pending Todos
 
@@ -102,6 +105,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T04:32:28.248Z
-Stopped at: Phase 15 context gathered
-Resume file: .planning/phases/15-international-api-based/15-CONTEXT.md
+Last session: 2026-03-17T13:48:17.099Z
+Stopped at: Completed 15-international-api-based/15-01-PLAN.md
+Resume file: None
