@@ -138,7 +138,7 @@ def _run_cleanup(db_path: str) -> None:
 # ---------------------------------------------------------------------------
 
 def register_radar_jobs(config: dict) -> None:
-    """Register the 5 Pain Radar jobs in APScheduler singleton.
+    """Register the 6 Pain Radar jobs in APScheduler singleton.
 
     Jobs registered:
       - radar_trends: every hour at minute=0
