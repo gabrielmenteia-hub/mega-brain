@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v2.0
 milestone_name: Platform Expansion
 status: in-progress
-stopped_at: Completed 18-nyquist-signoff/18-01-PLAN.md
-last_updated: "2026-03-17T23:30:01.613Z"
+stopped_at: Completed 19-code-quality-cleanup/19-01-PLAN.md
+last_updated: "2026-03-17T23:39:47.892Z"
 last_activity: "2026-03-17 — Phase 14 Plan 01: EduzzScanner + MonetizzeScanner fallback-only, migration _007 is_stale, mark_stale() wiring em run_all_scanners()"
 progress:
   total_phases: 7
-  completed_phases: 6
+  completed_phases: 7
   total_plans: 11
-  completed_plans: 10
+  completed_plans: 11
   percent: 100
 ---
 
@@ -76,6 +76,7 @@ Progress: [██████████] 100%
 | Phase 16-international-high-friction P02 | 13 | 2 tasks | 9 files |
 | Phase 17-unified-cross-platform-ranking P01 | 9 | 3 tasks | 7 files |
 | Phase 18 P01 | 8 | 3 tasks | 3 files |
+| Phase 19-code-quality-cleanup P01 | 8 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -112,6 +113,8 @@ Recent decisions affecting v2.0:
 - [Phase 17-01]: multi_platform_only como int=0 na rota FastAPI — checkbox HTML unchecked nao envia campo
 - [Phase 18]: Sign-off retroativo aceito para phases 13/15/17 com base em evidencias de VERIFICATION.md (scores 5/5, 9/9, 7/7)
 - [Phase 18]: Tasks 17-01-14 e 17-01-15 marcadas como manual-verified — verificacao visual de browser nao automatizavel
+- [Phase 19-01]: INFRA-03 referencia tabela platforms (confirmado via _006_v2_platforms.py) — correcao documental factual
+- [Phase 19-01]: Guard clause platform_slug is None posicionada apos scanner_cls is None, antes de key = f'...' — preserva short-circuit semantico
 
 ### Pending Todos
 
@@ -125,6 +128,6 @@ None yet.
 
 ## Session Continuity
 
-Last session: 2026-03-17T23:27:39.662Z
-Stopped at: Completed 18-nyquist-signoff/18-01-PLAN.md
+Last session: 2026-03-17T23:39:38.094Z
+Stopped at: Completed 19-code-quality-cleanup/19-01-PLAN.md
 Resume file: None
