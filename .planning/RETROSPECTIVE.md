@@ -55,15 +55,67 @@
 
 ---
 
+## Milestone: v2.0 — Platform Expansion
+
+**Shipped:** 2026-03-17
+**Phases:** 7 (13–19) | **Plans:** 11 | **Timeline:** 2026-02-27 → 2026-03-17 (18 dias)
+
+### What Was Built
+
+- **Infrastructure + Tech Debt (Phase 13)**: Migration _006/_007 para platforms + is_stale, platform_ids.py com constantes nomeadas, rank_type schema, nyquist sign-off v1.0
+- **BR Scanners (Phase 14)**: EduzzScanner/MonetizzeScanner (SSR httpx), PerfectPayScanner/BraipScanner (fallback-only + window.__NUXT__ parser) — Fallback Scanner Pattern estabelecido
+- **International API-Based (Phase 15)**: ProductHuntScanner (GraphQL cursor pagination, 2 páginas), UdemyScanner (Basic Auth REST, fallback api_discontinued) — TDD RED/GREEN cycle completo
+- **International High-Friction (Phase 16)**: JVZooScanner (Incapsula detection dupla), GumroadScanner (Playwright scroll loop), AppSumoScanner (SSR-first + Playwright fallback) — PLAYWRIGHT_SEMAPHORE(3) global
+- **Unified Cross-Platform Ranking (Phase 17)**: list_unified_ranking() com percentile normalization, /ranking/unified FastAPI route, HTMX templates com niche filter + multi-platform toggle + tab navigation
+- **Nyquist Sign-off + Quality Cleanup (Phases 18–19)**: VALIDATION.md retroativos assinados, null slug guard, platform badges estilizados, REQUIREMENTS.md INFRA-03 corrigido
+
+### What Worked
+
+- **Lição do v1.0 aplicada — nyquist sign-off explícito**: Phase 18 dedicada a assinar VALIDATION.md retroativos — dívida técnica de documentação identificada e fechada antes do milestone complete
+- **Fallback Scanner Pattern**: Decidir que plataformas instáveis retornam [] + alert='marketplace_unavailable' em vez de exception — zero crashes no pipeline por plataformas indisponíveis
+- **TDD RED/GREEN para scanners internacionais**: Ciclo TDD completo na Phase 15 encontrou um bug real em cursor pagination do ProductHunt antes da integração — padrão comprovado
+- **PLAYWRIGHT_SEMAPHORE(3)**: Solução limpa para OOM em scans paralelos — uma linha em base_scraper.py protege todos os scanners Playwright futuros automaticamente
+- **Percentile normalization**: Escalas incompatíveis (posição vs gravity vs upvotes) resolvidas corretamente — unified score comparável entre plataformas
+- **gsd-verifier pós-fase**: 7/7 fases terminaram com VERIFICATION.md — audit final foi trivial
+
+### What Was Inefficient
+
+- **Phase 16 subestimada**: Incapsula + Playwright OOM + SPA rendering eram 3 problemas independentes na mesma fase — poderia ter sido 3 fases menores com mais paralelismo
+- **ROADMAP.md ainda ficou dessincronizado**: Phases 18 e 19 não tinham `roadmap_complete: true` no analyze — pequeno mas recorrente
+- **Phases 18 e 19 foram necessárias por tech debt acumulado**: Se nyquist sign-off e code quality fossem gates em cada fase principal, não precisariam de fases dedicadas no fechamento
+
+### Patterns Established
+
+- **Fallback Scanner Pattern**: Plataformas inacessíveis → return [] + alert='marketplace_unavailable'. Documentado em scanner.py module docstring. Replicar para qualquer scanner novo de plataforma instável.
+- **PLAYWRIGHT_SEMAPHORE global**: `asyncio.Semaphore(3)` em base_scraper.py como proteção global contra OOM — não no scanner individual
+- **TDD RED cycle obrigatório para APIs externas**: Escrever fixtures + stubs antes de qualquer implementação — contratos testáveis antes do GREEN
+- **Percentile normalization como padrão de unified ranking**: `score_percentile = rank / max_rank` por plataforma antes de qualquer comparação cross-platform
+
+### Key Lessons
+
+1. **Tech debt de documentação acumula**: Fases 18 e 19 existiram porque nyquist sign-off e quality cleanup foram deixados para o final. Próximo milestone: gate explícito de nyquist_compliant e quality checklist ao fechar cada fase.
+2. **Fases de alta fricção merecem pesquisa antecipada**: JVZoo/Gumroad/AppSumo tinham características de bot detection / SPA desconhecidas antes da execução — vale um spike de 30 min antes de planejar.
+3. **Scanner de fallback é feature, não gambiarra**: Documentar o padrão explicitamente (como foi feito em scanner.py) é mais valioso do que tentar fazer o scanner funcionar em plataformas estruturalmente inacessíveis.
+4. **PLAYWRIGHT_SEMAPHORE pertence à infraestrutura, não ao scanner**: Decisões de limite de concorrência devem ser globais — colocar no BaseScraper garantiu proteção automática para AppSumo e Gumroad sem configuração adicional.
+
+### Cost Observations
+
+- Model mix: ~100% sonnet (executor + verifier)
+- Sessions: ~5 sessões ao longo do milestone v2.0
+- Notable: Fases menores (7 fases, 11 planos) vs v1.0 (12 fases, 30 planos) — mas escopo técnico similar. Lições do v1.0 reduziram o overhead de bugfix (apenas 2 fases de cleanup vs 6 no v1.0).
+
+---
+
 ## Cross-Milestone Trends
 
-| Metric | v1.0 |
-|--------|------|
-| Phases | 12 |
-| Plans | 30 |
-| Tests | 167 GREEN |
-| LOC | 11.393 |
-| Timeline | 18 dias |
-| Gap closure phases | 6/12 (50%) |
-| Requirements met | 31/31 (100%) |
-| Integration flows | 4/4 (100%) |
+| Metric | v1.0 | v2.0 |
+|--------|------|------|
+| Phases | 12 | 7 |
+| Plans | 30 | 11 |
+| Tests | 167 GREEN | +12 GREEN (Phase 15 TDD) |
+| LOC | 11.393 | +~3.000 est. |
+| Timeline | 18 dias | 18 dias |
+| Gap closure phases | 6/12 (50%) | 2/7 (29%) |
+| Requirements met | 31/31 (100%) | 17/17 (100%) |
+| Integration flows | 4/4 (100%) | 4/4 (100%) |
+| Platforms | 3 | 15+ |
