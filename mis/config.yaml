@@ -5,6 +5,10 @@ niches:
       hotmart: marketing
       clickbank: marketing
       kiwify: marketing
+      braip: cursos-online    # marketplace publico disponivel
+      perfectpay: null        # checkout-only, sem marketplace publico
+      eduzz: null             # SPA autenticado (orbita.eduzz.com), sem marketplace publico
+      monetizze: null         # 403 sem login, sem marketplace publico
     keywords:
       - "curso de marketing"
       - "trafego pago"
@@ -22,6 +26,10 @@ niches:
       hotmart: saude-e-fitness
       clickbank: health
       kiwify: saude
+      braip: encapsulados     # marketplace publico disponivel
+      perfectpay: null        # checkout-only, sem marketplace publico
+      eduzz: null             # SPA autenticado, sem marketplace publico
+      monetizze: null         # 403 sem login, sem marketplace publico
     keywords:
       - "emagrecer rapido"
       - "dieta low carb"
@@ -39,6 +47,10 @@ niches:
       hotmart: financas
       clickbank: investing
       kiwify: financas
+      braip: cursos-online    # proxy — sem slug especifico de financas confirmado
+      perfectpay: null        # checkout-only, sem marketplace publico
+      eduzz: null             # SPA autenticado, sem marketplace publico
+      monetizze: null         # 403 sem login, sem marketplace publico
     keywords:
       - "investir dinheiro"
       - "renda passiva"

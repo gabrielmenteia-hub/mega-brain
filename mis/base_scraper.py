@@ -38,6 +38,7 @@ DOMAIN_DELAYS: dict[str, float] = {
     "hotmart.com": 2.0,
     "kiwify.com.br": 2.0,
     "clickbank.com": 2.0,
+    "marketplace.braip.com": 2.0,
 }
 DEFAULT_DELAY: float = 2.0
 
