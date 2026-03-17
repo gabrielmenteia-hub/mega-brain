@@ -44,7 +44,7 @@
 **Depends on**: Phase 12 (v1.0 complete)
 **Requirements**: INFRA-01, INFRA-02, INFRA-03, DEBT-01, DEBT-02
 **Success Criteria** (what must be TRUE):
-  1. `python -m mis` inicia sem FK constraint violation ao criar produto em qualquer das 16 plataformas
+  1. `python -m mis` inicia sem FK constraint violation ao criar produto em qualquer das 12 plataformas
   2. Todo scanner novo pode importar `from mis.platform_ids import EDUZZ_PLATFORM_ID` (e equivalentes) sem hardcode local
   3. Cada plataforma no DB tem campo `rank_type` preenchido descrevendo a semântica do rank (positional, gravity, enrollment, upvotes)
   4. `grep -r "nyquist_compliant: false"` retorna zero resultados em todos os VALIDATION.md

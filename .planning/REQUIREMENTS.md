@@ -8,7 +8,7 @@
 
 ### INFRA — Pré-condições (bloqueantes)
 
-- [ ] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 16 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
+- [ ] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 12 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
 - [ ] **INFRA-02**: `mis/platform_ids.py` centraliza todos os IDs de plataforma como constantes nomeadas (elimina risco de collision entre scanners)
 - [ ] **INFRA-03**: Campo `rank_type` adicionado à tabela `products` para identificar a semântica do rank por plataforma (posição, gravity, EPC, upvotes, enrollment, etc.)
 
