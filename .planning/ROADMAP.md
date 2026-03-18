@@ -79,7 +79,11 @@ Plans:
   2. Após clicar "Pesquisar", resultados aparecem agrupados por plataforma e país (BR / US / Global)
   3. Resultados de uma pesquisa ficam persistidos no banco e podem ser consultados novamente sem re-scan
   4. Pesquisa em subnicho sem produtos retorna estado vazio legível, não erro
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 21-01-PLAN.md — Testes RED para migration _009, search_repository e search_orchestrator (TDD)
+- [ ] 21-02-PLAN.md — Implementar migration _009, search_repository, search_orchestrator + wiring app.py/db.py
+- [ ] 21-03-PLAN.md — Rotas FastAPI + templates HTMX + wiring final + checkpoint visual
 
 ### Phase 22: Spy Wiring
 **Goal**: Os top produtos de cada resultado de pesquisa são espionados automaticamente e o dossiê completo está disponível por produto
@@ -156,8 +160,8 @@ Plans:
 | 17. Unified Cross-Platform Ranking | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 18. Nyquist Sign-off | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 19. Code Quality Cleanup | v2.0 | 1/1 | Complete | 2026-03-17 |
-| 20. Niche Data Model | 2/2 | Complete    | 2026-03-18 | - |
-| 21. Manual Search Engine | v3.0 | 0/TBD | Not started | - |
+| 20. Niche Data Model | v3.0 | 2/2 | Complete | 2026-03-18 |
+| 21. Manual Search Engine | v3.0 | 0/3 | Not started | - |
 | 22. Spy Wiring | v3.0 | 0/TBD | Not started | - |
 | 23. Dashboard Redesign | v3.0 | 0/TBD | Not started | - |
 | 24. Favorites + Tracking | v3.0 | 0/TBD | Not started | - |
