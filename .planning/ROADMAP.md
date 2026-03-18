@@ -65,7 +65,10 @@
   1. Banco de dados contém 4 nichos (Relacionamento, Saúde, Finanças, Renda Extra) com ~40 subnichos acessíveis via query
   2. Cada subnicho retorna slug específico por plataforma (ex: "weight-loss" para ClickBank, "emagrecimento" para Hotmart)
   3. Migration aplicável em banco existente sem destruir dados v1.0/v2.0
-**Plans**: TBD
+**Plans**: 2 plans
+Plans:
+- [ ] 20-01-PLAN.md — Testes RED para migration _008 e niche_repository (TDD)
+- [ ] 20-02-PLAN.md — Implementar migration _008 + niche_repository.py + wiring db.py
 
 ### Phase 21: Manual Search Engine
 **Goal**: Usuário pode disparar pesquisa por subnicho e obter resultados salvos no banco sem nenhuma automação de background
