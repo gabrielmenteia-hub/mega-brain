@@ -19,6 +19,7 @@ from mis.web.routes.dossier import router as dossier_router
 from mis.web.routes.feed import router as feed_router
 from mis.web.routes.health import router as health_router
 from mis.web.routes.ranking import router as ranking_router
+from mis.web.routes.search import router as search_router
 
 TEMPLATES_DIR = Path(__file__).parent / "templates"
 STATIC_DIR = Path(__file__).parent / "static"
@@ -86,6 +87,16 @@ def create_app(db_path: str, start_scheduler: bool = True) -> FastAPI:
 
         yield
 
+        # Teardown: cancel all running manual search tasks
+        try:
+            from mis.search_orchestrator import _TASK_REGISTRY
+            for task in list(_TASK_REGISTRY.values()):
+                if not task.done():
+                    task.cancel()
+            _TASK_REGISTRY.clear()
+        except Exception as exc:
+            _log.warning("lifespan.search_task_cancel_failed", error=str(exc))
+
         # Teardown: stop scheduler
         if start_scheduler:
             try:
@@ -120,6 +131,7 @@ def create_app(db_path: str, start_scheduler: bool = True) -> FastAPI:
     app.include_router(feed_router)
     app.include_router(alerts_router)
     app.include_router(health_router)
+    app.include_router(search_router)
 
     @app.get("/", include_in_schema=False)
     async def root():

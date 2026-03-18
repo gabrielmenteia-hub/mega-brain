@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+
+{% block title %}Pesquisar Produtos — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+  <h1 class="text-2xl font-bold text-white mb-2">Pesquisar Produtos</h1>
+  <p class="text-gray-400 mb-6">Selecione um nicho e subnicho para iniciar um scan manual das plataformas.</p>
+
+  <!-- Search form -->
+  <form action="/search/run" method="post" class="bg-gray-900 border border-gray-800 rounded-lg p-6 mb-8">
+    <div class="flex flex-wrap gap-4 items-end">
+
+      <!-- Nicho -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Nicho</label>
+        <select name="niche_slug"
+                hx-get="/pesquisar/subniches"
+                hx-target="#select-subniche"
+                hx-trigger="change"
+                hx-include="[name='niche_slug']"
+                onchange="document.getElementById('select-subniche').disabled = false; document.getElementById('btn-pesquisar').disabled = true;"
+                class="bg-gray-800 text-gray-200 border border-gray-700 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 min-w-[180px]">
+          <option value="">Selecione um nicho...</option>
+          {% for n in niches %}
+          <option value="{{ n.slug }}"
+            {% if selected_niche == n.slug %}selected{% endif %}>
+            {{ n.name }}
+          </option>
+          {% endfor %}
+        </select>
+      </div>
+
+      <!-- Subnicho -->
+      <div>
+        <label class="block text-xs text-gray-400 mb-1">Subnicho</label>
+        <select id="select-subniche"
+                name="subniche_id"
+                disabled
+                onchange="document.getElementById('btn-pesquisar').disabled = this.value === '';"
+                class="bg-gray-800 text-gray-200 border border-gray-700 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500 min-w-[200px] disabled:opacity-50">
+          <option value="">Selecione um subnicho...</option>
+          {% if selected_subniche %}
+          <option value="{{ selected_subniche }}" selected>{{ selected_subniche }}</option>
+          {% endif %}
+        </select>
+      </div>
+
+      <!-- Submit -->
+      <div>
+        <button id="btn-pesquisar"
+                type="submit"
+                disabled
+                class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-1.5 rounded text-sm font-medium transition-colors disabled:opacity-50 disabled:cursor-not-allowed">
+          Pesquisar
+        </button>
+      </div>
+    </div>
+  </form>
+
+  <!-- Recent sessions -->
+  <h2 class="text-lg font-semibold text-white mb-3">Pesquisas Recentes</h2>
+
+  {% if recentes %}
+  <ul class="space-y-2">
+    {% for s in recentes %}
+    <li class="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 flex items-center justify-between gap-4">
+      <div class="flex items-center gap-4 text-sm">
+        <span class="text-gray-100 font-medium">{{ s.subniche_name or s.subniche_id }}</span>
+        <span class="text-gray-400">{{ s.platform_statuses | length }} plataformas</span>
+        <span class="text-gray-400">{{ s.product_count or 0 }} produtos</span>
+        <span class="text-gray-500 text-xs">
+          {% if s.started_at %}
+            {{ s.started_at[:16] | replace("T", " ") }}
+          {% endif %}
+        </span>
+        <!-- Status badge -->
+        {% if s.status == "running" %}
+        <span class="bg-yellow-600 text-yellow-100 text-xs px-2 py-0.5 rounded">Rodando</span>
+        {% elif s.status == "done" %}
+        <span class="bg-green-700 text-green-100 text-xs px-2 py-0.5 rounded">Concluido</span>
+        {% elif s.status in ("timeout", "cancelled") %}
+        <span class="bg-red-700 text-red-100 text-xs px-2 py-0.5 rounded">{{ s.status }}</span>
+        {% else %}
+        <span class="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded">{{ s.status }}</span>
+        {% endif %}
+      </div>
+      <div class="flex items-center gap-2">
+        <a href="/search/{{ s.id }}/results"
+           class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+          Ver
+        </a>
+        <button hx-delete="/search/{{ s.id }}"
+                hx-target="closest li"
+                hx-swap="outerHTML"
+                class="text-gray-500 hover:text-red-400 transition-colors text-sm px-1"
+                title="Remover">
+          ✕
+        </button>
+      </div>
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-gray-400 text-sm">Nenhuma pesquisa realizada ainda.</p>
+  {% endif %}
+</div>
+
+{% block scripts %}
+<script>
+  // Re-enable subniche select and update button state after HTMX swap
+  document.addEventListener("htmx:afterSwap", function(evt) {
+    if (evt.detail.target && evt.detail.target.id === "select-subniche") {
+      const sel = document.getElementById("select-subniche");
+      sel.disabled = false;
+      document.getElementById("btn-pesquisar").disabled = true;
+      sel.onchange = function() {
+        document.getElementById("btn-pesquisar").disabled = this.value === "";
+      };
+    }
+  });
+</script>
+{% endblock %}
+
+{% endblock %}
