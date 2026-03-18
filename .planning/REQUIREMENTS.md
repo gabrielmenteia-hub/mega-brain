@@ -13,9 +13,9 @@
 
 ### Pesquisa Manual
 
-- [ ] **SEARCH-01**: Usuário seleciona nicho → subnicho → clica "Pesquisar" para iniciar scan sob demanda
-- [ ] **SEARCH-02**: Resultado exibe produtos agrupados por plataforma e país de origem (BR / US / Global)
-- [ ] **SEARCH-03**: Zero automação — nenhum scan roda sem ação explícita do usuário
+- [x] **SEARCH-01**: Usuário seleciona nicho → subnicho → clica "Pesquisar" para iniciar scan sob demanda
+- [x] **SEARCH-02**: Resultado exibe produtos agrupados por plataforma e país de origem (BR / US / Global)
+- [x] **SEARCH-03**: Zero automação — nenhum scan roda sem ação explícita do usuário
 
 ### Espionagem
 
@@ -58,9 +58,9 @@
 |-------------|-------|--------|
 | NICHE-01 | Phase 20 | Complete |
 | NICHE-02 | Phase 20 | Complete |
-| SEARCH-01 | Phase 21 | Pending |
-| SEARCH-02 | Phase 21 | Pending |
-| SEARCH-03 | Phase 21 | Pending |
+| SEARCH-01 | Phase 21 | Complete |
+| SEARCH-02 | Phase 21 | Complete |
+| SEARCH-03 | Phase 21 | Complete |
 | SPY-V3-01 | Phase 22 | Pending |
 | SPY-V3-02 | Phase 22 | Pending |
 | SPY-V3-03 | Phase 22 | Pending |
