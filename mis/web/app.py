@@ -13,6 +13,7 @@ from mis.db import run_migrations
 from mis.health_monitor import register_canary_job, register_platform_canary_jobs, run_schema_integrity_check
 from mis.radar import register_radar_jobs
 from mis.scheduler import get_scheduler, register_scan_and_spy_job
+from mis.search_repository import mark_stale_running_sessions
 from mis.web.routes.alerts import router as alerts_router
 from mis.web.routes.dossier import router as dossier_router
 from mis.web.routes.feed import router as feed_router
@@ -25,13 +26,17 @@ STATIC_DIR = Path(__file__).parent / "static"
 _log = structlog.get_logger(__name__)
 
 
-def create_app(db_path: str) -> FastAPI:
+def create_app(db_path: str, start_scheduler: bool = True) -> FastAPI:
     """Create and configure the FastAPI application.
 
     Args:
-        db_path: Path to the SQLite database file.  Pass ':memory:' to skip
-                 migrations (useful for import-time tests where schema is
-                 already applied or not needed).
+        db_path:         Path to the SQLite database file.  Pass ':memory:' to skip
+                         migrations (useful for import-time tests where schema is
+                         already applied or not needed).
+        start_scheduler: When False, suppresses APScheduler job registration and
+                         startup. Useful for v3.0 manual-search mode and tests.
+                         The startup hook (mark_stale_running_sessions) always runs
+                         regardless of this flag.
 
     Returns:
         Configured FastAPI application instance.
@@ -39,43 +44,55 @@ def create_app(db_path: str) -> FastAPI:
 
     @asynccontextmanager
     async def lifespan(app: FastAPI):
-        # Startup: load config, register jobs, start scheduler
-        try:
-            config = load_config()
-        except Exception as exc:
-            _log.warning("lifespan.config_error", error=str(exc))
-            config = {}
-
-        try:
-            await run_schema_integrity_check(db_path)
-        except Exception as exc:
-            _log.warning("lifespan.schema_check_failed", error=str(exc))
-
-        for name, fn, args in [
-            ("register_scan_and_spy_job", register_scan_and_spy_job, [config]),
-            ("register_radar_jobs", register_radar_jobs, [config]),
-            ("register_canary_job", register_canary_job, []),
-            ("register_platform_canary_jobs", register_platform_canary_jobs, [db_path]),
-        ]:
+        # Startup: mark any sessions left in 'running' state as 'timeout'
+        # (crash recovery — runs regardless of start_scheduler flag)
+        if db_path != ":memory:":
             try:
-                fn(*args)
+                count = mark_stale_running_sessions(db_path)
+                if count:
+                    _log.info("lifespan.stale_sessions_marked_timeout", count=count)
             except Exception as exc:
-                _log.warning("lifespan.register_failed", job=name, error=str(exc))
+                _log.warning("lifespan.stale_sessions_error", error=str(exc))
 
-        try:
-            get_scheduler().start()
-            _log.info("lifespan.scheduler_started")
-        except Exception as exc:
-            _log.warning("lifespan.scheduler_start_failed", error=str(exc))
+        if start_scheduler:
+            # Startup: load config, register jobs, start scheduler
+            try:
+                config = load_config()
+            except Exception as exc:
+                _log.warning("lifespan.config_error", error=str(exc))
+                config = {}
+
+            try:
+                await run_schema_integrity_check(db_path)
+            except Exception as exc:
+                _log.warning("lifespan.schema_check_failed", error=str(exc))
+
+            for name, fn, args in [
+                ("register_scan_and_spy_job", register_scan_and_spy_job, [config]),
+                ("register_radar_jobs", register_radar_jobs, [config]),
+                ("register_canary_job", register_canary_job, []),
+                ("register_platform_canary_jobs", register_platform_canary_jobs, [db_path]),
+            ]:
+                try:
+                    fn(*args)
+                except Exception as exc:
+                    _log.warning("lifespan.register_failed", job=name, error=str(exc))
+
+            try:
+                get_scheduler().start()
+                _log.info("lifespan.scheduler_started")
+            except Exception as exc:
+                _log.warning("lifespan.scheduler_start_failed", error=str(exc))
 
         yield
 
         # Teardown: stop scheduler
-        try:
-            get_scheduler().shutdown(wait=False)
-            _log.info("lifespan.scheduler_stopped")
-        except Exception as exc:
-            _log.warning("lifespan.scheduler_stop_failed", error=str(exc))
+        if start_scheduler:
+            try:
+                get_scheduler().shutdown(wait=False)
+                _log.info("lifespan.scheduler_stopped")
+            except Exception as exc:
+                _log.warning("lifespan.scheduler_stop_failed", error=str(exc))
 
     app = FastAPI(
         title="MIS Dashboard",
