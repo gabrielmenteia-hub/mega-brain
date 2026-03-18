@@ -22,6 +22,7 @@ from .migrations._005_alerts import run_migration_005 as _run_005
 from .migrations._006_v2_platforms import run_migration_006 as _run_006
 from .migrations._007_is_stale import run_migration_007 as _run_007
 from .migrations._008_niche_v3 import run_migration_008 as _run_008
+from .migrations._009_search_sessions import run_migration_009 as _run_009
 
 
 def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
@@ -29,7 +30,8 @@ def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
 
     Runs _001 (initial schema), _002 (product enrichment), _003 (spy
     dossiers), _004 (pain radar), _005 (alerts), _006 (v2 platforms),
-    _007 (is_stale column), and _008 (niche v3 hierarchy) sequentially.
+    _007 (is_stale column), _008 (niche v3 hierarchy), and _009 (search
+    sessions) sequentially.
     Each migration is idempotent — safe to call on an already-migrated
     database.
 
@@ -44,6 +46,7 @@ def run_migrations(db_path: str) -> None:  # noqa: F401 (re-exported)
     _run_006(db_path)
     _run_007(db_path)
     _run_008(db_path)
+    _run_009(db_path)
 
 
 def get_db(db_path: str) -> sqlite_utils.Database:

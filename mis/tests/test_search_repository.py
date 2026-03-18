@@ -57,13 +57,13 @@ def test_create_and_list_session(db_path):
     """
     run_migrations(db_path)
 
-    session_id = create_session(db_path, subniche_id=1)
+    session_id = create_session(db_path, subniche_id=101)
     assert isinstance(session_id, int), "create_session must return int"
 
     sessions = list_recent_sessions(db_path)
     assert isinstance(sessions, list)
     assert len(sessions) == 1
-    assert sessions[0]["subniche_id"] == 1
+    assert sessions[0]["subniche_id"] == 101
 
 
 def test_get_session_returns_dict(db_path):
@@ -75,7 +75,7 @@ def test_get_session_returns_dict(db_path):
     """
     run_migrations(db_path)
 
-    session_id = create_session(db_path, subniche_id=2)
+    session_id = create_session(db_path, subniche_id=102)
     platform_statuses = {"hotmart": "done", "kiwify": "running"}
     update_session_status(db_path, session_id, "done", platform_statuses, product_count=5)
 
@@ -107,7 +107,7 @@ def test_list_session_products(db_path):
     """
     run_migrations(db_path)
 
-    session_id = create_session(db_path, subniche_id=1)
+    session_id = create_session(db_path, subniche_id=101)
 
     # Verify list_session_products returns list type (may be empty until GREEN)
     products = list_session_products(db_path, session_id)
@@ -133,7 +133,7 @@ def test_startup_marks_running_as_timeout(db_path):
     """
     run_migrations(db_path)
 
-    session_id = create_session(db_path, subniche_id=1)
+    session_id = create_session(db_path, subniche_id=101)
     # Manually set status to 'running' (simulating an in-progress scan
     # that was interrupted by a server crash/restart)
     update_session_status(db_path, session_id, "running", {}, product_count=0)
@@ -162,7 +162,7 @@ def test_delete_session_cascades(db_path):
     """
     run_migrations(db_path)
 
-    session_id = create_session(db_path, subniche_id=3)
+    session_id = create_session(db_path, subniche_id=103)
     sessions_before = list_recent_sessions(db_path)
     assert len(sessions_before) == 1
 

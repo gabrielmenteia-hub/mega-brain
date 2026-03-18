@@ -53,11 +53,11 @@ def test_post_search_run_creates_session(app_client):
     and Location header contains '/search/'.
 
     follow_redirects=False so we can inspect the redirect target.
-    Uses subniche_id=1 (first subniche available after migration _008 seed).
+    Uses subniche_id=101 (first subniche available after migration _008 seed).
     """
     resp = app_client.post(
         "/search/run",
-        data={"subniche_id": "1"},
+        data={"subniche_id": "101"},
         follow_redirects=False,
     )
     assert resp.status_code in (302, 303), (
