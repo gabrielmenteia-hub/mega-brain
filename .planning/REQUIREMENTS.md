@@ -8,8 +8,8 @@
 
 ### Nichos e Subnichos
 
-- [ ] **NICHE-01**: Sistema define 4 nichos fixos (Relacionamento, Saúde, Finanças, Renda Extra) com ~40 subnichos pré-configurados e mapeados por plataforma
-- [ ] **NICHE-02**: Cada subnicho tem slug de busca específico por plataforma (ex: "weight-loss" no ClickBank, "emagrecimento" no Hotmart)
+- [x] **NICHE-01**: Sistema define 4 nichos fixos (Relacionamento, Saúde, Finanças, Renda Extra) com ~40 subnichos pré-configurados e mapeados por plataforma
+- [x] **NICHE-02**: Cada subnicho tem slug de busca específico por plataforma (ex: "weight-loss" no ClickBank, "emagrecimento" no Hotmart)
 
 ### Pesquisa Manual
 
@@ -56,8 +56,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| NICHE-01 | Phase 20 | Pending |
-| NICHE-02 | Phase 20 | Pending |
+| NICHE-01 | Phase 20 | Complete |
+| NICHE-02 | Phase 20 | Complete |
 | SEARCH-01 | Phase 21 | Pending |
 | SEARCH-02 | Phase 21 | Pending |
 | SEARCH-03 | Phase 21 | Pending |

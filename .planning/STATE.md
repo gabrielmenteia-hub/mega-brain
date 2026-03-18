@@ -10,11 +10,11 @@ See: .planning/PROJECT.md (updated 2026-03-17)
 ## Current Position
 
 Phase: 20 of 26 (Niche Data Model)
-Plan: 0 of TBD in current phase
-Status: Ready to plan
-Last activity: 2026-03-17 — v3.0 roadmap criado (phases 20–26, 15 requirements, 100% coverage)
+Plan: 1 of 2 in current phase
+Status: In progress
+Last activity: 2026-03-18 — Plan 20-01 complete: TDD RED tests for migration _008 and niche_repository
 
-Progress: [░░░░░░░░░░] 0% (v3.0)
+Progress: [█░░░░░░░░░] 10% (v3.0 — 1/2 plans Phase 20)
 
 ## Performance Metrics
 
@@ -46,16 +46,16 @@ Recent decisions relevantes para v3.0:
 
 ### Pending Todos
 
-None yet.
+- Plan 20-02: implement _008_niche_v3.py migration + niche_repository.py (turns RED tests GREEN)
 
 ### Blockers/Concerns
 
-- [Pre-Phase 20]: Definir se nichos/subnichos ficam em tabela SQL ou em YAML/JSON seed — SQL facilita query, YAML facilita edição
+- [RESOLVED - Phase 20]: Nichos/subnichos ficam em tabela SQL (niches_v3, subniches) seed via migration _008 — banco é fonte de verdade
 - [Pre-Phase 21]: Confirmar se scan manual reutiliza run_all_scanners() com filtro de subnicho ou cria novo orchestrator dedicado
 - [Pre-Phase 22]: Confirmar limite de produtos espionados por plataforma por pesquisa (ex: top 5) para controlar custo LLM
 
 ## Session Continuity
 
-Last session: 2026-03-17
-Stopped at: Roadmap v3.0 criado — phases 20–26 definidas, aguardando /gsd:plan-phase 20
+Last session: 2026-03-18
+Stopped at: Completed 20-01-PLAN.md — TDD RED tests for migration _008 and niche_repository
 Resume file: None
