@@ -1,3 +1,19 @@
+---
+gsd_state_version: 1.0
+milestone: v3.0
+milestone_name: Market Intelligence 2.0
+status: executing
+stopped_at: Completed 20-02-PLAN.md — migration _008 + niche_repository GREEN (15 tests, 263 suite)
+last_updated: "2026-03-18T01:08:23.209Z"
+last_activity: "2026-03-18 — Plan 20-01 complete: TDD RED tests for migration _008 and niche_repository"
+progress:
+  total_phases: 7
+  completed_phases: 1
+  total_plans: 2
+  completed_plans: 2
+  percent: 100
+---
+
 # Project State
 
 ## Project Reference
@@ -14,7 +30,7 @@ Plan: 1 of 2 in current phase
 Status: In progress
 Last activity: 2026-03-18 — Plan 20-01 complete: TDD RED tests for migration _008 and niche_repository
 
-Progress: [█░░░░░░░░░] 10% (v3.0 — 1/2 plans Phase 20)
+Progress: [██████████] 100%
 
 ## Performance Metrics
 
@@ -30,6 +46,7 @@ Progress: [█░░░░░░░░░] 10% (v3.0 — 1/2 plans Phase 20)
 | 13–19 | 11 | ~10m |
 
 *Updated after each plan completion*
+| Phase 20 P02 | 22 | 2 tasks | 3 files |
 
 ## Accumulated Context
 
@@ -43,6 +60,8 @@ Recent decisions relevantes para v3.0:
 - [v3.0 Design]: SPY pipeline existente (SalesPageScraper, MetaAdsScraper, ReviewsScraper) reutilizado — não reconstruído
 - [v3.0 Design]: Favoritos com histórico de posição exigem tabela de snapshots (product_id, subnicho, rank, timestamp)
 - [v3.0 Design]: Alertas baseados em diff entre último scan e scan anterior por subnicho — sem infraestrutura externa
+- [Phase 20]: Idempotent migration fast-path via COUNT check to avoid write lock when another connection has pending transaction
+- [Phase 20]: 44 subniches seeded (not 42 as plan text stated) — explicit _SUBNICHES list in task action is authoritative
 
 ### Pending Todos
 
@@ -56,6 +75,6 @@ Recent decisions relevantes para v3.0:
 
 ## Session Continuity
 
-Last session: 2026-03-18
-Stopped at: Completed 20-01-PLAN.md — TDD RED tests for migration _008 and niche_repository
+Last session: 2026-03-18T01:08:23.199Z
+Stopped at: Completed 20-02-PLAN.md — migration _008 + niche_repository GREEN (15 tests, 263 suite)
 Resume file: None
