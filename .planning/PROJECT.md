@@ -111,5 +111,18 @@ Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo
 | Percentile normalization para unified ranking | Escalas incompatíveis entre plataformas (posição vs gravity vs upvotes) | ✓ Solução correta |
 | TDD RED/GREEN para scanners internacionais (Phase 15) | APIs externas exigem contratos testáveis | ✓ Encontrou bug real em cursor pagination |
 
+## Current Milestone: v3.0 — Market Intelligence 2.0
+
+**Goal:** Redesenhar a experiência de pesquisa com hierarquia nicho/subnicho, pesquisa manual sob demanda, espionagem automática dos top produtos e dossiê completo de estratégias de marketing.
+
+**Target features:**
+- 4 nichos + ~40 subnichos pré-configurados com mapeamento por plataforma
+- Pesquisa manual (botão) — zero automação
+- Resultado separado por plataforma e país
+- Espionagem automática ao pesquisar + dossiê completo por produto (Meta Ads, página de venda, upsell/downsell, copy, gatilhos)
+- Favoritos com histórico de posição
+- Alertas de novos campeões
+- Exportação em PDF
+
 ---
-*Last updated: 2026-03-17 after v2.0 Platform Expansion milestone*
+*Last updated: 2026-03-17 after v3.0 milestone start*

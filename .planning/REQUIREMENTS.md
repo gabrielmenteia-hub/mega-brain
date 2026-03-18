@@ -1,83 +1,81 @@
 # Requirements: Market Intelligence System (MIS)
 
-**Defined:** 2026-03-16
-**Milestone:** v2.0 Platform Expansion
-**Core Value:** Entregar ao usuário, sem esforço manual, o mapa completo do que está vendendo e por que está vendendo — para que ele possa modelar e lançar seus próprios produtos com máxima vantagem competitiva.
+**Defined:** 2026-03-17
+**Milestone:** v3.0 — Market Intelligence 2.0
+**Core Value:** Entregar ao usuário o mapa completo do que está vendendo e por que está vendendo — sem esforço manual — para que ele possa modelar e lançar produtos com máxima vantagem competitiva.
 
-## v2.0 Requirements
+## v3.0 Requirements
 
-### INFRA — Pré-condições (bloqueantes)
+### Nichos e Subnichos
 
-- [x] **INFRA-01**: Migration `_006_v2_platforms.py` cria rows para todas as 12 plataformas com `INSERT OR IGNORE` (elimina FK constraint violation em produção)
-- [x] **INFRA-02**: `mis/platform_ids.py` centraliza todos os IDs de plataforma como constantes nomeadas (elimina risco de collision entre scanners)
-- [x] **INFRA-03**: Campo `rank_type` adicionado à tabela `platforms` para identificar a semântica do rank por plataforma (posição, gravity, EPC, upvotes, enrollment, etc.)
+- [ ] **NICHE-01**: Sistema define 4 nichos fixos (Relacionamento, Saúde, Finanças, Renda Extra) com ~40 subnichos pré-configurados e mapeados por plataforma
+- [ ] **NICHE-02**: Cada subnicho tem slug de busca específico por plataforma (ex: "weight-loss" no ClickBank, "emagrecimento" no Hotmart)
 
-### SCAN-BR — Scanners Brasil
+### Pesquisa Manual
 
-- [x] **SCAN-BR-01**: `EduzzScanner` varre marketplace Eduzz por nicho e persiste top produtos por posição
-- [x] **SCAN-BR-02**: `MonetizzeScanner` varre marketplace Monetizze por nicho e persiste top produtos
-- [x] **SCAN-BR-03**: `PerfectPayScanner` varre marketplace PerfectPay por nicho (após verificação de URL live)
-- [x] **SCAN-BR-04**: `BraipScanner` varre marketplace Braip por nicho (após verificação de URL live)
+- [ ] **SEARCH-01**: Usuário seleciona nicho → subnicho → clica "Pesquisar" para iniciar scan sob demanda
+- [ ] **SEARCH-02**: Resultado exibe produtos agrupados por plataforma e país de origem (BR / US / Global)
+- [ ] **SEARCH-03**: Zero automação — nenhum scan roda sem ação explícita do usuário
 
-### SCAN-INTL — Scanners Internacionais
+### Espionagem
 
-- [x] **SCAN-INTL-01**: `ProductHuntScanner` busca trending products via GraphQL API usando `PH_ACCESS_TOKEN`
-- [x] **SCAN-INTL-02**: `UdemyScanner` busca top cursos por nicho via REST `/api-2.0/courses/`
-- [x] **SCAN-INTL-03**: `JVZooScanner` varre marketplace JVZoo por nicho (com contorno Incapsula ou fallback SSR)
-- [x] **SCAN-INTL-04**: `GumroadScanner` varre `gumroad.com/discover` por nicho ordenado por popular
-- [x] **SCAN-INTL-05**: `AppSumoScanner` varre `appsumo.com/products` por nicho (SSR-first, Playwright fallback)
+- [ ] **SPY-V3-01**: Ao pesquisar, espionagem automática roda nos top produtos de cada plataforma do resultado
+- [ ] **SPY-V3-02**: Usuário pode clicar em qualquer produto para abrir dossiê completo
+- [ ] **SPY-V3-03**: Dossiê inclui: anúncios Meta Ads ativos, página de venda completa, upsell/downsell mapeados, copy e gatilhos identificados, estrutura de oferta (preço, bônus, garantia)
 
-### DASH-V2 — Dashboard Cross-Platform
+### Dashboard
 
-- [x] **DASH-V2-01**: View `/ranking/unified` exibe top produtos por nicho consolidados de todas as plataformas usando normalização por percentil
-- [x] **DASH-V2-02**: View unificada filtra por nicho (obrigatório) e suporta toggle "multi-platform only" (produtos em 2+ plataformas)
-- [x] **DASH-V2-03**: View unificada exibe badges de plataforma, unified score e rank bruto por plataforma
+- [ ] **DASH-V3-01**: Tela principal com seletor de nicho/subnicho e botão "Pesquisar"
+- [ ] **DASH-V3-02**: Grid de resultados separado por plataforma/país com thumbnail, título, rank, comissão/preço
+- [ ] **DASH-V3-03**: Página de dossiê por produto com todas as estratégias de marketing estruturadas
 
-### DEBT — Tech Debt v1.0
+### Favoritos e Tracking
 
-- [x] **DEBT-01**: `nyquist_compliant: false` corrigido ou removido em todos os 12 `VALIDATION.md`
-- [x] **DEBT-02**: Docstring `radar/__init__.py:141` atualizada de "5 jobs" → "6 jobs"
+- [ ] **TRACK-01**: Usuário pode favoritar produtos para acompanhamento contínuo
+- [ ] **TRACK-02**: Sistema registra histórico de posição por produto favoritado (subiu/caiu no ranking ao longo do tempo)
 
-## Out of Scope (v2.0)
+### Alertas
 
-| Feature | Razão |
-|---------|-------|
-| Kajabi scanner | Sem marketplace público — white-label hosting, cada criador no próprio subdomínio |
-| Teachable scanner | Sem marketplace público — mesmo padrão do Kajabi |
-| Stan Store scanner | Link-in-bio tool sem ranking centralizado |
-| Skool scanner | SPA sem dados de vendas — contagem de membros não é proxy confiável |
-| ADV-01: PDF export | Deferido para v3.0 |
-| ADV-02: Comparação lado a lado | Deferido para v3.0 |
-| ADV-03: Histórico de evolução | Deferido para v3.0 |
-| ADV-04: Notificações WhatsApp/Telegram | Deferido para v3.0 |
+- [ ] **ALERT-V3-01**: Alerta visual no dashboard quando novo produto entra no top de um subnicho que o usuário pesquisou anteriormente
+
+### Exportação
+
+- [ ] **EXPORT-01**: Exportar dossiê completo de um produto em PDF com todas as estratégias de marketing
+
+## Fora do Escopo (v3.0)
+
+| Feature | Motivo |
+|---------|--------|
+| Scan automático agendado | Substituído por pesquisa manual sob demanda |
+| Pain Radar automático | Fora do foco v3.0 — pode retornar em v3.1 |
+| Comparação lado a lado | Complexidade alta — v3.1+ |
+| Notificações WhatsApp/Telegram | Infraestrutura externa — v3.1+ |
+| Kajabi, Teachable, Skool, Stan Store | Sem marketplace público — paywall extremo |
 
 ## Traceability
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| INFRA-01 | Phase 13 | Complete |
-| INFRA-02 | Phase 13 | Complete |
-| INFRA-03 | Phase 13 | Complete |
-| DEBT-01 | Phase 13 | Complete |
-| DEBT-02 | Phase 13 | Complete |
-| SCAN-BR-01 | Phase 14 | Complete |
-| SCAN-BR-02 | Phase 14 | Complete |
-| SCAN-BR-03 | Phase 14 | Complete |
-| SCAN-BR-04 | Phase 14 | Complete |
-| SCAN-INTL-01 | Phase 15 | Complete |
-| SCAN-INTL-02 | Phase 15 | Complete |
-| SCAN-INTL-03 | Phase 16 | Complete |
-| SCAN-INTL-04 | Phase 16 | Complete |
-| SCAN-INTL-05 | Phase 16 | Complete |
-| DASH-V2-01 | Phase 17 | Complete |
-| DASH-V2-02 | Phase 17 | Complete |
-| DASH-V2-03 | Phase 17 | Complete |
+| NICHE-01 | Phase 20 | Pending |
+| NICHE-02 | Phase 20 | Pending |
+| SEARCH-01 | Phase 21 | Pending |
+| SEARCH-02 | Phase 21 | Pending |
+| SEARCH-03 | Phase 21 | Pending |
+| SPY-V3-01 | Phase 22 | Pending |
+| SPY-V3-02 | Phase 22 | Pending |
+| SPY-V3-03 | Phase 22 | Pending |
+| DASH-V3-01 | Phase 23 | Pending |
+| DASH-V3-02 | Phase 23 | Pending |
+| DASH-V3-03 | Phase 23 | Pending |
+| TRACK-01 | Phase 24 | Pending |
+| TRACK-02 | Phase 24 | Pending |
+| ALERT-V3-01 | Phase 25 | Pending |
+| EXPORT-01 | Phase 26 | Pending |
 
 **Coverage:**
-- v2.0 requirements: 17 total
-- Mapped to phases: 17
+- v3.0 requirements: 15 total
+- Mapped to phases: 15
 - Unmapped: 0 ✓
 
 ---
-*Requirements defined: 2026-03-16*
-*Last updated: 2026-03-16 — traceability updated after ROADMAP.md v2.0 creation*
+*Requirements defined: 2026-03-17*
