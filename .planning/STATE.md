@@ -3,14 +3,14 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Market Intelligence 2.0
 status: executing
-stopped_at: Completed 21-01-PLAN.md
-last_updated: "2026-03-18T23:31:13.381Z"
+stopped_at: Completed 21-02-PLAN.md
+last_updated: "2026-03-18T23:48:45.603Z"
 last_activity: "2026-03-18 — Plan 20-01 complete: TDD RED tests for migration _008 and niche_repository"
 progress:
   total_phases: 7
   completed_phases: 1
   total_plans: 5
-  completed_plans: 3
+  completed_plans: 4
   percent: 100
 ---
 
@@ -48,6 +48,7 @@ Progress: [██████████] 100%
 *Updated after each plan completion*
 | Phase 20 P02 | 22 | 2 tasks | 3 files |
 | Phase 21-manual-search-engine P01 | 8 | 2 tasks | 3 files |
+| Phase 21-manual-search-engine P02 | 14 | 2 tasks | 7 files |
 
 ## Accumulated Context
 
@@ -65,6 +66,9 @@ Recent decisions relevantes para v3.0:
 - [Phase 20]: 44 subniches seeded (not 42 as plan text stated) — explicit _SUBNICHES list in task action is authoritative
 - [Phase 21-manual-search-engine]: test_no_scheduler_on_startup uses deferred import to test start_scheduler=False param — isolates new contract from existing app_client fixture
 - [Phase 21-manual-search-engine]: Web search tests fail with 404 (not ImportError) in RED — valid because app starts but router not registered yet
+- [Phase 21-manual-search-engine]: subniche_ids in RED tests fixed 1/2/3→101/102/103 — FK targets _008 seed IDs
+- [Phase 21-manual-search-engine]: SCANNER_MAP replicated as local constant in run_manual_search — not module-level in scanner.py
+- [Phase 21-manual-search-engine]: mark_stale_running_sessions runs before if start_scheduler block — crash recovery always executes
 
 ### Pending Todos
 
@@ -78,6 +82,6 @@ Recent decisions relevantes para v3.0:
 
 ## Session Continuity
 
-Last session: 2026-03-18T23:31:13.369Z
-Stopped at: Completed 21-01-PLAN.md
+Last session: 2026-03-18T23:48:45.591Z
+Stopped at: Completed 21-02-PLAN.md
 Resume file: None
