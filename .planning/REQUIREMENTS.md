@@ -19,9 +19,9 @@
 
 ### Espionagem
 
-- [ ] **SPY-V3-01**: Ao pesquisar, espionagem automática roda nos top produtos de cada plataforma do resultado
-- [ ] **SPY-V3-02**: Usuário pode clicar em qualquer produto para abrir dossiê completo
-- [ ] **SPY-V3-03**: Dossiê inclui: anúncios Meta Ads ativos, página de venda completa, upsell/downsell mapeados, copy e gatilhos identificados, estrutura de oferta (preço, bônus, garantia)
+- [x] **SPY-V3-01**: Ao pesquisar, espionagem automática roda nos top produtos de cada plataforma do resultado
+- [x] **SPY-V3-02**: Usuário pode clicar em qualquer produto para abrir dossiê completo
+- [x] **SPY-V3-03**: Dossiê inclui: anúncios Meta Ads ativos, página de venda completa, upsell/downsell mapeados, copy e gatilhos identificados, estrutura de oferta (preço, bônus, garantia)
 
 ### Dashboard
 
@@ -61,9 +61,9 @@
 | SEARCH-01 | Phase 21 | Complete |
 | SEARCH-02 | Phase 21 | Complete |
 | SEARCH-03 | Phase 21 | Complete |
-| SPY-V3-01 | Phase 22 | Pending |
-| SPY-V3-02 | Phase 22 | Pending |
-| SPY-V3-03 | Phase 22 | Pending |
+| SPY-V3-01 | Phase 22 | Complete |
+| SPY-V3-02 | Phase 22 | Complete |
+| SPY-V3-03 | Phase 22 | Complete |
 | DASH-V3-01 | Phase 23 | Pending |
 | DASH-V3-02 | Phase 23 | Pending |
 | DASH-V3-03 | Phase 23 | Pending |
