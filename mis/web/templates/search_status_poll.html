@@ -1,0 +1,52 @@
+<div id="search-status-poll"
+     hx-get="/search/{{ session.id }}/status/poll"
+     hx-trigger="every 2s"
+     hx-swap="outerHTML">
+
+  {% set platform_statuses = session.platform_statuses %}
+  {% set done_count = namespace(n=0) %}
+  {% for slug, status in platform_statuses.items() %}
+    {% if status in ("done", "error") %}{% set done_count.n = done_count.n + 1 %}{% endif %}
+  {% endfor %}
+  {% set total_count = platform_statuses | length %}
+
+  <!-- Progress summary -->
+  <div class="mb-4">
+    <div class="flex items-center justify-between text-sm text-gray-400 mb-2">
+      <span>{{ done_count.n }} de {{ total_count }} plataformas concluidas</span>
+      <span class="text-gray-500">Aguardando...</span>
+    </div>
+    {% if total_count > 0 %}
+    <div class="w-full bg-gray-800 rounded-full h-2">
+      <div class="bg-blue-600 h-2 rounded-full transition-all"
+           style="width: {{ (done_count.n / total_count * 100) | int }}%"></div>
+    </div>
+    {% endif %}
+  </div>
+
+  <!-- Per-platform status list -->
+  {% if platform_statuses %}
+  <ul class="space-y-1">
+    {% for slug, status in platform_statuses.items() %}
+    <li class="flex items-center gap-2 text-sm py-1">
+      {% if status == "done" %}
+      <span class="text-green-400">✓</span>
+      <span class="text-gray-200">{{ slug }}</span>
+      <span class="text-green-600 text-xs">concluido</span>
+      {% elif status == "error" %}
+      <span class="text-red-400">✗</span>
+      <span class="text-gray-400">{{ slug }}</span>
+      <span class="text-red-600 text-xs">erro</span>
+      {% else %}
+      <span class="text-yellow-400 animate-pulse">◆</span>
+      <span class="text-gray-300">{{ slug }}</span>
+      <span class="text-yellow-600 text-xs">scanning</span>
+      {% endif %}
+    </li>
+    {% endfor %}
+  </ul>
+  {% else %}
+  <p class="text-gray-500 text-sm">Iniciando scan...</p>
+  {% endif %}
+
+</div>

@@ -23,6 +23,7 @@
             hx-swap="outerHTML">
       </span>
     </a>
+    <a href="/pesquisar" class="text-gray-300 hover:text-white transition-colors">Buscar</a>
   </nav>
 
   <main class="px-6 py-6">
@@ -32,6 +33,20 @@
   <footer class="px-6 py-4 border-t border-gray-800 text-gray-600 text-sm text-center">
     <a href="/health" class="hover:text-gray-400 transition-colors">system health</a>
   </footer>
+
+  <!-- Toast notification — out-of-band via HTMX HX-Trigger showToast -->
+  <div id="toast"
+       hx-swap-oob="true"
+       class="fixed bottom-4 right-4 bg-gray-800 text-white px-4 py-2 rounded shadow-lg hidden z-50">
+  </div>
+  <script>
+    document.body.addEventListener("showToast", function(e) {
+      const t = document.getElementById("toast");
+      t.textContent = e.detail.value;
+      t.classList.remove("hidden");
+      setTimeout(function() { t.classList.add("hidden"); }, 3000);
+    });
+  </script>
 
   <script src="/static/app.js"></script>
   {% block scripts %}{% endblock %}

@@ -1,0 +1,42 @@
+{% if recentes %}
+<ul class="space-y-2">
+  {% for s in recentes %}
+  <li class="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 flex items-center justify-between gap-4">
+    <div class="flex items-center gap-4 text-sm">
+      <span class="text-gray-100 font-medium">{{ s.subniche_name or s.subniche_id }}</span>
+      <span class="text-gray-400">{{ s.platform_statuses | length }} plataformas</span>
+      <span class="text-gray-400">{{ s.product_count or 0 }} produtos</span>
+      <span class="text-gray-500 text-xs">
+        {% if s.started_at %}
+          {{ s.started_at[:16] | replace("T", " ") }}
+        {% endif %}
+      </span>
+      {% if s.status == "running" %}
+      <span class="bg-yellow-600 text-yellow-100 text-xs px-2 py-0.5 rounded">Rodando</span>
+      {% elif s.status == "done" %}
+      <span class="bg-green-700 text-green-100 text-xs px-2 py-0.5 rounded">Concluido</span>
+      {% elif s.status in ("timeout", "cancelled") %}
+      <span class="bg-red-700 text-red-100 text-xs px-2 py-0.5 rounded">{{ s.status }}</span>
+      {% else %}
+      <span class="bg-gray-700 text-gray-300 text-xs px-2 py-0.5 rounded">{{ s.status }}</span>
+      {% endif %}
+    </div>
+    <div class="flex items-center gap-2">
+      <a href="/search/{{ s.id }}/results"
+         class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+        Ver
+      </a>
+      <button hx-delete="/search/{{ s.id }}"
+              hx-target="closest li"
+              hx-swap="outerHTML"
+              class="text-gray-500 hover:text-red-400 transition-colors text-sm px-1"
+              title="Remover">
+        ✕
+      </button>
+    </div>
+  </li>
+  {% endfor %}
+</ul>
+{% else %}
+<p class="text-gray-400 text-sm">Nenhuma pesquisa realizada ainda.</p>
+{% endif %}

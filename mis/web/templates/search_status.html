@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+
+{% block title %}Buscando: {{ subniche_name }} — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="max-w-2xl mx-auto">
+
+  <!-- Header -->
+  <div class="mb-6 flex items-center gap-3">
+    <div class="w-6 h-6 border-2 border-blue-400 border-t-transparent rounded-full animate-spin"></div>
+    <div>
+      <h1 class="text-xl font-bold text-white">
+        Buscando: {{ subniche_name }}
+        {% if niche_name %}<span class="text-gray-400 font-normal text-base">({{ niche_name }})</span>{% endif %}
+      </h1>
+      <p class="text-gray-400 text-sm">Scan em andamento nas plataformas configuradas</p>
+    </div>
+  </div>
+
+  <!-- Timer -->
+  <div class="bg-gray-900 border border-gray-800 rounded-lg px-4 py-3 mb-4 flex items-center justify-between">
+    <span class="text-gray-400 text-sm">Tempo decorrido:</span>
+    <span id="elapsed-timer" class="text-gray-200 text-sm font-mono">0:00</span>
+  </div>
+
+  <!-- HTMX polling partial -->
+  <div class="bg-gray-900 border border-gray-800 rounded-lg p-4 mb-6">
+    {% include "search_status_poll.html" %}
+  </div>
+
+  <!-- Cancel button -->
+  <div class="flex gap-3">
+    <button hx-delete="/search/{{ session.id }}"
+            hx-target="body"
+            hx-swap="innerHTML"
+            class="bg-red-700 hover:bg-red-600 text-white px-4 py-2 rounded text-sm transition-colors">
+      Cancelar
+    </button>
+    <a href="/pesquisar"
+       class="text-gray-400 hover:text-gray-200 text-sm py-2 transition-colors">
+      &larr; Nova pesquisa
+    </a>
+  </div>
+
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  // Elapsed timer
+  var elapsedSeconds = 0;
+  var timerEl = document.getElementById("elapsed-timer");
+  function updateTimer() {
+    elapsedSeconds++;
+    var m = Math.floor(elapsedSeconds / 60);
+    var s = elapsedSeconds % 60;
+    timerEl.textContent = m + ":" + (s < 10 ? "0" + s : s);
+  }
+  var timerInterval = setInterval(updateTimer, 1000);
+</script>
+{% endblock %}

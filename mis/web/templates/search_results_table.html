@@ -1,0 +1,95 @@
+{% set PLATFORM_FLAGS = {
+  "hotmart": "🇧🇷",
+  "kiwify": "🇧🇷",
+  "eduzz": "🇧🇷",
+  "monetizze": "🇧🇷",
+  "perfectpay": "🇧🇷",
+  "braip": "🇧🇷",
+  "clickbank": "🇺🇸",
+  "jvzoo": "🇺🇸",
+  "product_hunt": "🌐",
+  "udemy": "🌐",
+  "gumroad": "🌐",
+  "appsumo": "🌐"
+} %}
+
+{% if products %}
+<table class="w-full text-sm">
+  <thead>
+    <tr class="text-left text-gray-400 border-b border-gray-700">
+      <th class="pb-2 pr-4 font-medium w-10">Pos</th>
+      <th class="pb-2 pr-4 font-medium">Produto</th>
+      <th class="pb-2 pr-4 font-medium">Plataforma</th>
+      <th class="pb-2 font-medium text-right">Preco / Comissao</th>
+    </tr>
+  </thead>
+  <tbody class="divide-y divide-gray-800">
+    {% for product in products %}
+    <tr class="hover:bg-gray-800/30 transition-colors">
+      <!-- Posicao -->
+      <td class="py-3 pr-4 text-gray-500 font-mono">{{ product.rank_at_scan or "—" }}</td>
+
+      <!-- Produto -->
+      <td class="py-3 pr-4">
+        <div class="flex items-start gap-3">
+          {% if product.thumbnail_url %}
+          <img src="{{ product.thumbnail_url }}"
+               alt=""
+               class="w-10 h-10 rounded object-cover bg-gray-800 flex-shrink-0"
+               onerror="this.style.display='none'">
+          {% endif %}
+          <div class="min-w-0">
+            <a href="{{ product.url }}"
+               target="_blank"
+               rel="noopener noreferrer"
+               class="text-blue-400 hover:text-blue-300 transition-colors line-clamp-2 block">
+              {{ product.title or "Sem titulo" }}
+            </a>
+          </div>
+        </div>
+      </td>
+
+      <!-- Plataforma + bandeira -->
+      <td class="py-3 pr-4">
+        <span class="text-gray-300">
+          {{ PLATFORM_FLAGS.get(product.platform_slug, "🌐") }}
+          {{ product.platform_name or product.platform_slug }}
+        </span>
+      </td>
+
+      <!-- Preco / Comissao -->
+      <td class="py-3 text-right">
+        {% if product.price %}
+        <span class="text-gray-200">
+          R$ {{ "%.2f"|format(product.price) }}
+        </span>
+        {% endif %}
+        {% if product.commission_pct %}
+        <span class="text-green-400 text-xs block">
+          {{ product.commission_pct }}% comissao
+        </span>
+        {% endif %}
+        {% if not product.price and not product.commission_pct %}
+        <span class="text-gray-500">—</span>
+        {% endif %}
+      </td>
+    </tr>
+    {% endfor %}
+  </tbody>
+</table>
+
+<!-- Ver mais (pagination hint) -->
+{% if products | length >= per_page %}
+<div class="mt-4 text-center">
+  <p class="text-gray-500 text-xs">Exibindo {{ products | length }} resultados. Refine por plataforma para ver mais.</p>
+</div>
+{% endif %}
+
+{% else %}
+<div class="py-12 text-center">
+  <p class="text-gray-400">Nenhum produto encontrado para este filtro.</p>
+  {% if selected_platform %}
+  <p class="text-gray-500 text-sm mt-2">Tente remover o filtro de plataforma.</p>
+  {% endif %}
+</div>
+{% endif %}

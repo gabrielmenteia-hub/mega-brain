@@ -1,0 +1,83 @@
+{% extends "base.html" %}
+
+{% block title %}Resultados: {{ subniche_name }} — MIS Dashboard{% endblock %}
+
+{% block content %}
+<div class="mb-6">
+
+  <!-- Breadcrumb -->
+  <div class="mb-4">
+    <a href="/pesquisar{% if niche_slug %}?niche={{ niche_slug }}{% if subniche_slug %}&subniche={{ subniche_slug }}{% endif %}{% endif %}"
+       class="text-blue-400 hover:text-blue-300 text-sm transition-colors">
+      &larr; Nova pesquisa
+    </a>
+  </div>
+
+  <!-- Header -->
+  <div class="flex items-start justify-between gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl font-bold text-white mb-1">
+        {{ subniche_name or "Subnicho" }}
+      </h1>
+      <p class="text-gray-400 text-sm">
+        Resultados de
+        {% if session.started_at %}
+          {{ session.started_at[:10] | replace("-", "/") }}
+          {{ session.started_at[11:16] }}
+        {% else %}
+          —
+        {% endif %}
+      </p>
+    </div>
+
+    <!-- Atualizar button -->
+    <form action="/search/run" method="post">
+      <input type="hidden" name="subniche_id" value="{{ session.subniche_id }}">
+      <button type="submit"
+              class="bg-gray-800 hover:bg-gray-700 border border-gray-700 text-gray-200 px-4 py-2 rounded text-sm transition-colors">
+        Atualizar
+      </button>
+    </form>
+  </div>
+
+  <!-- Stale data banner (> 7 days old) -->
+  {% if session.started_at %}
+  {% set started = session.started_at[:10] %}
+  {# Simple staleness check via string comparison — works for ISO dates #}
+  {% endif %}
+
+  <!-- Coverage banner -->
+  {% if total_platforms_done > 0 %}
+  <div class="bg-gray-900 border border-gray-800 rounded px-4 py-2 mb-4 text-sm text-gray-400">
+    <span class="text-gray-300">{{ platforms_ok }}</span> de
+    <span class="text-gray-300">{{ total_platforms_done }}</span>
+    plataformas retornaram produtos.
+  </div>
+  {% endif %}
+
+  <!-- Platform filter -->
+  <div class="flex items-center gap-3 mb-4">
+    <label class="text-xs text-gray-400">Filtrar por plataforma:</label>
+    <select name="platform"
+            hx-get="/search/{{ session.id }}/results/table"
+            hx-target="#results-table"
+            hx-swap="innerHTML"
+            hx-include="[name='platform']"
+            class="bg-gray-800 text-gray-200 border border-gray-700 rounded px-3 py-1.5 text-sm focus:outline-none focus:border-blue-500">
+      <option value="">Todas</option>
+      {% for p in available_platforms %}
+      <option value="{{ p.slug }}"
+              {% if selected_platform == p.slug %}selected{% endif %}>
+        {{ p.name }}
+      </option>
+      {% endfor %}
+    </select>
+  </div>
+
+  <!-- Results table -->
+  <div id="results-table" class="bg-gray-900 border border-gray-800 rounded-lg overflow-hidden p-4">
+    {% include "search_results_table.html" %}
+  </div>
+
+</div>
+{% endblock %}
