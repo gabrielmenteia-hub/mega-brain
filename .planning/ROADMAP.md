@@ -94,7 +94,11 @@ Plans:
   2. Usuário clica em qualquer produto e abre dossiê com anúncios Meta Ads ativos exibidos
   3. Dossiê exibe página de venda, upsell/downsell mapeados, copy e gatilhos identificados e estrutura de oferta (preço, bônus, garantia)
   4. Produto sem espionagem concluída exibe estado "em processamento" em vez de erro
-**Plans**: TBD
+**Plans**: 3 plans
+Plans:
+- [ ] 22-01-PLAN.md — Testes RED para spy wiring (TDD scaffold)
+- [ ] 22-02-PLAN.md — Backend wiring: SPY_V3_TOP_N, spy batch trigger, status transitions, list_session_products com dossier_status
+- [ ] 22-03-PLAN.md — Rotas + templates: re-spy em /results, coluna Dossiê, banner, tab Oferta, Gatilhos
 
 ### Phase 23: Dashboard Redesign
 **Goal**: Interface principal redesenhada com seletor nicho/subnicho, grid de resultados por plataforma/país e página de dossiê estruturada
@@ -162,7 +166,7 @@ Plans:
 | 19. Code Quality Cleanup | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 20. Niche Data Model | v3.0 | 2/2 | Complete | 2026-03-18 |
 | 21. Manual Search Engine | 3/3 | Complete    | 2026-03-19 | - |
-| 22. Spy Wiring | v3.0 | 0/TBD | Not started | - |
+| 22. Spy Wiring | v3.0 | 0/3 | Not started | - |
 | 23. Dashboard Redesign | v3.0 | 0/TBD | Not started | - |
 | 24. Favorites + Tracking | v3.0 | 0/TBD | Not started | - |
 | 25. Alerts | v3.0 | 0/TBD | Not started | - |
