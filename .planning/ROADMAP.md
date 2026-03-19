@@ -48,7 +48,7 @@
 **Milestone Goal:** Redesenhar a experiência de pesquisa com hierarquia nicho/subnicho, pesquisa manual sob demanda, espionagem automática dos top produtos, dossiê completo de estratégias de marketing, favoritos com histórico de posição, alertas de novos campeões e exportação em PDF.
 
 - [x] **Phase 20: Niche Data Model** — Schema de nichos/subnichos com slug mappings por plataforma (completed 2026-03-18)
-- [ ] **Phase 21: Manual Search Engine** — Trigger de pesquisa, orquestração de scan, resultados persistidos
+- [x] **Phase 21: Manual Search Engine** — Trigger de pesquisa, orquestração de scan, resultados persistidos (completed 2026-03-19)
 - [ ] **Phase 22: Spy Wiring** — Espionagem automática dos top produtos + dossiê disponível por produto
 - [ ] **Phase 23: Dashboard Redesign** — UI de pesquisa nicho/subnicho, grid de resultados por plataforma/país, página de dossiê
 - [ ] **Phase 24: Favorites + Tracking** — Favoritar produtos, histórico de posição ao longo do tempo
@@ -161,7 +161,7 @@ Plans:
 | 18. Nyquist Sign-off | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 19. Code Quality Cleanup | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 20. Niche Data Model | v3.0 | 2/2 | Complete | 2026-03-18 |
-| 21. Manual Search Engine | 2/3 | In Progress|  | - |
+| 21. Manual Search Engine | 3/3 | Complete   | 2026-03-19 | - |
 | 22. Spy Wiring | v3.0 | 0/TBD | Not started | - |
 | 23. Dashboard Redesign | v3.0 | 0/TBD | Not started | - |
 | 24. Favorites + Tracking | v3.0 | 0/TBD | Not started | - |
