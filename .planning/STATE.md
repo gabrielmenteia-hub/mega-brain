@@ -3,8 +3,8 @@ gsd_state_version: 1.0
 milestone: v3.0
 milestone_name: Market Intelligence 2.0
 status: executing
-stopped_at: "Completed 21-03-PLAN.md — checkpoint:human-verify pending"
-last_updated: "2026-03-19T00:10:17.153Z"
+stopped_at: Completed 21-03-PLAN.md — Phase 21 complete
+last_updated: "2026-03-19T02:33:38.471Z"
 last_activity: "2026-03-18 — Plan 20-01 complete: TDD RED tests for migration _008 and niche_repository"
 progress:
   total_phases: 7
@@ -50,6 +50,7 @@ Progress: [██████████] 100%
 | Phase 21-manual-search-engine P01 | 8 | 2 tasks | 3 files |
 | Phase 21-manual-search-engine P02 | 14 | 2 tasks | 7 files |
 | Phase 21-manual-search-engine P03 | 18 | 2 tasks | 9 files |
+| Phase 21-manual-search-engine P03 | 38 | 3 tasks | 11 files |
 
 ## Accumulated Context
 
@@ -72,6 +73,8 @@ Recent decisions relevantes para v3.0:
 - [Phase 21-manual-search-engine]: mark_stale_running_sessions runs before if start_scheduler block — crash recovery always executes
 - [Phase 21-manual-search-engine]: Template pesquisar.html criado em Task 1 com rotas — teste requer template antes de Task 2
 - [Phase 21-manual-search-engine]: Lifespan teardown cancela tasks asyncio do _TASK_REGISTRY — evita timeout no TestClient
+- [Phase 21-manual-search-engine]: base_scraper SSL context pre-created at module import to prevent event loop blocking during httpx.AsyncClient init on Python 3.14/Windows
+- [Phase 21-manual-search-engine]: Lifespan teardown uses asyncio.wait(pending, timeout=2.0) to allow graceful cancellation of pending scan tasks before registry clear
 
 ### Pending Todos
 
@@ -85,6 +88,6 @@ Recent decisions relevantes para v3.0:
 
 ## Session Continuity
 
-Last session: 2026-03-19T00:10:17.142Z
-Stopped at: Completed 21-03-PLAN.md — checkpoint:human-verify pending
+Last session: 2026-03-19T02:33:38.462Z
+Stopped at: Completed 21-03-PLAN.md — Phase 21 complete
 Resume file: None

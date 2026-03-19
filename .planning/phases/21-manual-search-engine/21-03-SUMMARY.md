@@ -44,23 +44,23 @@ key-decisions:
   - "Lifespan teardown cancels _TASK_REGISTRY tasks — prevents TestClient timeout when test triggers POST /search/run which creates a real asyncio scan task"
   - "search_status_poll.html uses Jinja2 namespace(n=0) for counter inside loop — Jinja2 scoping requires namespace object for mutation inside for loops"
 
-requirements-completed: [SEARCH-02]
+requirements-completed: [SEARCH-01, SEARCH-02, SEARCH-03]
 
-duration: 18min
+duration: 38min
 completed: 2026-03-19
 ---
 
 # Phase 21 Plan 03: Manual Search Engine - Web Routes + Templates Summary
 
-**FastAPI APIRouter with 8 search routes + 6 Jinja2 templates + navbar Buscar + toast — interface de pesquisa manual completa pronta para verificacao humana**
+**FastAPI APIRouter with 8 search routes + 6 Jinja2 templates + navbar Buscar + toast — interface de pesquisa manual completa aprovada em verificacao humana, 271 testes GREEN**
 
 ## Performance
 
-- **Duration:** 18 min
+- **Duration:** 38 min
 - **Started:** 2026-03-18T23:50:24Z
-- **Completed:** 2026-03-19T00:08:21Z
-- **Tasks:** 2 (+ 1 checkpoint awaiting human verify)
-- **Files modified:** 9
+- **Completed:** 2026-03-19T00:25:00Z
+- **Tasks:** 3 (incluindo checkpoint:human-verify aprovado)
+- **Files modified:** 11
 
 ## Accomplishments
 
@@ -78,6 +78,7 @@ completed: 2026-03-19
 
 1. **Task 1: Módulo de rotas search.py + wiring em app.py** - `e2733e7` (feat)
 2. **Task 2: Templates HTMX + navbar + toast** - `3acbf59` (feat)
+3. **Task 3: Checkpoint verificacao humana aprovado + bugfix teardown** - `10cbd96` (fix)
 
 ## Files Created/Modified
 
@@ -88,8 +89,9 @@ completed: 2026-03-19
 - `mis/web/templates/search_status_poll.html` — partial de polling HTMX (CRIADO)
 - `mis/web/templates/search_results.html` — pagina de resultados (CRIADO)
 - `mis/web/templates/search_results_table.html` — partial de tabela de produtos (CRIADO)
-- `mis/web/app.py` — include search_router + teardown cancel tasks (MODIFICADO)
+- `mis/web/app.py` — include search_router + teardown cancel tasks + asyncio.wait timeout (MODIFICADO)
 - `mis/web/templates/base.html` — navbar Buscar + toast (MODIFICADO)
+- `mis/base_scraper.py` — pre-create SSL context at module import to avoid blocking event loop (MODIFICADO)
 
 ## Decisions Made
 
@@ -115,15 +117,18 @@ completed: 2026-03-19
 - **Files modified:** mis/web/app.py
 - **Commit:** e2733e7
 
+**3. [Rule 1 - Bug] asyncio event loop blocking em teardown do TestClient**
+- **Found during:** Task 3 (apos aprovacao do checkpoint, ao rodar suite completa)
+- **Issue:** `ssl.create_default_context(cafile=certifi.where())` leva ~2s no Python 3.14/Windows e e chamado dentro de `httpx.AsyncClient.__init__()` que roda no event loop. Isso bloqueia o loop durante a inicializacao de cada scanner, impedindo cancelamento de tasks asyncio e travando o `TestClient.__exit__()` indefinidamente.
+- **Fix:** (1) `base_scraper.py` pre-cria o SSL context no nivel do modulo em tempo de importacao (`_SSL_CONTEXT = ssl.create_default_context(cafile=certifi.where())`) e passa `verify=_SSL_CONTEXT` para o `httpx.AsyncClient`. (2) `web/app.py` lifespan teardown usa `asyncio.wait(pending, timeout=2.0)` em vez de apenas `task.cancel()`.
+- **Files modified:** mis/base_scraper.py, mis/web/app.py
+- **Commit:** 10cbd96
+
 ## Issues Encountered
 
 Nenhum alem dos auto-fixados acima.
 
-## User Setup Required
-
-Checkpoint de verificacao visual — ver instrucoes abaixo.
-
-## Checkpoint: Verificacao Visual Pendente
+## Checkpoint: Verificacao Humana APROVADA
 
 Para verificar a interface completa:
 
@@ -141,9 +146,10 @@ Para verificar a interface completa:
 
 ## Next Phase Readiness
 
-- Todos os 26 testes web GREEN (incluindo 5 novos de test_web_search.py)
-- Interface completa implementada e testada automaticamente
-- Apos aprovacao do checkpoint, Phase 21 esta concluida
+- 271 testes GREEN (suite completa, excluindo test_appsumo_scanner.py que era pre-existente e passou apos fix do SSL)
+- 5 novos testes de test_web_search.py todos GREEN incluindo test_post_search_run_creates_session
+- Interface completa implementada, testada automaticamente e aprovada em verificacao humana
+- Phase 21 concluida
 
 ## Self-Check: PASSED
 
@@ -151,8 +157,10 @@ Para verificar a interface completa:
 - FOUND: mis/web/templates/pesquisar.html
 - FOUND: mis/web/templates/search_status.html
 - FOUND: mis/web/templates/search_results.html
+- FOUND: mis/base_scraper.py (modified with _SSL_CONTEXT pre-creation)
 - FOUND commit: e2733e7 (Task 1)
 - FOUND commit: 3acbf59 (Task 2)
+- FOUND commit: 10cbd96 (Task 3 - bug fix)
 
 ---
 *Phase: 21-manual-search-engine*
