@@ -161,7 +161,7 @@ Plans:
 | 18. Nyquist Sign-off | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 19. Code Quality Cleanup | v2.0 | 1/1 | Complete | 2026-03-17 |
 | 20. Niche Data Model | v3.0 | 2/2 | Complete | 2026-03-18 |
-| 21. Manual Search Engine | 3/3 | Complete   | 2026-03-19 | - |
+| 21. Manual Search Engine | 3/3 | Complete    | 2026-03-19 | - |
 | 22. Spy Wiring | v3.0 | 0/TBD | Not started | - |
 | 23. Dashboard Redesign | v3.0 | 0/TBD | Not started | - |
 | 24. Favorites + Tracking | v3.0 | 0/TBD | Not started | - |
