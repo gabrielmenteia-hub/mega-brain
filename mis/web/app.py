@@ -87,12 +87,17 @@ def create_app(db_path: str, start_scheduler: bool = True) -> FastAPI:
 
         yield
 
-        # Teardown: cancel all running manual search tasks
+        # Teardown: cancel all running manual search tasks and wait for them
+        # to finish (with a short timeout) so the event loop can shut down
+        # cleanly. Using asyncio.wait with a timeout avoids hanging if a task
+        # is blocked in synchronous code (e.g. SSL context initialisation).
         try:
             from mis.search_orchestrator import _TASK_REGISTRY
-            for task in list(_TASK_REGISTRY.values()):
-                if not task.done():
-                    task.cancel()
+            pending = [t for t in _TASK_REGISTRY.values() if not t.done()]
+            for task in pending:
+                task.cancel()
+            if pending:
+                await asyncio.wait(pending, timeout=2.0)
             _TASK_REGISTRY.clear()
         except Exception as exc:
             _log.warning("lifespan.search_task_cancel_failed", error=str(exc))

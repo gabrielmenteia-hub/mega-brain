@@ -6,9 +6,11 @@ Provides fetch() via httpx (SSR/JSON endpoints) and fetch_spa() via Playwright (
 Long-lived: one instance per scraping job. Use as async context manager.
 """
 import asyncio
+import ssl
 import time
 from typing import Optional
 
+import certifi
 import httpx
 import structlog
 from playwright.async_api import async_playwright
@@ -21,6 +23,12 @@ from tenacity import (
 )
 
 from .exceptions import ScraperError
+
+# Pre-create the SSL context at module import time so that
+# ssl.load_verify_locations() (which can take ~2s on the first call) runs
+# once during import — not inside the asyncio event loop where it would block
+# the loop and prevent task cancellation / timeout handling.
+_SSL_CONTEXT: ssl.SSLContext = ssl.create_default_context(cafile=certifi.where())
 
 # Configure structlog JSON output
 structlog.configure(
@@ -87,6 +95,7 @@ class BaseScraper:
             follow_redirects=True,
             timeout=httpx.Timeout(30.0),
             proxy=self._proxy,
+            verify=_SSL_CONTEXT,
         )
         return self
 
