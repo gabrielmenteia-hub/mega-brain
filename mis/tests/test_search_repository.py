@@ -170,3 +170,86 @@ def test_delete_session_cascades(db_path):
 
     sessions_after = list_recent_sessions(db_path)
     assert len(sessions_after) == 0
+
+
+# ---------------------------------------------------------------------------
+# SPY-V3-02: list_session_products returns product_id and dossier_status
+# ---------------------------------------------------------------------------
+
+
+def test_list_session_products_with_dossier(db_path):
+    """list_session_products deve retornar product_id e dossier_status por produto.
+
+    FAILS: the SELECT in list_session_products does not include p.id (product_id)
+    nor a JOIN/subquery to fetch dossier.status (dossier_status).
+    The returned dicts only have: rank_at_scan, platform_slug, title, url,
+    price, commission_pct, thumbnail_url, platform_name.
+    """
+    from datetime import datetime
+    import json
+    from mis.db import get_db
+
+    run_migrations(db_path)
+
+    # Seed minimal data: niche + platform + product
+    db = get_db(db_path)
+    now = datetime.utcnow().isoformat()
+    db.execute(
+        "INSERT OR IGNORE INTO platforms (id, name, slug, base_url, created_at) "
+        "VALUES (1, 'Hotmart', 'hotmart', 'https://hotmart.com', ?)", [now]
+    )
+    db.execute(
+        "INSERT OR IGNORE INTO niches (id, name, slug, created_at) "
+        "VALUES (1, 'Marketing Digital', 'marketing-digital', ?)", [now]
+    )
+    db.execute(
+        "INSERT OR IGNORE INTO products "
+        "(id, platform_id, niche_id, external_id, title, url, "
+        "rank_score, price, currency, scraped_at, raw_data) "
+        "VALUES (1, 1, 1, 'prod-001', 'Produto Teste', "
+        "'https://hotmart.com/produto/1', 0.0, 197.0, 'BRL', ?, '{}')",
+        [now],
+    )
+
+    # Create session
+    session_id = create_session(db_path, subniche_id=101)
+
+    # Link product to session
+    db.execute(
+        "INSERT INTO search_session_products "
+        "(session_id, product_id, rank_at_scan, platform_slug) "
+        "VALUES (?, 1, 1, 'hotmart')",
+        [session_id],
+    )
+
+    # Seed a dossier for the product
+    db.execute(
+        "INSERT INTO dossiers "
+        "(product_id, status, dossier_json, analysis, "
+        "opportunity_score, confidence_score, generated_at) "
+        "VALUES (1, 'done', '{}', '{}', 0.8, 80, ?)",
+        [now],
+    )
+
+    products = list_session_products(db_path, session_id)
+    assert isinstance(products, list)
+    assert len(products) > 0, "Deve retornar ao menos um produto"
+
+    item = products[0]
+
+    # FAILING assertions: these keys do not exist in the current SELECT
+    assert "product_id" in item, (
+        "list_session_products deve retornar 'product_id' (p.id) para cada produto"
+    )
+    assert "dossier_status" in item, (
+        "list_session_products deve retornar 'dossier_status' "
+        "(LEFT JOIN dossiers) para cada produto"
+    )
+
+    # Verify the dossier_status value is correct
+    assert item["dossier_status"] == "done", (
+        f"dossier_status deve ser 'done', got: {item.get('dossier_status')}"
+    )
+    assert item["product_id"] == 1, (
+        f"product_id deve ser 1, got: {item.get('product_id')}"
+    )
