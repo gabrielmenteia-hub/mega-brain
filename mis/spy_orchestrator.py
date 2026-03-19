@@ -37,6 +37,9 @@ _spy_counter = count()
 # Hardcoded per user decision: top 10 per niche per platform — not configurable
 SPY_TOP_N = 10
 
+# v3.0: top-5 per platform per search session — separate from legacy SPY_TOP_N = 10
+SPY_V3_TOP_N = 5
+
 # Default DB path: env var MIS_DB_PATH → falls back to data/mis.db
 _DEFAULT_DB_PATH = "data/mis.db"
 
@@ -57,6 +60,40 @@ def _get_spy_config() -> dict:
         "max_concurrent_spy": spy.get("max_concurrent_spy", 3),
         "min_reviews": spy.get("min_reviews", 10),
     }
+
+
+def get_top_products_for_spy(db_path: str, session_id: int) -> list[dict]:
+    """Return top-SPY_V3_TOP_N products per platform for a search session.
+
+    Uses in-memory grouping (defaultdict) over a single ordered query.
+    Plataformas fallback-only (eduzz, monetizze, perfectpay) are naturally
+    excluded because they have no slug mapping and produce 0 rows in
+    search_session_products.
+
+    Args:
+        db_path:    Path to the SQLite database file.
+        session_id: The search session to query.
+
+    Returns:
+        List of dicts with keys 'id' (product_id) and 'rank' (rank_at_scan).
+        Up to SPY_V3_TOP_N * num_platforms items, ordered by platform then rank.
+    """
+    from collections import defaultdict
+    db = get_db(db_path)
+    rows = db.execute(
+        "SELECT product_id, platform_slug, rank_at_scan "
+        "FROM search_session_products "
+        "WHERE session_id = ? "
+        "ORDER BY platform_slug, rank_at_scan ASC",
+        [session_id],
+    ).fetchall()
+    top_per_platform: dict[str, list] = defaultdict(list)
+    for product_id, platform_slug, rank_at_scan in rows:
+        if len(top_per_platform[platform_slug]) < SPY_V3_TOP_N:
+            top_per_platform[platform_slug].append(
+                {"id": product_id, "rank": rank_at_scan if rank_at_scan is not None else 999}
+            )
+    return [p for ps in top_per_platform.values() for p in ps]
 
 
 async def run_spy(product_id: int, force: bool = False) -> None:

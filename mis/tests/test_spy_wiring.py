@@ -32,8 +32,15 @@ def _seed_db(db_path: str, platform_slug: str = "hotmart") -> tuple[int, int]:
     db = get_db(db_path)
     now = datetime.utcnow().isoformat()
 
-    # Ensure platform exists (hotmart id=1, eduzz id=5, monetizze id=6, perfectpay id=7)
-    platform_id = 1 if platform_slug == "hotmart" else 99
+    # Ensure platform exists — IDs from migration _006:
+    # hotmart=1, clickbank=2, kiwify=3, eduzz=4, monetizze=5, perfectpay=6
+    _PLATFORM_ID_MAP = {
+        "hotmart": 1, "clickbank": 2, "kiwify": 3,
+        "eduzz": 4, "monetizze": 5, "perfectpay": 6,
+        "braip": 7, "product_hunt": 8, "udemy": 9, "jvzoo": 10,
+        "gumroad": 11, "appsumo": 12,
+    }
+    platform_id = _PLATFORM_ID_MAP.get(platform_slug, 99)
     db.execute(
         "INSERT OR IGNORE INTO platforms (id, name, slug, base_url, created_at) "
         "VALUES (?, ?, ?, ?, ?)",
