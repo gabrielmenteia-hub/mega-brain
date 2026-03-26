@@ -78,14 +78,14 @@
 | OUT-01 | Phase 4 | Pending |
 | OUT-02 | Phase 4 | Pending |
 | OUT-03 | Phase 4 | Pending |
-| INT-01 | Phase 5 | Pending |
-| INT-02 | Phase 5 | Pending |
+| INT-01 | Phase 4 | Pending |
+| INT-02 | Phase 4 | Pending |
 
 **Coverage:**
 - v1 requirements: 15 total
 - Mapped to phases: 15
-- Unmapped: 0 ✓
+- Unmapped: 0
 
 ---
 *Requirements defined: 2026-03-26*
-*Last updated: 2026-03-26 after initial definition*
+*Last updated: 2026-03-26 after roadmap creation (4 phases, coarse granularity)*
