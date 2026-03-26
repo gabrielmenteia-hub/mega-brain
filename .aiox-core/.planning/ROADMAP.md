@@ -27,7 +27,7 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Modelos Pydantic (ReviewScore, CreativeBundle, NexusConfig) importaveis e validam dados invalidos com erros claros
   2. Toda configuracao (MAX_RETRIES, thresholds, model IDs) e carregada de .env -- alterar .env muda comportamento sem tocar codigo
   3. Cada dimensao de revisao (copy, tecnica, compliance, performance) possui rubrica com criterios objetivos e exemplos few-shot testados
-**Plans:** 2 plans
+**Plans:** 1/2 plans executed
 
 Plans:
 - [ ] 01-01-PLAN.md — Modelos Pydantic (AgentScore, CreativeBundle) + NexusConfig via .env + TDD suite
@@ -84,7 +84,7 @@ Phases execute in numeric order: 1 -> 2 -> 3 -> 4
 
 | Phase | Plans Complete | Status | Completed |
 |-------|----------------|--------|-----------|
-| 1. Foundation | 0/2 | Not started | - |
+| 1. Foundation | 1/2 | In Progress|  |
 | 2. Review Engine | 0/2 | Not started | - |
 | 3. Regeneration Loop | 0/1 | Not started | - |
 | 4. Output & Integration | 0/2 | Not started | - |

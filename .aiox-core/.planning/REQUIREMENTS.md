@@ -7,8 +7,8 @@
 
 ### Foundation
 
-- [ ] **FND-01**: Sistema define modelos Pydantic tipados (ReviewScore, CreativeBundle, NexusConfig) como base de dados de todo o pipeline
-- [ ] **FND-02**: Toda configuração (MAX_RETRIES, thresholds por agente, model IDs) é carregada de variáveis de ambiente via .env, sem hardcode
+- [x] **FND-01**: Sistema define modelos Pydantic tipados (ReviewScore, CreativeBundle, NexusConfig) como base de dados de todo o pipeline
+- [x] **FND-02**: Toda configuração (MAX_RETRIES, thresholds por agente, model IDs) é carregada de variáveis de ambiente via .env, sem hardcode
 - [ ] **FND-03**: Cada dimensão de revisão possui rubrica estruturada com critérios objetivos e exemplos few-shot para calibração
 
 ### Review Engine
@@ -65,8 +65,8 @@
 
 | Requirement | Phase | Status |
 |-------------|-------|--------|
-| FND-01 | Phase 1 | Pending |
-| FND-02 | Phase 1 | Pending |
+| FND-01 | Phase 1 | Complete |
+| FND-02 | Phase 1 | Complete |
 | FND-03 | Phase 1 | Pending |
 | REV-01 | Phase 2 | Pending |
 | REV-02 | Phase 2 | Pending |
