@@ -1,0 +1,93 @@
+id: cybersecurity-squad
+name: Cybersecurity Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 15 agentes de cibersegurança cobrindo red team, blue team, AppSec, incident response, recon e exploração — com framework ético obrigatório."
+orchestrator: cyber-chief
+stats:
+  agents: 15
+  tasks: 9
+  workflows: 2
+tags: [penetration, red-team, blue-team, appsec, incident-response, security]
+agents:
+  - id: cyber-chief
+    name: Cyber Chief
+    command: "/cyber-chief"
+  - id: busterer
+    name: Busterer
+    command: "/busterer"
+  - id: cartographer
+    name: Cartographer
+    command: "/cartographer"
+  - id: chris-sanders
+    name: Chris Sanders
+    command: "/chris-sanders"
+  - id: command-generator
+    name: Command Generator
+    command: "/command-generator"
+  - id: dirber
+    name: Dirber
+    command: "/dirber"
+  - id: fuzzer
+    name: Fuzzer
+    command: "/fuzzer"
+  - id: georgia-weidman
+    name: Georgia Weidman
+    command: "/georgia-weidman"
+  - id: jim-manico
+    name: Jim Manico
+    command: "/jim-manico"
+  - id: marcus-carey
+    name: Marcus Carey
+    command: "/marcus-carey"
+  - id: omar-santos
+    name: Omar Santos
+    command: "/omar-santos"
+  - id: peter-kim
+    name: Peter Kim
+    command: "/peter-kim"
+  - id: ripper
+    name: Ripper
+    command: "/ripper"
+  - id: rogue
+    name: Rogue
+    command: "/rogue"
+  - id: shannon-runner
+    name: Shannon Runner
+    command: "/shannon-runner"
+tasks:
+  - id: analyze-vulnerability
+    name: Analyze Vulnerability
+    command: "/analyze-vulnerability"
+  - id: assess-security
+    name: Assess Security
+    command: "/assess-security"
+  - id: audit-app-security
+    name: Audit App Security
+    command: "/audit-app-security"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: generate-commands
+    name: Generate Commands
+    command: "/generate-commands"
+  - id: respond-incident
+    name: Respond Incident
+    command: "/respond-incident"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: run-pentest
+    name: Run Pentest
+    command: "/run-pentest"
+  - id: run-recon
+    name: Run Recon
+    command: "/run-recon"
+workflows:
+  - id: resposta-incidentes
+    name: Resposta a Incidentes
+    duration: "1-4 horas"
+  - id: pentest-engagement
+    name: Engajamento de Penetration Test
+    duration: "2-4 horas"
+added: "2026-03-12"

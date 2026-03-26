@@ -1,0 +1,75 @@
+id: advisory-board
+name: Advisory Board
+version: "1.0.0"
+source: xquads
+description: "Board de 11 conselheiros estratégicos cobrindo sistemas, pensamento multidisciplinar, riqueza, inovação, redes, propósito, autenticidade, equipes, minimalismo e sustentabilidade."
+orchestrator: board-chair
+stats:
+  agents: 11
+  tasks: 7
+  workflows: 2
+tags: [strategy, advisory, governance, decision-making]
+agents:
+  - id: board-chair
+    name: Board Chair
+    command: "/advisory-board-agents-board-chair"
+  - id: ray-dalio
+    name: Ray Dalio
+    command: "/advisory-board-agents-ray-dalio"
+  - id: charlie-munger
+    name: Charlie Munger
+    command: "/advisory-board-agents-charlie-munger"
+  - id: naval-ravikant
+    name: Naval Ravikant
+    command: "/advisory-board-agents-naval-ravikant"
+  - id: peter-thiel
+    name: Peter Thiel
+    command: "/advisory-board-agents-peter-thiel"
+  - id: reid-hoffman
+    name: Reid Hoffman
+    command: "/advisory-board-agents-reid-hoffman"
+  - id: simon-sinek
+    name: Simon Sinek
+    command: "/advisory-board-agents-simon-sinek"
+  - id: brene-brown
+    name: Brene Brown
+    command: "/advisory-board-agents-brene-brown"
+  - id: patrick-lencioni
+    name: Patrick Lencioni
+    command: "/advisory-board-agents-patrick-lencioni"
+  - id: derek-sivers
+    name: Derek Sivers
+    command: "/advisory-board-agents-derek-sivers"
+  - id: yvon-chouinard
+    name: Yvon Chouinard
+    command: "/advisory-board-agents-yvon-chouinard"
+tasks:
+  - id: convene-board
+    name: Convene Board
+    command: "/convene-board"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: evaluate-scaling
+    name: Evaluate Scaling
+    command: "/evaluate-scaling"
+  - id: get-founder-counsel
+    name: Get Founder Counsel
+    command: "/get-founder-counsel"
+  - id: resolve-culture-crisis
+    name: Resolve Culture Crisis
+    command: "/resolve-culture-crisis"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: seek-investment-counsel
+    name: Seek Investment Counsel
+    command: "/seek-investment-counsel"
+workflows:
+  - id: reuniao-consultiva
+    name: Reunião do Conselho Consultivo
+    duration: "~2 horas"
+  - id: framework-decisao
+    name: Framework de Decisão
+    duration: "~45-60 minutos"
+added: "2026-03-12"

@@ -1,0 +1,397 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PSYCHOLOGICAL TRIGGERS — Joseph Sugarman Framework
+# Reference: Triggers (1999) + The Adweek Copywriting Handbook (2006)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+framework:
+  name: "30 Psychological Triggers"
+  author: "Joseph Sugarman"
+  source: "Triggers (1999)"
+  principle: |
+    "Every buying decision is the result of a series of psychological triggers
+    that create a favorable environment for a sale. The copywriter's job is to
+    activate the right triggers for the right product."
+
+triggers:
+  1:
+    name: "Feeling of Involvement"
+    portuguese: "Sentimento de Envolvimento"
+    description: "Faça o prospect participar ativamente da copy, não apenas recebê-la"
+    power: "★★★★★"
+    application:
+      - "Perguntas retóricas que criam concordância interna"
+      - "Cenários de imersão: 'Imagine que...'"
+      - "Yes-ladder: série de 'verdades' com as quais o prospect concorda"
+      - "Exercícios ou cálculos que o prospect faz junto"
+    example: |
+      "Você já sentiu que por mais que você trabalhe, parece que o negócio
+      nunca cresce na proporção do esforço? Se você respondeu sim mentalmente,
+      continue lendo — porque o próximo parágrafo explica exatamente por quê."
+    avoid: "Perguntas retóricas óbvias demais ('Você quer ganhar dinheiro?')"
+
+  2:
+    name: "Honesty"
+    portuguese: "Honestidade"
+    description: "Admitir uma fraqueza ou limitação antes que o prospect descubra cria confiança"
+    power: "★★★★☆"
+    application:
+      - "Mencione uma limitação real do produto antes que ela apareça como objeção"
+      - "Admita quem NÃO se beneficia do produto"
+      - "Diga quando o resultado leva mais tempo do que o prospect espera"
+    example: |
+      "Preciso ser honesto: este método não é para quem quer resultados em 48 horas.
+      Leva em média 6 semanas para ver os primeiros resultados consistentes.
+      Mas quando chegam, são resultados que ficam."
+
+  3:
+    name: "Integrity"
+    portuguese: "Integridade"
+    description: "Demonstre através de ações, não palavras, que você cumpre o que promete"
+    power: "★★★★☆"
+    application:
+      - "Garantias que você de fato honra"
+      - "Casos onde você reembolsou clientes (mencione)"
+      - "Política clara de suporte e atendimento"
+
+  4:
+    name: "Credibility"
+    portuguese: "Credibilidade"
+    description: "Autoridade estabelecida por evidência, não por auto-proclamação"
+    power: "★★★★★"
+    application:
+      - "Publicações, coberturas de mídia, prêmios específicos"
+      - "Número específico de clientes ou resultados"
+      - "Anos de experiência em contexto específico"
+      - "Depoimentos de autoridades reconhecidas"
+    example: "Usado por 3.847 donos de clínicas em 17 estados. 94% de taxa de renovação."
+
+  5:
+    name: "Value and Proof of Value"
+    portuguese: "Valor e Prova de Valor"
+    description: "Construa a percepção de valor ANTES de revelar o preço"
+    power: "★★★★★"
+    application:
+      - "Mostre o valor de cada componente individualmente"
+      - "Compare com alternativas mais caras"
+      - "Calcule o ROI do investimento"
+      - "Revele o preço sempre depois de estabelecer o valor"
+    example: |
+      "Consultores cobram R$5.000/hora pelo mesmo framework.
+      Uma agência cobra R$8.000/mês para implementar isso por você.
+      No programa: R$1.997 — acesso completo por 12 meses."
+
+  6:
+    name: "Justify the Purchase"
+    portuguese: "Justifique a Compra"
+    description: "O prospect compra emocionalmente mas precisa de lógica para justificar para si (e outros)"
+    power: "★★★★☆"
+    application:
+      - "Forneça os argumentos que o prospect usará para se justificar"
+      - "ROI calculado: 'Em X meses, você recupera o investimento'"
+      - "Compare com custo de não agir"
+    example: |
+      "Pense nisso como um investimento: ao preço de R$997, se você fechar
+      apenas 1 cliente adicional usando esse método — e clientes pagam em média R$3.500 —
+      você já recuperou o investimento 3,5 vezes."
+
+  7:
+    name: "Greed"
+    portuguese: "Desejo de Ganho"
+    description: "O desejo de ganhar mais — dinheiro, tempo, status, liberdade"
+    power: "★★★★★"
+    application:
+      - "Pinte o cenário de ganho com especificidade visual"
+      - "Use números reais de clientes"
+      - "Torne o ganho tangível e imaginável"
+    example: |
+      "Imagine acordar na segunda-feira com 3 notificações de pagamento que chegaram
+      durante o fim de semana. R$2.200, R$1.800, R$3.400. R$7.400 sem uma única
+      ligação de vendas. Isso acontece quando o sistema está rodando."
+
+  8:
+    name: "Establish Authority"
+    portuguese: "Estabelecer Autoridade"
+    description: "Posicionamento como a fonte mais confiável no assunto"
+    power: "★★★★☆"
+    application:
+      - "Mencione credenciais específicas e relevantes"
+      - "Cite os resultados mais impressionantes"
+      - "Nomeie quem você ajudou que o prospect reconhece"
+    avoid: "Auto-proclamação vazia ('somos especialistas')"
+
+  9:
+    name: "Satisfy Curiosity"
+    portuguese: "Satisfazer Curiosidade"
+    description: "O trigger mais poderoso — cria lacuna de informação que só fecha ao comprar"
+    power: "★★★★★"
+    application:
+      - "Abra a lacuna no início (headline, hook)"
+      - "Mantenha a lacuna aberta ao longo da copy"
+      - "Feche apenas no CTA ou após"
+      - "Use 'O segredo de...', 'A razão real...', 'O que {grupo} não te conta...'"
+    rule: "NUNCA abra uma lacuna de curiosidade e feche-a antes do CTA."
+    example: |
+      "Existe um erro que 87% dos vendedores cometem no primeiro contato —
+      e que faz os clientes potenciais sumirem. Não é o que você está pensando.
+      Vou explicar exatamente o que é — e como evitar — na página 3."
+
+  10:
+    name: "Fear and Sense of Urgency"
+    portuguese: "Medo e Urgência"
+    description: "Medo de perda (mais potente) + urgência real para agir"
+    power: "★★★★★"
+    application:
+      - "Mostre o custo de NÃO agir (específico e calculado)"
+      - "Deadline real com razão lógica"
+      - "Consequência futura se nada mudar"
+    rule: "Urgência DEVE ser real e ter razão lógica. Fake urgency destrói credibilidade."
+    example: |
+      "Cada mês sem implementar isso representa em média 4 negociações que não fecham.
+      No seu ticket médio de R$8.000, isso é R$32.000 que vai para o concorrente.
+      O programa fecha vagas na sexta porque a próxima turma só abre em março."
+
+  11:
+    name: "Instant Gratification"
+    portuguese: "Gratificação Instantânea"
+    description: "Entrega de resultado ou quick win o mais rápido possível"
+    power: "★★★★☆"
+    application:
+      - "Mencione um resultado que acontece nas primeiras 24-48h"
+      - "Acesso imediato após compra"
+      - "Primeira vitória antes da fim do módulo 1"
+
+  12:
+    name: "Exclusivity and Rarity"
+    portuguese: "Exclusividade e Raridade"
+    description: "Pertencer a algo que não é para todos eleva o valor percebido"
+    power: "★★★★☆"
+    application:
+      - "Defina claramente quem é (e não é) o público"
+      - "Limite de vagas com razão real"
+      - "Processo seletivo ou qualificação"
+    example: |
+      "Este grupo é limitado a 30 empresas por turma. Não por estratégia de escassez —
+      mas porque o acompanhamento individual que oferecemos não é escalável além disso."
+
+  13:
+    name: "Hope"
+    portuguese: "Esperança"
+    description: "A promessa de um futuro melhor — o trigger mais humano"
+    power: "★★★★★"
+    application:
+      - "Pinte o estado futuro com riqueza de detalhes"
+      - "Use histórias de transformação"
+      - "Conecte o produto ao sonho mais profundo do prospect"
+    example: |
+      "Daqui a 6 meses, você pode estar olhando para um negócio que funciona
+      sem você estar disponível 24h. Onde clientes chegam por indicação,
+      onde sua equipe resolve sem te acionar, onde você trabalha porque quer — não porque precisa."
+
+  14:
+    name: "Simplicity"
+    portuguese: "Simplicidade"
+    description: "Reduza a percepção de complexidade para remover barreira de entrada"
+    power: "★★★★☆"
+    application:
+      - "Declare explicitamente o que NÃO é necessário para começar"
+      - "Divida em passos simples e numerados"
+      - "Use analogias com o familiar"
+    example: |
+      "Você não precisa saber nada sobre tráfego pago para começar.
+      O sistema guia cada passo. Se você sabe usar o WhatsApp, você consegue."
+
+  15:
+    name: "Human Relationships"
+    portuguese: "Relacionamento Humano"
+    description: "Compramos de quem conhecemos, gostamos e confiamos"
+    power: "★★★★☆"
+    application:
+      - "Compartilhe história pessoal real"
+      - "Mostre vulnerabilidade e falha antes do sucesso"
+      - "Copy conversacional, não corporativa"
+
+  16:
+    name: "Guilt"
+    portuguese: "Culpa"
+    description: "O prospect sente-se responsável por não ter agido antes (use com compaixão)"
+    power: "★★★☆☆"
+    application:
+      - "Mostre o custo de inação passada sem julgamento"
+      - "'Não é culpa sua que não sabia. Mas agora você sabe.'"
+    rule: "Nunca use para envergonhar. Use para empoderar."
+
+  17:
+    name: "Justify with Logic"
+    portuguese: "Justifique com Lógica"
+    description: "Após a decisão emocional, forneça argumentos lógicos"
+    power: "★★★★☆"
+    application:
+      - "ROI calculado"
+      - "Comparação de custo-benefício"
+      - "Testimonial de alguém que inicialmente duvidava"
+
+  18:
+    name: "Greed (Specific Scenarios)"
+    portuguese: "Cenários Específicos de Ganho"
+    description: "Torne o ganho tão específico que o prospect consegue se ver vivendo-o"
+    power: "★★★★★"
+    application:
+      - "Cenários vívidos e específicos (dia, hora, sentimento)"
+      - "Números reais de clientes em situação similar"
+
+  19:
+    name: "Testimonials"
+    portuguese: "Depoimentos"
+    description: "Prova social de alguém similar ao prospect"
+    power: "★★★★★"
+    application:
+      - "Depoimento com antes/depois específico"
+      - "Nome completo + cargo + empresa verificável"
+      - "Objeção que tinham antes + como mudou"
+    rule: "Depoimento vago é pior que nenhum depoimento."
+
+  20:
+    name: "Nature of Product"
+    portuguese: "Natureza do Produto"
+    description: "Algumas características do produto em si criam confiança"
+    power: "★★★☆☆"
+    application:
+      - "Processo de criação que impressiona"
+      - "Ingrediente/componente que demonstra cuidado"
+
+  21:
+    name: "Prospect's Future"
+    portuguese: "Futuro do Prospect"
+    description: "Conecte o produto ao futuro que o prospect quer construir"
+    power: "★★★★☆"
+    application:
+      - "Onde eles estarão em 1, 5, 10 anos com vs. sem o produto"
+      - "A decisão de hoje vs. o futuro de amanhã"
+
+  22:
+    name: "Current Fads"
+    portuguese: "Tendências Atuais"
+    description: "Conectar ao que é relevante e urgente agora"
+    power: "★★★☆☆"
+    application:
+      - "Referências a notícias ou tendências atuais do mercado"
+      - "'Enquanto [tendência acontece], você pode...'"
+
+  23:
+    name: "Desire to Belong"
+    portuguese: "Desejo de Pertencimento"
+    description: "Ser parte de um grupo desejável"
+    power: "★★★★☆"
+    application:
+      - "'Junte-se a {número} {ICPs} que já...'"
+      - "Comunidade exclusiva como bônus"
+      - "Identidade de grupo ('fundadores', 'early adopters')"
+
+  24:
+    name: "Collect or Collect"
+    portuguese: "Colecionar"
+    description: "O impulso de completar uma coleção"
+    power: "★★★☆☆"
+    application:
+      - "Certificações progressivas"
+      - "Módulos que formam um sistema completo"
+
+  25:
+    name: "Curiosity"
+    portuguese: "Curiosidade"
+    description: "O trigger mais universal — funciona em qualquer formato"
+    power: "★★★★★"
+    note: "Ver trigger #9 — Satisfy Curiosity. São o par complementar."
+
+  26:
+    name: "Sense of Urgency"
+    portuguese: "Senso de Urgência"
+    description: "Razão real para agir agora vs. mais tarde"
+    power: "★★★★★"
+    note: "Ver trigger #10 — Fear and Sense of Urgency."
+
+  27:
+    name: "Fear"
+    portuguese: "Medo"
+    description: "O driver mais potente da ação humana"
+    power: "★★★★★"
+    note: "Ver trigger #10 — Fear and Sense of Urgency."
+
+  28:
+    name: "Instant Gratification"
+    portuguese: "Gratificação Imediata"
+    description: "Quick win — resultado visível o mais rápido possível"
+    power: "★★★★☆"
+    note: "Ver trigger #11."
+
+  29:
+    name: "Exclusivity"
+    portuguese: "Exclusividade"
+    description: "Para os poucos que qualificam"
+    power: "★★★★☆"
+    note: "Ver trigger #12."
+
+  30:
+    name: "Simplicity"
+    portuguese: "Simplicidade"
+    description: "Mais fácil do que parece"
+    power: "★★★★☆"
+    note: "Ver trigger #14."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TOP 10 POWER TRIGGERS (Priority Implementation)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+power_triggers:
+  rank:
+    1: "Curiosidade (#9, #25) — trigger mais universal"
+    2: "Medo e Urgência (#10, #26, #27) — mais potente para ação imediata"
+    3: "Esperança (#13) — mais humano e duradouro"
+    4: "Desejo de Ganho (#7, #18) — motor universal"
+    5: "Valor e Prova (#5) — indispensável antes do preço"
+    6: "Envolvimento (#1) — multiplica todos os outros"
+    7: "Credibilidade (#4, #8) — pré-requisito para qualquer claim"
+    8: "Prova Social (#19) — o mais eficiente para mercados céticos"
+    9: "Exclusividade (#12, #29) — eleva valor percebido"
+    10: "Simplicidade (#14, #30) — remove barreira de entrada"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SLIPPERY SLIDE CHECKLIST
+# ═══════════════════════════════════════════════════════════════════════════════
+
+slippery_slide_checklist:
+  principle: "Cada frase existe apenas para fazer ler a próxima"
+  checkpoints:
+    - "Primeira frase: impossível de não ler"
+    - "Cada parágrafo: termina com gancho para o próximo"
+    - "Nenhuma frase passiva onde poderia ser ativa"
+    - "Nenhum jargão sem tradução imediata"
+    - "Nenhum parágrafo sem espaço em branco depois"
+    - "Transição suave entre cada seção"
+    - "CTA chega quando o prospect está pronto — não antes"
+
+friction_types:
+  lexical:
+    description: "Palavras difíceis, técnicas ou desconhecidas"
+    detection: "Você parou para reler? É fricção lexical."
+    fix: "Substitua por linguagem comum. Se técnico necessário, explique imediatamente."
+
+  structural:
+    description: "Parágrafos longos, sem espaço em branco"
+    detection: "Olhou para o bloco e deu vontade de pular?"
+    fix: "Máx 4 linhas por parágrafo. Uma ideia por vez."
+
+  cognitive:
+    description: "Argumento que exige muito esforço mental"
+    detection: "Precisou reler para entender?"
+    fix: "Simplifique. Use analogia. Divida em passos."
+
+  trust:
+    description: "Claim que parece grande demais para ser verdade"
+    detection: "Você teria acreditado nisso sem conhecer o autor?"
+    fix: "Adicione prova antes do claim ou reduza o claim."
+
+  pace:
+    description: "Perda de ritmo — muito devagar ou muito rápido"
+    detection: "Você quis pular alguma seção?"
+    fix: "Varie o comprimento das frases. Curtas = ritmo. Longas = respiro."

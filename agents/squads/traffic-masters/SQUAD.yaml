@@ -1,0 +1,96 @@
+id: traffic-masters
+name: Traffic Masters
+version: "1.0.0"
+source: xquads
+description: "Squad de 16 agentes especializados em tráfego pago — Facebook, YouTube, Google Ads, mídia buying, creative analysis, scaling e tracking."
+orchestrator: traffic-chief
+stats:
+  agents: 16
+  tasks: 9
+  workflows: 2
+tags: [traffic, paid-ads, facebook-ads, google-ads, media-buying, scaling, tracking]
+agents:
+  - id: traffic-chief
+    name: Traffic Chief
+    command: "/traffic-chief"
+  - id: ad-midas
+    name: Ad Midas
+    command: "/ad-midas"
+  - id: ads-analyst
+    name: Ads Analyst
+    command: "/ads-analyst"
+  - id: creative-analyst
+    name: Creative Analyst
+    command: "/creative-analyst"
+  - id: depesh-mandalia
+    name: Depesh Mandalia
+    command: "/depesh-mandalia"
+  - id: fiscal
+    name: Fiscal
+    command: "/fiscal"
+  - id: kasim-aslam
+    name: Kasim Aslam
+    command: "/kasim-aslam"
+  - id: media-buyer
+    name: Media Buyer
+    command: "/media-buyer"
+  - id: molly-pittman
+    name: Molly Pittman
+    command: "/molly-pittman"
+  - id: nicholas-kusmich
+    name: Nicholas Kusmich
+    command: "/nicholas-kusmich"
+  - id: pedro-sobral
+    name: Pedro Sobral
+    command: "/pedro-sobral"
+  - id: performance-analyst
+    name: Performance Analyst
+    command: "/performance-analyst"
+  - id: pixel-specialist
+    name: Pixel Specialist
+    command: "/pixel-specialist"
+  - id: ralph-burns
+    name: Ralph Burns
+    command: "/ralph-burns"
+  - id: scale-optimizer
+    name: Scale Optimizer
+    command: "/scale-optimizer"
+  - id: tom-breeze
+    name: Tom Breeze
+    command: "/tom-breeze"
+tasks:
+  - id: analyze-performance
+    name: Analyze Performance
+    command: "/analyze-performance"
+  - id: audit-ad-account
+    name: Audit Ad Account
+    command: "/audit-ad-account"
+  - id: create-ad-creative
+    name: Create Ad Creative
+    command: "/create-ad-creative"
+  - id: create-ad-strategy
+    name: Create Ad Strategy
+    command: "/create-ad-strategy"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: manage-budget
+    name: Manage Budget
+    command: "/manage-budget"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: scale-campaign
+    name: Scale Campaign
+    command: "/scale-campaign"
+  - id: setup-tracking
+    name: Setup Tracking
+    command: "/setup-tracking"
+workflows:
+  - id: auditoria-formacao-dados
+    name: Auditoria e Formação de Dados
+    duration: "2-4 horas"
+  - id: lancamento-campanhas
+    name: Lançamento de Campanhas
+    duration: "1-3 horas"
+added: "2026-03-12"

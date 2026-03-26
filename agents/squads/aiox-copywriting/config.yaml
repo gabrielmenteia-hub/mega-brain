@@ -1,0 +1,369 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# COPYWRITING SQUAD - Configuration
+# Version: 1.0.0
+# Purpose: Elite copy production for all formats + strategic analysis
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: copywriting
+version: 1.0.0
+
+pack:
+  name: copywriting
+  version: 1.0.0
+  short-title: Copywriting Squad
+  description: >-
+    Squad especializado em copywriting de elite para todos os formatos.
+    Combina os maiores copywriters da história em um pipeline estratégico:
+    inteligência de mercado → estratégia → escrita → otimização.
+    Output: copy pronta para usar + análise estratégica completa.
+  author: AIOX
+  icon: "✍️"
+  slashPrefix: copy
+
+entry_agent: copy-chief
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CORE PRINCIPLES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+core_principles:
+  - name: "AWARENESS FIRST"
+    rule: "Toda copy começa mapeando o nível de consciência do mercado (Schwartz). Copy escrita para o nível errado não converte."
+
+  - name: "RESEARCH BEFORE WRITING"
+    rule: "Ogilvy: 'Não consigo criar anúncios sem pesquisa.' Pesquise o produto, o mercado e o cliente antes de escrever uma linha."
+
+  - name: "DESIRE EXISTS, YOU CHANNEL IT"
+    rule: "Schwartz: 'Copy não cria desejo. Ela pega o desejo que já existe e o direciona.' Encontre o desejo latente."
+
+  - name: "OFFER BEATS COPY"
+    rule: "Hormozi: Uma oferta irresistível com copy mediana supera uma oferta fraca com copy genial. Estruture a oferta primeiro."
+
+  - name: "PROOF DRIVES RESPONSE"
+    rule: "Bencivenga: 'A força mais poderosa no copywriting é a crença genuína, apoiada por prova.' Nunca afirme sem provar."
+
+  - name: "SLIPPERY SLIDE"
+    rule: "Sugarman: Cada frase existe apenas para fazer o leitor ler a próxima. Flow é lei."
+
+  - name: "SPECIFICITY = CREDIBILITY"
+    rule: "Hopkins: '47% mais eficaz' supera 'muito mais eficaz'. Números específicos constroem crença."
+
+  - name: "STARVING CROWD"
+    rule: "Halbert: O maior ativo não é o produto, é o mercado. Encontre a multidão faminta primeiro."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TIER STRUCTURE
+# ═══════════════════════════════════════════════════════════════════════════════
+
+tier_structure:
+  orchestrator:
+    agent: copy-chief
+    role: "Route requests, coordinate tiers, deliver copy + análise estratégica"
+
+  tier_0:
+    name: "Market Intelligence"
+    agents:
+      - eugene-schwartz
+      - david-ogilvy
+    purpose: "Map awareness level, identify USP, research market"
+    output: "market-brief.md"
+
+  tier_1:
+    name: "Strategy & Angle"
+    agents:
+      - dan-kennedy
+      - alex-hormozi
+      - claude-hopkins
+    purpose: "Define angle, emotional drivers, offer structure, proof framework"
+    output: "copy-strategy.md"
+
+  tier_2:
+    name: "Writing"
+    agents:
+      - gary-halbert
+      - gary-bencivenga
+    purpose: "Draft copy + credibility layer"
+    output: "copy-draft.md"
+
+  tier_3:
+    name: "Optimization & Critique"
+    agents:
+      - joseph-sugarman
+    purpose: "Psychological trigger audit, flow optimization, final polish"
+    output: "copy-final.md + copy-analysis.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SUPPORTED FORMATS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+formats:
+  ad:
+    name: "Ad (Meta/Google)"
+    components:
+      - hook (3-5 variants)
+      - body
+      - cta
+    awareness_target: "unaware to solution-aware"
+    primary_agents: [gary-halbert, eugene-schwartz]
+
+  landing-page:
+    name: "Landing Page / Sales Page"
+    components:
+      - hero (headline + subheadline)
+      - pain/problem section
+      - mechanism/solution
+      - social proof
+      - offer stack
+      - faq
+      - close + cta
+    awareness_target: "solution-aware to most-aware"
+    primary_agents: [gary-bencivenga, alex-hormozi, claude-hopkins]
+
+  email:
+    name: "Email / Sequence"
+    components:
+      - subject line (5 variants)
+      - preview text
+      - body
+      - cta
+      - p.s.
+    awareness_target: "varies by sequence stage"
+    primary_agents: [gary-halbert, dan-kennedy]
+
+  social:
+    name: "Social Media (Caption / Thread)"
+    components:
+      - hook (first line)
+      - body
+      - cta / engagement trigger
+    awareness_target: "unaware to pain-aware"
+    primary_agents: [eugene-schwartz, joseph-sugarman]
+
+  vsl:
+    name: "VSL / Video Script"
+    components:
+      - hook (0-30s)
+      - problem identification
+      - story / credibility
+      - mechanism reveal
+      - social proof
+      - offer
+      - close
+    awareness_target: "pain-aware to solution-aware"
+    primary_agents: [dan-kennedy, gary-bencivenga, alex-hormozi]
+
+  sales-letter:
+    name: "Sales Letter (Long Form)"
+    components:
+      - headline
+      - subheadline
+      - opening story
+      - problem amplification
+      - mechanism
+      - proof section
+      - offer
+      - guarantee
+      - close
+      - p.s.
+    awareness_target: "pain-aware to most-aware"
+    primary_agents: [gary-halbert, gary-bencivenga, claude-hopkins]
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quality_gates:
+  - id: "QG-001"
+    name: "Market Intelligence Complete"
+    transition: "Entry → Tier 1"
+    type: "blocking"
+    criteria:
+      - "Awareness level identified (1-5 Schwartz scale)"
+      - "ICP (Ideal Customer Profile) defined"
+      - "Core desire / mass desire identified"
+      - "Top 3 objections mapped"
+      - "USP or unique mechanism identified"
+      - "Competitors / market sophistication assessed"
+    if_fails:
+      action: "Gather missing intelligence before proceeding"
+      agents: [eugene-schwartz, david-ogilvy]
+      rework_limit: 2
+
+  - id: "QG-002"
+    name: "Strategy Approved"
+    transition: "Tier 1 → Tier 2"
+    type: "blocking"
+    criteria:
+      - "Primary angle selected and justified"
+      - "Emotional drivers mapped (fear / desire / aspiration)"
+      - "Offer structured (if applicable)"
+      - "Proof framework defined (testimonials / data / demonstration)"
+      - "Format confirmed"
+    if_fails:
+      action: "Revise strategy — present alternative angles"
+      agents: [dan-kennedy, alex-hormozi]
+      rework_limit: 2
+
+  - id: "QG-003"
+    name: "Draft Ready"
+    transition: "Tier 2 → Tier 3"
+    type: "blocking"
+    criteria:
+      - "All format components present"
+      - "Hook passes the scroll-stop test"
+      - "No unsubstantiated claims"
+      - "CTA clear and specific"
+    if_fails:
+      action: "Return to writing tier for revision"
+      agents: [gary-halbert, gary-bencivenga]
+      rework_limit: 2
+
+  - id: "QG-004"
+    name: "Copy Final Approved"
+    transition: "Tier 3 → Delivery"
+    type: "blocking"
+    criteria:
+      - "copy-quality.md checklist passes (mandatory 100%, quality 80%)"
+      - "Trigger audit complete"
+      - "Flow score >= 7/10"
+      - "Strategic analysis attached"
+    if_fails:
+      action: "Return to Sugarman for flow/trigger revision"
+      agents: [joseph-sugarman]
+      rework_limit: 2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATTERN LIBRARY
+# ═══════════════════════════════════════════════════════════════════════════════
+
+pattern_library:
+  prefix: CP
+  categories:
+    - id: AP
+      name: "Awareness Patterns"
+      description: "Patterns for matching copy to awareness level"
+    - id: OP
+      name: "Offer Patterns"
+      description: "Patterns for structuring offers"
+    - id: PP
+      name: "Proof Patterns"
+      description: "Patterns for building credibility"
+    - id: TP
+      name: "Trigger Patterns"
+      description: "Psychological trigger deployment"
+    - id: FP
+      name: "Formula Patterns"
+      description: "Copy formulas by format"
+  patterns:
+    - id: CP-AP-001
+      name: "5 Stages of Awareness"
+      description: "Schwartz: Unaware → Pain Aware → Solution Aware → Product Aware → Most Aware. Match headline and hook to exact stage."
+      source: "Eugene Schwartz — Breakthrough Advertising"
+    - id: CP-AP-002
+      name: "Market Sophistication Levels"
+      description: "1st claim works. 2nd needs mechanism. 3rd needs new mechanism. 4th needs identification. 5th needs experience."
+      source: "Eugene Schwartz — Breakthrough Advertising"
+    - id: CP-OP-001
+      name: "Value Equation"
+      description: "Dream Outcome × Perceived Likelihood / (Time Delay × Effort & Sacrifice). Maximize numerator, minimize denominator."
+      source: "Alex Hormozi — $100M Offers"
+    - id: CP-OP-002
+      name: "Grand Slam Offer Stack"
+      description: "Core offer + bonuses + guarantee + urgency/scarcity. Each element removes a reason NOT to buy."
+      source: "Alex Hormozi — $100M Offers"
+    - id: CP-PP-001
+      name: "Reason-Why Copy"
+      description: "Hopkins: Always give a reason WHY. A claim with a reason converts higher than a bare claim."
+      source: "Claude Hopkins — Scientific Advertising"
+    - id: CP-PP-002
+      name: "Preemptive Claim"
+      description: "Hopkins: Be first to claim what all competitors do. Coors 'Rocky Mountain spring water' — all beer was cold-filtered."
+      source: "Claude Hopkins — Scientific Advertising"
+    - id: CP-TP-001
+      name: "Slippery Slide"
+      description: "Sugarman: First sentence creates curiosity. Each sentence pulls to the next. Never break the flow."
+      source: "Joseph Sugarman — The Adweek Copywriting Handbook"
+    - id: CP-TP-002
+      name: "30 Psychological Triggers"
+      description: "Sugarman: Feeling of involvement, curiosity, fear, greed, guilt, urgency, scarcity, simplicity, etc."
+      source: "Joseph Sugarman — Triggers"
+    - id: CP-FP-001
+      name: "PAS Formula"
+      description: "Problem → Agitate → Solution. Halbert's favorite structure for short copy."
+      source: "Gary Halbert"
+    - id: CP-FP-002
+      name: "AIDA"
+      description: "Attention → Interest → Desire → Action. The foundational copy structure."
+      source: "Classic Direct Response"
+    - id: CP-FP-003
+      name: "PASTOR"
+      description: "Problem → Amplify → Story/Solution → Transformation → Offer → Response."
+      source: "Ray Edwards"
+    - id: CP-FP-004
+      name: "Ogilvy Headlines"
+      description: "News, curiosity, benefit, how-to, warning, testimonial. 80 cents of your advertising dollar spent here."
+      source: "David Ogilvy — Confessions of an Advertising Man"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TASK STANDARDS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+task_standards:
+  enforce_anatomy: true
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow_config:
+  checkpoint_policy: always_active
+  fail_fast: true
+  allow_manual_override: false
+  default_format: "landing-page"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# OUTPUT FORMATS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+output_formats:
+  copy_draft:
+    description: "Copy completa no formato solicitado"
+    file: "output/copy/{project-slug}/copy-final.md"
+
+  strategic_analysis:
+    description: "Análise estratégica: awareness level, angle escolhido, triggers usados, pontos de atrito, recomendações de A/B"
+    file: "output/copy/{project-slug}/copy-analysis.md"
+
+  market_brief:
+    description: "Briefing de mercado: ICP, awareness level, desejo central, objeções, USP"
+    file: "output/copy/{project-slug}/market-brief.md"
+
+  copy_strategy:
+    description: "Estratégia de copy: ângulo, drivers emocionais, framework de prova, estrutura da oferta"
+    file: "output/copy/{project-slug}/copy-strategy.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HANDOFFS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+handoffs:
+  receives_from:
+    - agent: "user"
+      what: "Produto/serviço, formato, contexto do público (opcional)"
+
+  delivers_to:
+    - agent: "user"
+      what: "copy-final.md + copy-analysis.md"
+    - agent: "@curator"
+      what: "Hook testado para uso em vídeos"
+    - agent: "@deep-research"
+      what: "Pesquisa de mercado aprofundada quando necessário"

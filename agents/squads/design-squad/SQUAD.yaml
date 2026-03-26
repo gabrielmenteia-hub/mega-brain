@@ -1,0 +1,69 @@
+id: design-squad
+name: Design Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 8 especialistas em design — estratégia, design system, atomic design, UX, UI engineering, design conversacional, arquitetura e criação visual."
+orchestrator: design-chief
+stats:
+  agents: 8
+  tasks: 8
+  workflows: 2
+tags: [design, ux, ui, design-system, atomic-design, visual]
+agents:
+  - id: design-chief
+    name: Design Chief
+    command: "/design-chief"
+  - id: brad-frost
+    name: Brad Frost
+    command: "/brad-frost"
+  - id: dan-mall
+    name: Dan Mall
+    command: "/dan-mall"
+  - id: dave-malouf
+    name: Dave Malouf
+    command: "/dave-malouf"
+  - id: design-system-architect
+    name: Design System Architect
+    command: "/design-system-architect"
+  - id: ui-engineer
+    name: UI Engineer
+    command: "/ui-engineer"
+  - id: ux-designer
+    name: UX Designer
+    command: "/ux-designer"
+  - id: visual-generator
+    name: Visual Generator
+    command: "/visual-generator"
+tasks:
+  - id: audit-design
+    name: Audit Design
+    command: "/audit-design"
+  - id: create-component-spec
+    name: Create Component Spec
+    command: "/create-component-spec"
+  - id: create-design-system
+    name: Create Design System
+    command: "/create-design-system"
+  - id: design-ux-flow
+    name: Design UX Flow
+    command: "/design-ux-flow"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: generate-handoff
+    name: Generate Handoff
+    command: "/generate-handoff"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: setup-design-ops
+    name: Setup Design Ops
+    command: "/setup-design-ops"
+workflows:
+  - id: design-system-creation
+    name: Criação de Design System
+    duration: "4-6 horas"
+  - id: feature-design
+    name: Design de Funcionalidade
+    duration: "2-4 horas"
+added: "2026-03-12"

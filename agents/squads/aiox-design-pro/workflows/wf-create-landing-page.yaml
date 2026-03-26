@@ -1,0 +1,364 @@
+workflow:
+  id: wf-create-landing-page
+  name: "Create Landing Page"
+  version: "1.0.0"
+  squad: design-pro
+  description: |
+    Workflow completo de criacao de landing page para infoprodutos.
+    Coordena 6 agentes especializados em sequencia, com quality gates entre fases.
+  mode: yolo  # ou incremental com checkpoints humanos
+  total_phases: 6
+
+inputs:
+  required:
+    - produto: "Nome e descricao do produto"
+    - publico: "Perfil do comprador ideal"
+    - preco: "Preco e modelo de venda"
+    - objetivo: "Meta de conversao"
+    - tipo_produto: "curso | ebook | mentoria | membership | workshop"
+  optional:
+    - provas: "Depoimentos e resultados disponiveis"
+    - tom: "premium | acessivel | urgente | educativo"
+    - urgencia: "Escassez ou prazo real se existir"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 0: TRIAGE
+# ═══════════════════════════════════════════════════════════════════════════════
+phases:
+  - id: P0
+    name: "Triage"
+    agent: "design-pro-chief"
+    duration_estimate: "2-5 minutos"
+    description: "Validar inputs e rotear para agentes corretos"
+
+    steps:
+      - id: P0.1
+        action: "Validar inputs obrigatorios"
+        criteria: "produto + publico + preco + objetivo + tipo_produto presentes"
+
+      - id: P0.2
+        action: "Selecionar modelo de landing page"
+        decision:
+          - IF tipo == "ebook" AND preco <= 97: modelo = "short-form"
+          - IF tipo == "curso" AND preco > 97: modelo = "long-form"
+          - IF tipo == "mentoria" OR preco > 1000: modelo = "premium-qualificacao"
+          - DEFAULT: modelo = "long-form"
+
+    checkpoint:
+      id: DP-WF-001
+      name: "Inputs Validos"
+      criteria:
+        - "Todos os inputs obrigatorios presentes"
+        - "Modelo de pagina selecionado"
+      blocking: true
+
+    output:
+      modelo_selecionado: string
+      agentes_necessarios: list
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 1: DIAGNOSTICO
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P1
+    name: "Diagnostico de Conversao"
+    agent: "conversion-diagnostician"
+    task: "tasks/analyze-brief.md"
+    duration_estimate: "10-20 minutos"
+    description: "Analisar produto, publico e objetivos para gerar brief completo"
+
+    steps:
+      - id: P1.1
+        action: "Coletar 7 dimensoes do brief"
+        tool: "analyze-brief.md"
+
+      - id: P1.2
+        action: "Gerar persona card"
+        output: "persona_card.yaml"
+
+      - id: P1.3
+        action: "Identificar objecoes principais"
+        output: "top_3_objecoes"
+
+      - id: P1.4
+        action: "Mapear inventario de provas"
+        output: "inventario_provas"
+
+    checkpoint:
+      id: DP-WF-P1
+      name: "Brief Completo"
+      criteria:
+        - "Persona com estado atual e desejado"
+        - "Promessa principal definida"
+        - "Minimo 3 objecoes identificadas"
+      blocking: true
+
+    output:
+      persona_card: object
+      brief_conversao: object
+      inventario_provas: list
+      promessa_principal: string
+
+    handoff_to: P2
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 2: ARQUITETURA
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P2
+    name: "Arquitetura de Informacao"
+    agent: "ux-architect"
+    task: "tasks/create-landing-page.md"
+    duration_estimate: "10-15 minutos"
+    description: "Definir estrutura de secoes e wireframe textual"
+    depends_on: [P1]
+
+    steps:
+      - id: P2.1
+        action: "Selecionar secoes por modelo e tipo de produto"
+        input: "modelo_selecionado + tipo_produto"
+
+      - id: P2.2
+        action: "Ordenar secoes pela jornada emocional"
+        reference: "Jornada: Curiosidade → Identificacao → Esperanca → Desejo → Confianca → Acao"
+
+      - id: P2.3
+        action: "Definir elementos de cada secao"
+        output: "wireframe_textual"
+
+      - id: P2.4
+        action: "Posicionar CTAs estrategicos"
+        regra: "CTA em pelo menos: hero, apos depoimentos, CTA final"
+
+    checkpoint:
+      id: DP-WF-P2
+      name: "Estrutura Aprovada"
+      criteria:
+        - "Todas as secoes necessarias para o modelo"
+        - "Ordem logica com justificativa emocional"
+        - "CTAs posicionados"
+      blocking: true
+
+    output:
+      wireframe_textual: object
+      secoes_ordenadas: list
+      cta_positions: list
+
+    handoff_to: P3
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 3: COPY
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P3
+    name: "Copywriting"
+    agent: "conversion-copywriter"
+    task: "tasks/create-landing-page.md"
+    duration_estimate: "20-40 minutos"
+    description: "Escrever copy completo da landing page"
+    depends_on: [P2]
+
+    steps:
+      - id: P3.1
+        action: "Escrever 5+ variacoes de headline"
+        formula: "Resultado + Publico + Tempo + Anti-objecao"
+
+      - id: P3.2
+        action: "Escrever copy de cada secao"
+        input: "wireframe_textual + persona_card"
+
+      - id: P3.3
+        action: "Criar bullets de beneficio"
+        formato: "Beneficio especifico → resultado mensuravel"
+        quantidade: "5-8 bullets"
+
+      - id: P3.4
+        action: "Escrever CTAs e microcopy"
+        quantidade: "1 primario + 2 variacoes"
+
+      - id: P3.5
+        action: "Redigir FAQ"
+        quantidade: "5-8 perguntas baseadas nas top objecoes"
+
+    checkpoint:
+      id: DP-WF-P3
+      name: "Copy Completo"
+      criteria:
+        - "Headline com resultado especifico"
+        - "Copy para cada secao do wireframe"
+        - "CTAs em formato de alta conversao"
+        - "FAQ respondendo objecoes principais"
+      blocking: true
+
+    output:
+      copy_completo: object
+      headline_principal: string
+      headline_alternativas: list
+      cta_principal: string
+      faq: list
+
+    handoff_to: [P4, P5]  # P4 e P5 podem ocorrer em paralelo
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 4: DESIGN VISUAL
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P4
+    name: "Design Visual"
+    agent: "visual-designer"
+    task: "tasks/create-landing-page.md"
+    duration_estimate: "15-25 minutos"
+    description: "Definir sistema visual completo"
+    depends_on: [P2]
+
+    steps:
+      - id: P4.1
+        action: "Definir paleta de cores (6 usos)"
+        inputs: ["tipo_produto", "tom", "perfil_psicografico_persona"]
+
+      - id: P4.2
+        action: "Definir sistema tipografico"
+        output: "heading + body + CTA com tamanhos desktop e mobile"
+
+      - id: P4.3
+        action: "Especificar hierarquia visual por secao"
+
+      - id: P4.4
+        action: "Definir tratamento de imagens e mockups"
+
+    checkpoint:
+      id: DP-WF-P4
+      name: "Design System Completo"
+      criteria:
+        - "Paleta com 6 usos e HEX codes"
+        - "Sistema tipografico com tamanhos mobile"
+        - "Especificacoes de imagem definidas"
+      blocking: true
+
+    output:
+      design_system: object
+      paleta: object
+      tipografia: object
+      spec_imagens: object
+
+    handoff_to: P6
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 5: ESPECIALIZACAO INFOPRODUTO
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P5
+    name: "Especializacao Infoproduto"
+    agent: "infoproduct-specialist"
+    task: "tasks/create-sales-page.md"
+    duration_estimate: "10-20 minutos"
+    description: "Adaptar para padroes especificos do tipo de infoproduto"
+    depends_on: [P3]
+
+    steps:
+      - id: P5.1
+        action: "Validar elementos especificos do tipo de produto"
+        checks_por_tipo:
+          curso: [modulos_com_resultado, pilha_de_valor, bonus]
+          ebook: [mockup_3d, tabela_de_conteudo]
+          mentoria: [cases_resultado, processo_aplicacao]
+
+      - id: P5.2
+        action: "Calcular pilha de valor (se aplicavel)"
+        formula: "Somar valores unitarios dos entregaveis"
+
+      - id: P5.3
+        action: "Definir estrategia de urgencia (se genuina)"
+
+      - id: P5.4
+        action: "Especificar modelo de checkout"
+
+    checkpoint:
+      id: DP-WF-P5
+      name: "Especializacao Completa"
+      criteria:
+        - "Elementos especificos do tipo presentes"
+        - "Pilha de valor calculada"
+        - "Urgencia genuina ou ausente"
+      blocking: true
+
+    output:
+      elementos_especificos: list
+      pilha_de_valor: object
+      urgencia_definida: string | null
+
+    handoff_to: P6
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASE 6: MOBILE E VALIDACAO FINAL
+# ═══════════════════════════════════════════════════════════════════════════════
+  - id: P6
+    name: "Mobile e Validacao Final"
+    agent: "mobile-optimizer"
+    task: "checklists/mobile-checklist.md"
+    duration_estimate: "10-15 minutos"
+    description: "Validar responsividade, performance e qualidade final"
+    depends_on: [P4, P5]
+
+    steps:
+      - id: P6.1
+        action: "Validar especificacoes mobile"
+        checklist: "mobile-checklist.md"
+
+      - id: P6.2
+        action: "Definir breakpoints e adaptacoes"
+
+      - id: P6.3
+        action: "Especificar targets de performance (LCP, CLS)"
+
+      - id: P6.4
+        action: "Aplicar landing-page-checklist.md"
+        score_minimo: 75
+
+    checkpoint:
+      id: DP-WF-P6
+      name: "Validacao Final"
+      criteria:
+        - "Mobile checklist score >= 70"
+        - "Landing page checklist score >= 75"
+        - "Todos os itens veto passando"
+      blocking: true
+
+    output:
+      mobile_spec: object
+      checklist_score: int
+      itens_pendentes: list
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FINAL OUTPUT
+# ═══════════════════════════════════════════════════════════════════════════════
+final_output:
+  artifacts:
+    - persona_card: "YAML com perfil completo do comprador"
+    - wireframe_textual: "MD com estrutura de secoes"
+    - copy_completo: "MD com todo o copy da pagina"
+    - design_system: "YAML com paleta, tipografia e especificacoes"
+    - mobile_spec: "MD com adaptacoes e targets de performance"
+    - checklist_final: "Score e itens validados"
+
+  quality_score:
+    formula: "(landing_page_checklist_score + mobile_checklist_score) / 2"
+    minimo: 72
+    ideal: 85+
+
+  entrega_completa_quando:
+    - "Todos os 6 agentes concluiram suas fases"
+    - "Todos os checkpoints de fase passando"
+    - "Score de qualidade >= 72"
+    - "Nenhum item veto falhando"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ERROR HANDLING
+# ═══════════════════════════════════════════════════════════════════════════════
+error_handling:
+  checkpoint_fail:
+    action: "Retornar para a fase anterior com feedback especifico"
+    max_retries: 2
+    on_max_retries: "Reportar ao usuario com problema especifico"
+
+  missing_brief:
+    action: "Acionar conversion-diagnostician para completar brief"
+
+  score_abaixo_minimo:
+    action: "Identificar secao com score mais baixo e corrigir"
+    max_iterations: 2

@@ -1,0 +1,60 @@
+id: movement-squad
+name: Movement Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 7 agentes para construção de movimentos — fenomenologia, identidade, manifestos, ciclos de crescimento e medição de impacto."
+orchestrator: movement-chief
+stats:
+  agents: 7
+  tasks: 7
+  workflows: 1
+tags: [movement, community, social-impact, identity, manifesto, growth-cycles]
+agents:
+  - id: movement-chief
+    name: Movement Chief
+    command: "/movement-chief"
+  - id: movement-architect
+    name: Movement Architect
+    command: "/movement-architect"
+  - id: fenomenologo
+    name: Fenomenólogo
+    command: "/fenomenologo"
+  - id: identitario
+    name: Identitário
+    command: "/identitario"
+  - id: estrategista-de-ciclo
+    name: Estrategista de Ciclo
+    command: "/estrategista-de-ciclo"
+  - id: manifestador
+    name: Manifestador
+    command: "/manifestador"
+  - id: analista-de-impacto
+    name: Analista de Impacto
+    command: "/analista-de-impacto"
+tasks:
+  - id: analyze-phenomenon
+    name: Analyze Phenomenon
+    command: "/analyze-phenomenon"
+  - id: create-identity
+    name: Create Identity
+    command: "/create-identity"
+  - id: write-manifesto
+    name: Write Manifesto
+    command: "/write-manifesto"
+  - id: build-movement
+    name: Build Movement
+    command: "/build-movement"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: measure-impact
+    name: Measure Impact
+    command: "/measure-impact"
+  - id: review
+    name: Review
+    command: "/review"
+workflows:
+  - id: lancamento-movimento
+    name: Lançamento de Movimento
+    duration: "2-4 horas"
+added: "2026-03-12"

@@ -1,0 +1,93 @@
+id: brand-squad
+name: Brand Squad
+version: "1.0.0"
+source: xquads
+description: "Squad definitivo de estratégia de marca com 15 especialistas — equity, posicionamento, identidade, arquitetura, narrativa e crescimento."
+orchestrator: brand-chief
+stats:
+  agents: 15
+  tasks: 9
+  workflows: 2
+tags: [branding, positioning, identity, narrative, equity]
+agents:
+  - id: brand-chief
+    name: Brand Chief
+    command: "/brand-chief"
+  - id: al-ries
+    name: Al Ries
+    command: "/al-ries"
+  - id: alina-wheeler
+    name: Alina Wheeler
+    command: "/alina-wheeler"
+  - id: archetype-consultant
+    name: Archetype Consultant
+    command: "/archetype-consultant"
+  - id: byron-sharp
+    name: Byron Sharp
+    command: "/byron-sharp"
+  - id: david-aaker
+    name: David Aaker
+    command: "/david-aaker"
+  - id: denise-lee-yohn
+    name: Denise Lee Yohn
+    command: "/denise-lee-yohn"
+  - id: domain-scout
+    name: Domain Scout
+    command: "/domain-scout"
+  - id: donald-miller
+    name: Donald Miller
+    command: "/donald-miller"
+  - id: emily-heyward
+    name: Emily Heyward
+    command: "/emily-heyward"
+  - id: jean-noel-kapferer
+    name: Jean-Noël Kapferer
+    command: "/jean-noel-kapferer"
+  - id: kevin-lane-keller
+    name: Kevin Lane Keller
+    command: "/kevin-lane-keller"
+  - id: marty-neumeier
+    name: Marty Neumeier
+    command: "/marty-neumeier"
+  - id: miller-sticky-brand
+    name: Miller Sticky Brand
+    command: "/miller-sticky-brand"
+  - id: naming-strategist
+    name: Naming Strategist
+    command: "/naming-strategist"
+tasks:
+  - id: audit-brand
+    name: Audit Brand
+    command: "/audit-brand"
+  - id: create-positioning
+    name: Create Positioning
+    command: "/create-positioning"
+  - id: create-brand-story
+    name: Create Brand Story
+    command: "/create-brand-story"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: generate-names
+    name: Generate Names
+    command: "/generate-names"
+  - id: design-architecture
+    name: Design Architecture
+    command: "/design-architecture"
+  - id: build-identity
+    name: Build Identity
+    command: "/build-identity"
+  - id: map-archetype
+    name: Map Archetype
+    command: "/map-archetype"
+  - id: review
+    name: Review
+    command: "/review"
+workflows:
+  - id: branding-strategy
+    name: Estratégia de Marca
+    duration: "4-6 horas"
+  - id: brand-optimization
+    name: Otimização de Marca Existente
+    duration: "2-4 horas"
+added: "2026-03-12"

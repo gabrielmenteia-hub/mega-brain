@@ -1,0 +1,81 @@
+id: storytelling-squad
+name: Storytelling Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 12 mestres em storytelling — mitologia, screenwriting, narrativa pessoal, business storytelling, improviso, pitching e movimentos sociais."
+orchestrator: story-chief
+stats:
+  agents: 12
+  tasks: 8
+  workflows: 2
+tags: [storytelling, narrative, pitch, brand-story, screenwriting, manifesto]
+agents:
+  - id: story-chief
+    name: Story Chief
+    command: "/story-chief"
+  - id: blake-snyder
+    name: Blake Snyder
+    command: "/blake-snyder"
+  - id: dan-harmon
+    name: Dan Harmon
+    command: "/dan-harmon"
+  - id: joseph-campbell
+    name: Joseph Campbell
+    command: "/joseph-campbell"
+  - id: keith-johnstone
+    name: Keith Johnstone
+    command: "/keith-johnstone"
+  - id: kindra-hall
+    name: Kindra Hall
+    command: "/kindra-hall"
+  - id: marshall-ganz
+    name: Marshall Ganz
+    command: "/marshall-ganz"
+  - id: matthew-dicks
+    name: Matthew Dicks
+    command: "/matthew-dicks"
+  - id: nancy-duarte
+    name: Nancy Duarte
+    command: "/nancy-duarte"
+  - id: oren-klaff
+    name: Oren Klaff
+    command: "/oren-klaff"
+  - id: park-howell
+    name: Park Howell
+    command: "/park-howell"
+  - id: shawn-coyne
+    name: Shawn Coyne
+    command: "/shawn-coyne"
+tasks:
+  - id: analyze-story
+    name: Analyze Story
+    command: "/analyze-story"
+  - id: build-narrative
+    name: Build Narrative
+    command: "/build-narrative"
+  - id: create-pitch
+    name: Create Pitch
+    command: "/create-pitch"
+  - id: create-presentation
+    name: Create Presentation
+    command: "/create-presentation"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: unblock-creative
+    name: Unblock Creative
+    command: "/unblock-creative"
+  - id: write-manifesto
+    name: Write Manifesto
+    command: "/write-manifesto"
+workflows:
+  - id: brand-narrative
+    name: Sistema de Narrativa de Marca
+    duration: "2-3 horas"
+  - id: story-development
+    name: Desenvolvimento de História
+    duration: "1-3 horas"
+added: "2026-03-12"

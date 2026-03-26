@@ -1,0 +1,270 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Full Copy Pipeline
+# Command: *write {formato}
+# ═══════════════════════════════════════════════════════════════════════════════
+
+workflow:
+  name: wf-full-pipeline
+  version: 1.0.0
+  command: "*write {formato}"
+  description: |
+    Pipeline completo de copywriting de elite:
+    Market Intelligence → Strategy → Writing → Optimization → Delivery
+  entry_agent: copy-chief
+  output:
+    - "output/copy/{project-slug}/market-brief.md"
+    - "output/copy/{project-slug}/copy-strategy.md"
+    - "output/copy/{project-slug}/copy-final.md"
+    - "output/copy/{project-slug}/copy-analysis.md"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+  0:
+    name: "Briefing"
+    agent: copy-chief
+    description: "Coleta informações mínimas antes de iniciar o pipeline"
+    steps:
+      - id: "0.1"
+        action: "Apresentar briefing template ao usuário"
+        required_fields: [produto, formato]
+        optional_fields: [publico, objetivo, prova_disponivel, restricoes]
+        blocking: true
+
+      - id: "0.2"
+        action: "Confirmar briefing com usuário antes de iniciar"
+        display: |
+          BRIEFING CONFIRMADO:
+          ┌──────────────────────────────────────────────────────┐
+          │ Produto: {produto}                                    │
+          │ Formato: {formato}                                    │
+          │ Público: {publico | "Definir no T0"}                  │
+          │ Objetivo: {objetivo}                                  │
+          │ Prova: {prova | "Não informado"}                      │
+          └──────────────────────────────────────────────────────┘
+        confirmation: "*go ou ajuste"
+        blocking: true
+
+  1:
+    name: "Tier 0 — Market Intelligence"
+    agents: [eugene-schwartz, david-ogilvy]
+    task: "squads/copywriting/tasks/analyze-market.md"
+    description: "Diagnóstico de awareness, ICP, USP, objeções"
+    parallel: true
+    steps:
+      - id: "1.1"
+        agent: eugene-schwartz
+        action: "Diagnosticar awareness level (1-5)"
+        action2: "Mapear mass desire e força dominante"
+        action3: "Avaliar sofisticação do mercado"
+        output: "awareness-report.md (parcial)"
+
+      - id: "1.2"
+        agent: david-ogilvy
+        action: "Protocolo de pesquisa de produto"
+        action2: "Identificar USP ou oportunidade"
+        action3: "Mapear claims por força de prova"
+        output: "market-research.md (parcial)"
+
+      - id: "1.3"
+        agent: copy-chief
+        action: "Consolidar em market-brief.md"
+        output: "output/copy/{project-slug}/market-brief.md"
+
+    gate:
+      id: "QG-001"
+      type: "blocking"
+      criteria:
+        - "Awareness level diagnosticado com justificativa"
+        - "ICP definido"
+        - "Desejo central mapeado"
+        - "Mínimo 5 objeções"
+        - "USP identificado"
+      on_fail: "Retornar ao Tier 0 para completar inteligência"
+
+  2:
+    name: "Tier 1 — Strategy"
+    agents: [dan-kennedy, alex-hormozi, claude-hopkins]
+    description: "Ângulo, drivers emocionais, oferta, framework de prova"
+    steps:
+      - id: "2.1"
+        agent: dan-kennedy
+        action: "Definir top 3 ângulos magnéticos"
+        action2: "Mapear drivers emocionais (medo/desejo/identidade)"
+        action3: "Estruturar urgência e deadline (se aplicável)"
+        output: "angle-strategy.md (parcial)"
+
+      - id: "2.2"
+        agent: alex-hormozi
+        action: "Estruturar Grand Slam Offer (se copy inclui oferta)"
+        action2: "Aplicar Value Equation"
+        action3: "Projetar garantia"
+        output: "offer-structure.md (parcial)"
+        conditional: "Apenas se copy inclui oferta (landing-page, sales-letter, vsl)"
+
+      - id: "2.3"
+        agent: claude-hopkins
+        action: "Auditar claims com reason-why"
+        action2: "Identificar claims preemptivos"
+        action3: "Mapear framework de prova"
+        output: "proof-framework.md (parcial)"
+
+      - id: "2.4"
+        agent: copy-chief
+        action: "Selecionar ângulo principal"
+        action2: "Apresentar estratégia ao usuário para aprovação"
+        display: |
+          ESTRATÉGIA DE COPY — {produto} — {formato}
+          ─────────────────────────────────────────────
+          Awareness Level: Stage {N} — {nome}
+          Ângulo principal: {ângulo}
+          Driver emocional: {driver}
+          USP / Mecanismo: {usp}
+          Oferta: {oferta resumida}
+          Framework de prova: {proof_approach}
+
+          Confirmar? (*go) ou ajustar?
+        confirmation: "*go ou ajuste"
+        blocking: true
+        output: "output/copy/{project-slug}/copy-strategy.md"
+
+    gate:
+      id: "QG-002"
+      type: "blocking"
+      criteria:
+        - "Ângulo principal selecionado"
+        - "Drivers emocionais mapeados"
+        - "Framework de prova definido"
+        - "Oferta estruturada (se aplicável)"
+      on_fail: "Retornar ao Tier 1 para revisar estratégia"
+
+  3:
+    name: "Tier 2 — Writing"
+    agents: [gary-halbert, gary-bencivenga]
+    task: "squads/copywriting/tasks/write-copy.md"
+    description: "Draft completo + camada de prova e credibilidade"
+    steps:
+      - id: "3.1"
+        agent: gary-halbert
+        action: "Draft principal — todos os componentes do formato"
+        action2: "So-what test em cada seção"
+        output: "copy-draft-v1.md (parcial)"
+
+      - id: "3.2"
+        agent: gary-bencivenga
+        action: "Proof layer — believability audit"
+        action2: "Objection sweep — verificar top 5 objeções"
+        action3: "Bullets (se formato inclui)"
+        output: "copy-draft-v2.md (parcial)"
+
+      - id: "3.3"
+        agent: copy-chief
+        action: "Consolidar copy-draft.md"
+        output: "output/copy/{project-slug}/copy-draft.md"
+
+    gate:
+      id: "QG-003"
+      type: "blocking"
+      criteria:
+        - "Todos os componentes do formato presentes"
+        - "Hook passa scroll-stop test"
+        - "Nenhuma afirmação sem prova"
+        - "CTA único e específico"
+      on_fail: "Retornar ao Tier 2 para revisão"
+
+  4:
+    name: "Tier 3 — Optimization"
+    agent: joseph-sugarman
+    description: "Trigger audit, flow, friction, polish final"
+    steps:
+      - id: "4.1"
+        agent: joseph-sugarman
+        action: "Trigger audit (30 triggers)"
+        action2: "Flow test (slippery slide)"
+        action3: "Friction scan (4 tipos)"
+        action4: "Otimização e polish final"
+        output: "copy-final.md + copy-analysis.md (parciais)"
+
+      - id: "4.2"
+        agent: joseph-sugarman
+        action: "Gerar copy-analysis.md completo"
+        includes:
+          - "Score por dimensão (0-10)"
+          - "Trigger audit"
+          - "Friction points"
+          - "Top 3 problemas e fixes"
+          - "Recomendações de A/B teste"
+        output: "output/copy/{project-slug}/copy-analysis.md"
+
+      - id: "4.3"
+        agent: copy-chief
+        action: "Executar copy-quality.md checklist"
+        reference: "squads/copywriting/checklists/copy-quality.md"
+        blocking: true
+        output: "QG-004 validation"
+
+    gate:
+      id: "QG-004"
+      type: "blocking"
+      criteria:
+        - "copy-quality.md: mandatory 100%, quality >= 80%"
+        - "copy-final.md gerado"
+        - "copy-analysis.md gerado"
+      on_fail: "Retornar ao Tier 3 para revisão específica"
+
+  5:
+    name: "Delivery"
+    agent: copy-chief
+    description: "Entrega final ao usuário"
+    steps:
+      - id: "5.1"
+        action: "Apresentar deliverables ao usuário"
+        format: |
+          ✅ COPY FINALIZADA — {produto} — {formato}
+
+          DELIVERABLES:
+          📄 Copy Final: output/copy/{project-slug}/copy-final.md
+          📊 Análise Estratégica: output/copy/{project-slug}/copy-analysis.md
+          📋 Market Brief: output/copy/{project-slug}/market-brief.md
+          🎯 Estratégia: output/copy/{project-slug}/copy-strategy.md
+
+          RESUMO DA ANÁLISE:
+          Score Geral: {X}/10
+          Awareness Level: Stage {N}
+          Ângulo: {ângulo}
+          Triggers Ativos: {N}/15
+          Top Recomendação de A/B: {teste_1}
+
+          PRÓXIMOS PASSOS:
+          1. *critique [seção específica] — critique mais profunda
+          2. *optimize [headline|hook|cta] — otimizar elemento específico
+          3. *write {outro_formato} — criar outra versão do formato
+          4. *email-sequence {produto} — criar sequência de nurture
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# ANTI-PATTERNS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+anti_patterns:
+  never_do:
+    - "Iniciar Tier 2 sem QG-001 e QG-002 passados"
+    - "Entregar copy sem análise estratégica"
+    - "Pular confirmação do usuário na estratégia (fase 2.4)"
+    - "Executar QG-004 sem checklist completo"
+
+  always_do:
+    - "Confirmar briefing antes de iniciar"
+    - "Confirmar estratégia com usuário antes de escrever"
+    - "Entregar copy-final.md + copy-analysis.md juntos"
+    - "Informar caminhos exatos dos arquivos na entrega"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUICK PIPELINE (sem confirmações intermediárias)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+quick_mode:
+  trigger: "Usuário usa *write com --quick flag ou pede para não parar para confirmação"
+  behavior: "Executa pipeline completo sem pausas. Apresenta tudo ao final."
+  risk: "Pode gerar copy com estratégia que o usuário mudaria. Recomendado apenas após alinhamento prévio."

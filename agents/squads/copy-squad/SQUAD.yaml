@@ -1,0 +1,129 @@
+id: copy-squad
+name: Copy Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de elite com 23 agentes de copywriting — 22 copywriters legendários + 1 orquestrador. Cobre direct response, email, funnels, VSLs, cartas de vendas e ofertas."
+orchestrator: cyrus
+stats:
+  agents: 23
+  tasks: 13
+  workflows: 2
+tags: [copywriting, direct-response, email, funnel, vsl, sales-letter]
+agents:
+  - id: cyrus
+    name: Cyrus
+    command: "/cyrus"
+  - id: andre-chaperon
+    name: Andre Chaperon
+    command: "/andre-chaperon"
+  - id: ben-settle
+    name: Ben Settle
+    command: "/ben-settle"
+  - id: claude-hopkins
+    name: Claude Hopkins
+    command: "/claude-hopkins"
+  - id: clayton-makepeace
+    name: Clayton Makepeace
+    command: "/clayton-makepeace"
+  - id: dan-kennedy
+    name: Dan Kennedy
+    command: "/dan-kennedy"
+  - id: dan-koe
+    name: Dan Koe
+    command: "/dan-koe"
+  - id: david-deutsch
+    name: David Deutsch
+    command: "/david-deutsch"
+  - id: david-ogilvy
+    name: David Ogilvy
+    command: "/david-ogilvy"
+  - id: eugene-schwartz
+    name: Eugene Schwartz
+    command: "/eugene-schwartz"
+  - id: frank-kern
+    name: Frank Kern
+    command: "/frank-kern"
+  - id: gary-bencivenga
+    name: Gary Bencivenga
+    command: "/gary-bencivenga"
+  - id: gary-halbert
+    name: Gary Halbert
+    command: "/gary-halbert"
+  - id: jim-rutz
+    name: Jim Rutz
+    command: "/jim-rutz"
+  - id: joe-sugarman
+    name: Joe Sugarman
+    command: "/joe-sugarman"
+  - id: john-carlton
+    name: John Carlton
+    command: "/john-carlton"
+  - id: jon-benson
+    name: Jon Benson
+    command: "/jon-benson"
+  - id: parris-lampropoulos
+    name: Parris Lampropoulos
+    command: "/parris-lampropoulos"
+  - id: robert-collier
+    name: Robert Collier
+    command: "/robert-collier"
+  - id: russell-brunson
+    name: Russell Brunson
+    command: "/russell-brunson"
+  - id: ry-schwartz
+    name: Ry Schwartz
+    command: "/ry-schwartz"
+  - id: stefan-georgi
+    name: Stefan Georgi
+    command: "/stefan-georgi"
+  - id: todd-brown
+    name: Todd Brown
+    command: "/todd-brown"
+tasks:
+  - id: write-headline
+    name: Write Headline
+    command: "/write-headline"
+  - id: write-sales-letter
+    name: Write Sales Letter
+    command: "/write-sales-letter"
+  - id: write-vsl-script
+    name: Write VSL Script
+    command: "/write-vsl-script"
+  - id: write-email-sequence
+    name: Write Email Sequence
+    command: "/write-email-sequence"
+  - id: write-ad-copy
+    name: Write Ad Copy
+    command: "/write-ad-copy"
+  - id: write-landing-page
+    name: Write Landing Page
+    command: "/write-landing-page"
+  - id: write-bullets
+    name: Write Bullets
+    command: "/write-bullets"
+  - id: create-funnel-copy
+    name: Create Funnel Copy
+    command: "/create-funnel-copy"
+  - id: create-offer
+    name: Create Offer
+    command: "/create-offer"
+  - id: analyze-copy
+    name: Analyze Copy
+    command: "/analyze-copy"
+  - id: critique-copy
+    name: Critique Copy
+    command: "/critique-copy"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: review
+    name: Review
+    command: "/review"
+workflows:
+  - id: projeto-completo-copy
+    name: Projeto Completo de Copy
+    duration: "3-5 horas"
+  - id: ciclo-revisao-copy
+    name: Ciclo de Revisão de Copy
+    duration: "1-2 horas"
+added: "2026-03-12"

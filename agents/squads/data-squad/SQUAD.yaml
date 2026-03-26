@@ -1,0 +1,63 @@
+id: data-squad
+name: Data Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 7 estrategistas data-driven — analytics (Kaushik), CLV (Fader), growth (Ellis), community (Spinks), customer success (Mehta), audience (Kao)."
+orchestrator: datum
+stats:
+  agents: 7
+  tasks: 7
+  workflows: 2
+tags: [analytics, growth, customer-success, community, clv, metrics, retention]
+agents:
+  - id: datum
+    name: Datum
+    command: "/data-squad-agents-datum"
+  - id: avinash-kaushik
+    name: Avinash Kaushik
+    command: "/data-squad-agents-avinash"
+  - id: david-spinks
+    name: David Spinks
+    command: "/data-squad-agents-david-spinks"
+  - id: peter-fader
+    name: Peter Fader
+    command: "/data-squad-agents-peter-fader"
+  - id: sean-ellis
+    name: Sean Ellis
+    command: "/data-squad-agents-sean-ellis"
+  - id: wes-kao
+    name: Wes Kao
+    command: "/data-squad-agents-wes-kao"
+  - id: nick-mehta
+    name: Nick Mehta
+    command: "/data-squad-agents-nick-mehta"
+tasks:
+  - id: analyze-data
+    name: Analyze Data
+    command: "/analyze-data"
+  - id: build-audience
+    name: Build Audience
+    command: "/build-audience"
+  - id: build-community-strategy
+    name: Build Community Strategy
+    command: "/build-community-strategy"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: measure-growth
+    name: Measure Growth
+    command: "/measure-growth"
+  - id: optimize-retention
+    name: Optimize Retention
+    command: "/optimize-retention"
+  - id: review
+    name: Review
+    command: "/review"
+workflows:
+  - id: analytics-setup
+    name: Configuração de Analytics
+    duration: "4-8 sprints"
+  - id: growth-sprint
+    name: Sprint de Crescimento
+    duration: "2 semanas"
+added: "2026-03-12"

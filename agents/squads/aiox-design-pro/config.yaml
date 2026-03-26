@@ -1,0 +1,113 @@
+squad:
+  name: design-pro
+  version: 1.0.0
+  short-title: Design Pro Squad
+  description: >-
+    Squad especializado em web design, landing pages e UI/UX para venda de
+    infoprodutos. Combina principios de conversao, design visual, UX e copy
+    persuasivo para criar paginas de alta performance para cursos, ebooks,
+    mentorias e outros produtos digitais.
+  author: AIOX
+  icon: "🎨"
+  entry_agent: design-pro-chief
+  slashPrefix: designPro
+
+workspace_integration:
+  level: read_write
+  rationale: "Le contexto de marca e produto do workspace, escreve artefatos de design de volta"
+  read_paths:
+    - workspace/businesses/{brand}/
+    - workspace/domains/design/
+  write_paths:
+    - workspace/businesses/{brand}/design/
+  template_namespace: design-pro
+
+pattern_library:
+  prefix: DP
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "DP-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Padroes para estrutura e execucao de tarefas de design"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Padroes para tipos de executor"
+    - id: PP
+      name: "Process Patterns"
+      description: "Padroes para processos de workflow de design"
+    - id: IP
+      name: "Integration Patterns"
+      description: "Padroes para integracoes externas"
+    - id: CP
+      name: "Conversion Patterns"
+      description: "Padroes de conversao validados para infoprodutos"
+  patterns: []
+
+task_standards:
+  enforce_anatomy: true
+  validator: "DP-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+executor_types:
+  human:
+    id: "DP-EP-001"
+    name: "Human Executor"
+    use_for:
+      - "Decisoes estrategicas de marca"
+      - "Aprovacao de identidade visual"
+      - "Validacao de tom e voz"
+  agent:
+    id: "DP-EP-002"
+    name: "Agent Executor (AI)"
+    use_for:
+      - "Geracao de copy e headlines"
+      - "Estrutura de landing page"
+      - "Auditoria de UX"
+      - "Analise de conversao"
+  hybrid:
+    id: "DP-EP-003"
+    name: "Hybrid Executor"
+    use_for:
+      - "Revisao de design com validacao humana"
+      - "Ajuste de copy com aprovacao"
+      - "Checklist de qualidade assistido"
+  worker:
+    id: "DP-EP-004"
+    name: "Worker Executor"
+    use_for:
+      - "Geracao de templates padrao"
+      - "Exportacao de checklists"
+      - "Automacao de estrutura de arquivos"
+
+executor_selection:
+  requires_creativity: human
+  requires_judgment: [human, hybrid]
+  requires_speed: [agent, worker]
+  requires_consistency: worker
+  requires_validation: hybrid
+  requires_learning: agent
+
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Todo checkpoint DEVE passar"
+    skip_on_override: "Pode pular com aprovacao manual"
+    advisory: "Apenas alerta, nao bloqueia"
+  fail_fast: true
+  allow_manual_override: false

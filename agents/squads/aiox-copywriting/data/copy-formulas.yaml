@@ -1,0 +1,325 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# COPY FORMULAS & FRAMEWORKS
+# Multi-source: Halbert, Kennedy, Hopkins, Sugarman, Hormozi, Schwartz, Ogilvy
+# ═══════════════════════════════════════════════════════════════════════════════
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# COPY FORMULAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+formulas:
+  PAS:
+    name: "Problem → Agitate → Solution"
+    author: "Gary Halbert (popularizou)"
+    best_for: "Ads, emails, social, abertura de sales letter"
+    structure:
+      P: "Nomeie o problema com precisão (na linguagem do prospect)"
+      A: "Aprofunde a dor — consequências, custo, futuro sem resolver"
+      S: "Apresente a solução como saída natural"
+    template: |
+      [PROBLEM]
+      {nome_da_dor_com_precisão}
+
+      [AGITATE]
+      E o pior é que {consequência 1}.
+      Enquanto isso, {consequência 2}.
+      Cada dia que passa, {custo crescente}.
+
+      [SOLUTION]
+      Foi por isso que {origem da solução}.
+      {produto} resolve {problema} porque {mecanismo}.
+
+  AIDA:
+    name: "Attention → Interest → Desire → Action"
+    author: "Elias St. Elmo Lewis (1898)"
+    best_for: "Qualquer formato. O modelo clássico."
+    structure:
+      A: "Captura atenção — headline, hook, imagem"
+      I: "Mantém interesse — fatos, história, curiosidade"
+      D: "Constrói desejo — benefícios, prova, oferta"
+      Action: "CTA — específico, único, urgente"
+
+  PASTOR:
+    name: "Problem → Amplify → Story/Solution → Transformation → Offer → Response"
+    author: "Ray Edwards"
+    best_for: "Long-form copy, VSL, sales letter"
+    structure:
+      P: "Identifique e nomeie o problema"
+      A: "Amplifique as consequências"
+      S: "Apresente Story e depois Solução"
+      T: "Pinte a Transformação (antes/depois)"
+      O: "A Oferta completa"
+      R: "Response — CTA"
+
+  BAB:
+    name: "Before → After → Bridge"
+    author: "Múltiplos autores"
+    best_for: "Emails curtos, social media, ads de awareness"
+    structure:
+      Before: "Descreva a situação atual (dolorosa)"
+      After: "Pinte o estado desejado com especificidade"
+      Bridge: "Apresente seu produto como a ponte"
+    template: |
+      [BEFORE]
+      {situação atual do prospect — específica e real}
+
+      [AFTER]
+      Imagine {estado desejado — específico, visual, emocional}.
+
+      [BRIDGE]
+      {produto} é {o que é} que permite {transformação}.
+
+  FAB:
+    name: "Feature → Advantage → Benefit"
+    author: "Clássico de vendas"
+    best_for: "Bullets, seção de produto, comparativos"
+    structure:
+      F: "Característica técnica do produto"
+      A: "O que essa característica FAZ"
+      B: "O que isso SIGNIFICA para o cliente"
+    template: "[Feature] que {advantage}, o que significa {benefit para o cliente}"
+
+  PPPP:
+    name: "Picture → Promise → Prove → Push"
+    author: "Henry Hoke Sr."
+    best_for: "Sales letters, landing pages"
+    structure:
+      Picture: "Pinte um quadro vívido do problema ou da solução"
+      Promise: "Faça a promessa central"
+      Prove: "Suporte com evidências"
+      Push: "CTA direto e urgente"
+
+  QUEST:
+    name: "Qualify → Understand → Educate → Stimulate → Transition"
+    author: "Frank Egner"
+    best_for: "Long-form para audiências céticas"
+    structure:
+      Q: "Qualifique o leitor (quem é este para)"
+      U: "Demonstre que você entende o problema deles"
+      E: "Eduque sobre a solução"
+      S: "Estimule com benefícios e prova"
+      T: "Transição para a oferta"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# HEADLINE FORMULAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+headline_formulas:
+  by_awareness_stage:
+    stage_1_unaware:
+      - "Como {grupo específico} consegue {resultado desejado} sem {sacrifício}"
+      - "{N} pessoas estão {resultado} enquanto você {ação atual}"
+      - "O segredo que {grupo invejável} usa para {resultado}"
+
+    stage_2_pain_aware:
+      - "Por que você {sintoma da dor} mesmo fazendo {esforço}"
+      - "Finalmente: como resolver {problema} de uma vez por todas"
+      - "Para quem já tentou {método comum} e continua {problema}"
+
+    stage_3_solution_aware:
+      - "O {mecanismo único} que permite {resultado} sem {sacrifício}"
+      - "Por que {método convencional} não funciona — e o que funciona"
+      - "Como {mecanismo} ajuda {ICP} a {resultado} diferente de qualquer {alternativa}"
+
+    stage_4_product_aware:
+      - "Por que {N} {ICPs} escolheram {produto} — resultados em {tempo}"
+      - "{produto}: o que acontece depois de {tempo} de uso"
+      - "{N} razões pelas quais {ICPs} estão trocando {alternativa} por {produto}"
+
+    stage_5_most_aware:
+      - "{N}% de desconto — só até {data}"
+      - "Última turma de {período} — {N} vagas"
+      - "{produto}: preço sobe {data}. Garantia de {prazo}."
+
+  by_type:
+    news:
+      - "Novo método permite {resultado} sem {sacrifício}"
+      - "Apresentando: {nome do mecanismo} — {promessa principal}"
+      - "Finalmente revelado: {segredo que o mercado queria}"
+
+    curiosity:
+      - "O erro que {profissão} comete quando {situação}"
+      - "Por que {coisa comum} pode estar te custando {resultado negativo}"
+      - "O que nenhum {expert/concorrente} vai te contar sobre {assunto}"
+
+    benefit_direct:
+      - "Como dobrar {resultado} em {tempo} — garantido"
+      - "{N} formas comprovadas de {resultado principal}"
+      - "Consiga {resultado} em {tempo} ou não pague"
+
+    how_to:
+      - "Como {ação} sem {sacrifício indesejado}"
+      - "Como {grupo específico} consegue {resultado} mesmo {obstáculo}"
+      - "Como eu {resultado impressionante} — e como você pode fazer o mesmo"
+
+    question:
+      - "Você comete algum desses erros em {área}?"
+      - "O que você faria se soubesse que {fato impactante}?"
+      - "Por que {grupo bem-sucedido} nunca {ação comum que todos fazem}?"
+
+    command:
+      - "Pare de {comportamento]. Comece a {comportamento desejado}."
+      - "Não compre {produto/serviço} sem antes ler isso"
+      - "Leia isto antes de {decisão importante}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# BULLET FORMULAS (Bencivenga Style)
+# ═══════════════════════════════════════════════════════════════════════════════
+
+bullet_formulas:
+  principle: "Cada bullet deve criar desejo imediato de saber a resposta"
+  structures:
+    - "Como {ação} sem {sacrifício}"
+    - "O erro que {grupo} comete quando {situação} — e como evitá-lo"
+    - "Por que {coisa comum} na verdade {consequência surpreendente}"
+    - "O segredo de {grupo bem-sucedido} para {resultado}"
+    - "{N} sinais de que {situação problemática} — e o que fazer"
+    - "A pergunta que você deve fazer ANTES de {ação}"
+    - "O {tipo de coisa} que {especialista renomado} usa mas nunca menciona"
+    - "Como descobrir se {situação} em menos de {tempo}"
+    - "Por que {crença comum} é completamente errada — e o que é correto"
+    - "O que fazer quando {situação difícil que todos enfrentam}"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CTA FORMULAS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+cta_formulas:
+  principle: "CTA deve descrever O QUE o prospect recebe, não O QUE deve fazer"
+
+  weak_vs_strong:
+    - weak: "Clique aqui"
+      strong: "Acesse o treinamento gratuito agora"
+    - weak: "Saiba mais"
+      strong: "Veja os resultados de {N} clientes"
+    - weak: "Compre agora"
+      strong: "Sim, quero dobrar minha conversão em 90 dias"
+    - weak: "Cadastre-se"
+      strong: "Reserve minha vaga (apenas {N} disponíveis)"
+    - weak: "Entre em contato"
+      strong: "Agende uma diagnóstico gratuito de 30 minutos"
+
+  structures:
+    benefit_cta:
+      template: "Sim, quero {benefício principal}"
+      example: "Sim, quero aprender a gerar leads qualificados no LinkedIn"
+
+    action_cta:
+      template: "{Ação} + {o que recebe} + {urgência opcional}"
+      example: "Acesse o método completo — vagas encerram sexta"
+
+    identity_cta:
+      template: "{Identidade que o prospect quer ser} → comece aqui"
+      example: "Empreendedores que faturam acima de R$100k/mês → começam aqui"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EMAIL FRAMEWORKS
+# ═══════════════════════════════════════════════════════════════════════════════
+
+email_frameworks:
+  subject_line_formulas:
+    curiosity:
+      - "O motivo real pelo qual [resultado indesejado]"
+      - "Não abra este email se você [qualificador]"
+      - "Isso mudou minha opinião sobre [assunto]"
+
+    benefit:
+      - "Como [resultado] em [tempo]"
+      - "[N] formas de [resultado] esta semana"
+      - "O método que [resultado] para [grupo]"
+
+    news:
+      - "[novidade relevante] — o que isso significa para você"
+      - "Finalmente: [promessa que o mercado quer]"
+
+    personal:
+      - "Uma pergunta rápida"
+      - "Posso ser honesto?"
+      - "Cometei um erro"
+
+    urgency:
+      - "Encerra hoje: [oferta]"
+      - "[N] horas restantes"
+      - "Última chance — [benefício]"
+
+  email_structures:
+    sales_email:
+      sections:
+        - "Abertura: história ou fato surpreendente (2-3 parágrafos)"
+        - "Problema: nomeie a dor (1-2 parágrafos)"
+        - "Solução: introduza o produto (1-2 parágrafos)"
+        - "Prova: 1 resultado específico (1 parágrafo)"
+        - "CTA: único e específico"
+        - "P.S.: repete benefício + urgência"
+      rule: "Um email = uma mensagem = um CTA"
+
+    nurture_email:
+      sections:
+        - "Abertura: valor imediato ou história"
+        - "Insight/ensinamento: o que o prospect aprende"
+        - "CTA leve: 'se quiser ir mais fundo...'"
+      rule: "Nurture emails constroem relacionamento. Não venda hard em todo email."
+
+    reactivation_email:
+      sections:
+        - "Reconhecimento: admita o silêncio"
+        - "Valor: algo novo e relevante"
+        - "Oferta: motivo para reengajar"
+      example: |
+        Assunto: Eu sumi. Mas voltei com algo bom.
+
+        Faz {tempo} desde que te enviei algo.
+        Fui honesto comigo: o que eu mandava não era útil o suficiente.
+
+        Mudei isso. E quero provar com este {recurso gratuito/insight}.
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# FORMAT-SPECIFIC SWIPE TEMPLATES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+swipe_templates:
+  ad_cold:
+    awareness: "Stage 1-2"
+    structure: "Hook (problema/resultado) → Body (PAS) → CTA"
+    length: "150-300 palavras"
+    template: |
+      [HOOK — escolha uma das opções]
+      A: Se você {sintoma da dor}, não é culpa sua. É {causa real}.
+      B: {N} {ICPs} descobriram como {resultado} sem {sacrifício}.
+      C: {Declaração contraintuitiva que para o scroll}.
+
+      [BODY]
+      {1-2 parágrafos de agitação ou história}
+
+      {1 parágrafo de solução — sem vender ainda}
+
+      {1 parágrafo de prova ou credencial}
+
+      [CTA]
+      {Ação específica} → {Link}
+      {Urgência se aplicável}
+
+  ad_warm:
+    awareness: "Stage 3-4"
+    structure: "Hook (mecanismo/resultado) → Body (prova) → CTA (oferta)"
+    length: "100-200 palavras"
+    template: |
+      [HOOK — mecanismo ou resultado específico]
+      {Afirmação direta sobre o que funciona}
+
+      [BODY]
+      {1-2 parágrafos: prova social ou resultado específico}
+      {1 parágrafo: oferta ou diferencial}
+
+      [CTA]
+      {Oferta clara} → {Link}
+      {Deadline se aplicável}
+
+  social_hook_formulas:
+    - "{Declaração contraintuitiva}."
+    - "A maioria dos {ICPs} faz isso errado."
+    - "{Pergunta que o prospect se faz mas nunca verbalizou}"
+    - "Aprendi isso da forma mais cara possível."
+    - "{N} anos para entender uma coisa:"
+    - "Não sei quem precisa ouvir isso, mas:"
+    - "A verdade sobre {assunto} que ninguém fala:"

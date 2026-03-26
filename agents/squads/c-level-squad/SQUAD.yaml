@@ -1,0 +1,60 @@
+id: c-level-squad
+name: C-Level Squad
+version: "1.0.0"
+source: xquads
+description: "C-suite virtual de 6 executivos — CEO (Vision Chief), COO, CMO, CTO, CIO, CAIO. Estratégia, operações, marketing, tecnologia e AI."
+orchestrator: vision-chief
+stats:
+  agents: 6
+  tasks: 7
+  workflows: 2
+tags: [c-suite, strategy, operations, marketing, technology, ai, leadership]
+agents:
+  - id: vision-chief
+    name: Vision Chief
+    command: "/c-level-squad-agents-vision-chief"
+  - id: coo-orchestrator
+    name: COO Orchestrator
+    command: "/c-level-squad-agents-coo-orchestrator"
+  - id: cmo-architect
+    name: CMO Architect
+    command: "/c-level-squad-agents-cmo-architect"
+  - id: cio-engineer
+    name: CIO Engineer
+    command: "/c-level-squad-agents-cio-engineer"
+  - id: caio-architect
+    name: CAIO Architect
+    command: "/c-level-squad-agents-caio-architect"
+  - id: cto-architect
+    name: CTO Architect
+    command: "/c-level-squad-agents-cto-architect"
+tasks:
+  - id: design-operations
+    name: Design Operations
+    command: "/design-operations"
+  - id: diagnose
+    name: Diagnose
+    command: "/diagnose"
+  - id: evaluate-technology
+    name: Evaluate Technology
+    command: "/evaluate-technology"
+  - id: plan-fundraise
+    name: Plan Fundraise
+    command: "/plan-fundraise"
+  - id: plan-go-to-market
+    name: Plan Go to Market
+    command: "/plan-go-to-market"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: set-vision
+    name: Set Vision
+    command: "/set-vision"
+workflows:
+  - id: board-presentation
+    name: Apresentação para o Conselho
+    duration: "2-4 horas"
+  - id: strategic-planning
+    name: Planejamento Estratégico
+    duration: "4-8 horas"
+added: "2026-03-12"

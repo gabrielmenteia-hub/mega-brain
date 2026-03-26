@@ -1,0 +1,131 @@
+squad:
+  name: garfield-time
+  version: 1.0.0
+  short-title: Garfield Time — Info Produto Milionário
+  description: >-
+    Squad especializado em modelagem e engenharia reversa de info produtos
+    milionários. Analisa produtos campeões, desmonta estruturas de oferta e
+    copy, mapeia funis de alta conversão e cria produtos modelados com base
+    nos padrões dos maiores infoprodutores do mercado BR e internacional.
+  author: MEGABRAIN
+  icon: "🐱"
+  entry_agent: garfield-chief
+  slashPrefix: garfieldTime
+
+workspace_integration:
+  level: read_only
+  rationale: "Lê contexto de negócio do workspace para calibrar modelagem ao mercado do usuário"
+  read_paths:
+    - workspace/businesses/
+    - workspace/domains/
+  write_paths: []
+  template_namespace: garfield
+
+pattern_library:
+  prefix: GT
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "GT-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Padrões para estrutura e execução de tasks"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Padrões para tipos de executor"
+    - id: PP
+      name: "Process Patterns"
+      description: "Padrões para workflows de modelagem"
+    - id: AP
+      name: "Analysis Patterns"
+      description: "Padrões para análise e engenharia reversa"
+  patterns: []
+
+task_standards:
+  enforce_anatomy: true
+  validator: "GT-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+
+executor_types:
+  human:
+    id: "GT-EP-001"
+    use_for: ["Decisões estratégicas", "Validação final de produto"]
+  agent:
+    id: "GT-EP-002"
+    use_for: ["Análise de produtos", "Engenharia reversa", "Modelagem de oferta"]
+  hybrid:
+    id: "GT-EP-003"
+    use_for: ["Revisão de copy", "Validação de funil"]
+  worker:
+    id: "GT-EP-004"
+    use_for: ["Geração de relatórios estruturados", "Export de templates"]
+
+workflow_config:
+  checkpoint_policy: always_active
+  fail_fast: true
+  allow_manual_override: false
+
+agents:
+  orchestrator:
+    id: garfield-chief
+    tier: orchestrator
+    file: agents/garfield-chief.md
+  tier_0:
+    - id: product-diagnostician
+      tier: 0
+      file: agents/product-diagnostician.md
+  tier_1:
+    - id: offer-architect
+      tier: 1
+      file: agents/offer-architect.md
+    - id: launch-strategist
+      tier: 1
+      file: agents/launch-strategist.md
+  tier_2:
+    - id: ask-methodologist
+      tier: 2
+      file: agents/ask-methodologist.md
+    - id: market-seducer
+      tier: 2
+      file: agents/market-seducer.md
+  tier_3:
+    - id: copy-decoder
+      tier: 3
+      file: agents/copy-decoder.md
+    - id: br-market-strategist
+      tier: 3
+      file: agents/br-market-strategist.md
+
+quality_gates:
+  - id: QG-GT-001
+    name: "Request Classification"
+    transition: "Input → Tier 0"
+    type: routing
+  - id: QG-GT-002
+    name: "Benchmark Complete"
+    transition: "Tier 0 → Tier 1"
+    type: blocking
+    criteria: "Produto classificado, gaps mapeados"
+  - id: QG-GT-003
+    name: "Reverse Engineering Validated"
+    transition: "Após análise Tier 1"
+    type: blocking
+    criteria: "Oferta + copy desmontados com evidências"
+  - id: QG-GT-004
+    name: "Model Approved"
+    transition: "Antes de criação do produto"
+    type: blocking
+    criteria: "Modelo validado pelo usuário"
+  - id: QG-GT-005
+    name: "Final Output Review"
+    transition: "Saída final"
+    type: blocking
+    criteria: "Produto modelado completo e validado"

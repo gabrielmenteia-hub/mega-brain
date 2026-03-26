@@ -1,0 +1,159 @@
+name: pai-do-trafego
+version: 1.0.0
+tested: false
+updated_at: "2026-03-19"
+short-title: Pai do Tráfego Squad
+description: >-
+  Squad de Direct Response Creative para infoprodutos brasileiros.
+  Produz pacotes completos de criativos validados — copy, hook, briefing
+  visual e critique — prontos para Meta Ads e TikTok Ads, com loop de
+  otimização por métricas reais (CTR, Hook Rate, CPL, ROAS).
+  Orchestrator: @pdt-chief. Modo: incremental com checkpoint por agente.
+author: Pai do Tráfego
+entry_agent: pdt-chief
+slashPrefix: paiDoTrafego
+
+settings:
+  activation:
+    show_greeting: true
+    show_quick_commands: true
+
+workspace_integration:
+  level: read_write
+  rationale: >-
+    Lê contexto do produto/oferta do workspace para alimentar briefs.
+    Escreve pacotes criativos validados como artefatos reutilizáveis.
+  read_paths:
+    - workspace/businesses/
+    - workspace/domains/
+  write_paths:
+    - workspace/businesses/{brand}/creatives/
+  template_namespace: dr-creatives
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PATTERN LIBRARY
+# ═══════════════════════════════════════════════════════════════════════════════
+pattern_library:
+  prefix: PDT
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "PDT-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Padrões para estrutura e execução de tasks criativas"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Padrões para seleção de executor (Agent/Hybrid/Human)"
+    - id: PP
+      name: "Process Patterns"
+      description: "Padrões de workflow de produção criativa"
+    - id: IP
+      name: "Integration Patterns"
+      description: "Padrões de integração com plataformas de Ads"
+    - id: QP
+      name: "Quality Patterns"
+      description: "Padrões de critique e validação de criativos"
+  patterns: []
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TASK STANDARDS
+# ═══════════════════════════════════════════════════════════════════════════════
+task_standards:
+  enforce_anatomy: true
+  validator: "PDT-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+    - handoff
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# EXECUTOR TYPES
+# ═══════════════════════════════════════════════════════════════════════════════
+executor_types:
+  human:
+    id: "PDT-EP-001"
+    use_for: ["Aprovação final de criativos", "Decisão de veiculação", "Ajuste estratégico"]
+  agent:
+    id: "PDT-EP-002"
+    use_for: ["Geração de copy", "Hooks", "Roteiros", "Análise de métricas"]
+  hybrid:
+    id: "PDT-EP-003"
+    use_for: ["Review de criativos", "Validação pré-publicação", "Critique"]
+  worker:
+    id: "PDT-EP-004"
+    use_for: ["Formatação de pacotes", "Export de briefings visuais"]
+
+executor_selection:
+  requires_creativity: agent
+  requires_judgment: [human, hybrid]
+  requires_speed: agent
+  requires_validation: hybrid
+  requires_approval: human
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW CONFIG
+# ═══════════════════════════════════════════════════════════════════════════════
+workflow_config:
+  checkpoint_policy: always_active
+  fail_fast: true
+  allow_manual_override: false
+  mode: incremental
+  note: "Criativos são sensíveis. Zero YOLO sem checkpoint."
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# QUALITY GATES
+# ═══════════════════════════════════════════════════════════════════════════════
+quality_gates:
+  - id: PDT-QG-001
+    name: "Audit Completo"
+    transition: "Input → market-auditor → dr-master"
+    type: bloqueante
+    criteria: "Avatar, nível de consciência e ângulos definidos"
+  - id: PDT-QG-002
+    name: "Ângulo Aprovado"
+    transition: "dr-master → offer-architect → Tier 3"
+    type: bloqueante
+    criteria: "USP, mecanismo único e oferta core validados"
+  - id: PDT-QG-003
+    name: "Creative Review"
+    transition: "Tier 3 → creative-critic"
+    type: bloqueante
+    criteria: "Copy passa checklist de qualidade DR"
+  - id: PDT-QG-004
+    name: "Checklist Publicação"
+    transition: "Review → Output Final"
+    type: bloqueante
+    criteria: "Formato, CTA, compliance e assets visuais OK"
+  - id: PDT-QG-005
+    name: "Loop de Iteração"
+    transition: "Métricas reais → metrics-optimizer → revisão"
+    type: condicional
+    criteria: "CTR < benchmark OU Hook Rate < 20% OU ROAS < meta"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# METADATA
+# ═══════════════════════════════════════════════════════════════════════════════
+metadata:
+  type: hybrid
+  squad_type: expert+pipeline
+  base_stats:
+    agents: 9
+    tasks: 0
+    workflows: 0
+    checklists: 0
+  score: 0.0
+  domain: direct-response-creative
+  target_market: infoprodutos-brasil
+  platforms: [meta-ads, tiktok-ads]

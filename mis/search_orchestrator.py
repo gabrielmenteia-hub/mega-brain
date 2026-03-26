@@ -14,6 +14,7 @@ import structlog
 
 from .db import get_db
 from .search_repository import update_session_status
+from .spy_orchestrator import run_spy_batch, get_top_products_for_spy, SPY_V3_TOP_N
 
 _log = structlog.get_logger(__name__)
 _TASK_REGISTRY: dict[int, asyncio.Task] = {}
@@ -249,3 +250,17 @@ async def run_manual_search(session_id: int, subniche_id: int, db_path: str) -> 
         subniche_id=subniche_id,
         total_products=total_products,
     )
+
+    # --- SPY WIRING (v3.0) ---
+    # Transition to 'spying' and run spy batch on top products
+    update_session_status(db_path, session_id, "spying", platform_statuses, total_products)
+    products_to_spy = get_top_products_for_spy(db_path, session_id)
+    _log.info(
+        "run_manual_search.spy_start",
+        session_id=session_id,
+        products_to_spy=len(products_to_spy),
+    )
+    if products_to_spy:
+        await run_spy_batch(products_to_spy, max_concurrent=SPY_V3_TOP_N)
+    update_session_status(db_path, session_id, "spy_done", platform_statuses, total_products)
+    _log.info("run_manual_search.spy_done", session_id=session_id)

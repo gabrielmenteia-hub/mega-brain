@@ -1,0 +1,99 @@
+id: hormozi-squad
+name: Hormozi Squad
+version: "1.0.0"
+source: xquads
+description: "Squad de 16 agentes implementando os frameworks de Alex Hormozi — offers, leads, pricing, sales, content, hooks, launch, retention e scaling."
+orchestrator: hormozi-chief
+stats:
+  agents: 16
+  tasks: 10
+  workflows: 2
+tags: [hormozi, offers, leads, pricing, sales, growth, funnels]
+agents:
+  - id: hormozi-chief
+    name: Hormozi Chief
+    command: "/hormozi-chief"
+  - id: hormozi-ads
+    name: Hormozi Ads
+    command: "/hormozi-ads"
+  - id: hormozi-advisor
+    name: Hormozi Advisor
+    command: "/hormozi-advisor"
+  - id: hormozi-audit
+    name: Hormozi Audit
+    command: "/hormozi-audit"
+  - id: hormozi-closer
+    name: Hormozi Closer
+    command: "/hormozi-closer"
+  - id: hormozi-content
+    name: Hormozi Content
+    command: "/hormozi-content"
+  - id: hormozi-copy
+    name: Hormozi Copy
+    command: "/hormozi-copy"
+  - id: hormozi-hooks
+    name: Hormozi Hooks
+    command: "/hormozi-hooks"
+  - id: hormozi-launch
+    name: Hormozi Launch
+    command: "/hormozi-launch"
+  - id: hormozi-leads
+    name: Hormozi Leads
+    command: "/hormozi-leads"
+  - id: hormozi-models
+    name: Hormozi Models
+    command: "/hormozi-models"
+  - id: hormozi-offers
+    name: Hormozi Offers
+    command: "/hormozi-offers"
+  - id: hormozi-pricing
+    name: Hormozi Pricing
+    command: "/hormozi-pricing"
+  - id: hormozi-retention
+    name: Hormozi Retention
+    command: "/hormozi-retention"
+  - id: hormozi-scale
+    name: Hormozi Scale
+    command: "/hormozi-scale"
+  - id: hormozi-workshop
+    name: Hormozi Workshop
+    command: "/hormozi-workshop"
+tasks:
+  - id: audit-business
+    name: Audit Business
+    command: "/audit-business"
+  - id: close-sale
+    name: Close Sale
+    command: "/close-sale"
+  - id: create-hooks
+    name: Create Hooks
+    command: "/create-hooks"
+  - id: create-offer
+    name: Create Offer
+    command: "/create-offer"
+  - id: design-workshop
+    name: Design Workshop
+    command: "/design-workshop"
+  - id: generate-leads
+    name: Generate Leads
+    command: "/generate-leads"
+  - id: plan-launch
+    name: Plan Launch
+    command: "/plan-launch"
+  - id: review
+    name: Review
+    command: "/review"
+  - id: set-pricing
+    name: Set Pricing
+    command: "/set-pricing"
+  - id: scale-business
+    name: Scale Business
+    command: "/scale-business"
+workflows:
+  - id: reconhecimento-negocio
+    name: Reconhecimento de Negócios
+    duration: "2-4 horas"
+  - id: pipeline-criacao-oferta
+    name: Pipeline de Criação de Oferta
+    duration: "3-5 horas"
+added: "2026-03-12"

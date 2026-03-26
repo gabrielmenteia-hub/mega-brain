@@ -1,0 +1,53 @@
+id: espio-007
+name: espio-007
+short-title: "Espião 007"
+version: "1.0.0"
+source: local
+description: "Squad de espionagem sistemática de infoprodutos e produtos de alto ticket no mercado americano. Rastreia nichos em alta, mapeia funis completos (VSL → OTO → Downsell), extrai e analisa copy, desestrutura ofertas e entrega briefs acionáveis para adaptação ao mercado brasileiro."
+orchestrator: 007-bond
+stats:
+  agents: 6
+  tasks: 0
+  workflows: 0
+tags: [spy, market-research, funnel-mapping, copy-analysis, us-market, infoproducts, clickbank, jvzoo]
+platforms:
+  - ClickBank
+  - Digistore24
+  - JVZoo
+  - Warrior Plus
+  - ThriveCart
+market:
+  language: EN-US
+  region: United States
+agents:
+  - id: 007-bond
+    name: Bond
+    command: "/007-bond"
+    role: orchestrator
+  - id: 007-scout
+    name: Scout
+    command: "/007-scout"
+    role: specialist
+  - id: 007-funnel-mapper
+    name: Funnel Mapper
+    command: "/007-funnel-mapper"
+    role: specialist
+  - id: 007-copy-analyst
+    name: Copy Analyst
+    command: "/007-copy-analyst"
+    role: specialist
+  - id: 007-offer-decoder
+    name: Offer Decoder
+    command: "/007-offer-decoder"
+    role: specialist
+  - id: 007-brief-writer
+    name: Brief Writer
+    command: "/007-brief-writer"
+    role: specialist
+config:
+  extends: extend
+author: gabrielmenteia-hub
+license: MIT
+aiox:
+  minVersion: "2.1.0"
+  type: squad
