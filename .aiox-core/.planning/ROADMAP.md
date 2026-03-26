@@ -27,11 +27,11 @@ Decimal phases appear between their surrounding integers in numeric order.
   1. Modelos Pydantic (ReviewScore, CreativeBundle, NexusConfig) importaveis e validam dados invalidos com erros claros
   2. Toda configuracao (MAX_RETRIES, thresholds, model IDs) e carregada de .env -- alterar .env muda comportamento sem tocar codigo
   3. Cada dimensao de revisao (copy, tecnica, compliance, performance) possui rubrica com criterios objetivos e exemplos few-shot testados
-**Plans**: TBD
+**Plans:** 2 plans
 
 Plans:
-- [ ] 01-01: Data models e config loader
-- [ ] 01-02: Rubricas de revisao com few-shot calibration
+- [ ] 01-01-PLAN.md — Modelos Pydantic (AgentScore, CreativeBundle) + NexusConfig via .env + TDD suite
+- [ ] 01-02-PLAN.md — 4 rubricas de revisao com criterios objetivos e few-shot calibration
 
 ### Phase 2: Review Engine
 **Goal**: Um criativo submetido recebe veredictos tipados de 4 agentes especializados rodando em paralelo, com gate de custo que evita gerar audio/video desnecessario
