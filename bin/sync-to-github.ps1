@@ -35,26 +35,31 @@ function Sync-Repo {
 # 1. Mirror Layer 3 from MEGABRAIN -> mega-brain-data
 Write-Host "`n=== Mirroring Layer 3 -> mega-brain-data ===" -ForegroundColor Cyan
 
+# Only exclude what would CORRUPT the repo or LEAK secrets
 $excludeDirs = @(
     ".git", "node_modules", "__pycache__", ".pytest_cache",
     ".venv", "venv", ".next", "dist", "build", "out",
     ".turbo", ".mypy_cache",
-    "EvoTwin", "Simplex", "One Day",
-    ".antigravity", ".cursor", ".windsurf", ".codex", ".aiox-core",
-    "mega-brain-premium", "DS-main", "llm-council-main",
-    "rtk-master", "tribev2-main"
+    "EvoTwin", "Simplex", "One Day"
 )
 $excludeFiles = @(
     ".env", ".env.local",
-    "*.pyc", "*.db", "*.sqlite", "*.sqlite3", "*.tsbuildinfo",
-    "settings.local.json"
+    "*.pyc", "*.db", "*.sqlite", "*.sqlite3", "*.tsbuildinfo"
 )
 $args = @($MEGABRAIN, $DATA_BACKUP, "/E", "/R:1", "/W:1", "/NP", "/NFL", "/NDL", "/XD") + $excludeDirs + @("/XF") + $excludeFiles
 & robocopy @args | Out-Null
 
-# Defensive: remove any nested .env that slipped through
-Get-ChildItem -Path $DATA_BACKUP -Recurse -Force -Filter ".env" -ErrorAction SilentlyContinue | Remove-Item -Force
-Get-ChildItem -Path $DATA_BACKUP -Recurse -Force -Filter ".env.local" -ErrorAction SilentlyContinue | Remove-Item -Force
+# Defensive: nuke any nested .env that slipped through
+Get-ChildItem -Path $DATA_BACKUP -Recurse -Force -Filter ".env" -ErrorAction SilentlyContinue |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+Get-ChildItem -Path $DATA_BACKUP -Recurse -Force -Filter ".env.local" -ErrorAction SilentlyContinue |
+    Remove-Item -Force -ErrorAction SilentlyContinue
+
+# Strip nested .git dirs (NOT the root .git of mega-brain-data itself!)
+$rootGit = Join-Path $DATA_BACKUP ".git"
+Get-ChildItem -Path $DATA_BACKUP -Recurse -Force -Directory -Filter ".git" -ErrorAction SilentlyContinue |
+    Where-Object { $_.FullName -ne $rootGit } |
+    ForEach-Object { Remove-Item $_.FullName -Recurse -Force -ErrorAction SilentlyContinue }
 
 # 2. Push each repo
 Sync-Repo -Path "$MEGABRAIN\EvoTwin" -Branch "master" -Label "EvoTwin (submodule)"
