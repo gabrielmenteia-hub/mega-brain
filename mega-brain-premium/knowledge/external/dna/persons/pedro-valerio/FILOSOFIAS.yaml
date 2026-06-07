@@ -1,0 +1,109 @@
+# FILOSOFIAS — Pedro Valerio Lopez
+# Camada L1 do DNA Cognitivo
+# Versao: 1.1.0
+# Atualizado: 2026-03-18
+# Insights: 12
+
+version: "1.1.0"
+updated: "2026-03-18"
+person: "Pedro Valério"
+slug: "pedro-valerio"
+layer: "L1-FILOSOFIAS"
+count: 12
+
+filosofias:
+  - id: "FIL-PV-001"
+    nome: "Modelo Mental Antes de Técnica"
+    descricao: "Processos quebram quando se muda o executor sem mudar o modelo mental. O problema nunca é técnico."
+    citacao: "O problema do Marcos não era técnico. Não era falta de treinamento. O problema era o modelo mental."
+    chunks: ["chunk_1", "chunk_2"]
+    source: "SINKRA Cap 1"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-002"
+    nome: "Fluxograma Não É Processo"
+    descricao: "Fluxograma é representação visual. Processo é mecanismo operacional com estados, transições, validações e responsáveis formais."
+    citacao: "Fluxograma é representação visual. Processo é mecanismo operacional. São coisas completamente diferentes."
+    chunks: ["chunk_258"]
+    source: "SINKRA Cap 14"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-003"
+    nome: "Memória Humana Não É Controle"
+    descricao: "Dependência de memória humana não é controle, é esperança. Processos precisam de auto-validação."
+    citacao: "Dependência de memória humana não é controle, é esperança."
+    chunks: ["chunk_236"]
+    source: "SINKRA Cap 13"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-004"
+    nome: "Task-First"
+    descricao: "Toda atividade deve ser definida pela tarefa, não pelo executor. O QUE antes de QUEM."
+    citacao: "O processo inteiro foi desenhado assumindo que cada caixa seria executada por um humano."
+    chunks: ["chunk_215", "chunk_2"]
+    source: "SINKRA Cap 12"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-005"
+    nome: "Paradigma via Prática"
+    descricao: "Paradigma não se aprende em curso — se internaliza com prática. Clareza operacional é paradigma."
+    citacao: "Paradigma é algo que emerge de dentro pra fora. Você não aprende paradigma num curso."
+    chunks: ["chunk_389"]
+    source: "SINKRA Cap 19"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-006"
+    nome: "Dogfooding Obrigatório"
+    descricao: "Use seus próprios produtos internamente antes de vender. Quem vende sem usar não tem credibilidade."
+    citacao: "Muita gente cria produto pra fora, pra vender, mas não usa os próprios produtos."
+    chunks: ["chunk_410"]
+    source: "MEET-0033"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-007"
+    nome: "Única Fonte de Verdade"
+    descricao: "Se não está no ClickUp, não aconteceu. A ferramenta de gestão é o único registro válido de trabalho."
+    citacao: "Se não está no ClickUp, não aconteceu."
+    chunks: ["INS-PV-024"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-008"
+    nome: "Ferramenta Serve o Processo"
+    descricao: "Ferramenta se adapta ao processo, não o contrário. Nunca distorça seu fluxo para caber na ferramenta."
+    citacao: "Ferramenta se adapta ao processo, não o contrário."
+    chunks: ["INS-PV-025"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-009"
+    nome: "Implementação Exige Plano"
+    descricao: "Implementação sem plano é caos. Toda mudança operacional precisa de design antes de execução."
+    citacao: "Implementação sem plano é caos."
+    chunks: ["INS-PV-026"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-010"
+    nome: "Cultura Acima de Ferramenta"
+    descricao: "Cultura de responsabilidade supera qualquer ferramenta. Sem cultura, nenhuma ferramenta salva."
+    citacao: "Cultura de responsabilidade supera qualquer ferramenta."
+    chunks: ["INS-PV-027"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-011"
+    nome: "Deixe um Rastro"
+    descricao: "Documente todas as decisões. Rastreabilidade é pré-requisito de melhoria contínua."
+    citacao: "Deixe um rastro — documente todas as decisões."
+    chunks: ["INS-PV-028"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FIL-PV-012"
+    nome: "Processo Vive Onde o Trabalho Acontece"
+    descricao: "Faça o processo viver onde o trabalho é feito. Não force a equipe a sair do fluxo para registrar."
+    citacao: "Faça o processo viver onde o trabalho é feito."
+    chunks: ["INS-PV-029"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"

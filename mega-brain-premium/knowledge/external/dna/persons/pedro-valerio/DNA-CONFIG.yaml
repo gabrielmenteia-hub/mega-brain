@@ -1,0 +1,56 @@
+behavioral_patterns: 7
+composition:
+  FILOSOFIAS: 12
+  FRAMEWORKS: 11
+  HEURISTICAS: 9
+  METODOLOGIAS: 9
+  MODELOS_MENTAIS: 9
+  VOICE_DNA: 1
+  total: 51
+identity:
+  obsessions: 3
+  paradoxes: 3
+  values: 7
+insights_count: 66
+maturidade: COMPLETO
+person: Pedro Valério
+pipeline_version: MCE-1.0
+slug: pedro-valerio
+sources:
+  files:
+  - chunks: 403
+    id: SINKRA-Pedro-Valerio-Lopez
+    title: SINKRA - Mapeamento de Processos para a Era da Sincronização Humano-IA
+    type: doc
+    words: 107339
+  - chunks: 5
+    id: MEET-0032
+    title: Esteira de Criativos com Pedro Valério
+    type: call
+  - chunks: 2
+    id: MEET-0033
+    title: Fábrica de Criativos
+    type: call
+  - chunks: 4
+    id: MEET-0034
+    title: Gestão Lendária com Pedro e Alan
+    type: call
+  - chunks: 2
+    id: MEET-0039
+    title: Onboarding ClickUp com Pedro
+    type: call
+  - chunks: 0
+    id: MEET-0095
+    title: Deploy paths, sandbox, squad pro
+    type: call
+  - chunks: 0
+    id: MEET-0098
+    title: Projeto governo R$2.4M, BBB case, 4 registries
+    type: call
+  - chunks: 27
+    id: GESTAO-ALL-v2
+    title: Gestão de Projetos e ClickUp - Playbook Completo
+    type: doc
+  total: 8
+updated: '2026-03-18'
+version: 1.1.0

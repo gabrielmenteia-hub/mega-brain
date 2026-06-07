@@ -1,0 +1,83 @@
+id: WF-01
+name: Fluxo Principal de Conversa (Modo Livre)
+version: 1.0.0
+trigger: user_message_received
+
+description: >
+  Fluxo principal executado a cada mensagem do usuário no modo livre.
+  T-03 e T-04 executam em paralelo para otimizar latência.
+
+steps:
+  - id: save-message
+    task: T-02
+    executor: session-manager
+    inputs:
+      session_id: "{{session.id}}"
+      text: "{{user.message}}"
+    outputs: [history, turn_count]
+
+  - id: parallel-analysis
+    parallel: true
+    steps:
+      - id: character-response
+        task: T-03
+        executor: character-engine
+        inputs:
+          history: "{{save-message.history}}"
+          persona: "{{session.character}}"
+          interest_level: "{{session.interest_level}}"
+          turn_count: "{{save-message.turn_count}}"
+          last_test_turn: "{{session.last_test_turn}}"
+          coach_score: "{{session.last_coach_score}}"
+        outputs: [character_response, interest_level, applied_test]
+
+      - id: retrieve-concepts
+        task: T-04
+        executor: knowledge-retriever
+        inputs:
+          user_message: "{{user.message}}"
+          history_last_3: "{{save-message.history[-3:]}}"
+          user_level: "{{user.level}}"
+          scenario: "{{session.scenario}}"
+        outputs: [concepts]
+
+  - id: analyze
+    task: T-05
+    executor: coach-analyzer
+    depends_on: [character-response, retrieve-concepts]
+    inputs:
+      user_message: "{{user.message}}"
+      history: "{{save-message.history}}"
+      concepts: "{{retrieve-concepts.concepts}}"
+      character_state: "{{character-response.character_state}}"
+    outputs: [analysis]
+
+  - id: write-feedback
+    task: T-06
+    executor: feedback-writer
+    depends_on: [analyze]
+    inputs:
+      analysis: "{{analyze.analysis}}"
+      user_message: "{{user.message}}"
+      user_level: "{{user.level}}"
+      concepts: "{{retrieve-concepts.concepts}}"
+    outputs: [feedback]
+
+  - id: check-session-end
+    condition: "{{character-response.interest_level}} <= 0"
+    if_true: trigger WF-04
+    if_false: return_response
+
+quality_gates:
+  - id: QG-S3
+    check: "T-03 and T-04 completed"
+    blocks: T-05
+  - id: QG-S4
+    check: "T-05 completed"
+    blocks: T-06
+
+response_format:
+  character_message: "{{character-response.character_response}}"
+  interest_indicator: "{{character-response.interest_level}}"
+  coach_feedback: "{{write-feedback.feedback.feedback_text}}"
+  score: "{{write-feedback.feedback.score_overall}}"

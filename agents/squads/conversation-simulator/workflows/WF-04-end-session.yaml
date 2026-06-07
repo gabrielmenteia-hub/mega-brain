@@ -1,0 +1,59 @@
+id: WF-04
+name: Encerramento de Sessão
+version: 1.0.0
+trigger: user_ends_session OR interest_level_zero OR session_timeout
+
+description: >
+  Fluxo de encerramento. Calcula XP, atualiza progresso e exibe summary final.
+  T-07 → T-08 → T-09 são sequenciais (cada um depende do anterior).
+
+steps:
+  - id: compute-xp
+    task: T-07
+    executor: progress-tracker
+    inputs:
+      session_summary: "{{session.scores_average}}"
+      mode: "{{session.mode}}"
+      character: "{{session.character}}"
+      session_completed: "{{session.interest_level > 20 AND session.turn_count >= 5}}"
+    outputs: [xp_gained, skills_xp]
+
+  - id: update-progress
+    task: T-08
+    executor: progress-tracker
+    depends_on: [compute-xp]
+    inputs:
+      user_id: "{{user.id}}"
+      xp_gained: "{{compute-xp.xp_gained}}"
+      skills_xp: "{{compute-xp.skills_xp}}"
+      current_user_state: "{{user.current_state}}"
+    outputs: [level_up, milestones, new_state]
+
+  - id: finalize-session
+    task: T-09
+    executor: session-manager
+    depends_on: [update-progress]
+    inputs:
+      session_id: "{{session.id}}"
+      progress_result: "{{update-progress}}"
+      session_data: "{{session.full_data}}"
+    outputs: [summary]
+
+quality_gates:
+  - id: QG-S5
+    check: "T-07 completed"
+    blocks: T-08
+  - id: QG-S4b
+    check: "T-08 completed"
+    blocks: T-09
+
+response_format:
+  summary_screen:
+    duration: "{{finalize-session.summary.duration_minutes}} min"
+    turns: "{{finalize-session.summary.total_turns}} turnos"
+    final_interest: "{{finalize-session.summary.final_interest}}/100"
+    score_overall: "{{finalize-session.summary.scores_average.overall}}/10"
+    xp_gained: "+{{compute-xp.xp_gained}} XP"
+    level_up: "{{update-progress.level_up}}"
+    milestones: "{{update-progress.milestones}}"
+    concepts_seen: "{{finalize-session.summary.concepts_encountered}}"

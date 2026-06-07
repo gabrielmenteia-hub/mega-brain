@@ -1,0 +1,41 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PRODUCT BUILDER SQUAD - Configuration
+# Version: 1.0.0
+# Purpose: Build complete digital products (Lovable + Supabase) from idea to deploy-ready prompt
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: product-builder
+version: 1.0.0
+
+pack:
+  name: product-builder
+  version: 1.0.0
+  short-title: Product Builder Squad
+  description: >-
+    Squad completo para construir produtos digitais modernos.
+    Da ideia ao prompt Lovable: estratégia, arquitetura de dados, segurança,
+    UX, copy e engenharia de prompt em pipeline sequencial com quality gates.
+    Output: prompt final otimizado para Lovable + todos os artefatos intermediários.
+  author: MEGABRAIN
+  icon: "🏗️"
+  slashPrefix: product
+
+entry_agent: product-chief
+
+workspace_integration:
+  level: read_write
+  rationale: >-
+    O squad consome contexto do projeto e produz artefatos em output/product/{slug}/
+  read_paths:
+    - workspace/
+  write_paths:
+    - workspace/output/product/
+
+metadata:
+  version: "1.0.0"
+  type: "base"
+  score: 9.0
+  stats:
+    agents: 7
+    phases: 9
+    quality_gates: 7

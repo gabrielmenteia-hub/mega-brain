@@ -1,0 +1,52 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/Users/Gabriel/MEGABRAIN/system/REGISTRY/**)",
+      "Bash(python -c \":*)",
+      "Read(//c/Users/Gabriel/MEGABRAIN/knowledge/dossiers//**)",
+      "Bash(/dev/null echo:*)",
+      "Read(//c/Users/Gabriel/MEGABRAIN/.aiox-core/**)",
+      "Bash(python -c \"import weasyprint; print\\(''OK''\\)\")",
+      "Bash(python -c \"import pdfkit; print\\(''pdfkit''\\)\")",
+      "Bash(pip install:*)",
+      "Bash(python -c \"import weasyprint; print\\(''''WeasyPrint OK''''\\)\")",
+      "Read(//c/Users/Gabriel/.claude/get-shit-done/templates/**)",
+      "WebSearch",
+      "Bash(mkdir -p \"C:/Users/Gabriel/.claude/Mente Lendaria/codigo-presenca-magnetica\")",
+      "Read(//c/Users/Gabriel/.claude/Mente Lendaria/**)",
+      "Bash(mkdir -p \"C:/Users/Gabriel/.claude/Mente Lendaria/codigo-presenca-magnetica/app\")",
+      "Bash(mkdir -p \"C:/Users/Gabriel/.claude/Mente Lendaria/codigo-presenca-magnetica/components\")",
+      "Bash(mkdir -p \"C:/Users/Gabriel/.claude/Mente Lendaria/codigo-presenca-magnetica/public\")",
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Read(//dev/**)",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(''''Keys:'''', list\\(d.keys\\(\\)\\)[:5]\\); print\\(''''Total insights:'''', len\\(d.get\\(''''insights'''', d.get\\(''''data'''',[]\\)\\)\\)\\)\")",
+      "Bash(python -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(''''Keys:'''', list\\(d.keys\\(\\)\\)[:5]\\); chunks=d.get\\(''''chunks'''',d.get\\(''''data'''',[]\\)\\); print\\(''''Total chunks:'''', len\\(chunks\\)\\)\")",
+      "Bash(npm show:*)",
+      "Bash(node -e \":*)",
+      "Read(//c/Users/Gabriel/MEGABRAIN/.aiox-core/$\\(npm root -g\\)/**)",
+      "Read(//c/Users/Gabriel/AppData/Local/npm-cache/_npx/**)",
+      "Read(//c/Users/Gabriel/MEGABRAIN/**)",
+      "Read(//c/Users/Gabriel/.claude/**)",
+      "Bash(node -e \"JSON.parse\\(require\\(''fs''\\).readFileSync\\(''C:/Users/Gabriel/.claude/settings.json'',''utf8''\\)\\); console.log\\(''JSON válido''\\)\")",
+      "Bash(python scripts/canva_oauth.py)",
+      "Read(//c/Users/Gabriel/Downloads/Modelos de PV/**)",
+      "Read(//c/Users/Gabriel/Downloads/**)",
+      "Bash(python -c \"import youtube_transcript_api; print\\(''''OK''''\\)\")",
+      "Bash(python -c \"import yt_dlp; print\\(''''yt-dlp OK''''\\)\")",
+      "Bash(python processing/tmp_narrative.py)",
+      "Bash(rm processing/tmp_narrative.py)",
+      "Bash(python -c \"from youtube_transcript_api import YouTubeTranscriptApi; print\\(''OK''\\)\")",
+      "Bash(python -c ':*)"
+    ],
+    "additionalDirectories": [
+      "C:\\Users\\Gabriel\\MEGABRAIN\\.claude\\sessions",
+      "C:\\Users\\Gabriel\\.claude\\sessions",
+      "C:\\Users\\Gabriel\\.claude\\Mente Lendaria\\codigo-presenca-magnetica",
+      "C:\\Users\\Gabriel\\.clone\\Mente Lendaria\\codigo-presenca-magnetica\\app",
+      "c:\\Users\\Gabriel\\MEGABRAIN",
+      "C:\\Users\\Gabriel\\.claude",
+      "\\tmp"
+    ]
+  }
+}

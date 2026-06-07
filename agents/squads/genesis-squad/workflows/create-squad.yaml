@@ -1,0 +1,237 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOW: Create Squad
+# Squad: genesis-squad
+# Purpose: Pipeline completo de criação de squad para qualquer nicho
+# ═══════════════════════════════════════════════════════════════════════════════
+
+id: wf-create-squad
+name: Create Squad
+version: 1.0.0
+type: sequential
+executor: genesis-chief
+
+description: >-
+  Pipeline de 5 fases para criar um squad completo a partir de um nicho e objetivo.
+  Cada fase produz um artefato aprovado pelo usuário antes de avançar.
+
+inputs:
+  - name: niche
+    type: string
+    required: true
+    description: "O domínio ou segmento do squad (ex: fitness, jurídico, e-commerce)"
+  - name: objective
+    type: string
+    required: true
+    description: "O que o squad deve fazer (ex: criar conteúdo de vendas para coaches)"
+  - name: mode
+    type: enum
+    values: [incremental, yolo]
+    default: incremental
+
+outputs:
+  - name: squad_directory
+    type: directory
+    description: "squads/{slug}/ com todos os arquivos gerados"
+  - name: quality_report
+    type: file
+    description: "quality-report.md com score final"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# PHASES
+# ═══════════════════════════════════════════════════════════════════════════════
+
+phases:
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase-1
+    name: Domain Discovery
+    executor: "@niche-analyst"
+    description: "Mapear o domínio: atores, processos, outputs, lacunas"
+
+    steps:
+      - id: S1.1
+        action: "Receber nicho e objetivo do usuário"
+        produces: "brief_inicial"
+      - id: S1.2
+        action: "Mapear atores do domínio (mínimo 3)"
+        produces: "actors_map"
+      - id: S1.3
+        action: "Identificar 5 processos centrais"
+        produces: "processes_map"
+      - id: S1.4
+        action: "Detectar lacunas prioritárias para agentes"
+        produces: "gaps_list"
+      - id: S1.5
+        action: "Gerar Domain Brief consolidado"
+        produces: "domain-brief.md"
+
+    quality_gate:
+      id: QG-01
+      criteria:
+        - "Domain Brief tem pelo menos 3 atores mapeados"
+        - "Domain Brief tem exatamente 5 processos centrais"
+        - "Pelo menos 3 lacunas identificadas com critérios claros"
+      p1_blockers:
+        - "Domain Brief ausente ou incompleto"
+        - "Menos de 3 atores mapeados"
+      on_pass: "Avançar para Phase 2"
+      on_fail: "Retornar para S1.2 e completar mapeamento"
+      approval: "user"  # Aguarda aprovação do usuário
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase-2
+    name: Agent Architecture
+    executor: "@agent-architect"
+    description: "Projetar estrutura de agentes com papéis únicos e hierarquia clara"
+
+    inputs:
+      - "domain-brief.md"
+
+    steps:
+      - id: S2.1
+        action: "Definir orquestrador ({squad}-chief)"
+        produces: "chief_definition"
+      - id: S2.2
+        action: "Mapear Specialists para cada lacuna prioritária"
+        produces: "specialists_list"
+      - id: S2.3
+        action: "Verificar: nenhum papel duplicado"
+        produces: "dedup_check"
+      - id: S2.4
+        action: "Definir DNA de cada agente (tom, princípio, expertise, vocabulário)"
+        produces: "agents_dna"
+      - id: S2.5
+        action: "Gerar Agent Architecture Document"
+        produces: "agent-architecture.md"
+
+    quality_gate:
+      id: QG-02
+      criteria:
+        - "Exatamente 1 agente em Tier 1 (Chief)"
+        - "Mínimo 2 agentes em Tier 2 (Specialists)"
+        - "Nenhum papel duplicado entre agentes"
+        - "Todos os agentes têm DNA definido"
+      p1_blockers:
+        - "Mais de 1 Chief"
+        - "Papéis duplicados detectados"
+        - "Agente sem papel definido"
+      on_pass: "Avançar para Phase 3"
+      on_fail: "Retornar para S2.2 e revisar papéis"
+      approval: "user"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase-3
+    name: Workflow Design
+    executor: "@workflow-designer"
+    description: "Criar tasks atômicas, workflows e quality gates"
+
+    inputs:
+      - "agent-architecture.md"
+
+    steps:
+      - id: S3.1
+        action: "Converter use cases em tasks atômicas"
+        produces: "tasks_list"
+      - id: S3.2
+        action: "Organizar tasks em workflows por objetivo"
+        produces: "workflows_structure"
+      - id: S3.3
+        action: "Inserir quality gates nas transições críticas"
+        produces: "gates_map"
+      - id: S3.4
+        action: "Gerar Workflow Specification"
+        produces: "workflow-spec.md"
+
+    quality_gate:
+      id: QG-03
+      criteria:
+        - "Cada use case tem pelo menos 1 workflow"
+        - "Cada workflow tem pelo menos 1 quality gate"
+        - "Cada quality gate tem critérios mensuráveis"
+      p1_blockers:
+        - "Use case sem workflow correspondente"
+        - "Workflow sem quality gate"
+      on_pass: "Avançar para Phase 4"
+      on_fail: "Retornar para S3.1 e cobrir use cases faltantes"
+      approval: "user"
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase-4
+    name: Squad Assembly
+    executor: "@squad-assembler"
+    description: "Gerar todos os arquivos físicos do squad"
+
+    inputs:
+      - "domain-brief.md"
+      - "agent-architecture.md"
+      - "workflow-spec.md"
+
+    steps:
+      - id: S4.1
+        action: "Criar estrutura de diretórios squads/{slug}/"
+        produces: "directory_structure"
+      - id: S4.2
+        action: "Gerar config.yaml"
+        produces: "config.yaml"
+      - id: S4.3
+        action: "Gerar agents/{agent-id}.md para cada agente"
+        produces: "agent_files"
+      - id: S4.4
+        action: "Gerar tasks/{task-id}.md para cada task"
+        produces: "task_files"
+      - id: S4.5
+        action: "Gerar workflows/{wf-id}.yaml"
+        produces: "workflow_files"
+      - id: S4.6
+        action: "Gerar README.md"
+        produces: "README.md"
+
+    quality_gate:
+      id: QG-04
+      criteria:
+        - "config.yaml gerado sem campos vazios"
+        - "Todos os agentes da arquitetura têm arquivo .md"
+        - "entry_agent do config existe como arquivo"
+        - "README.md gerado"
+      p1_blockers:
+        - "Arquivo de agente faltando"
+        - "entry_agent sem arquivo correspondente"
+        - "Campos {placeholder} não preenchidos"
+      on_pass: "Avançar para Phase 5"
+      on_fail: "Retornar para S4.3 e gerar arquivos faltantes"
+      approval: "auto"  # Verificação automática de arquivos
+
+  # ─────────────────────────────────────────────────────────────────────────────
+  - id: phase-5
+    name: Validation
+    executor: "@quality-guardian"
+    description: "Auditar o squad contra padrões AIOX e calcular score"
+
+    inputs:
+      - "squads/{slug}/"
+
+    steps:
+      - id: S5.1
+        action: "Executar checklist P1 (blockers)"
+        produces: "p1_results"
+      - id: S5.2
+        action: "Executar checklist P2 (warnings)"
+        produces: "p2_results"
+      - id: S5.3
+        action: "Calcular score por dimensão"
+        produces: "dimension_scores"
+      - id: S5.4
+        action: "Gerar Quality Report"
+        produces: "quality-report.md"
+
+    quality_gate:
+      id: QG-05
+      criteria:
+        - "Score final >= 7.0 / 10.0"
+        - "Zero blockers P1"
+      p1_blockers:
+        - "Score < 7.0"
+        - "Qualquer item P1 falhando"
+      on_pass: "Squad aprovado — entregar ao usuário"
+      on_fail: "Retornar para Phase 4 com lista de correções"
+      approval: "auto"

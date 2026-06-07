@@ -1,0 +1,1423 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O Protocolo do Homem Insubstituível</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background: #080810;
+      color: #F5F5F5;
+      font-family: 'Inter', system-ui, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── TOKENS ────────────────────────────────────────────────── */
+    :root {
+      --bg-deep:    #080810;
+      --bg-mid:     #0D0D1A;
+      --bg-card:    #111125;
+      --gold:       #C9A84C;
+      --blue:       #1A6FE8;
+      --blue-light: #3D8EFF;
+      --blue-dark:  #1258C4;
+      --text:       #F5F5F5;
+      --sub:        #888888;
+      --border:     rgba(26,111,232,0.18);
+      --font-head:  'Bebas Neue', 'Anton', Impact, sans-serif;
+      --font-body:  'Inter', system-ui, sans-serif;
+    }
+
+    /* ─── TYPOGRAPHY ────────────────────────────────────────────── */
+    .h1 { font-family: var(--font-head); font-size: clamp(2.6rem, 7vw, 5rem); line-height: 1.0; letter-spacing: 0.02em; }
+    .h2 { font-family: var(--font-head); font-size: clamp(2rem, 5vw, 3.4rem); line-height: 1.05; letter-spacing: 0.02em; }
+    .h3 { font-family: var(--font-head); font-size: clamp(1.4rem, 3.5vw, 2rem); letter-spacing: 0.03em; }
+    .label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+    .gold   { color: var(--gold); }
+    .blue   { color: var(--blue-light); }
+    .sub    { color: var(--sub); }
+
+    /* ─── LAYOUT ────────────────────────────────────────────────── */
+    .section { padding: 80px 20px; }
+    .section--alt { background: var(--bg-mid); }
+    .container { max-width: 880px; margin: 0 auto; }
+    .container--wide { max-width: 1100px; margin: 0 auto; }
+
+    /* ─── TOP BAR ───────────────────────────────────────────────── */
+    .topbar {
+      background: var(--blue-dark);
+      text-align: center;
+      padding: 10px 20px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+    }
+    .topbar span { color: #fff; }
+    .topbar strong { color: var(--gold); }
+
+    /* ─── HERO ──────────────────────────────────────────────────── */
+    .hero {
+      background: var(--bg-deep);
+      padding: 60px 20px 70px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(26,111,232,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero__eyebrow {
+      display: inline-block;
+      background: rgba(26,111,232,0.15);
+      border: 1px solid rgba(26,111,232,0.4);
+      color: var(--blue-light);
+      padding: 6px 18px;
+      border-radius: 2px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+    }
+    .hero__title { margin-bottom: 10px; }
+    .hero__title .line1 { color: var(--text); display: block; }
+    .hero__title .line2 { color: var(--blue-light); display: block; }
+    .hero__subtitle {
+      font-size: clamp(1rem, 2.5vw, 1.25rem);
+      color: var(--sub);
+      max-width: 620px;
+      margin: 18px auto 36px;
+      line-height: 1.55;
+    }
+    .hero__subtitle strong { color: var(--text); }
+
+    /* VSL Player */
+    .vsl-wrapper {
+      max-width: 720px;
+      margin: 0 auto 40px;
+      border-radius: 4px;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px var(--border), 0 20px 60px rgba(0,0,0,0.7);
+      position: relative;
+    }
+    .vsl-player {
+      background: #050508;
+      aspect-ratio: 16/9;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      gap: 16px;
+      cursor: pointer;
+      position: relative;
+    }
+    .vsl-player__overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,111,232,0.07) 0%, transparent 60%);
+    }
+    .vsl-play-btn {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      background: var(--blue);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 0 0 8px rgba(26,111,232,0.2), 0 0 40px rgba(26,111,232,0.4);
+      transition: transform 0.2s, box-shadow 0.2s;
+      z-index: 1;
+    }
+    .vsl-play-btn:hover { transform: scale(1.08); box-shadow: 0 0 0 12px rgba(26,111,232,0.25), 0 0 60px rgba(26,111,232,0.5); }
+    .vsl-play-btn svg { fill: #fff; width: 28px; height: 28px; margin-left: 4px; }
+    .vsl-caption { font-size: 0.78rem; color: var(--sub); z-index: 1; letter-spacing: 0.06em; text-transform: uppercase; }
+
+    /* CTA Button */
+    .btn-cta {
+      display: inline-block;
+      background: var(--blue);
+      color: #fff;
+      font-family: var(--font-body);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      padding: 18px 42px;
+      border-radius: 3px;
+      border: none;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s, box-shadow 0.2s;
+      box-shadow: 0 6px 30px rgba(26,111,232,0.45);
+      text-decoration: none;
+    }
+    .btn-cta:hover {
+      background: var(--blue-light);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 40px rgba(26,111,232,0.6);
+    }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-cta--lg { font-size: 1.1rem; padding: 22px 52px; }
+    .btn-cta--gold {
+      background: var(--gold);
+      color: #080810;
+      box-shadow: 0 6px 30px rgba(201,168,76,0.4);
+    }
+    .btn-cta--gold:hover { background: #e0bb5c; box-shadow: 0 10px 40px rgba(201,168,76,0.55); }
+
+    .hero__guarantee {
+      margin-top: 16px;
+      font-size: 0.78rem;
+      color: var(--sub);
+    }
+    .hero__guarantee svg { vertical-align: middle; margin-right: 4px; }
+
+    /* ─── PROBLEM ───────────────────────────────────────────────── */
+    .problem__intro {
+      max-width: 640px;
+      margin: 0 auto 56px;
+      text-align: center;
+    }
+    .problem__intro p {
+      color: var(--sub);
+      font-size: 1.05rem;
+      margin-top: 16px;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+    .pain-card {
+      background: var(--bg-card);
+      border: 1px solid rgba(26,111,232,0.12);
+      border-top: 3px solid var(--blue);
+      padding: 28px 24px;
+      border-radius: 3px;
+    }
+    .pain-card__icon {
+      font-size: 2rem;
+      margin-bottom: 14px;
+    }
+    .pain-card__title {
+      font-family: var(--font-head);
+      font-size: 1.25rem;
+      letter-spacing: 0.05em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .pain-card__text {
+      color: var(--sub);
+      font-size: 0.9rem;
+      line-height: 1.6;
+    }
+    .pain-card__text strong { color: var(--text); }
+    .problem__close {
+      max-width: 640px;
+      margin: 48px auto 0;
+      text-align: center;
+      font-size: 1.1rem;
+      color: var(--sub);
+      line-height: 1.65;
+    }
+    .problem__close strong { color: var(--blue-light); }
+
+    /* ─── MECHANISM / AUTHOR ────────────────────────────────────── */
+    .mechanism__grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 56px;
+      align-items: center;
+    }
+    @media (max-width: 680px) {
+      .mechanism__grid { grid-template-columns: 1fr; gap: 36px; }
+    }
+    .mechanism__photo {
+      position: relative;
+    }
+    .mechanism__img-placeholder {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      aspect-ratio: 4/5;
+      overflow: hidden;
+      position: relative;
+    }
+    .mechanism__img-placeholder::before { content: none; }
+    .mechanism__img-placeholder::after { content: none; }
+    .mechanism__img-inner { display: none; }
+    .mechanism__img-icon { display: none; }
+    .mechanism__img-name { display: none; }
+    .mechanism__img-role { display: none; }
+    .mechanism__avatar-img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center 15%;
+      display: block;
+      filter: contrast(1.08) brightness(1.02) saturate(0.9);
+      image-rendering: -webkit-optimize-contrast;
+    }
+    .mechanism__badge {
+      position: absolute;
+      top: -12px;
+      right: -12px;
+      background: var(--gold);
+      color: #080810;
+      font-size: 0.65rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 5px 10px;
+      border-radius: 2px;
+    }
+    .mechanism__content .label { color: var(--blue-light); margin-bottom: 14px; display: block; }
+    .mechanism__content h2 { margin-bottom: 20px; }
+    .mechanism__content p {
+      color: var(--sub);
+      font-size: 0.97rem;
+      line-height: 1.7;
+      margin-bottom: 16px;
+    }
+    .mechanism__content p strong { color: var(--text); }
+    .mechanism__stats {
+      display: flex;
+      gap: 28px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .mech-stat__number {
+      font-family: var(--font-head);
+      font-size: 2.2rem;
+      color: var(--blue-light);
+      line-height: 1;
+    }
+    .mech-stat__label { font-size: 0.75rem; color: var(--sub); margin-top: 2px; }
+
+    /* ─── MODULES ───────────────────────────────────────────────── */
+    .modules__intro { text-align: center; margin-bottom: 52px; }
+    .modules__intro p { color: var(--sub); margin-top: 14px; font-size: 1rem; }
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+    }
+    .module-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 32px 26px;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .module-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue) 0%, var(--blue-light) 100%);
+    }
+    .module-card:hover { border-color: rgba(26,111,232,0.35); transform: translateY(-3px); }
+    .module-card__number {
+      font-family: var(--font-head);
+      font-size: 3.5rem;
+      line-height: 1;
+      color: rgba(26,111,232,0.15);
+      position: absolute;
+      top: 16px;
+      right: 20px;
+      letter-spacing: -0.02em;
+    }
+    .module-card__icon {
+      width: 52px;
+      height: 52px;
+      background: rgba(26,111,232,0.12);
+      border: 1px solid rgba(26,111,232,0.25);
+      border-radius: 3px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 18px;
+    }
+    .module-card__label { color: var(--blue-light); font-size: 0.68rem; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; margin-bottom: 8px; }
+    .module-card__title { font-family: var(--font-head); font-size: 1.3rem; letter-spacing: 0.04em; color: var(--text); margin-bottom: 14px; }
+    .module-card__text { color: var(--sub); font-size: 0.88rem; line-height: 1.65; }
+    .module-card__text strong { color: var(--text); }
+    .module-card__bullets { margin-top: 16px; padding: 0; list-style: none; }
+    .module-card__bullets li {
+      font-size: 0.84rem;
+      color: var(--sub);
+      padding: 5px 0 5px 18px;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .module-card__bullets li:last-child { border-bottom: none; }
+    .module-card__bullets li::before {
+      content: '›';
+      position: absolute;
+      left: 0;
+      color: var(--blue-light);
+      font-weight: 700;
+    }
+
+    /* ─── VALUE STACK ───────────────────────────────────────────── */
+    .value-stack__intro { text-align: center; margin-bottom: 48px; }
+    .value-stack__intro p { color: var(--sub); margin-top: 12px; }
+    .vs-table {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .vs-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 18px 28px;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+      gap: 16px;
+    }
+    .vs-row:last-child { border-bottom: none; }
+    .vs-row--header {
+      background: rgba(26,111,232,0.1);
+      border-bottom: 1px solid rgba(26,111,232,0.2);
+    }
+    .vs-row__item { font-size: 0.95rem; color: var(--text); flex: 1; }
+    .vs-row__item .tag {
+      display: inline-block;
+      background: rgba(26,111,232,0.15);
+      color: var(--blue-light);
+      font-size: 0.6rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      padding: 2px 7px;
+      border-radius: 2px;
+      text-transform: uppercase;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .vs-row__item .tag--gold { background: rgba(201,168,76,0.15); color: var(--gold); }
+    .vs-row__price {
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      color: var(--sub);
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .vs-row--header .vs-row__item { color: var(--sub); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; }
+    .vs-row--header .vs-row__price { color: var(--sub); font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; }
+    .vs-total {
+      background: rgba(26,111,232,0.08);
+      border-top: 1px solid rgba(26,111,232,0.25) !important;
+    }
+    .vs-total .vs-row__item { font-weight: 700; font-size: 1rem; color: var(--text); }
+    .vs-total .vs-row__price { color: var(--sub); font-size: 1.3rem; }
+    .vs-total .vs-row__price s { font-size: 1rem; opacity: 0.5; margin-right: 8px; }
+    .vs-cta-box {
+      text-align: center;
+      margin-top: 40px;
+    }
+    .vs-cta-box__you-pay {
+      font-size: 0.78rem;
+      color: var(--sub);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+    .vs-cta-box__price {
+      font-family: var(--font-head);
+      font-size: 3.8rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .vs-cta-box__anchor {
+      font-size: 0.85rem;
+      color: var(--sub);
+      text-decoration: line-through;
+      margin-bottom: 24px;
+    }
+
+    /* ─── SOCIAL PROOF ──────────────────────────────────────────── */
+    .proof__numbers {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      flex-wrap: wrap;
+      margin: 0 auto 60px;
+      padding: 0 20px;
+    }
+    .proof-num {
+      text-align: center;
+    }
+    .proof-num__value {
+      font-family: var(--font-head);
+      font-size: clamp(2.4rem, 6vw, 3.6rem);
+      color: var(--blue-light);
+      line-height: 1;
+    }
+    .proof-num__value span { color: var(--gold); }
+    .proof-num__label { font-size: 0.78rem; color: var(--sub); margin-top: 4px; letter-spacing: 0.06em; text-transform: uppercase; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+    }
+    .testi-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 28px 24px;
+    }
+    .testi-card__stars {
+      color: var(--gold);
+      font-size: 1rem;
+      letter-spacing: 2px;
+      margin-bottom: 14px;
+    }
+    .testi-card__text {
+      color: #c8c8d4;
+      font-size: 0.92rem;
+      line-height: 1.7;
+      font-style: italic;
+      margin-bottom: 20px;
+    }
+    .testi-card__author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .testi-card__avatar {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      overflow: hidden;
+      background: linear-gradient(135deg, #1A4080, #1A6FE8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-head);
+      font-size: 1.2rem;
+      color: #fff;
+      flex-shrink: 0;
+    }
+    .testi-card__name { font-size: 0.9rem; font-weight: 700; color: var(--text); }
+    .testi-card__meta { font-size: 0.72rem; color: var(--sub); margin-top: 2px; }
+
+    /* ─── OFFER ─────────────────────────────────────────────────── */
+    .offer__box {
+      background: var(--bg-card);
+      border: 1px solid rgba(26,111,232,0.25);
+      border-radius: 6px;
+      max-width: 680px;
+      margin: 0 auto;
+      overflow: hidden;
+      box-shadow: 0 0 0 1px rgba(26,111,232,0.08), 0 30px 80px rgba(0,0,0,0.5);
+    }
+    .offer__header {
+      background: linear-gradient(135deg, #0d1e40 0%, #0a1628 100%);
+      border-bottom: 1px solid rgba(26,111,232,0.2);
+      padding: 28px 32px;
+      text-align: center;
+    }
+    .offer__header .label { color: var(--blue-light); margin-bottom: 10px; display: block; }
+    .offer__header h2 { font-size: clamp(1.6rem, 4vw, 2.4rem); }
+    .offer__body { padding: 32px; }
+    .offer__checklist { list-style: none; margin-bottom: 28px; }
+    .offer__checklist li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      padding: 9px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+      font-size: 0.93rem;
+      color: var(--sub);
+    }
+    .offer__checklist li:last-child { border-bottom: none; }
+    .offer__checklist li strong { color: var(--text); }
+    .check-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: rgba(26,111,232,0.15);
+      border: 1px solid rgba(26,111,232,0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 1px;
+      color: var(--blue-light);
+      font-size: 0.7rem;
+      font-weight: 700;
+    }
+    .offer__price-block { text-align: center; margin: 28px 0; }
+    .offer__price-block .was { font-size: 0.9rem; color: var(--sub); text-decoration: line-through; margin-bottom: 4px; }
+    .offer__price-block .now-label { font-size: 0.72rem; color: var(--sub); letter-spacing: 0.14em; text-transform: uppercase; margin-bottom: 4px; }
+    .offer__price-block .price { font-family: var(--font-head); font-size: 4.5rem; color: var(--gold); line-height: 1; }
+    .offer__price-block .price-sub { font-size: 0.8rem; color: var(--sub); margin-top: 6px; }
+    .offer__cta { text-align: center; margin-bottom: 20px; }
+    .offer__cta .btn-cta { width: 100%; max-width: 420px; font-size: 1.05rem; padding: 20px; }
+    .offer__bump {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 3px;
+      padding: 18px 20px;
+      margin-top: 20px;
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+    }
+    .offer__bump input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      accent-color: var(--gold);
+      margin-top: 2px;
+      flex-shrink: 0;
+      cursor: pointer;
+    }
+    .offer__bump__text { font-size: 0.85rem; color: var(--sub); line-height: 1.55; }
+    .offer__bump__text strong { color: var(--gold); }
+    .offer__guarantee {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      margin-top: 28px;
+      padding: 20px;
+      background: rgba(26,111,232,0.05);
+      border: 1px solid rgba(26,111,232,0.12);
+      border-radius: 3px;
+    }
+    .guarantee-badge {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(26,111,232,0.12);
+      border: 2px solid rgba(26,111,232,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      flex-shrink: 0;
+    }
+    .offer__guarantee__text h4 { font-size: 0.95rem; color: var(--text); margin-bottom: 4px; }
+    .offer__guarantee__text p { font-size: 0.82rem; color: var(--sub); line-height: 1.5; }
+
+    /* ─── FAQ ───────────────────────────────────────────────────── */
+    .faq__intro { text-align: center; margin-bottom: 44px; }
+    .faq__intro p { color: var(--sub); margin-top: 12px; }
+    .faq-list { max-width: 700px; margin: 0 auto; }
+    .faq-item {
+      border: 1px solid var(--border);
+      border-radius: 3px;
+      margin-bottom: 10px;
+      overflow: hidden;
+    }
+    .faq-item__q {
+      padding: 18px 22px;
+      font-size: 0.97rem;
+      font-weight: 600;
+      color: var(--text);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--bg-card);
+      transition: background 0.2s;
+    }
+    .faq-item__q:hover { background: rgba(26,111,232,0.06); }
+    .faq-item__q .faq-icon {
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background: rgba(26,111,232,0.12);
+      border: 1px solid rgba(26,111,232,0.25);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--blue-light);
+      font-size: 1.1rem;
+      flex-shrink: 0;
+      font-weight: 400;
+      line-height: 1;
+      transition: transform 0.2s;
+    }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    .faq-item__a {
+      padding: 0 22px;
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.3s ease, padding 0.3s ease;
+      font-size: 0.9rem;
+      color: var(--sub);
+      line-height: 1.7;
+      background: var(--bg-card);
+      border-top: 0px solid rgba(26,111,232,0.1);
+    }
+    .faq-item.open .faq-item__a {
+      max-height: 300px;
+      padding: 16px 22px 20px;
+      border-top-width: 1px;
+    }
+    .faq-item__a strong { color: var(--text); }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    .footer {
+      background: #04040A;
+      border-top: 1px solid rgba(255,255,255,0.05);
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .footer__logo {
+      font-family: var(--font-head);
+      font-size: 1.4rem;
+      letter-spacing: 0.1em;
+      color: var(--sub);
+      margin-bottom: 16px;
+    }
+    .footer__logo span { color: var(--blue-light); }
+    .footer__links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; margin-bottom: 20px; }
+    .footer__links a { font-size: 0.78rem; color: var(--sub); letter-spacing: 0.06em; transition: color 0.2s; }
+    .footer__links a:hover { color: var(--blue-light); }
+    .footer__legal { font-size: 0.72rem; color: #444; max-width: 560px; margin: 0 auto; line-height: 1.6; }
+
+    /* ─── DIVIDERS ──────────────────────────────────────────────── */
+    .section-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(26,111,232,0.2), transparent);
+    }
+
+    /* ─── URGENCY BAR ───────────────────────────────────────────── */
+    .urgency-bar {
+      background: var(--bg-mid);
+      border-top: 1px solid rgba(26,111,232,0.15);
+      border-bottom: 1px solid rgba(26,111,232,0.15);
+      padding: 14px 20px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--sub);
+    }
+    .urgency-bar strong { color: var(--text); }
+    .urgency-bar .highlight { color: var(--blue-light); font-weight: 700; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .section { padding: 60px 16px; }
+      .proof__numbers { gap: 28px; }
+      .offer__body { padding: 22px 18px; }
+      .offer__guarantee { flex-direction: column; text-align: center; align-items: center; }
+      .mechanism__stats { gap: 20px; }
+    }
+
+    /* ─── MISC ──────────────────────────────────────────────────── */
+    .text-center { text-align: center; }
+    .mt-8  { margin-top: 8px; }
+    .mt-16 { margin-top: 16px; }
+    .mt-24 { margin-top: 24px; }
+    .mt-32 { margin-top: 32px; }
+    .mb-8  { margin-bottom: 8px; }
+    .mb-16 { margin-bottom: 16px; }
+
+    /* Blue glow line accent */
+    .blue-line {
+      display: inline-block;
+      width: 48px;
+      height: 3px;
+      background: var(--blue);
+      border-radius: 2px;
+      margin: 16px auto;
+    }
+
+    /* Strikethrough price in a span */
+    s { opacity: 0.5; }
+  </style>
+</head>
+<body>
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  TOP BAR                                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<div class="topbar">
+  <span>Acesso disponível agora mesmo — </span>
+  <strong>Vagas com desconto limitadas. Preço sobe em breve.</strong>
+</div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 1 — HERO                        ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="hero">
+  <div class="container">
+    <div class="hero__eyebrow">Método Exclusivo — Relacionamento Masculino</div>
+
+    <h1 class="h1 hero__title">
+      <span class="line1">O Protocolo do</span>
+      <span class="line2">Homem Insubstituível</span>
+    </h1>
+
+    <p class="hero__subtitle">
+      O sistema preciso para <strong>fazer ela nunca querer te deixar</strong> — não por dependência tóxica,
+      mas porque você se tornou o homem que ela simplesmente não consegue imaginar perder.
+    </p>
+
+    <!-- VSL Player -->
+    <div class="vsl-wrapper">
+      <div class="vsl-player">
+        <div class="vsl-player__overlay"></div>
+        <div class="vsl-play-btn">
+          <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+        </div>
+        <p class="vsl-caption">Assista ao vídeo antes de fechar essa página</p>
+      </div>
+    </div>
+
+    <a href="#oferta" class="btn-cta btn-cta--lg">
+      QUERO ME TORNAR INSUBSTITUÍVEL &nbsp;›
+    </a>
+    <p class="hero__guarantee mt-16">
+      🔒 Garantia incondicional de 7 dias — risco zero.
+    </p>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+<div class="urgency-bar">
+  <strong>247 homens</strong> já transformaram seus relacionamentos com este protocolo —
+  <span class="highlight">83% relatam mudanças perceptíveis em até 11 dias.</span>
+</div>
+
+<div class="section-divider"></div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 2 — PROBLEMA                    ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="problem__intro">
+      <span class="label blue">O que está acontecendo com você</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">Você sente que algo está errado.<br/>Mas não sabe exatamente o quê.</h2>
+      <p>Talvez ela pareça distante. Talvez você sinta que a qualquer momento pode perder tudo.
+         Essa insegurança não é fraqueza — é sinal de que você ainda não tem o <em>protocolo certo</em>.</p>
+    </div>
+
+    <div class="pain-grid">
+      <!-- Dor 1 -->
+      <div class="pain-card">
+        <div class="pain-card__icon">😰</div>
+        <div class="pain-card__title">O Medo de Perdê-la</div>
+        <p class="pain-card__text">
+          Você acorda com aquela sensação no estômago. Fica verificando o celular, repassando conversas,
+          tentando decifrar o que cada mensagem fria significa. <strong>Você age por medo — e ela sente isso.</strong>
+          E quanto mais você pressiona, mais ela recua.
+        </p>
+      </div>
+
+      <!-- Dor 2 -->
+      <div class="pain-card">
+        <div class="pain-card__icon">🔥</div>
+        <div class="pain-card__title">O Ciúme que Sabota</div>
+        <p class="pain-card__text">
+          Não é que você seja controlador. É que você tem tanto medo de perdê-la que qualquer coisa
+          vira ameaça. Você questiona, vigia, pressiona — e no fim, <strong>se transforma exatamente no
+          homem que ela vai querer escapar.</strong> O ciúme mal gerenciado é veneno silencioso.
+        </p>
+      </div>
+
+      <!-- Dor 3 -->
+      <div class="pain-card">
+        <div class="pain-card__icon">🪞</div>
+        <div class="pain-card__title">A Insegurança Invisível</div>
+        <p class="pain-card__text">
+          Por fora tudo parece bem. Por dentro você sabe que <strong>busca validação dela o tempo todo.</strong>
+          Cada gesto de afeto vira oxigênio. Cada frieza, catástrofe. Você nunca está no controle —
+          está sempre reagindo ao humor dela. E isso corrói o que ela mais admira em um homem.
+        </p>
+      </div>
+    </div>
+
+    <div class="problem__close">
+      <p>
+        Esses padrões não são culpa sua. Você nunca foi ensinado a criar
+        <strong class="blue">vínculo emocional real</strong> — o tipo que faz ela pensar em você quando
+        está sozinha, que faz o seu nome ser o que ela digita primeiro. Isso tem um nome, tem estrutura,
+        e tem um protocolo.
+      </p>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 3 — MECANISMO / AUTOR           ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section">
+  <div class="container">
+    <div class="mechanism__grid">
+      <!-- Foto placeholder -->
+      <div class="mechanism__photo">
+        <div class="mechanism__img-placeholder">
+          <img class="mechanism__avatar-img"
+               src="rafael-vieira.jpg"
+               alt="Rafael Vieira — Criador do Protocolo" />
+        </div>
+        <div class="mechanism__badge">ESPECIALISTA</div>
+      </div>
+
+      <!-- Conteúdo -->
+      <div class="mechanism__content">
+        <span class="label">Por que este método funciona</span>
+        <h2 class="h2">O Protocolo não é <span class="blue">teoria.</span><br/>É engenharia de vínculo.</h2>
+        <p>
+          Passei anos entendendo o que realmente cria <strong>apego emocional profundo</strong> — não o apego
+          que vem do desespero, mas o que nasce quando um homem ocupa um lugar único na vida de uma mulher.
+        </p>
+        <p>
+          Estudei psicologia do vínculo, padrões de relacionamento e comportamento masculino em mais de
+          <strong>400 casos reais</strong>. O que descobri foi que o homem insubstituível não é o mais bonito,
+          nem o mais rico — é o que <strong>entende como construir presença que não pode ser substituída.</strong>
+        </p>
+        <p>
+          O Protocolo nasceu dessas descobertas. É um sistema estruturado em 3 blocos que transforma
+          sua forma de se posicionar, se comunicar e criar conexão — <strong>sem jogos, sem manipulação,
+          sem perder quem você é.</strong>
+        </p>
+
+        <div class="mechanism__stats">
+          <div class="mech-stat">
+            <div class="mech-stat__number">247+</div>
+            <div class="mech-stat__label">Alunos ativos</div>
+          </div>
+          <div class="mech-stat">
+            <div class="mech-stat__number">83%</div>
+            <div class="mech-stat__label">Mudanças em 11 dias</div>
+          </div>
+          <div class="mech-stat">
+            <div class="mech-stat__number">7</div>
+            <div class="mech-stat__label">Dias de garantia</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 4 — MÓDULOS                     ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="modules__intro">
+      <span class="label blue">O que você vai aprender</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">3 Blocos. Um Sistema Completo.</h2>
+      <p>Cada bloco foi projetado para remover uma camada do problema e instalar o comportamento correto.</p>
+    </div>
+
+    <div class="module-grid">
+      <!-- Módulo 1 -->
+      <div class="module-card">
+        <div class="module-card__number">01</div>
+        <div class="module-card__icon">🧠</div>
+        <div class="module-card__label">Bloco 1</div>
+        <div class="module-card__title">A Psicologia do Vínculo</div>
+        <p class="module-card__text">
+          Entenda <strong>o que realmente faz uma mulher se apegar</strong> de forma profunda e duradoura —
+          não o que ela diz, mas o que move o comportamento dela no nível emocional mais primitivo.
+        </p>
+        <ul class="module-card__bullets">
+          <li>Os 4 gatilhos neurológicos do apego feminino</li>
+          <li>Por que "ser bom" sozinho não é suficiente</li>
+          <li>A diferença entre atração e vínculo (e por que importa)</li>
+          <li>Como o medo de perder inverte a dinâmica da relação</li>
+        </ul>
+      </div>
+
+      <!-- Módulo 2 -->
+      <div class="module-card">
+        <div class="module-card__number">02</div>
+        <div class="module-card__icon">⚙️</div>
+        <div class="module-card__label">Bloco 2</div>
+        <div class="module-card__title">O Protocolo em Prática</div>
+        <p class="module-card__text">
+          Os <strong>comportamentos específicos que criam dependência emocional saudável</strong> —
+          como você age, como você fala, como você está presente de um jeito que ninguém mais consegue replicar.
+        </p>
+        <ul class="module-card__bullets">
+          <li>O modelo de presença que cria saudade real</li>
+          <li>Como se comunicar para gerar desejo de proximidade</li>
+          <li>Limites que aumentam o respeito (não distanciam)</li>
+          <li>Os erros que destroem o vínculo sem você perceber</li>
+        </ul>
+      </div>
+
+      <!-- Módulo 3 -->
+      <div class="module-card">
+        <div class="module-card__number">03</div>
+        <div class="module-card__icon">🏆</div>
+        <div class="module-card__label">Bloco 3</div>
+        <div class="module-card__title">O Homem que Ela Nunca Larga</div>
+        <p class="module-card__text">
+          Como <strong>solidificar sua posição como insubstituível</strong> — criando uma identidade relacional
+          tão forte que a ideia de te perder gera desconforto genuíno nela.
+        </p>
+        <ul class="module-card__bullets">
+          <li>Como ser incomum dentro da relação estabelecida</li>
+          <li>A âncora emocional que mantém você no topo da mente dela</li>
+          <li>Como responder a testes sem perder o eixo</li>
+          <li>O plano de manutenção de longo prazo do vínculo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 5 — VALUE STACK                 ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section">
+  <div class="container">
+    <div class="value-stack__intro">
+      <span class="label blue">Tudo que você recebe hoje</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">A Oferta Completa</h2>
+      <p>Cada item tem valor real e foi desenhado para funcionar em conjunto.</p>
+    </div>
+
+    <div class="vs-table">
+      <div class="vs-row vs-row--header">
+        <div class="vs-row__item">Item</div>
+        <div class="vs-row__price">Valor</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-row__item">
+          <strong>O Protocolo do Homem Insubstituível</strong>
+          <span class="tag">Módulo Principal</span>
+          <div style="font-size:0.8rem;color:var(--sub);margin-top:4px;">3 blocos completos + material de apoio</div>
+        </div>
+        <div class="vs-row__price">R$ 297</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-row__item">
+          <strong>Bônus 1: Teste de Insubstituibilidade</strong>
+          <span class="tag tag--gold">Bônus</span>
+          <div style="font-size:0.8rem;color:var(--sub);margin-top:4px;">Diagnóstico de onde você está agora + plano de ação</div>
+        </div>
+        <div class="vs-row__price">R$ 47</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-row__item">
+          <strong>Bônus 2: 5 Conversas que Criam Conexão</strong>
+          <span class="tag tag--gold">Bônus</span>
+          <div style="font-size:0.8rem;color:var(--sub);margin-top:4px;">Scripts reais para situações críticas de relacionamento</div>
+        </div>
+        <div class="vs-row__price">R$ 37</div>
+      </div>
+
+      <div class="vs-row">
+        <div class="vs-row__item">
+          <strong>Bônus 3: Modo Emergência</strong>
+          <span class="tag tag--gold">Bônus</span>
+          <div style="font-size:0.8rem;color:var(--sub);margin-top:4px;">Protocolo para quando a relação está em crise imediata</div>
+        </div>
+        <div class="vs-row__price">R$ 57</div>
+      </div>
+
+      <div class="vs-row vs-total">
+        <div class="vs-row__item">Valor Total do Pacote</div>
+        <div class="vs-row__price"><s>R$ 438</s> <span style="color:var(--gold)">R$ 97</span></div>
+      </div>
+    </div>
+
+    <div class="vs-cta-box">
+      <div class="vs-cta-box__you-pay">Você paga hoje apenas</div>
+      <div class="vs-cta-box__price">R$ 97</div>
+      <div class="vs-cta-box__anchor">De R$ 297 — 67% de desconto</div>
+      <a href="#oferta" class="btn-cta">GARANTIR MINHA VAGA COM DESCONTO &nbsp;›</a>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 6 — PROVA SOCIAL                ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section section--alt">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:52px;">
+      <span class="label blue">Resultados reais</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">Homens que <span class="blue">Aplicaram</span><br/>e Transformaram</h2>
+    </div>
+
+    <!-- Números -->
+    <div class="proof__numbers">
+      <div class="proof-num">
+        <div class="proof-num__value">247<span>+</span></div>
+        <div class="proof-num__label">Alunos ativos</div>
+      </div>
+      <div class="proof-num">
+        <div class="proof-num__value">83<span>%</span></div>
+        <div class="proof-num__label">Mudanças perceptíveis em até 11 dias</div>
+      </div>
+      <div class="proof-num">
+        <div class="proof-num__value">7</div>
+        <div class="proof-num__label">Dias de garantia sem risco</div>
+      </div>
+    </div>
+
+    <!-- Depoimentos -->
+    <div class="testimonials-grid">
+      <!-- Testi 1 -->
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__text">
+          "Tava num ciclo de insegurança que parecia interminável. Aplicar o Protocolo no segundo bloco
+          foi um divisor de águas — minha namorada me disse semanas depois que nunca tinha se sentido
+          tão segura e ao mesmo tempo tão atraída. Não entendeu o que mudou. Eu sei."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar">M</div>
+          <div>
+            <div class="testi-card__name">Marcos A.</div>
+            <div class="testi-card__meta">32 anos — São Paulo, SP</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testi 2 -->
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__text">
+          "Achei que ia ser mais do mesmo papo de relacionamento. Errei feio. O bloco 1 me mostrou
+          que eu entendia tudo errado sobre apego. No dia 9 ela me mandou mensagem dizendo que fica
+          pensando em mim quando tá longe. Nunca tinha acontecido isso antes."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar">R</div>
+          <div>
+            <div class="testi-card__name">Ricardo F.</div>
+            <div class="testi-card__meta">28 anos — Belo Horizonte, MG</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Testi 3 -->
+      <div class="testi-card">
+        <div class="testi-card__stars">★★★★★</div>
+        <p class="testi-card__text">
+          "Tava quase terminando um relacionamento de 4 anos por não saber lidar com a dinâmica.
+          O Modo Emergência salvou. Reorganizei a comunicação, mudei meu posicionamento, e a gente
+          nunca esteve tão bem. Ela disse que parece que tá namorando um homem novo."
+        </p>
+        <div class="testi-card__author">
+          <div class="testi-card__avatar">L</div>
+          <div>
+            <div class="testi-card__name">Lucas T.</div>
+            <div class="testi-card__meta">39 anos — Curitiba, PR</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 7 — OFERTA                      ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section id="oferta" class="section">
+  <div class="container">
+    <div style="text-align:center; margin-bottom:40px;">
+      <span class="label blue">Sua decisão agora</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">Você pode continuar <span style="color:var(--sub)">como está</span><br/>— ou mudar o jogo hoje.</h2>
+    </div>
+
+    <div class="offer__box">
+      <div class="offer__header">
+        <span class="label">Acesso imediato ao</span>
+        <h2 class="h2">Protocolo do Homem Insubstituível</h2>
+      </div>
+
+      <div class="offer__body">
+        <!-- Checklist do que inclui -->
+        <ul class="offer__checklist">
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bloco 1 completo</strong> — A Psicologia do Vínculo</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bloco 2 completo</strong> — O Protocolo em Prática</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bloco 3 completo</strong> — O Homem que Ela Nunca Larga</span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bônus 1:</strong> Teste de Insubstituibilidade <span style="color:var(--gold);font-size:0.8rem;">(+ R$47)</span></span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bônus 2:</strong> 5 Conversas que Criam Conexão <span style="color:var(--gold);font-size:0.8rem;">(+ R$37)</span></span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span><strong>Bônus 3:</strong> Modo Emergência — para crises imediatas <span style="color:var(--gold);font-size:0.8rem;">(+ R$57)</span></span>
+          </li>
+          <li>
+            <span class="check-icon">✓</span>
+            <span>Acesso vitalício + atualizações futuras</span>
+          </li>
+        </ul>
+
+        <!-- Preço -->
+        <div class="offer__price-block">
+          <div class="was">De R$ 297,00</div>
+          <div class="now-label">Hoje por apenas</div>
+          <div class="price">R$ 97</div>
+          <div class="price-sub">Pagamento único — acesso imediato</div>
+        </div>
+
+        <!-- CTA Principal -->
+        <div class="offer__cta">
+          <a href="#" class="btn-cta btn-cta--lg">
+            QUERO O PROTOCOLO AGORA &nbsp;›
+          </a>
+        </div>
+
+        <!-- Order Bump -->
+        <div class="offer__bump">
+          <input type="checkbox" id="bump" />
+          <div class="offer__bump__text">
+            <label for="bump" style="cursor:pointer;">
+              <strong>SIM, quero as 89 Mensagens Prontas por apenas +R$37</strong><br/>
+              Templates de mensagem testados para os momentos mais críticos do relacionamento:
+              reconectar depois de uma briga, criar saudade, reaquecer o interesse e muito mais.
+              Copie, adapte e envie. Simples assim.
+            </label>
+          </div>
+        </div>
+
+        <!-- Garantia -->
+        <div class="offer__guarantee">
+          <div class="guarantee-badge">🛡️</div>
+          <div class="offer__guarantee__text">
+            <h4>Garantia Incondicional de 7 Dias</h4>
+            <p>
+              Se por qualquer motivo você não ficar satisfeito, basta enviar um email em até 7 dias
+              após a compra e <strong>devolvemos 100% do seu dinheiro</strong>, sem perguntas, sem burocracia.
+              O risco é todo nosso.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Upsell hint -->
+    <div style="text-align:center; margin-top:32px;">
+      <p style="font-size:0.82rem; color:var(--sub);">
+        Após a compra, você verá a oferta especial do
+        <strong style="color:var(--blue-light);">Unlock the Protocol (R$ 197)</strong> —
+        implementação avançada com suporte direto.
+      </p>
+    </div>
+  </div>
+</section>
+
+<div class="section-divider"></div>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  SECTION 8 — FAQ                         ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section section--alt">
+  <div class="container">
+    <div class="faq__intro">
+      <span class="label blue">Perguntas frequentes</span>
+      <div class="blue-line"></div>
+      <h2 class="h2">Suas Dúvidas,<br/>Respondidas.</h2>
+      <p>Resposta direta para o que você provavelmente quer saber antes de decidir.</p>
+    </div>
+
+    <div class="faq-list">
+
+      <div class="faq-item open">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          Isso funciona mesmo se meu relacionamento estiver em crise agora?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          Sim. O Bônus "Modo Emergência" foi criado especificamente para situações de crise — quando a relação
+          está fria, houve uma briga séria, ou você sente que está perdendo ela. <strong>Não é mágica, mas é o
+          caminho mais direto de reposicionar o jogo a seu favor.</strong> Vários alunos relataram reversões
+          significativas em menos de duas semanas.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          Preciso estar em um relacionamento para usar o Protocolo?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          Não. O Protocolo funciona tanto para quem está em um relacionamento quanto para quem está
+          conquistando alguém. Os princípios do vínculo emocional se aplicam em qualquer estágio.
+          Se você está <strong>começando um relacionamento, é o melhor momento para aplicar</strong> — você
+          constrói a dinâmica certa desde o início, sem ter que consertar depois.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          Isso é manipulação? Não quero usar técnicas desonestas.
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          Entendo a preocupação — e é exatamente o oposto. O Protocolo não ensina a fingir nem a criar
+          ilusões. Ele ensina você a se tornar genuinamente mais valioso dentro da relação:
+          mais presente, mais claro, mais seguro. <strong>Não é sobre manipular ela — é sobre se tornar
+          o homem que você deveria ser.</strong> Quando isso acontece, o apego dela é real e sustentável.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          Em quanto tempo vejo resultados?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          83% dos alunos relatam mudanças perceptíveis no comportamento dela em até 11 dias.
+          Isso não significa que tudo estará resolvido em 11 dias — mas você vai notar o termômetro
+          emocional dela mudar. <strong>Os resultados mais sólidos aparecem entre 3 e 6 semanas</strong>
+          de aplicação consistente. Relacionamentos têm inércia, mas a mudança começa rápido.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          Como acesso o conteúdo depois da compra?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          O acesso é <strong>imediato após a confirmação do pagamento</strong>. Você receberá um email com
+          login na plataforma. Todo o conteúdo fica disponível 24h/7 dias — assista no computador,
+          tablet ou celular. O acesso é vitalício, sem prazo de expiração.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-item__q" onclick="toggleFaq(this)">
+          E se eu não gostar? A garantia realmente existe?
+          <span class="faq-icon">+</span>
+        </div>
+        <div class="faq-item__a">
+          Existe e é incondicional. Você tem <strong>7 dias completos para testar todo o material</strong>.
+          Se por qualquer motivo você quiser reembolso — seja porque não gostou, porque a metodologia
+          não é para você, ou simplesmente porque mudou de ideia — basta enviar um email e devolvemos
+          100% do valor pago. Sem questionamentos. Sem complicação.
+        </div>
+      </div>
+
+    </div><!-- /.faq-list -->
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  CTA FINAL                               ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<section class="section" style="background:var(--bg-deep); text-align:center;">
+  <div class="container">
+    <span class="label blue">Última chance</span>
+    <div class="blue-line"></div>
+    <h2 class="h2" style="max-width:600px; margin: 0 auto 16px;">
+      O Homem Insubstituível<br/>não espera o momento perfeito.
+    </h2>
+    <p style="color:var(--sub); max-width:480px; margin: 0 auto 36px; font-size:1.02rem; line-height:1.6;">
+      Ele age enquanto ainda tem algo a construir. Você está aqui por um motivo.
+      A decisão certa está a um clique de distância.
+    </p>
+    <a href="#oferta" class="btn-cta btn-cta--lg">GARANTIR MEU ACESSO AGORA &nbsp;›</a>
+    <p style="margin-top:14px; font-size:0.78rem; color:var(--sub);">
+      🔒 Pagamento 100% seguro &nbsp;·&nbsp; Acesso imediato &nbsp;·&nbsp; Garantia de 7 dias
+    </p>
+  </div>
+</section>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  FOOTER                                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<footer class="footer">
+  <div class="footer__logo">PROTOCOLO <span>INSUBSTITUÍVEL</span></div>
+  <div class="footer__links">
+    <a href="#">Termos de Uso</a>
+    <a href="#">Política de Privacidade</a>
+    <a href="#">Política de Reembolso</a>
+    <a href="#">Contato</a>
+  </div>
+  <p class="footer__legal">
+    Este produto é um programa digital de desenvolvimento pessoal e relacionamento. Os resultados
+    apresentados são individuais e podem variar. Depoimentos são experiências reais de alunos, não
+    garantia de resultados idênticos. © 2024 Protocolo Insubstituível. Todos os direitos reservados.
+  </p>
+</footer>
+
+
+<!-- ╔══════════════════════════════════════════╗ -->
+<!-- ║  FAQ JS                                  ║ -->
+<!-- ╚══════════════════════════════════════════╝ -->
+<script>
+  function toggleFaq(el) {
+    var item = el.parentElement;
+    var isOpen = item.classList.contains('open');
+    // Close all
+    document.querySelectorAll('.faq-item').forEach(function(i) {
+      i.classList.remove('open');
+    });
+    // Open clicked if it was closed
+    if (!isOpen) {
+      item.classList.add('open');
+    }
+  }
+</script>
+
+</body>
+</html>

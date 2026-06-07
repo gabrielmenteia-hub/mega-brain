@@ -1,0 +1,77 @@
+id: ebook-diagramacao-squad
+name: Ebook Diagramação Squad
+version: "1.1.0"
+source: megabrain
+description: >
+  Squad especializado em diagramação e formatação de livros — físicos e digitais.
+  Três especialistas brasileiros com metodologias complementares: Drak Tutoriais
+  (livros físicos no Word) + Beatriz Oliveira (ebooks Kindle KDP via Google Docs)
+  + Ana Clara Gregory (ebooks no Canva para venda na Hotmart).
+  Orquestrado pelo Publicação Chief que decide a rota certa para cada projeto.
+orchestrator: publicacao-chief
+stats:
+  agents: 4
+  tasks: 8
+  workflows: 3
+tags: [diagramacao, ebook, livro-fisico, kindle, kdp, word, canva, hotmart, autopublicacao, formatacao]
+agents:
+  - id: publicacao-chief
+    name: Publicação Chief
+    command: "/publicacao-chief"
+    role: "Orquestrador — decide rota (físico vs digital vs Canva/Hotmart) e integra perspectivas"
+  - id: drak-tutoriais
+    name: Drak Tutoriais
+    command: "/drak-tutoriais"
+    role: "Especialista em livros físicos — Word, margens, tipografia, impressão"
+  - id: beatriz-oliveira
+    name: Beatriz Oliveira
+    command: "/beatriz-oliveira"
+    role: "Especialista em ebooks — Kindle KDP, Google Docs, Kindle Create"
+  - id: ana-clara-gregory
+    name: Ana Clara Gregory
+    command: "/ana-clara-gregory"
+    role: "Especialista em ebooks no Canva — design, funil, venda na Hotmart"
+tasks:
+  - id: diagrama-livro-fisico
+    name: Diagramar Livro Físico no Word
+    command: "/diagrama-livro-fisico"
+  - id: formatar-ebook-kdp
+    name: Formatar Ebook para Kindle KDP
+    command: "/formatar-ebook-kdp"
+  - id: criar-ebook-canva
+    name: Criar Ebook no Canva (para Hotmart)
+    command: "/criar-ebook-canva"
+  - id: escolher-formato
+    name: Escolher Formato (Físico vs Kindle vs Canva/Hotmart)
+    command: "/escolher-formato"
+  - id: revisar-diagramacao
+    name: Revisar Diagramação
+    command: "/revisar-diagramacao"
+  - id: escolher-fontes
+    name: Escolher Fontes (com checagem de direitos)
+    command: "/escolher-fontes"
+  - id: preparar-publicacao
+    name: Preparar para Publicação (ISBN, Ficha, Upload)
+    command: "/preparar-publicacao"
+  - id: estruturar-funil-ebook
+    name: Estruturar Funil com Ebook (abre-carteira + CTA)
+    command: "/estruturar-funil-ebook"
+workflows:
+  - id: livro-fisico-completo
+    name: Livro Físico Completo — Do Texto ao PDF Final
+    duration: "2-4 horas"
+    agentes: [drak-tutoriais, publicacao-chief]
+  - id: ebook-kindle-completo
+    name: Ebook Kindle Completo — Do Google Docs ao KDP
+    duration: "1-2 horas"
+    agentes: [beatriz-oliveira, publicacao-chief]
+  - id: ebook-canva-hotmart
+    name: Ebook no Canva — Do Zero à Venda na Hotmart
+    duration: "1-3 horas"
+    agentes: [ana-clara-gregory, publicacao-chief]
+added: "2026-03-28"
+updated: "2026-03-29"
+dna_sources:
+  drak-tutoriais: "knowledge/dna/persons/drak-tutoriais/"
+  beatriz-oliveira: "knowledge/dna/persons/beatriz-oliveira/"
+  ana-clara-gregory: "knowledge/dna/persons/ana-clara-gregory/"

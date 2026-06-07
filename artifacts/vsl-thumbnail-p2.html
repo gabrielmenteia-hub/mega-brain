@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>VSL Thumbnail — O Protocolo do Homem Insubstituível</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    font-family: 'Inter', sans-serif;
+    gap: 16px;
+  }
+
+  .label {
+    color: #888;
+    font-size: 12px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+  }
+
+  /* ── THUMBNAIL CONTAINER 16:9 ── */
+  .thumb {
+    width: 1280px;
+    height: 720px;
+    position: relative;
+    overflow: hidden;
+    background: #080810;
+    cursor: pointer;
+  }
+
+  /* Fundo — gradiente base */
+  .thumb__bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 75% 50%, #0d1a3a 0%, transparent 70%),
+      linear-gradient(135deg, #040408 0%, #080D1C 50%, #0a1428 100%);
+  }
+
+  /* Linhas decorativas diagonais */
+  .thumb__lines {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        -55deg,
+        transparent,
+        transparent 80px,
+        rgba(26, 111, 232, 0.03) 80px,
+        rgba(26, 111, 232, 0.03) 81px
+      );
+  }
+
+  /* Glow lateral esquerdo — azul */
+  .thumb__glow-left {
+    position: absolute;
+    left: -80px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 500px;
+    height: 700px;
+    background: radial-gradient(ellipse, rgba(26, 111, 232, 0.18) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Glow inferior — dourado */
+  .thumb__glow-bottom {
+    position: absolute;
+    bottom: -100px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 900px;
+    height: 300px;
+    background: radial-gradient(ellipse, rgba(201, 168, 76, 0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  /* Linha vertical de acento — esquerda */
+  .thumb__accent-line {
+    position: absolute;
+    left: 72px;
+    top: 10%;
+    height: 80%;
+    width: 3px;
+    background: linear-gradient(180deg, transparent, #1A6FE8 30%, #C9A84C 70%, transparent);
+  }
+
+  /* Foto do especialista — lado direito */
+  .thumb__photo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 105%;
+    width: 52%;
+    object-fit: cover;
+    object-position: center top;
+    mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 50%, transparent 100%),
+                linear-gradient(to top, rgba(0,0,0,0) 0%, rgba(0,0,0,1) 15%);
+    -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.95) 50%, transparent 100%);
+    filter: contrast(1.1) brightness(0.92) saturate(0.85);
+  }
+
+  /* Overlay escuro sobre a foto para integrar ao fundo */
+  .thumb__photo-overlay {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    height: 105%;
+    width: 52%;
+    background: linear-gradient(to right, #080810 0%, transparent 35%, transparent 80%, #080810 100%);
+  }
+
+  /* Área de texto — lado esquerdo */
+  .thumb__copy {
+    position: absolute;
+    left: 100px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 560px;
+    z-index: 10;
+  }
+
+  .thumb__tag {
+    display: inline-block;
+    background: rgba(26, 111, 232, 0.15);
+    border: 1px solid rgba(26, 111, 232, 0.4);
+    color: #6aaaf5;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    padding: 5px 14px;
+    border-radius: 2px;
+    margin-bottom: 20px;
+  }
+
+  .thumb__headline {
+    font-family: 'Bebas Neue', Impact, sans-serif;
+    font-size: 88px;
+    line-height: 0.92;
+    letter-spacing: 0.01em;
+    color: #F5F5F5;
+    margin-bottom: 24px;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.8);
+  }
+
+  .thumb__headline em {
+    font-style: normal;
+    color: #C9A84C;
+  }
+
+  .thumb__headline span {
+    color: #1A6FE8;
+  }
+
+  .thumb__sub {
+    font-size: 18px;
+    font-weight: 400;
+    color: #aaaacc;
+    line-height: 1.5;
+    max-width: 460px;
+    margin-bottom: 36px;
+  }
+
+  .thumb__sub strong {
+    color: #F5F5F5;
+    font-weight: 700;
+  }
+
+  /* Play button */
+  .thumb__play {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+  }
+
+  .thumb__play-btn {
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1A6FE8, #0d4fa8);
+    border: 2px solid rgba(26, 111, 232, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 30px rgba(26, 111, 232, 0.5), 0 0 60px rgba(26, 111, 232, 0.2);
+    flex-shrink: 0;
+  }
+
+  .thumb__play-btn svg {
+    width: 26px;
+    height: 26px;
+    fill: #fff;
+    margin-left: 4px;
+  }
+
+  .thumb__play-text {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .thumb__play-text strong {
+    font-size: 15px;
+    font-weight: 700;
+    color: #F5F5F5;
+  }
+
+  .thumb__play-text span {
+    font-size: 12px;
+    color: #888;
+    margin-top: 2px;
+  }
+
+  /* Badge nome do especialista */
+  .thumb__name-badge {
+    position: absolute;
+    right: 48px;
+    bottom: 40px;
+    z-index: 20;
+    text-align: right;
+  }
+
+  .thumb__name-badge strong {
+    display: block;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 22px;
+    letter-spacing: 0.1em;
+    color: #F5F5F5;
+  }
+
+  .thumb__name-badge span {
+    font-size: 11px;
+    color: #C9A84C;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+  }
+
+  /* Partículas decorativas */
+  .thumb__particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+  }
+
+  .p1 { width: 4px; height: 4px; background: #C9A84C; top: 18%; left: 8%; opacity: 0.7; }
+  .p2 { width: 3px; height: 3px; background: #1A6FE8; top: 72%; left: 14%; opacity: 0.5; }
+  .p3 { width: 5px; height: 5px; background: #C9A84C; top: 35%; left: 4%; opacity: 0.4; }
+  .p4 { width: 2px; height: 2px; background: #fff; top: 55%; left: 22%; opacity: 0.3; }
+  .p5 { width: 3px; height: 3px; background: #1A6FE8; top: 82%; left: 6%; opacity: 0.6; }
+
+  /* ── VERSÃO MOBILE 9:16 ── */
+  .thumb-mobile {
+    width: 432px;
+    height: 768px;
+    position: relative;
+    overflow: hidden;
+    background: #080810;
+    cursor: pointer;
+  }
+
+  .thumb-mobile .thumb__bg {
+    background:
+      radial-gradient(ellipse 80% 50% at 50% 30%, #0d1a3a 0%, transparent 70%),
+      linear-gradient(180deg, #040408 0%, #080D1C 100%);
+  }
+
+  .thumb-mobile .thumb__photo {
+    right: 0;
+    bottom: 0;
+    height: 65%;
+    width: 100%;
+    object-position: center 20%;
+    -webkit-mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 40%, transparent 100%);
+    mask-image: linear-gradient(to top, rgba(0,0,0,0.9) 40%, transparent 100%);
+  }
+
+  .thumb-mobile .thumb__photo-overlay {
+    width: 100%;
+    height: 65%;
+    background: linear-gradient(to bottom, #080810 0%, transparent 30%);
+  }
+
+  .thumb-mobile .thumb__copy {
+    left: 0;
+    right: 0;
+    top: 48px;
+    transform: none;
+    width: 100%;
+    padding: 0 32px;
+    text-align: center;
+  }
+
+  .thumb-mobile .thumb__headline {
+    font-size: 58px;
+  }
+
+  .thumb-mobile .thumb__sub {
+    font-size: 14px;
+    max-width: 100%;
+    margin-bottom: 24px;
+  }
+
+  .thumb-mobile .thumb__play {
+    justify-content: center;
+  }
+
+  .thumb-mobile .thumb__accent-line {
+    display: none;
+  }
+
+  .thumb-mobile .thumb__name-badge {
+    right: 0;
+    left: 0;
+    text-align: center;
+    bottom: 20px;
+  }
+
+  .controls {
+    display: flex;
+    gap: 12px;
+  }
+
+  .btn {
+    background: rgba(26,111,232,0.15);
+    border: 1px solid rgba(26,111,232,0.3);
+    color: #6aaaf5;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 4px;
+    cursor: pointer;
+    letter-spacing: 0.05em;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .btn:hover { background: rgba(26,111,232,0.25); }
+
+  .hidden { display: none !important; }
+</style>
+</head>
+<body>
+
+<p class="label">VSL Thumbnail — O Protocolo do Homem Insubstituível</p>
+
+<div class="controls">
+  <button class="btn" onclick="showDesktop()">16:9 Desktop</button>
+  <button class="btn" onclick="showMobile()">9:16 Mobile / Stories</button>
+</div>
+
+<!-- ══════════════════════════════════
+     VERSÃO DESKTOP 1280x720
+     ══════════════════════════════════ -->
+<div class="thumb" id="desktop">
+  <div class="thumb__bg"></div>
+  <div class="thumb__lines"></div>
+  <div class="thumb__glow-left"></div>
+  <div class="thumb__glow-bottom"></div>
+  <div class="thumb__accent-line"></div>
+
+  <!-- Partículas -->
+  <div class="thumb__particle p1"></div>
+  <div class="thumb__particle p2"></div>
+  <div class="thumb__particle p3"></div>
+  <div class="thumb__particle p4"></div>
+  <div class="thumb__particle p5"></div>
+
+  <!-- Foto -->
+  <img class="thumb__photo" src="rafael-vieira.jpg" alt="Rafael Vieira" />
+  <div class="thumb__photo-overlay"></div>
+
+  <!-- Copy -->
+  <div class="thumb__copy">
+    <div class="thumb__tag">Método exclusivo</div>
+    <h1 class="thumb__headline">
+      Como Ser<br/>
+      <em>Impossível</em><br/>
+      de <span>Esquecer</span>
+    </h1>
+    <p class="thumb__sub">
+      O protocolo que faz ela pensar em você <strong>mesmo quando não deveria</strong>
+    </p>
+    <div class="thumb__play">
+      <div class="thumb__play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="thumb__play-text">
+        <strong>Assistir apresentação</strong>
+        <span>Duração: 22 minutos</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Nome -->
+  <div class="thumb__name-badge">
+    <strong>RAFAEL VIEIRA</strong>
+    <span>Criador do Protocolo</span>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════
+     VERSÃO MOBILE 432x768
+     ══════════════════════════════════ -->
+<div class="thumb thumb-mobile hidden" id="mobile">
+  <div class="thumb__bg"></div>
+  <div class="thumb__lines"></div>
+  <div class="thumb__glow-left"></div>
+  <div class="thumb__glow-bottom"></div>
+  <div class="thumb__accent-line"></div>
+
+  <img class="thumb__photo" src="rafael-vieira.jpg" alt="Rafael Vieira" />
+  <div class="thumb__photo-overlay"></div>
+
+  <div class="thumb__copy">
+    <div class="thumb__tag">Método exclusivo</div>
+    <h1 class="thumb__headline">
+      Como Ser<br/>
+      <em>Impossível</em><br/>
+      de <span>Esquecer</span>
+    </h1>
+    <p class="thumb__sub">
+      O protocolo que faz ela pensar em você <strong>mesmo quando não deveria</strong>
+    </p>
+    <div class="thumb__play">
+      <div class="thumb__play-btn">
+        <svg viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+      </div>
+      <div class="thumb__play-text">
+        <strong>Assistir apresentação</strong>
+        <span>22 minutos</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="thumb__name-badge">
+    <strong>RAFAEL VIEIRA</strong>
+    <span>Criador do Protocolo</span>
+  </div>
+</div>
+
+<p class="label" style="margin-top:4px;">Clique nos botões para alternar entre formatos</p>
+
+<script>
+  function showDesktop() {
+    document.getElementById('desktop').classList.remove('hidden');
+    document.getElementById('mobile').classList.add('hidden');
+  }
+  function showMobile() {
+    document.getElementById('mobile').classList.remove('hidden');
+    document.getElementById('desktop').classList.add('hidden');
+  }
+</script>
+
+</body>
+</html>

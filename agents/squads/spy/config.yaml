@@ -1,0 +1,308 @@
+# Spy - Competitive Intelligence Squad v3.0
+# Squad Configuration
+
+name: spy
+version: "3.0.0"
+description: "Competitive intelligence: universal benchmarking (codebase, LLM, product, company, technology) + content analysis (YouTube/Instagram)"
+author: "AIOX Team"
+upgraded_at: "2026-02-17"
+
+pack:
+  name: spy
+  title: "Spy - Competitive Intelligence Squad"
+  version: "3.0.0"
+  author: "AIOX Team"
+  description: "Competitive intelligence: universal benchmarking (codebase, LLM, product, company, technology) + content analysis (YouTube/Instagram)"
+  icon: "🕵️"
+  slash_prefix: "spy"
+
+metadata:
+  version: "3.0.0"
+  score: 6.8
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# SQUAD TYPE & INTEGRATION
+# ═══════════════════════════════════════════════════════════════════════════════
+squad_type: pipeline
+# pipeline = Sequential flow: Research → Analysis → Output
+
+mmos_integration:
+  enabled: false
+  fallback_behavior: "graceful"
+
+workspace_integration:
+  level: none
+  rationale: >-
+    Spy não escreve artefatos canônicos em workspace. Relatórios de benchmark
+    vivem em docs/bench/ e análises operacionais vivem em outputs/spy/.
+  read_paths: []
+  write_paths: []
+  readiness_owner: coo-orchestrator
+  readiness_resolver: null
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# AGENTS
+# ═══════════════════════════════════════════════════════════════════════════════
+agents:
+  - id: spy
+    name: "Spy"
+    role: "Main competitive intelligence agent"
+    tier: orchestrator
+    specialty: "Player analysis, viral content, market trends"
+
+  - id: research-head
+    name: "Research Head"
+    role: "Research lead and data analysis"
+    tier: 1
+    specialty: "Deep research, data validation, strategic insights"
+
+  - id: bench-analyst
+    name: "Bench Analyst"
+    role: "Universal benchmark specialist"
+    tier: 1
+    specialty: "Universal comparative benchmarking across codebases, LLMs, products, companies, and technologies"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TASKS
+# ═══════════════════════════════════════════════════════════════════════════════
+tasks:
+  # ─── Content Analysis ──────────────────────────────────────────────────────
+  - id: quick-analysis
+    name: "Quick Analysis"
+    category: analysis
+    description: "8-minute player analysis"
+
+  - id: deep-research
+    name: "Deep Research"
+    category: research
+    description: "Detailed channel/profile research"
+
+  # ─── Benchmark: Legacy Codebase Tasks ──────────────────────────────────────
+  - id: bench-framework
+    name: "Full Framework Benchmark"
+    category: benchmark-legacy
+    description: "End-to-end benchmark pipeline with deep artifacts (legacy codebase)"
+
+  - id: bench-quick-compare
+    name: "Quick Framework Comparison"
+    category: benchmark-legacy
+    description: "Fast structural comparison (agents/workflows) — DEPRECATED, use bench-matrix"
+
+  - id: bench-inventory
+    name: "AIOX Self-Inventory"
+    category: benchmark
+    description: "Snapshot baseline of local AIOX structure"
+
+  - id: bench-gap-analysis
+    name: "Gap Analysis & Feature Absorption"
+    category: benchmark-legacy
+    description: "Prioritized roadmap and executable gap backlog (legacy)"
+
+  - id: bench-deep-compare
+    name: "Deep Component Comparison"
+    category: benchmark-codebase
+    description: "Component-by-component deep comparison with config blocks and analysis tables"
+
+  - id: bench-absorb
+    name: "Feature Absorption"
+    category: benchmark-codebase
+    description: "Absorb competitor features into AIOX backlog with priority scoring"
+
+  - id: bench-hooks
+    name: "Benchmark Hooks"
+    category: benchmark-codebase
+    description: "Pre/post hooks for benchmark pipeline automation"
+
+  - id: bench-migrate
+    name: "Migration Playbook Generator"
+    category: benchmark-codebase
+    description: "Generate migration playbook from competitor framework to AIOX"
+
+  - id: bench-traceability
+    name: "Benchmark Traceability"
+    category: benchmark-codebase
+    description: "Trace benchmark findings to gap backlog and absorption actions"
+
+  # ─── Benchmark: Universal Core Tasks ───────────────────────────────────────
+  - id: bench-detect
+    name: "Benchmark Type Detection"
+    category: benchmark-core
+    description: "Auto-detect comparison type from subjects"
+
+  - id: bench-matrix
+    name: "Universal Comparison Matrix"
+    category: benchmark-core
+    description: "Feature/capability comparison table"
+
+  - id: bench-score
+    name: "Universal Scoring"
+    category: benchmark-core
+    description: "Weighted multi-dimension quantitative scoring"
+
+  - id: bench-gap
+    name: "Universal Gap Analysis"
+    category: benchmark-core
+    description: "Bidirectional gap identification and classification"
+
+  - id: bench-report
+    name: "Executive Report"
+    category: benchmark-core
+    description: "Consolidated executive report with recommendations"
+
+  - id: bench-battle-card
+    name: "Battle Card"
+    category: benchmark-core
+    description: "1-page quick comparison for decision makers"
+
+  # ─── Benchmark: Type-Specific Tasks ────────────────────────────────────────
+  - id: bench-codebase-recon
+    name: "Codebase Reconnaissance"
+    category: benchmark-codebase
+    description: "Git clone + filesystem scan for codebase comparison"
+
+  - id: bench-llm-eval
+    name: "LLM Evaluation"
+    category: benchmark-llm
+    description: "LLM specs, benchmarks, pricing comparison"
+
+  - id: bench-product-research
+    name: "Product Research"
+    category: benchmark-product
+    description: "Product features, pricing, reviews comparison"
+
+  - id: bench-company-intel
+    name: "Company Intelligence"
+    category: benchmark-company
+    description: "Company competitive analysis"
+
+  - id: bench-tech-eval
+    name: "Technology Evaluation"
+    category: benchmark-technology
+    description: "Technology maturity, ecosystem, DX comparison"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# WORKFLOWS
+# ═══════════════════════════════════════════════════════════════════════════════
+workflows:
+  - id: bench-comparison-pipeline
+    name: "Universal Benchmark Comparison Pipeline"
+    category: benchmark
+    description: "10-phase universal pipeline: detect → inventory → matrix → score → gap → deep dive → report → battle card → quality gate"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# TEMPLATES
+# ═══════════════════════════════════════════════════════════════════════════════
+templates:
+  # ─── Content Analysis Templates ────────────────────────────────────────────
+  - id: player-analysis-tmpl
+    name: "Player Analysis Template"
+
+  # ─── Legacy Codebase Templates ─────────────────────────────────────────────
+  - id: bench-comparativo-tmpl
+    name: "Benchmark Comparative Template (DEPRECATED — use bench-matrix-tmpl)"
+
+  - id: bench-scores-tmpl
+    name: "Benchmark Scores Template (DEPRECATED — use bench-scorecard-tmpl)"
+
+  - id: bench-deep-compare-tmpl
+    name: "Benchmark Deep Comparison Template"
+
+  - id: bench-migration-tmpl
+    name: "Benchmark Migration Playbook Template"
+
+  # ─── Codebase-Specific Renamed Templates ───────────────────────────────────
+  - id: bench-codebase-comparativo-tmpl
+    name: "Codebase Comparative Template"
+
+  - id: bench-codebase-scores-tmpl
+    name: "Codebase Scores Template"
+
+  # ─── Universal Templates ───────────────────────────────────────────────────
+  - id: bench-matrix-tmpl
+    name: "Universal Comparison Matrix Template"
+
+  - id: bench-scorecard-tmpl
+    name: "Universal Scorecard Template"
+
+  - id: bench-battle-card-tmpl
+    name: "Battle Card Template"
+
+  - id: bench-report-tmpl
+    name: "Executive Report Template"
+
+  - id: bench-quadrant-tmpl
+    name: "Gartner-Style Quadrant Template"
+
+  - id: bench-gap-tmpl
+    name: "Gap Analysis Template"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# CHECKLISTS
+# ═══════════════════════════════════════════════════════════════════════════════
+checklists:
+  - id: content-creation-checklist
+    name: "Content Creation Checklist"
+
+  - id: bench-quality-checklist
+    name: "Benchmark Quality Checklist"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DATA (Knowledge Bases)
+# ═══════════════════════════════════════════════════════════════════════════════
+data:
+  - id: viral-content-framework
+    name: "Viral Content Framework"
+    description: "5 title formulas, 4 video structures, proven hooks"
+
+  - id: knowledge-base
+    name: "General Knowledge Base"
+
+  - id: bench-skeleton
+    name: "Benchmark Skeleton"
+    description: "Reference scaffold for universal output structure"
+
+  - id: bench-dimension-packs
+    name: "Dimension Packs"
+    description: "Weighted scoring dimensions per comparison type"
+
+  - id: bench-data-sources
+    name: "Data Sources"
+    description: "Data acquisition strategy per comparison type"
+
+  - id: bench-output-formats
+    name: "Output Formats"
+    description: "Available output formats for benchmark reports"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# API CONFIGURATION
+# ═══════════════════════════════════════════════════════════════════════════════
+apis:
+  - name: "YouTube Data v3"
+    env_var: "YOUTUBE_API_KEY"
+    status: "configured"
+
+  - name: "Meta Graph (Instagram)"
+    env_var: "META_ACCESS_TOKEN"
+    status: "configured"
+
+# ═══════════════════════════════════════════════════════════════════════════════
+# DEPENDENCIES & TAGS
+# ═══════════════════════════════════════════════════════════════════════════════
+dependencies:
+  squads:
+    - aiox-core
+
+tags:
+  - competitive-intelligence
+  - content-analysis
+  - framework-benchmark
+  - universal-benchmark
+  - llm-comparison
+  - product-comparison
+  - company-analysis
+  - technology-evaluation
+  - youtube
+  - instagram
+  - viral-content
+  - research
+  - market-analysis

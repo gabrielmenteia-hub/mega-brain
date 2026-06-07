@@ -1,0 +1,49 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# CREATOR SQUAD - Configuration
+# Version: 1.0.0
+# Purpose: Create complete squads (agents + workflows) for any niche or segment
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: genesis-squad
+version: 1.0.0
+
+pack:
+  name: genesis-squad
+  version: 1.0.0
+  short-title: Genesis Squad
+  description: >-
+    Squad universal para criar squads de agentes completos para qualquer nicho ou segmento.
+    Do domínio ao squad pronto: discovery, arquitetura de agentes, design de workflows,
+    assembly de arquivos e validação AIOX em pipeline sequencial com quality gates.
+    Output: squad completo (config.yaml + agents/ + tasks/ + workflows/) pronto para uso.
+  author: MEGABRAIN
+  icon: "🏭"
+  slashPrefix: genesis
+
+entry_agent: genesis-chief
+
+workspace_integration:
+  level: read_write
+  rationale: >-
+    O squad lê contexto do workspace e produz squads em squads/{slug}/
+  read_paths:
+    - workspace/
+    - agents/squads/
+  write_paths:
+    - agents/squads/
+
+metadata:
+  version: "1.0.0"
+  type: "pipeline"
+  score: 9.0
+  stats:
+    agents: 6
+    phases: 5
+    quality_gates: 5
+
+commands:
+  "*build [nicho] [objetivo]": "Inicia pipeline completo de criação de squad"
+  "*phase [N]": "Executa fase específica (assume anteriores completas)"
+  "*status": "Mostra progresso atual do pipeline"
+  "*output": "Exibe o squad gerado até agora"
+  "*help": "Lista todos os comandos disponíveis"

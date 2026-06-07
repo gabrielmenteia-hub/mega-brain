@@ -1,0 +1,10 @@
+agent_id: coo
+access_level: workspace_first
+read_paths:
+  - "workspace/"
+write_paths:
+  - "workspace/_system/"
+  - "workspace/_templates/"
+  - "workspace/domains/"
+  - "workspace/businesses/"
+justification: "COO is the workspace guardian. Full access for structure enforcement, template management, and governance operations."

@@ -1,0 +1,101 @@
+# FRAMEWORKS — Pedro Valerio Lopez
+# Camada L4 do DNA Cognitivo
+# Versao: 1.1.0
+# Atualizado: 2026-03-18
+# Insights: 11
+
+version: "1.1.0"
+updated: "2026-03-18"
+person: "Pedro Valério"
+slug: "pedro-valerio"
+layer: "L4-FRAMEWORKS"
+count: 11
+
+frameworks:
+  - id: "FW-PV-001"
+    nome: "3 Estratégias TikTok"
+    descricao: "1) ParqueEds (credibilidade), 2) TikTok Shop (volume afiliados), 3) Alpha Funnel (sustentação 3 meses)."
+    componentes: ["ParqueEds", "TikTok Shop", "Alpha Funnel"]
+    chunks: ["chunk_404"]
+    source: "MEET-0032"
+    confianca: "HIGH"
+
+  - id: "FW-PV-002"
+    nome: "Empilhamento de Atenção"
+    descricao: "3 categorias empilháveis de Thumb Stopping: Visual (estático), Sonoro (SFX), Cênico (ação)."
+    componentes: ["Visual", "Sonoro", "Cênico"]
+    chunks: ["chunk_406", "chunk_407"]
+    source: "MEET-0032"
+    confianca: "HIGH"
+
+  - id: "FW-PV-003"
+    nome: "Compensação por Multiplicadores"
+    descricao: "3 fatores: Meta receita (agressivo) × NPS (protetor) × Eficiência custo (anti-bloat)."
+    componentes: ["Meta Receita", "NPS/Qualidade", "Eficiência Custo"]
+    chunks: ["chunk_412"]
+    source: "MEET-0034"
+    confianca: "HIGH"
+
+  - id: "FW-PV-004"
+    nome: "ClickUp como OS"
+    descricao: "Projeto → Produto → Campanha com automações N8N. Dashboard-first workflow."
+    componentes: ["Projeto", "Produto", "Campanha", "Automações N8N", "Dashboard"]
+    chunks: ["chunk_409", "chunk_415", "chunk_416"]
+    source: "MEET-0039"
+    confianca: "HIGH"
+
+  - id: "FW-PV-005"
+    nome: "SINKRA Hierarquia Composicional"
+    descricao: "6 níveis de composição: Token > Atom > Molecule > Organism > Template > Instance."
+    componentes: ["Token", "Atom", "Molecule", "Organism", "Template", "Instance"]
+    chunks: ["chunk_59", "chunk_60", "chunk_65", "chunk_98"]
+    source: "SINKRA Cap 4-10"
+    confianca: "HIGH"
+
+  - id: "FW-PV-006"
+    nome: "DBTLO — 5 Etapas Cíclicas"
+    descricao: "Framework de implementação em 5 etapas cíclicas: Design → Build → Train → Launch → Optimize. Cada ciclo melhora o anterior."
+    componentes: ["Design", "Build", "Train", "Launch", "Optimize"]
+    chunks: ["INS-PV-040"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FW-PV-007"
+    nome: "10 Mandamentos do ClickUp"
+    descricao: "10 regras fundamentais para uso correto do ClickUp. Violação de qualquer uma compromete o sistema inteiro."
+    componentes: ["10 mandamentos"]
+    chunks: ["INS-PV-041"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FW-PV-008"
+    nome: "Hierarquia Allfluence"
+    descricao: "Estrutura hierárquica do ClickUp: Workspace > Space > Folder > List > Task. Cada nível tem função específica."
+    componentes: ["Workspace", "Space", "Folder", "List", "Task"]
+    chunks: ["INS-PV-042"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FW-PV-009"
+    nome: "Cadência de Revisão"
+    descricao: "4 cadências de revisão progressiva: Daily (tarefas) → Weekly (progresso) → Monthly (métricas) → Quarterly (estratégia)."
+    componentes: ["Daily", "Weekly", "Monthly", "Quarterly"]
+    chunks: ["INS-PV-043"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FW-PV-010"
+    nome: "13 Erros Mortais do ClickUp"
+    descricao: "13 erros fatais na implementação do ClickUp, organizados em 7 categorias. Checklist preventivo para implementadores."
+    componentes: ["7 categorias", "13 erros"]
+    chunks: ["INS-PV-044"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"
+
+  - id: "FW-PV-011"
+    nome: "Campos Personalizados Essenciais"
+    descricao: "Conjunto de campos personalizados essenciais por tipo de tarefa. Base para visibilidade e automação."
+    componentes: ["Campos por tipo de tarefa"]
+    chunks: ["INS-PV-045"]
+    source: "GESTAO-ALL-v2"
+    confianca: "HIGH"

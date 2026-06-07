@@ -1,0 +1,42 @@
+id: WF-02
+name: Fluxo Guiado (PRO/MASTER)
+version: 1.0.0
+trigger: user_draft_submitted
+
+description: >
+  Fluxo do modo guiado. Analisa a mensagem ANTES de enviar e sugere melhorias.
+  Bloqueado para plano FREE. Após preview aprovado, executa WF-01 normalmente.
+
+steps:
+  - id: preview-analysis
+    task: T-10
+    executor: coach-analyzer + feedback-writer
+    inputs:
+      draft_message: "{{user.draft}}"
+      history: "{{session.history}}"
+      character_state: "{{session.character_state}}"
+      user_level: "{{user.level}}"
+      user_plan: "{{user.plan}}"
+    outputs: [preview_feedback, blocked]
+
+  - id: check-plan
+    condition: "{{preview-analysis.blocked}} == true"
+    if_true: return paywall_response
+    if_false: return preview_to_user
+
+  - id: user-decision
+    wait_for: user_action
+    actions:
+      - send_as_is: trigger WF-01 with original draft
+      - edit_and_send: wait for new draft → loop to preview-analysis
+      - cancel: discard draft
+
+quality_gates:
+  - id: QG-S6
+    check: "user.plan in [pro, master]"
+    blocks: T-10
+
+response_format:
+  preview_feedback: "{{preview-analysis.preview_feedback}}"
+  score_preview: "{{preview-analysis.score_preview}}"
+  suggestions: "{{preview-analysis.suggestions}}"

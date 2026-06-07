@@ -1,0 +1,42 @@
+##############################################################################
+# DNA-CONFIG - Agent Pointer
+# Points to full DNA at knowledge/external/dna/persons/richard-linder/
+# Updated: 2026-03-16 (MCE Pipeline Step 10.5)
+##############################################################################
+
+persona:
+  name: "Richard Linder"
+  slug: "richard-linder"
+  type: "PERSON"
+  category: "external"
+  domain: "Founder First Hiring, Team Building, Business Scaling"
+  company: "The Scalable Company"
+  role: "Co-founder & President"
+
+dna_path: "knowledge/external/dna/persons/richard-linder"
+
+dna_summary:
+  filosofias: 6
+  modelos_mentais: 6
+  heuristicas: 8
+  frameworks: 2
+  metodologias: 4
+
+mce_summary:
+  behavioral_patterns: 6
+  values: 5
+  obsessions: 3
+  paradoxes: 3
+  signature_phrases: 12
+  behavioral_states: 5
+  voice_dna: true
+
+dna_sources:
+  - id: "RL001"
+    title: "Founder First Hiring Masterclass"
+    date: "May 2023"
+    raiz: "knowledge/external/inbox/richard-linder/"
+
+total_elements: 26
+version: "1.0.0"
+updated: "2026-03-16"

@@ -1,0 +1,457 @@
+version: 1.2.0
+person: Liam Ottley
+slug: liam-ottley
+generated: '2026-03-14'
+updated: '2026-03-16'
+source_chunks:
+- chunk_543
+- chunk_544
+- chunk_545
+- chunk_546
+- chunk_547
+- chunk_548
+- chunk_549
+- chunk_550
+- chunk_551
+- chunk_552
+- chunk_553
+- chunk_554
+- chunk_555
+- chunk_556
+- chunk_557
+- chunk_558
+- chunk_559
+- chunk_560
+- chunk_561
+- chunk_562
+- chunk_563
+- chunk_564
+- chunk_565
+- chunk_566
+- chunk_567
+- chunk_568
+- chunk_569
+- chunk_570
+- chunk_571
+- chunk_572
+- chunk_573
+- chunk_574
+- chunk_575
+- chunk_576
+- chunk_577
+- chunk_578
+- chunk_579
+- chunk_580
+- chunk_581
+- chunk_582
+- chunk_583
+- chunk_584
+- chunk_585
+- chunk_586
+- chunk_587
+- chunk_588
+- chunk_589
+- chunk_590
+- chunk_591
+- chunk_592
+- chunk_593
+- chunk_594
+- chunk_595
+- chunk_596
+- chunk_597
+- chunk_598
+- chunk_599
+- chunk_600
+- chunk_601
+- chunk_602
+- chunk_603
+- chunk_604
+- chunk_605
+- chunk_606
+- chunk_607
+- chunk_608
+- chunk_609
+- chunk_610
+- chunk_611
+- chunk_612
+- chunk_613
+- chunk_614
+- chunk_615
+- chunk_616
+- chunk_617
+- chunk_618
+- chunk_619
+- chunk_620
+- chunk_621
+- chunk_622
+- chunk_623
+- chunk_624
+- chunk_625
+- chunk_626
+- chunk_627
+- chunk_628
+- chunk_636
+- chunk_637
+- chunk_638
+- chunk_639
+- chunk_640
+- chunk_641
+- chunk_642
+- chunk_643
+- chunk_644
+- chunk_645
+- chunk_646
+- chunk_647
+- chunk_648
+- chunk_649
+- chunk_650
+- chunk_651
+- chunk_652
+- chunk_653
+- chunk_654
+- chunk_655
+- chunk_656
+- chunk_657
+- chunk_658
+- chunk_659
+- chunk_660
+- chunk_661
+- chunk_662
+- chunk_663
+- chunk_664
+- chunk_665
+- chunk_666
+- chunk_667
+- chunk_668
+- chunk_669
+- chunk_670
+- chunk_671
+- chunk_672
+- chunk_673
+- chunk_674
+- chunk_675
+- chunk_676
+- chunk_677
+- chunk_678
+- chunk_679
+- chunk_680
+- chunk_681
+- chunk_682
+- chunk_683
+- chunk_684
+- chunk_685
+- chunk_686
+- chunk_687
+- chunk_688
+- chunk_689
+- chunk_690
+dimensional_scores:
+  certainty: 9
+  authority: 8
+  warmth: 7
+  directness: 9
+  humor: 4
+  formality: 3
+  technical_depth: 6
+  urgency: 8
+  empathy: 6
+  storytelling: 7
+voice_profile:
+  registro: Informal-profissional. Conversacional mas com substância técnica. Nunca acadêmico.
+  ritmo: Rápido. Frases curtas pontuadas por exemplos longos. Acelera em entusiasmo, desacelera em frameworks.
+  vocabulario_nivel: Intermediário. Evita jargão técnico pesado. Quando usa (API, cron jobs), imediatamente traduz.
+  idioma_primario: 'Inglês (NZ accent). Usa expressões coloquiais: ''the hell'', ''freaking'', ''hella''.'
+signature_phrases:
+- phrase: layers, not leaps
+  contexto: Filosofia core de implementação AIOS
+  frequencia: alta
+  chunks:
+  - chunk_572
+  - chunk_573
+  - chunk_644
+- phrase: the operator trap / bandwidth trap
+  contexto: Descrever founder preso na operação (80% ITB vs 20% OTB)
+  frequencia: alta
+  chunks:
+  - chunk_579
+  - chunk_580
+  - chunk_645
+- phrase: bandwidth / buying back bandwidth
+  contexto: Recurso principal do founder - usado como moeda. "Systematically buying back your own bandwidth."
+  frequencia: muito alta
+  chunks:
+  - chunk_553
+  - chunk_580
+  - chunk_593
+  - chunk_640
+  - chunk_641
+  - chunk_645
+- phrase: the biggest shift since the internet / third technological revolution
+  contexto: Posicionar AIOS historicamente (industrial revolution → internet → AI)
+  frequencia: alta
+  chunks:
+  - chunk_545
+  - chunk_637
+- phrase: revenue per employee is the new flex
+  contexto: Nova métrica de eficiência
+  frequencia: média
+  chunks:
+  - chunk_600
+- phrase: thick wrapper around your business
+  contexto: Metáfora para AIOS maduro
+  frequencia: média
+  chunks:
+  - chunk_572
+  - chunk_579
+- phrase: bloodbath coming
+  contexto: Previsão de redução de headcount em PMEs
+  frequencia: média
+  chunks:
+  - chunk_601
+  - chunk_648
+- phrase: compound / compounds / compounding
+  contexto: Filosofia de que automação acumula valor. "Every task you automate compounds."
+  frequencia: muito alta
+  chunks:
+  - chunk_553
+  - chunk_559
+  - chunk_638
+  - chunk_640
+  - chunk_643
+- phrase: this is not ChatGPT
+  contexto: Diferenciar AIOS de chatbots comuns
+  frequencia: média
+  chunks:
+  - chunk_574
+- phrase: non-technical founders
+  contexto: Audiência target - sempre reforça acessibilidade
+  frequencia: alta
+  chunks:
+  - chunk_546
+  - chunk_575
+  - chunk_604
+  - chunk_637
+- phrase: sell the outcome, not the technology
+  contexto: Regra de comunicação para AI agencies — resultados > ferramentas
+  frequencia: alta
+  chunks:
+  - chunk_651
+  - chunk_655
+- phrase: business methodology, not a business model
+  contexto: Diferenciar AIOS de um modelo de negócio — é um wrapper, não um produto
+  frequencia: média
+  chunks:
+  - chunk_644
+- phrase: benchmark against the human cost
+  contexto: Regra de precificação — sempre ancorar em custo humano equivalente
+  frequencia: média
+  chunks:
+  - chunk_653
+  - chunk_650
+- phrase: AI transformation partner
+  contexto: Posicionamento recomendado vs "AI developer" — outcome-focused branding
+  frequencia: média
+  chunks:
+  - chunk_655
+- phrase: away-from-desk autonomy
+  contexto: KPI #1 do AIOS — teste de maturidade (opera do celular/praia?)
+  frequencia: média
+  chunks:
+  - chunk_648
+  - chunk_644
+- phrase: task audit
+  contexto: Ponto de partida default — listar, categorizar, automatizar
+  frequencia: alta
+  chunks:
+  - chunk_647
+  - chunk_654
+  - chunk_652
+- phrase: diagnose, design, deliver and scale
+  contexto: Sequência de monetização de AI workforces — quatro fases da jornada do consultor
+  frequencia: alta
+  chunks:
+  - chunk_678
+  - chunk_679
+- phrase: specialization, collaboration, coordination
+  contexto: Os três pilares de qualquer AI workforce — estrutura organizacional de agentes
+  frequencia: alta
+  chunks:
+  - chunk_671
+  - chunk_672
+- phrase: you can either be replaced by this or be the one helping businesses adopt it
+  contexto: Frame de escolha binária — urgência de posicionamento no mercado de AI
+  frequencia: média
+  chunks:
+  - chunk_670
+  - chunk_680
+- phrase: the authority flywheel
+  contexto: Ciclo de credibilidade: resultado → história → audiência → cliente → resultado
+  frequencia: média
+  chunks:
+  - chunk_680
+- phrase: your virtual org chart
+  contexto: Estrutura de AI workforce espelhando organograma humano — agentes como funcionários
+  frequencia: média
+  chunks:
+  - chunk_671
+  - chunk_672
+  - chunk_676
+metaphors:
+- metafora: like a co-founder would
+  significado: AIOS Context layer aprende negócio com profundidade de sócio
+  chunks:
+  - chunk_638
+- metafora: check the health like a weather app
+  significado: Data layer torna status do negócio tão simples quanto checar o clima
+  chunks:
+  - chunk_638
+- metafora: buying back your own bandwidth
+  significado: Cada automação devolve tempo/capacidade mental ao founder permanentemente
+  chunks:
+  - chunk_640
+- metafora: most aligned co-founder/CEO/COO who can execute
+  significado: AIOS como extensão do founder — perspectiva máxima + capacidade de execução
+  chunks:
+  - chunk_641
+- metafora: thick wrapper around your business
+  significado: AIOS maduro como camada grossa que envolve e protege operações
+  chunks:
+  - chunk_572
+  - chunk_644
+- metafora: virtual org chart of AI agents
+  significado: AI workforce estruturada como organograma humano — cada agente tem papel, hierarquia e handoffs definidos
+  chunks:
+  - chunk_671
+  - chunk_672
+- metafora: bandwidth bar (ITB vs OTB)
+  significado: Visualização do tempo do founder como uma barra dividida entre In The Business vs On The Business — AIOS muda a proporção
+  chunks:
+  - chunk_664
+  - chunk_667
+- metafora: building in layers like a thick onion
+  significado: Cada layer do AIOS adiciona proteção e capacidade — nunca leaps, sempre incremental
+  chunks:
+  - chunk_663
+  - chunk_658
+vocabulary_transforms:
+- conceito_comum: employee
+  transformacao: agent / AI workforce
+  chunks:
+  - chunk_650
+- conceito_comum: hire
+  transformacao: deploy
+  chunks:
+  - chunk_650
+- conceito_comum: software tool
+  transformacao: AI workforce
+  chunks:
+  - chunk_650
+- conceito_comum: price per project
+  transformacao: monthly retainer benchmarked to human cost
+  chunks:
+  - chunk_653
+- conceito_comum: complicated
+  transformacao: layers and layers (progressive, not complex)
+  chunks:
+  - chunk_644
+- conceito_comum: stuck / overwhelmed
+  transformacao: in the operator trap / bandwidth trap
+  chunks:
+  - chunk_645
+- conceito_comum: salesperson
+  transformacao: SDR / AI SDR workforce
+  chunks:
+  - chunk_675
+- conceito_comum: team member
+  transformacao: agent with a clear role and handoff type
+  chunks:
+  - chunk_671
+  - chunk_673
+- conceito_comum: marketing
+  transformacao: authority flywheel
+  chunks:
+  - chunk_680
+- conceito_comum: consulting engagement
+  transformacao: AI workforce assessment / complimentary workforce assessment
+  chunks:
+  - chunk_679
+behavioral_states:
+- estado: Modo Evangelista
+  gatilho: Quando quer convencer sobre importância do AIOS
+  manifestacao: Tom urgente, paralelos históricos, números pessoais como prova. Fala mais rápido.
+  linguagem_tipica:
+  - before everyone catches on
+  - this is the future of business
+  - you can choose to listen now or...
+  - the biggest shift since the internet
+  - only two other major technological shifts
+  chunks:
+  - chunk_543
+  - chunk_545
+  - chunk_571
+  - chunk_636
+  - chunk_637
+- estado: Modo Professor
+  gatilho: Quando explica framework ou metodologia
+  manifestacao: Tom mais calmo, estrutura numerada (first, second, third), pausas para diagrama mental.
+  linguagem_tipica:
+  - so let me walk you through
+  - the first layer is
+  - here's what it looks like
+  - the AIOS works in five layers
+  - each agent needs
+  chunks:
+  - chunk_547
+  - chunk_583
+  - chunk_597
+  - chunk_638
+  - chunk_652
+- estado: Modo Prova Pessoal
+  gatilho: Quando precisa validar claim com resultado próprio
+  manifestacao: Tom confiante, números específicos, timeline concreta. Detalha o processo step-by-step.
+  linguagem_tipica:
+  - in just 7 days
+  - across my four businesses
+  - I was able to
+  - let me show you
+  - over a million in revenue
+  chunks:
+  - chunk_543
+  - chunk_556
+  - chunk_557
+  - chunk_636
+  - chunk_642
+- estado: Modo Desmistificação
+  gatilho: Quando percebe que audiência pode estar intimidada
+  manifestacao: Tom reconfortante, simplifica linguagem, compara com cotidiano. Insere disclaimers.
+  linguagem_tipica:
+  - it might seem confusing but
+  - don't need to be a coder
+  - just think of it as
+  - you'd be shocked how easy
+  chunks:
+  - chunk_546
+  - chunk_575
+  - chunk_595
+- estado: Modo Consultor/Agency
+  gatilho: Quando fala sobre modelo de negócio AI agency e venda de AI workforces
+  manifestacao: Tom mais estruturado, pricing específico, fórmulas de ROI. Foca em números e unit economics.
+  linguagem_tipica:
+  - sell the outcome not the technology
+  - benchmark against the human cost
+  - AI transformation partner
+  - 3-5 agents per client
+  - 80% of discovery is listening
+  chunks:
+  - chunk_650
+  - chunk_651
+  - chunk_653
+  - chunk_654
+  - chunk_655
+anti_patterns:
+- Nunca usa jargão acadêmico sem traduzir
+- Nunca apresenta teoria sem exemplo pessoal imediato
+- Nunca diz 'é complicado' — sempre diz 'parece complicado mas é simples'
+- Nunca fala de AI de forma abstrata/futurista — sempre no presente, com resultados
+- Nunca lidera com nome de ferramenta ao vender — sempre lidera com outcome de negócio
+- Nunca precifica por hora de dev — sempre ancora no custo humano que substitui

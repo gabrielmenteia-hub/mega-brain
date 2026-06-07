@@ -1,0 +1,1413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>O Código da Atração Permanente — Desperte Atração Real. Elimine o Vácuo.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0A;
+      color: #F5F5F5;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────────── */
+    h1, h2, h3, .headline {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+    }
+    .gold    { color: #C9A84C; }
+    .fire    { color: #E8431A; }
+    .muted   { color: #888888; }
+    .body-sm { font-size: 0.875rem; color: #888888; }
+
+    /* ─── LAYOUT ───────────────────────────────────────────────────── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .container--wide {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── SECTIONS ─────────────────────────────────────────────────── */
+    .section--dark   { background-color: #0A0A0A; }
+    .section--mid    { background-color: #111111; }
+    .section--accent { background-color: #0D0D0D; border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; }
+
+    /* ─── DIVIDER ──────────────────────────────────────────────────── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #C9A84C, #E8431A);
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+    .divider--left { margin: 0 0 24px; }
+
+    /* ─── BUTTONS ──────────────────────────────────────────────────── */
+    .btn-cta {
+      display: inline-block;
+      background-color: #E8431A;
+      color: #FFFFFF;
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      padding: 18px 48px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 24px rgba(232, 67, 26, 0.35);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-cta:hover {
+      background-color: #FF5A2C;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232, 67, 26, 0.5);
+    }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-cta--lg { font-size: 1.6rem; padding: 22px 60px; }
+    .btn-cta--sm { font-size: 1.1rem; padding: 14px 32px; }
+    .btn-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #888888;
+      text-align: center;
+    }
+
+    /* ─── BADGE ────────────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      color: #C9A84C;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── TOP BAR ──────────────────────────────────────────────────── */
+    .topbar {
+      background: linear-gradient(90deg, #0D0D0D, #111111);
+      border-bottom: 1px solid #1E1E1E;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888888;
+    }
+    .topbar strong { color: #C9A84C; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 1 — HERO
+    ═══════════════════════════════════════════════════════════════ */
+    #hero {
+      background: linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 100%);
+      padding: 72px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+    .hero-headline {
+      font-size: clamp(3rem, 9vw, 5.5rem);
+      color: #F5F5F5;
+      margin-bottom: 8px;
+    }
+    .hero-headline span { color: #C9A84C; }
+    .hero-subheadline {
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      color: #E8431A;
+      margin-bottom: 28px;
+    }
+    .hero-description {
+      font-size: 1.05rem;
+      color: #BBBBBB;
+      max-width: 620px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    /* VSL Player placeholder */
+    .vsl-wrapper {
+      max-width: 720px;
+      margin: 0 auto 44px;
+      position: relative;
+    }
+    .vsl-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #111111 0%, #1A1A1A 100%);
+      border: 1px solid #2A2A2A;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .vsl-player::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(201,168,76,0.03), transparent);
+    }
+    .vsl-play-btn {
+      width: 72px; height: 72px;
+      background: rgba(232, 67, 26, 0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 0 40px rgba(232,67,26,0.4);
+    }
+    .vsl-play-btn:hover { transform: scale(1.08); background: #E8431A; }
+    .vsl-play-btn svg { margin-left: 6px; }
+    .vsl-label {
+      font-size: 0.8rem;
+      color: #666666;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-cta-area { margin-top: 8px; }
+    .hero-trust {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      margin-top: 28px;
+      flex-wrap: wrap;
+    }
+    .hero-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      color: #888888;
+    }
+    .hero-trust-item .icon { font-size: 1rem; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 2 — PROBLEMA
+    ═══════════════════════════════════════════════════════════════ */
+    #problema {
+      background-color: #111111;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .section-label {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #E8431A;
+      margin-bottom: 16px;
+      font-weight: 600;
+    }
+    .section-title {
+      font-size: clamp(2.2rem, 6vw, 3.8rem);
+      margin-bottom: 16px;
+    }
+    .section-subtitle {
+      font-size: 1rem;
+      color: #888888;
+      max-width: 560px;
+      margin: 0 auto 56px;
+      line-height: 1.7;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 24px;
+      text-align: left;
+    }
+    .pain-card {
+      background: #0A0A0A;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 32px 28px;
+      position: relative;
+      transition: border-color 0.2s;
+    }
+    .pain-card:hover { border-color: #C9A84C33; }
+    .pain-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #E8431A, transparent);
+      border-radius: 8px 8px 0 0;
+    }
+    .pain-num {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 3.5rem;
+      color: #1E1E1E;
+      line-height: 1;
+      margin-bottom: 12px;
+    }
+    .pain-title {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: #F5F5F5;
+      margin-bottom: 10px;
+    }
+    .pain-text { font-size: 0.9rem; color: #888888; line-height: 1.65; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 3 — MECANISMO
+    ═══════════════════════════════════════════════════════════════ */
+    #mecanismo {
+      background-color: #0A0A0A;
+      padding: 80px 0;
+    }
+    .mec-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .creator-photo {
+      width: 100%;
+      aspect-ratio: 3/4;
+      background: linear-gradient(160deg, #1A1A1A 0%, #0D0D0D 100%);
+      border-radius: 8px;
+      border: 1px solid #2A2A2A;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      overflow: hidden;
+      position: relative;
+    }
+    .creator-photo::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("https://placehold.co/400x533/0D0D0D/1A1A1A?text=") center/cover no-repeat;
+    }
+    .creator-silhouette {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 60px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .creator-silhouette svg { opacity: 0.18; }
+    .creator-caption {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      background: linear-gradient(0deg, rgba(0,0,0,0.95) 0%, transparent 100%);
+      padding: 24px 20px 20px;
+      text-align: center;
+    }
+    .creator-name {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.4rem;
+      color: #F5F5F5;
+      letter-spacing: 0.05em;
+    }
+    .creator-title { font-size: 0.75rem; color: #C9A84C; letter-spacing: 0.1em; }
+    .mec-text .section-label { text-align: left; }
+    .mec-headline {
+      font-size: clamp(2rem, 4vw, 3rem);
+      margin-bottom: 20px;
+    }
+    .mec-body {
+      font-size: 0.95rem;
+      color: #AAAAAA;
+      line-height: 1.8;
+      margin-bottom: 20px;
+    }
+    .mec-body strong { color: #F5F5F5; }
+    .mec-body em { color: #C9A84C; font-style: normal; }
+    .credential-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 28px;
+    }
+    .credential-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      font-size: 0.88rem;
+      color: #BBBBBB;
+    }
+    .credential-list li .ck {
+      color: #C9A84C;
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+
+    /* METHOD BOX */
+    .method-box {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-left: 3px solid #C9A84C;
+      border-radius: 0 6px 6px 0;
+      padding: 24px 28px;
+      margin-top: 32px;
+    }
+    .method-title {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.3rem;
+      color: #C9A84C;
+      margin-bottom: 10px;
+      letter-spacing: 0.05em;
+    }
+    .method-desc { font-size: 0.88rem; color: #999999; line-height: 1.7; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 4 — MÓDULOS
+    ═══════════════════════════════════════════════════════════════ */
+    #modulos {
+      background-color: #111111;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .module-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 24px;
+      margin-top: 16px;
+    }
+    .module-card {
+      background: #0A0A0A;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 36px 28px 32px;
+      text-align: left;
+      position: relative;
+      transition: border-color 0.25s, transform 0.2s;
+    }
+    .module-card:hover {
+      border-color: #C9A84C44;
+      transform: translateY(-4px);
+    }
+    .module-icon {
+      width: 52px; height: 52px;
+      background: rgba(201, 168, 76, 0.08);
+      border: 1px solid rgba(201, 168, 76, 0.2);
+      border-radius: 6px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+    .module-number {
+      font-size: 0.65rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #E8431A;
+      margin-bottom: 8px;
+      font-weight: 600;
+    }
+    .module-title {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.5rem;
+      color: #F5F5F5;
+      letter-spacing: 0.03em;
+      margin-bottom: 12px;
+    }
+    .module-desc { font-size: 0.88rem; color: #888888; line-height: 1.7; margin-bottom: 20px; }
+    .module-topics {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 7px;
+    }
+    .module-topics li {
+      font-size: 0.82rem;
+      color: #BBBBBB;
+      padding-left: 18px;
+      position: relative;
+    }
+    .module-topics li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #C9A84C;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 5 — VALUE STACK
+    ═══════════════════════════════════════════════════════════════ */
+    #valuestack {
+      background-color: #0A0A0A;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .stack-box {
+      background: linear-gradient(145deg, #111111 0%, #0E0E0E 100%);
+      border: 1px solid #2A2A2A;
+      border-radius: 12px;
+      padding: 48px 40px;
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      overflow: hidden;
+    }
+    .stack-box::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #C9A84C, #E8431A);
+    }
+    .stack-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid #1A1A1A;
+    }
+    .stack-item:last-of-type { border-bottom: none; }
+    .stack-left {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      text-align: left;
+    }
+    .stack-icon {
+      width: 36px; height: 36px;
+      background: rgba(201,168,76,0.08);
+      border-radius: 4px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1rem;
+      flex-shrink: 0;
+    }
+    .stack-name { font-size: 0.92rem; color: #F5F5F5; font-weight: 500; }
+    .stack-detail { font-size: 0.75rem; color: #888888; }
+    .stack-price {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.3rem;
+      color: #C9A84C;
+      white-space: nowrap;
+    }
+    .stack-total-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 24px 0 16px;
+      border-top: 1px solid #333333;
+      margin-top: 8px;
+    }
+    .stack-total-label {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.1rem;
+      color: #888888;
+      letter-spacing: 0.08em;
+    }
+    .stack-total-value {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 2rem;
+      color: #888888;
+      text-decoration: line-through;
+    }
+    .stack-real-price-row {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .stack-real-label {
+      font-size: 0.8rem;
+      color: #C9A84C;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+    .stack-real-price {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 3.2rem;
+      color: #E8431A;
+      line-height: 1;
+    }
+    .stack-real-price sup { font-size: 1.4rem; vertical-align: super; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 6 — PROVA SOCIAL
+    ═══════════════════════════════════════════════════════════════ */
+    #prova-social {
+      background-color: #111111;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 24px;
+      margin-bottom: 64px;
+    }
+    .stat-card {
+      background: #0A0A0A;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 28px 20px;
+    }
+    .stat-number {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 3rem;
+      color: #C9A84C;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .stat-label { font-size: 0.8rem; color: #888888; line-height: 1.4; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      text-align: left;
+    }
+    .testimonial-card {
+      background: #0A0A0A;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+    .testimonial-card:hover { border-color: #C9A84C33; }
+    .testimonial-stars {
+      color: #C9A84C;
+      font-size: 0.9rem;
+      margin-bottom: 14px;
+      letter-spacing: 2px;
+    }
+    .testimonial-text {
+      font-size: 0.9rem;
+      color: #CCCCCC;
+      line-height: 1.7;
+      margin-bottom: 20px;
+      font-style: italic;
+    }
+    .testimonial-text::before { content: '"'; color: #C9A84C; font-size: 1.2rem; }
+    .testimonial-text::after  { content: '"'; color: #C9A84C; font-size: 1.2rem; }
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+    .author-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1E1E1E, #2A2A2A);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.75rem;
+      color: #C9A84C;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+    .author-name { font-size: 0.88rem; font-weight: 600; color: #F5F5F5; }
+    .author-detail { font-size: 0.75rem; color: #888888; }
+    .result-tag {
+      display: inline-block;
+      background: rgba(232, 67, 26, 0.1);
+      border: 1px solid rgba(232, 67, 26, 0.25);
+      color: #E8431A;
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 2px;
+      margin-top: 4px;
+      display: block;
+      width: fit-content;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 7 — OFERTA + GARANTIA
+    ═══════════════════════════════════════════════════════════════ */
+    #oferta {
+      background-color: #0A0A0A;
+      padding: 80px 0;
+      text-align: center;
+    }
+    .oferta-box {
+      max-width: 680px;
+      margin: 0 auto;
+    }
+    .price-anchor {
+      font-size: 1rem;
+      color: #888888;
+    }
+    .price-anchor s { color: #555555; }
+    .price-main {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: clamp(4rem, 12vw, 6rem);
+      color: #F5F5F5;
+      line-height: 1;
+      margin: 8px 0;
+    }
+    .price-main sup { font-size: 2rem; vertical-align: super; color: #C9A84C; }
+    .price-main .cents { font-size: 2.5rem; color: #C9A84C; }
+    .price-installment { font-size: 0.85rem; color: #888888; margin-bottom: 32px; }
+    .order-bump-box {
+      background: #111111;
+      border: 2px dashed #C9A84C44;
+      border-radius: 8px;
+      padding: 20px 24px;
+      margin: 28px 0;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      text-align: left;
+    }
+    .bump-checkbox {
+      width: 24px; height: 24px;
+      border: 2px solid #C9A84C;
+      border-radius: 4px;
+      flex-shrink: 0;
+      display: flex; align-items: center; justify-content: center;
+      cursor: pointer;
+      background: rgba(201,168,76,0.08);
+    }
+    .bump-checkbox::after { content: '✓'; color: #C9A84C; font-size: 0.9rem; font-weight: 700; }
+    .bump-label { font-size: 0.88rem; color: #BBBBBB; line-height: 1.5; }
+    .bump-label strong { color: #C9A84C; display: block; margin-bottom: 3px; }
+    .bump-price { font-family: 'Bebas Neue', Anton, Impact, sans-serif; font-size: 1.4rem; color: #E8431A; margin-left: auto; flex-shrink: 0; }
+
+    .guarantee-box {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 32px 28px;
+      display: flex;
+      align-items: flex-start;
+      gap: 20px;
+      margin-top: 40px;
+      text-align: left;
+    }
+    .guarantee-shield {
+      width: 64px; height: 64px;
+      background: rgba(201,168,76,0.08);
+      border: 2px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.8rem;
+      flex-shrink: 0;
+    }
+    .guarantee-title {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.4rem;
+      color: #C9A84C;
+      margin-bottom: 8px;
+    }
+    .guarantee-text { font-size: 0.88rem; color: #999999; line-height: 1.7; }
+
+    /* UPSELL MENTION */
+    .upsell-mention {
+      background: linear-gradient(135deg, #111111, #0E0E0E);
+      border: 1px solid #2A2A2A;
+      border-radius: 8px;
+      padding: 24px 28px;
+      margin-top: 24px;
+      text-align: left;
+      position: relative;
+      overflow: hidden;
+    }
+    .upsell-mention::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; bottom: 0;
+      width: 3px;
+      background: linear-gradient(180deg, #C9A84C, #E8431A);
+    }
+    .upsell-tag {
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: #E8431A;
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+    .upsell-title {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.4rem;
+      color: #F5F5F5;
+      margin-bottom: 8px;
+    }
+    .upsell-desc { font-size: 0.85rem; color: #888888; line-height: 1.6; }
+
+    /* PAYMENT ICONS */
+    .payment-icons {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-top: 20px;
+      flex-wrap: wrap;
+    }
+    .pay-icon {
+      background: #111111;
+      border: 1px solid #2A2A2A;
+      border-radius: 4px;
+      padding: 5px 10px;
+      font-size: 0.65rem;
+      color: #666666;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 8 — FAQ
+    ═══════════════════════════════════════════════════════════════ */
+    #faq {
+      background-color: #111111;
+      padding: 80px 0;
+    }
+    .faq-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+      margin-top: 16px;
+    }
+    .faq-item {
+      background: #0A0A0A;
+      border: 1px solid #1E1E1E;
+      border-radius: 8px;
+      padding: 24px;
+      transition: border-color 0.2s;
+    }
+    .faq-item:hover { border-color: #2A2A2A; }
+    .faq-q {
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: #F5F5F5;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+    .faq-q .faq-icon { color: #C9A84C; flex-shrink: 0; }
+    .faq-a { font-size: 0.85rem; color: #888888; line-height: 1.7; padding-left: 22px; }
+
+    /* ─── FINAL CTA BAR ─────────────────────────────────────────── */
+    #final-cta {
+      background: linear-gradient(180deg, #0A0A0A, #0D0D0D);
+      padding: 80px 0 96px;
+      text-align: center;
+    }
+    .final-headline {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      margin-bottom: 16px;
+    }
+    .final-sub {
+      font-size: 1rem;
+      color: #888888;
+      max-width: 480px;
+      margin: 0 auto 40px;
+    }
+
+    /* ─── FOOTER ────────────────────────────────────────────────── */
+    footer {
+      background: #050505;
+      border-top: 1px solid #1A1A1A;
+      padding: 32px 0;
+      text-align: center;
+    }
+    .footer-text { font-size: 0.75rem; color: #444444; line-height: 1.8; }
+    .footer-links { display: flex; justify-content: center; gap: 24px; margin-bottom: 16px; flex-wrap: wrap; }
+    .footer-links a { font-size: 0.75rem; color: #555555; text-decoration: none; transition: color 0.2s; }
+    .footer-links a:hover { color: #C9A84C; }
+
+    /* ─── STICKY CTA (MOBILE) ───────────────────────────────────── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.96);
+      border-top: 1px solid #2A2A2A;
+      padding: 12px 20px;
+      backdrop-filter: blur(8px);
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      display: none;
+    }
+    .sticky-price {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.8rem;
+      color: #F5F5F5;
+      white-space: nowrap;
+    }
+    .sticky-price small { font-size: 0.85rem; color: #888888; display: block; font-family: Inter, sans-serif; }
+    .sticky-btn { white-space: nowrap; flex-shrink: 0; }
+
+    /* ─── RESPONSIVE ────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .mec-inner { grid-template-columns: 1fr; }
+      .creator-photo { aspect-ratio: 4/3; max-height: 280px; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .order-bump-box { flex-wrap: wrap; }
+      .bump-price { margin-left: 0; }
+      .guarantee-box { flex-direction: column; }
+      .sticky-bar { display: flex; }
+      .stack-box { padding: 32px 20px; }
+    }
+    @media (max-width: 480px) {
+      .hero-trust { gap: 16px; }
+      .hero-trust-item { font-size: 0.72rem; }
+      .btn-cta--lg { font-size: 1.3rem; padding: 18px 28px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══ TOP BAR ═══════════════════════════════════════════════════ -->
+<div class="topbar">
+  <strong>OFERTA ESPECIAL</strong> — Acesso imediato por apenas <strong>R$ 97</strong> + Bônus exclusivos por tempo limitado
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 1 — HERO
+════════════════════════════════════════════════════════════════ -->
+<section id="hero" class="section--dark">
+  <div class="container">
+    <p class="hero-eyebrow">Método comprovado · 247 alunos · Resultados em até 11 dias</p>
+    <h1 class="hero-headline">O <span>Código</span> da<br>Atração Permanente</h1>
+    <p class="hero-subheadline">Desperte Atração Real.<br>Elimine o Vácuo.</p>
+    <p class="hero-description">
+      Você vai descobrir o mecanismo exato que faz uma mulher pensar em você mesmo quando você não está presente — e por que a maioria dos homens nunca aprende isso.
+    </p>
+
+    <!-- VSL Player -->
+    <div class="vsl-wrapper">
+      <div class="vsl-player">
+        <div class="vsl-play-btn">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="white">
+            <polygon points="5,3 19,12 5,21"/>
+          </svg>
+        </div>
+        <span class="vsl-label">Assista antes de decidir — 4 minutos</span>
+      </div>
+    </div>
+
+    <div class="hero-cta-area">
+      <a href="#oferta" class="btn-cta btn-cta--lg">QUERO DESCOBRIR O CÓDIGO AGORA</a>
+      <span class="btn-sub">Acesso imediato · Pagamento 100% seguro · Garantia de 7 dias</span>
+    </div>
+
+    <div class="hero-trust">
+      <div class="hero-trust-item"><span class="icon">🔒</span> Compra 100% segura</div>
+      <div class="hero-trust-item"><span class="icon">⚡</span> Acesso imediato</div>
+      <div class="hero-trust-item"><span class="icon">↩</span> Garantia de 7 dias</div>
+      <div class="hero-trust-item"><span class="icon">📱</span> Acesso vitalício</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 2 — PROBLEMA
+════════════════════════════════════════════════════════════════ -->
+<section id="problema" class="section--mid">
+  <div class="container">
+    <p class="section-label">Você se reconhece aqui?</p>
+    <h2 class="section-title">O Problema Que Ninguém<br><span class="gold">Fala Abertamente</span></h2>
+    <p class="section-subtitle">Nenhum desses problemas tem a ver com aparência, dinheiro ou sorte. Eles têm a ver com um código que você ainda não desbloqueou.</p>
+    <div class="divider"></div>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-num">01</div>
+        <h3 class="pain-title">O vácuo que corrói</h3>
+        <p class="pain-text">Você manda mensagem, ela demora horas para responder — ou pior, te deixa visto. A conversa começa quente e esfria do nada. Você fica reanalisando tudo o que disse tentando entender onde errou.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">02</div>
+        <h3 class="pain-title">Amizade em vez de desejo</h3>
+        <p class="pain-text">Você é atencioso, interessante, está presente — mas de alguma forma acaba na zona de amizade. Ela fala sobre outros caras com você. Você sente que está fazendo tudo certo e mesmo assim não é suficiente.</p>
+      </div>
+      <div class="pain-card">
+        <div class="pain-num">03</div>
+        <h3 class="pain-title">Atração que não sustenta</h3>
+        <p class="pain-text">Existe interesse no início, mas ele se dissolve rapidamente. Você percebe que não consegue manter o nível de atração ao longo do tempo — e não sabe como reacender o que foi perdido sem parecer desesperado.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 3 — MECANISMO
+════════════════════════════════════════════════════════════════ -->
+<section id="mecanismo" class="section--dark">
+  <div class="container--wide">
+    <div class="mec-inner">
+
+      <!-- Creator Photo -->
+      <div class="creator-photo">
+        <div class="creator-silhouette">
+          <svg width="200" height="280" viewBox="0 0 200 280" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="100" cy="70" r="48" fill="#F5F5F5"/>
+            <path d="M20 280 C20 180 180 180 180 280" fill="#F5F5F5"/>
+          </svg>
+        </div>
+        <div class="creator-caption">
+          <div class="creator-name">Rafael Mendes</div>
+          <div class="creator-title">Especialista em Psicologia da Atração</div>
+        </div>
+      </div>
+
+      <!-- Text -->
+      <div class="mec-text">
+        <p class="section-label">O criador do método</p>
+        <h2 class="mec-headline">Por que a maioria falha — e o que é diferente <span class="gold">aqui</span></h2>
+        <p class="mec-body">
+          Durante 8 anos estudei o que <strong>realmente</strong> gera atração sustentável — não o que os livros de autoajuda dizem, não os conselhos rassos de coaches de dating. Fui fundo na <em>psicologia evolutiva, neurociência comportamental e comunicação não-verbal</em> para extrair o padrão que poucos homens descobrem sozinhos.
+        </p>
+        <p class="mec-body">
+          Atração real não é sobre ser mais bonito ou mais rico. É sobre <strong>ativar os gatilhos certos, no momento certo, com a consistência certa.</strong> Isso é aprendível. Isso é o Código.
+        </p>
+
+        <ul class="credential-list">
+          <li><span class="ck">◆</span> Mais de 8 anos estudando psicologia da atração e comunicação masculina</li>
+          <li><span class="ck">◆</span> 247 alunos treinados — 83% com resultados documentados em até 11 dias</li>
+          <li><span class="ck">◆</span> Metodologia validada em cenários reais, não em teorias de laboratório</li>
+          <li><span class="ck">◆</span> Abordagem sem manipulação — baseada em valor genuíno e presença real</li>
+        </ul>
+
+        <div class="method-box">
+          <div class="method-title">O Mecanismo: O Código CAP</div>
+          <div class="method-desc">
+            O Código da Atração Permanente funciona em três camadas simultâneas: <strong style="color:#C9A84C">Calibração</strong> (entender o estado interno dela), <strong style="color:#C9A84C">Ativação</strong> (os comportamentos que disparam o circuito de atração) e <strong style="color:#C9A84C">Permanência</strong> (como fazer isso se tornar a experiência padrão que ela associa a você). Sem joguinhos. Sem scripts decorados. Com estrutura.
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 4 — MÓDULOS
+════════════════════════════════════════════════════════════════ -->
+<section id="modulos" class="section--mid">
+  <div class="container">
+    <p class="section-label">O que você vai aprender</p>
+    <h2 class="section-title">3 Blocos. <span class="gold">1 Transformação.</span></h2>
+    <p class="section-subtitle">Cada bloco foi construído para ser aplicado imediatamente — sem teoria sem fim, sem exercícios vazios.</p>
+    <div class="divider"></div>
+
+    <div class="module-grid">
+      <!-- Bloco 1 -->
+      <div class="module-card">
+        <div class="module-icon">🧠</div>
+        <div class="module-number">Bloco 01</div>
+        <h3 class="module-title">A Psicologia da Atração</h3>
+        <p class="module-desc">Entenda como a mente feminina processa atração — e por que o que você pensa que funciona geralmente tem o efeito oposto.</p>
+        <ul class="module-topics">
+          <li>Os 4 gatilhos evolutivos de atração que toda mulher possui</li>
+          <li>Por que disponibilidade excessiva destrói o interesse</li>
+          <li>Como o cérebro feminino cria obsessão por um homem</li>
+          <li>O erro de comunicação que move você para a zona de amizade</li>
+          <li>A diferença entre ser desejado e ser apenas apreciado</li>
+        </ul>
+      </div>
+
+      <!-- Bloco 2 -->
+      <div class="module-card">
+        <div class="module-icon">⚡</div>
+        <div class="module-number">Bloco 02</div>
+        <h3 class="module-title">O Código em Ação</h3>
+        <p class="module-desc">Os comportamentos específicos que ativam atração real — não impressões superficiais, mas presença que grava.</p>
+        <ul class="module-topics">
+          <li>Linguagem corporal que comunica valor sem dizer uma palavra</li>
+          <li>Como criar tensão saudável que ela vai querer resolver</li>
+          <li>O protocolo de conversas que aumentam investimento emocional</li>
+          <li>Timing: quando avançar, quando recuar, quando manter</li>
+          <li>Como sair da defensiva e operar do lugar certo</li>
+        </ul>
+      </div>
+
+      <!-- Bloco 3 -->
+      <div class="module-card">
+        <div class="module-icon">🛡️</div>
+        <div class="module-number">Bloco 03</div>
+        <h3 class="module-title">Blindagem Emocional</h3>
+        <p class="module-desc">Nunca mais ser ignorado, deixado no vácuo ou jogado na zona de amizade. Mantenha o nível de atração ao longo do tempo.</p>
+        <ul class="module-topics">
+          <li>Como se blindar contra o ciclo de investimento ansioso</li>
+          <li>O que fazer quando ela esfria — sem parecer desesperado</li>
+          <li>Reacendendo atração que foi perdida</li>
+          <li>O estado mental que torna você magneticamente seguro</li>
+          <li>Como manter a tensão e o interesse vivos no longo prazo</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 5 — VALUE STACK
+════════════════════════════════════════════════════════════════ -->
+<section id="valuestack" class="section--dark">
+  <div class="container">
+    <p class="section-label">Tudo que você recebe hoje</p>
+    <h2 class="section-title">O Valor Real da <span class="gold">Oferta Completa</span></h2>
+    <p class="section-subtitle" style="margin-bottom: 48px;">Você não está comprando apenas um curso. Está levando um sistema completo de transformação.</p>
+
+    <div class="stack-box">
+      <div class="stack-item">
+        <div class="stack-left">
+          <div class="stack-icon">📚</div>
+          <div>
+            <div class="stack-name">O Código da Atração Permanente — Curso Completo</div>
+            <div class="stack-detail">3 blocos · Acesso vitalício · Mobile-friendly</div>
+          </div>
+        </div>
+        <div class="stack-price">R$ 297</div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-left">
+          <div class="stack-icon">⏱</div>
+          <div>
+            <div class="stack-name">Bônus 1 — Protocolo 72h</div>
+            <div class="stack-detail">Plano de ação para os primeiros 3 dias de resultado</div>
+          </div>
+        </div>
+        <div class="stack-price">R$ 97</div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-left">
+          <div class="stack-icon">💬</div>
+          <div>
+            <div class="stack-name">Bônus 2 — 97 Conversas</div>
+            <div class="stack-detail">Banco de conversas reais que criam atração e tensão</div>
+          </div>
+        </div>
+        <div class="stack-price">R$ 67</div>
+      </div>
+
+      <div class="stack-item">
+        <div class="stack-left">
+          <div class="stack-icon">🚨</div>
+          <div>
+            <div class="stack-name">Bônus 3 — Modo Emergência</div>
+            <div class="stack-detail">Protocolo para quando você está prestes a ser ignorado</div>
+          </div>
+        </div>
+        <div class="stack-price">R$ 47</div>
+      </div>
+
+      <div class="stack-total-row">
+        <div class="stack-total-label">Valor total do pacote</div>
+        <div class="stack-total-value">R$ 508</div>
+      </div>
+
+      <div class="stack-real-price-row">
+        <div class="stack-real-label">Hoje você paga apenas</div>
+        <div class="stack-real-price"><sup>R$</sup>97</div>
+      </div>
+    </div>
+
+    <div style="margin-top: 40px;">
+      <a href="#oferta" class="btn-cta btn-cta--lg">GARANTIR MINHA VAGA POR R$ 97</a>
+      <span class="btn-sub">Oferta por tempo limitado · Acesso imediato após confirmação</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 6 — PROVA SOCIAL
+════════════════════════════════════════════════════════════════ -->
+<section id="prova-social" class="section--mid">
+  <div class="container">
+    <p class="section-label">Resultados reais</p>
+    <h2 class="section-title">Os Números <span class="gold">Não Mentem</span></h2>
+    <p class="section-subtitle">O método foi testado, refinado e validado por homens reais em situações reais.</p>
+    <div class="divider"></div>
+
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-number">247</div>
+        <div class="stat-label">Alunos ativos que já passaram pelo método</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">83%</div>
+        <div class="stat-label">Relatam resultados concretos em até 11 dias</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">11</div>
+        <div class="stat-label">Dias — tempo médio até os primeiros resultados</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-number">4.9</div>
+        <div class="stat-label">Avaliação média dos alunos (escala de 5)</div>
+      </div>
+    </div>
+
+    <div class="testimonials-grid">
+      <!-- Depoimento 1 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">Eu tinha desistido de tentar entender o que estava fazendo de errado. Passei anos repetindo o mesmo padrão — me aproximava, ela esfriava, eu ficava confuso. Em 9 dias aplicando o Bloco 2 a dinâmica mudou completamente. Ela começou a me mandar mensagem primeiro.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">LF</div>
+          <div>
+            <div class="author-name">Lucas F.</div>
+            <div class="author-detail">34 anos · Engenheiro · São Paulo</div>
+            <div class="result-tag">Resultado em 9 dias</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Depoimento 2 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">O que me pegou foi a parte da Blindagem Emocional. Eu não sabia que meu estado interno estava sabotando tudo. O protocolo de 72h me deu uma estrutura clara para agir sem ficar na minha cabeça. Hoje opero de um lugar completamente diferente.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">RM</div>
+          <div>
+            <div class="author-name">Rodrigo M.</div>
+            <div class="author-detail">28 anos · Designer · Rio de Janeiro</div>
+            <div class="result-tag">Transformação de mentalidade</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Depoimento 3 -->
+      <div class="testimonial-card">
+        <div class="testimonial-stars">★★★★★</div>
+        <p class="testimonial-text">Investi em vários cursos antes. Nenhum entregou algo que eu pudesse aplicar no mesmo dia. O Código é diferente porque vai direto ao ponto. As 97 conversas do bônus sozinhas já valeram o investimento — me pouparam meses de tentativa e erro.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar">TA</div>
+          <div>
+            <div class="author-name">Thiago A.</div>
+            <div class="author-detail">41 anos · Empresário · Curitiba</div>
+            <div class="result-tag">Aplicação imediata</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 7 — OFERTA + GARANTIA
+════════════════════════════════════════════════════════════════ -->
+<section id="oferta" class="section--dark">
+  <div class="container">
+    <div class="oferta-box">
+      <div class="badge">Oferta com tempo limitado</div>
+      <p class="section-label">Sua decisão, agora</p>
+      <h2 class="section-title" style="margin-bottom: 32px;">Comece Hoje.<br><span class="gold">Resultados em até 11 Dias.</span></h2>
+
+      <div class="price-anchor"><s>De R$ 297</s> — Hoje, por apenas:</div>
+      <div class="price-main"><sup>R$</sup>97</div>
+      <p class="price-installment">Pagamento único · Acesso vitalício · Sem mensalidade</p>
+
+      <!-- Order Bump -->
+      <div class="order-bump-box">
+        <div class="bump-checkbox"></div>
+        <div class="bump-label">
+          <strong>SIM! Quero adicionar — 47 Openers Prontos</strong>
+          As primeiras mensagens que criam curiosidade e tensão imediata. Testadas e aprovadas. Adicione ao seu pedido por apenas +R$ 37.
+        </div>
+        <div class="bump-price">+R$ 37</div>
+      </div>
+
+      <a href="#" class="btn-cta btn-cta--lg">QUERO O CÓDIGO DA ATRAÇÃO PERMANENTE</a>
+      <span class="btn-sub">🔒 Ambiente 100% seguro · Hotmart · Pix, Cartão e Boleto</span>
+
+      <!-- Payment Icons -->
+      <div class="payment-icons">
+        <span class="pay-icon">Visa</span>
+        <span class="pay-icon">Mastercard</span>
+        <span class="pay-icon">Pix</span>
+        <span class="pay-icon">Boleto</span>
+        <span class="pay-icon">Amex</span>
+        <span class="pay-icon">Elo</span>
+      </div>
+
+      <!-- Guarantee -->
+      <div class="guarantee-box">
+        <div class="guarantee-shield">🛡️</div>
+        <div>
+          <div class="guarantee-title">Garantia Incondicional de 7 Dias</div>
+          <p class="guarantee-text">Se em até 7 dias depois do acesso você não estiver completamente satisfeito com o conteúdo, basta enviar um e-mail e devolvemos 100% do seu dinheiro — sem perguntas, sem burocracia, sem julgamento. Você não tem nada a perder. O risco é 100% nosso.</p>
+        </div>
+      </div>
+
+      <!-- Upsell Mention -->
+      <div class="upsell-mention">
+        <div class="upsell-tag">Oferta especial após a compra</div>
+        <div class="upsell-title">Unlock the Code — Nível Avançado</div>
+        <p class="upsell-desc">Após garantir seu acesso, você terá a oportunidade única de entrar no módulo avançado <strong style="color: #F5F5F5">Unlock the Code</strong> — onde aprofundamos os padrões de atração em relacionamentos reais, cenários de longa duração e situações complexas. Disponível somente para alunos do Código. Investimento de R$ 197.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     SECTION 8 — FAQ
+════════════════════════════════════════════════════════════════ -->
+<section id="faq" class="section--mid">
+  <div class="container">
+    <p class="section-label" style="text-align:center">Dúvidas frequentes</p>
+    <h2 class="section-title" style="text-align:center; margin-bottom: 12px;">Perguntas e <span class="gold">Respostas</span></h2>
+    <p class="section-subtitle">Tudo que você precisa saber antes de garantir seu acesso.</p>
+    <div class="divider"></div>
+
+    <div class="faq-grid">
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> Para quem é esse método?</div>
+        <p class="faq-a">Para homens entre 25 e 45 anos que querem entender como despertar e manter atração genuína — seja em relacionamentos novos, em situações que esfriaram ou em relações que querem aprofundar. Não é para quem busca manipulação ou scripts prontos sem substância.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> Quanto tempo leva para ver resultados?</div>
+        <p class="faq-a">83% dos alunos relatam resultados concretos em até 11 dias. Isso varia com a frequência de aplicação e a situação específica de cada um. O Protocolo 72h (bônus) foi desenhado exatamente para acelerar os primeiros resultados.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> Preciso ser bonito ou ter dinheiro?</div>
+        <p class="faq-a">Não. O método trabalha com os mecanismos psicológicos reais de atração — que independem de aparência física ou status financeiro. Vários alunos aplicaram sem nenhuma dessas condições e tiveram resultados expressivos.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> Como funciona o acesso ao conteúdo?</div>
+        <p class="faq-a">Após a confirmação do pagamento, você recebe acesso imediato à plataforma — disponível no computador e no celular. O acesso é vitalício. Você pode consumir no seu ritmo, pausar e retomar quando quiser.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> Isso envolve manipulação ou jogos mentais?</div>
+        <p class="faq-a">Não. O método é construído em cima de valor genuíno, presença real e comunicação calibrada — não de jogos ou scripts falsos. O objetivo é tornar você o tipo de homem que naturalmente gera atração, não enganar ninguém.</p>
+      </div>
+
+      <div class="faq-item">
+        <div class="faq-q"><span class="faq-icon">◆</span> E se eu não gostar? Tem garantia?</div>
+        <p class="faq-a">Sim. Você tem 7 dias de garantia incondicional. Se por qualquer motivo não estiver satisfeito, basta solicitar o reembolso por e-mail e devolvemos 100% do seu investimento sem perguntas. Simples assim.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════
+     FINAL CTA
+════════════════════════════════════════════════════════════════ -->
+<section id="final-cta" class="section--dark">
+  <div class="container">
+    <div class="badge">Última chamada</div>
+    <h2 class="final-headline">A Atração que Você<br><span class="gold">Merece Já Existe.</span><br><span class="fire">Só Precisa Ser Ativada.</span></h2>
+    <p class="final-sub">O Código sempre esteve lá. Agora você tem o mapa.</p>
+    <a href="#oferta" class="btn-cta btn-cta--lg" style="max-width: 560px; margin: 0 auto; display: block;">QUERO O CÓDIGO DA ATRAÇÃO PERMANENTE</a>
+    <span class="btn-sub">R$ 97 · Acesso imediato · Garantia de 7 dias</span>
+
+    <div class="hero-trust" style="margin-top: 36px;">
+      <div class="hero-trust-item"><span class="icon">🔒</span> Compra 100% segura</div>
+      <div class="hero-trust-item"><span class="icon">⚡</span> Acesso imediato</div>
+      <div class="hero-trust-item"><span class="icon">↩</span> Garantia incondicional</div>
+      <div class="hero-trust-item"><span class="icon">♾</span> Acesso vitalício</div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ══════════════════════════════════════════════════ -->
+<footer>
+  <div class="container">
+    <div class="footer-links">
+      <a href="#">Termos de Uso</a>
+      <a href="#">Política de Privacidade</a>
+      <a href="#">Suporte</a>
+      <a href="#">Política de Reembolso</a>
+    </div>
+    <p class="footer-text">
+      © 2024 O Código da Atração Permanente. Todos os direitos reservados.<br>
+      Este produto é destinado exclusivamente a fins educacionais. Os resultados mencionados não são garantidos e variam de acordo com o esforço individual de cada aluno.<br>
+      CNPJ: 00.000.000/0000-00 · Processamento de pagamentos: Hotmart
+    </p>
+  </div>
+</footer>
+
+<!-- ═══ STICKY BAR (MOBILE) ═══════════════════════════════════ -->
+<div class="sticky-bar">
+  <div class="sticky-price">
+    <small>Apenas hoje</small>
+    R$ 97
+  </div>
+  <a href="#oferta" class="btn-cta btn-cta--sm sticky-btn">GARANTIR AGORA</a>
+</div>
+
+<script>
+  // Smooth scroll for anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+    anchor.addEventListener('click', function(e) {
+      const href = this.getAttribute('href');
+      if (href === '#') return;
+      e.preventDefault();
+      const target = document.querySelector(href);
+      if (target) {
+        target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    });
+  });
+
+  // Show sticky bar after scrolling past hero
+  const hero = document.getElementById('hero');
+  const stickyBar = document.querySelector('.sticky-bar');
+  const observer = new IntersectionObserver(
+    ([entry]) => {
+      if (window.innerWidth <= 768) {
+        stickyBar.style.display = entry.isIntersecting ? 'none' : 'flex';
+      }
+    },
+    { threshold: 0.1 }
+  );
+  if (hero) observer.observe(hero);
+
+  // Order bump toggle visual
+  const bumpCheckbox = document.querySelector('.bump-checkbox');
+  if (bumpCheckbox) {
+    bumpCheckbox.addEventListener('click', () => {
+      bumpCheckbox.style.background = bumpCheckbox.style.background.includes('0.08')
+        ? 'rgba(201,168,76,0.25)'
+        : 'rgba(201,168,76,0.08)';
+    });
+  }
+</script>
+
+</body>
+</html>

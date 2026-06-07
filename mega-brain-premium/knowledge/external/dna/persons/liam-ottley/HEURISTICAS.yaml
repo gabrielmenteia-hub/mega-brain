@@ -1,0 +1,187 @@
+##############################################################################
+# HEURISTICS - Liam Ottley
+# Layer 3: Practical rules and decision shortcuts
+# Source: 3 YouTube podcasts (24,287 words)
+# Generated: 2026-03-13
+##############################################################################
+
+heuristics:
+
+  - id: HEUR-LO-001
+    name: "60-70% Task Automation Target"
+    type: numeric
+    description: >
+      A founder should aim to automate 60-70% of their recurring tasks
+      within 30 days of AIOS setup. This is the threshold where bandwidth
+      shift becomes significant enough to enable new initiatives.
+    threshold: "60-70% of tasks automated"
+    quote: "I'm going for 60 to 70% of mine over the next 30 days."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: HEUR-LO-002
+    name: "80/20 Bandwidth Split (Reverse It)"
+    type: numeric
+    description: >
+      Default state: 80% time IN the business, 20% ON the business.
+      Goal state: 20% ITB, 80% OTB. The AIOS methodology exists
+      to systematically move this bar from 80/20 to 20/80.
+    threshold: "From 80/20 to 20/80 ITB/OTB ratio"
+    quote: "For most of us we are spending like 80% on must-dos and then we have this little bit here, our 20%."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+    reinforced_chunks: ["chunk_645"]
+    reinforced_by: "INS-LO-033"
+
+  - id: HEUR-LO-003
+    name: "7-Day Sprint vs Quarter"
+    type: numeric
+    description: >
+      With AIOS bandwidth freed, a major initiative (webinar, product launch)
+      can be executed in 7 days vs the traditional 1-2 quarters. This is
+      possible when founder has both freed bandwidth AND the AI workspace.
+    threshold: "7 days with AIOS = 1 quarter traditional"
+    quote: "I got more work done in a week than an entire team would be able to do over a quarter normally."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: HEUR-LO-004
+    name: "Daily Brief Before 8am"
+    type: qualitative
+    description: >
+      Every morning before 8am, receive a synthesized 5-10 page PDF
+      briefing covering all businesses. Includes revenue, meetings,
+      Slack activity, SWOT analysis, content performance. Makes you
+      the most informed person in the organization without any meetings.
+    threshold: "Daily brief delivered before 8am via Telegram"
+    quote: "I'm the most informed person in my entire organization before 8:00 AM and I didn't have to sit through a single meeting."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: HEUR-LO-005
+    name: "Revenue Per Employee Must Go Up"
+    type: numeric
+    description: >
+      With AIOS, revenue per employee should increase. Either revenue
+      goes up with same headcount, headcount goes down with same revenue,
+      or both. This is the efficiency metric to track.
+    threshold: "Revenue/employee trending UP"
+    quote: "Revenue per employee should be going up for you as an entrepreneur."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: HEUR-LO-006
+    name: "15% AI Decisions by 2028"
+    type: numeric
+    description: >
+      Gartner predicts 15% of all work decisions will be made by
+      AI agents by 2028, up from near zero today. This validates
+      the urgency of building AI workforce capabilities now.
+    threshold: "15% by 2028 (Gartner)"
+    quote: "Gartner predicts that 15% of all work decisions will be made by AI agents by 2028."
+    source: "How to Build and Sell AI Agent Workforces"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+
+  - id: HEUR-LO-007
+    name: "Test Away-From-Desk Regularly"
+    type: qualitative
+    description: >
+      Periodically test running your business entirely from your phone
+      (Telegram). If something breaks or is missing, that's what to
+      fix next. Goal: 100% capability away from desk.
+    threshold: "100% business operations from phone"
+    quote: "You need to test that occasionally. Go away for the weekend without your laptop."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: HEUR-LO-008
+    name: "7-8 Dashboards Consolidated to One"
+    type: numeric
+    description: >
+      The average founder checks 7-8 platforms daily (CRM, analytics,
+      revenue, marketing). AIOS data layer consolidates all into one
+      place, checkable like a weather app.
+    threshold: "7-8 dashboards → 1 unified view"
+    quote: "It used to be seven or eight different platforms just to understand what was going on in the morning."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: "HEUR-LO-009"
+    name: "AI Workforce Pricing Formula"
+    heuristic: "Price AI agents at 40-60% of human equivalent cost. SDR at $5K/mo → AI SDR at $2-3K/mo."
+    threshold: "40-60% of human cost"
+    quote: "If an SDR costs $5K/month, price the AI SDR agent at $2-3K/month — saves 40-60% with 24/7 coverage."
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    reinforced_chunks: ["chunk_652"]
+    reinforced_by: "INS-LO-040"
+
+  - id: "HEUR-LO-010"
+    name: "Agent Stacking Sweet Spot"
+    heuristic: "Stack 3-5 agents per client at $1.5-3K each = $4.5-15K/month retainer with 80%+ margins."
+    threshold: "3-5 agents, $1.5-3K each, 80%+ margin"
+    quote: "3-5 agents per client at $1.5-3K each = $4.5-15K/month retainer. This gives you great margins (80%+)."
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    reinforced_chunks: ["chunk_652"]
+    reinforced_by: "INS-LO-040"
+
+  - id: "HEUR-LO-011"
+    name: "Discovery Listening Rule"
+    heuristic: "Spend 80% of AI consulting discovery call LISTENING. Map workflows first, then propose."
+    threshold: "80% listening / 20% talking"
+    quote: "The biggest mistake in AI consulting: building before understanding. Spend 80% of the discovery call LISTENING."
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+
+  - id: "HEUR-LO-012"
+    name: "ITB/OTB Rebalance Target"
+    heuristic: "AIOS should rebalance from 80% ITB/20% OTB to 15-20% ITB/80% OTB."
+    threshold: "From 80/20 to 20/80"
+    quote: "Get must-dos down to 15-20% and working ON the business up to 80%."
+    source: "What Is an AI Operating System (And Why Every Business Will Need One)"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+    reinforced_chunks: ["chunk_645"]
+    reinforced_by: "INS-LO-033"
+
+  - id: "HEUR-LO-013"
+    name: "Case Study vs Posts Ratio"
+    heuristic: "One case study with real numbers beats 100 theoretical posts for AI agency sales."
+    threshold: "1 case study > 100 posts"
+    quote: "One good case study with real numbers beats 100 theoretical posts."
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    reinforced_chunks: ["chunk_654"]
+    reinforced_by: "INS-LO-042"
+
+  # ---- New from Autonomous Run 2026-03-16, chunks 656-690 ----
+
+  - id: "HEUR-LO-014"
+    name: "Perfil do Cliente Ideal para AI Workforce"
+    heuristic: "Clientes ideais são empresas de serviços ou pequenas empresas com processos claros e repetitivos que atualmente exigem múltiplas pessoas para executar."
+    type: qualitative
+    threshold: "Service company OR small business + repeatable multi-step workflows + can't afford full teams"
+    quote: "The businesses that need AI workforces the most are typically service companies or small businesses drowning in manual processes — they need 24/7 operations, but can't afford full teams."
+    insight_ref: "LO-018"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_679"]
+
+  - id: "HEUR-LO-015"
+    name: "Teste de Niche de Cold Email"
+    heuristic: "4 nichos × 500 emails × 30 dias → identificar vencedor → dobrar down. O niche com melhor taxa de resposta vira o foco principal."
+    type: numeric
+    threshold: "4 niches × 500 emails = 2000 emails total. 30-day tracking cycle."
+    quote: "Choose four service niches, write one clear results-driven email per niche, send 500 emails per niche and track for 30 days. After 30 days, identify which performed best and double down."
+    insight_ref: "LO-019"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_679"]
+
+metadata:
+  total_items: 15
+  source_person: "Liam Ottley"
+  source_count: 3
+  extraction_date: "2026-03-13"
+  updated: "2026-03-16"
+  version: "1.2.0"

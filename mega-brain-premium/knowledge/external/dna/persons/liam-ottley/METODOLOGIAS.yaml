@@ -1,0 +1,306 @@
+##############################################################################
+# METHODOLOGIES - Liam Ottley
+# Layer 5: Step-by-step implementations
+# Source: 3 YouTube podcasts (24,287 words)
+# Generated: 2026-03-13
+##############################################################################
+
+methodologies:
+
+  - id: MET-LO-001
+    name: "AIOS Implementation Methodology"
+    description: >
+      Complete step-by-step methodology for building an AI Operating System
+      from scratch as a non-technical founder. Sequential layers that build
+      on each other.
+    steps:
+      - step: 1
+        name: "Context Layer Setup"
+        actions:
+          - "Document who you are, what you sell, values, team structure"
+          - "Load business strategy (quarterly and annual)"
+          - "Set up Claude Code workspace with CLAUDE.md containing all context"
+          - "Verify: AI can answer questions about your business without prompting"
+      - step: 2
+        name: "Data Layer Setup"
+        actions:
+          - "Identify all data sources (CRM, Stripe, Analytics, Bitly, etc.)"
+          - "Connect data sources to Claude Code workspace"
+          - "Build unified dashboard (one-glance view)"
+          - "Verify: can query any metric conversationally"
+      - step: 3
+        name: "Intelligence Layer Setup"
+        actions:
+          - "Connect meeting recorder (Fireflies) to local database"
+          - "Connect Slack to queryable storage"
+          - "Build Daily Brief automation (Telegram + PDF)"
+          - "Set up cron job for daily synthesis before 8am"
+          - "Include daily SWOT analysis and synthesis as part of the brief"
+          - "Verify: receiving comprehensive daily brief"
+        reinforced_chunks: ["chunk_639"]
+        reinforced_by: "INS-LO-027"
+      - step: 4
+        name: "Automate Layer"
+        actions:
+          - "Execute Task Audit (list ALL recurring tasks)"
+          - "Categorize: YES / PARTIAL / NO for AI capability"
+          - "Prioritize by bandwidth impact"
+          - "Use /explore command to build each automation"
+          - "Set up cron jobs for recurring automations"
+          - "Track: automation percentage target 60-70%"
+          - "Ensure every automated task compounds with the next — bandwidth freed is permanent"
+        reinforced_chunks: ["chunk_640"]
+        reinforced_by: "INS-LO-028"
+      - step: 5
+        name: "Build Layer"
+        actions:
+          - "Use freed bandwidth for new initiatives"
+          - "Execute 7-day sprints for major projects"
+          - "Leverage full AIOS workspace for accelerated execution"
+          - "Decide: build more or enjoy freedom"
+    timeline: "Days to weeks per layer, not months"
+    source: "The Biggest Shift in Business Since the Internet Just Happened + What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+    reinforced_chunks: ["chunk_647", "chunk_649"]
+    reinforced_by: "INS-LO-034 (Task Audit: 83 tasks, 54 targeted for automation), INS-LO-036 (Daily Brief spec: 5-10pg PDF, 80 API calls across 6 data streams)"
+
+  - id: MET-LO-002
+    name: "7-Day Sprint Methodology"
+    description: >
+      Compressed execution framework for major business initiatives.
+      Uses freed AIOS bandwidth plus AI workspace to accomplish in
+      7 days what traditionally takes a quarter.
+    steps:
+      - day: "1-2"
+        action: "Research & Analysis"
+        detail: "Analyze comments, community messages, surface themes. Plan offer and structure."
+      - day: "3-4"
+        action: "Content Production"
+        detail: "Plan, package, and film 5 YouTube videos. Use content pipeline for concepts, titles, thumbnails."
+      - day: "5"
+        action: "Infrastructure Build"
+        detail: "Webinar structure + slides. Email sequences. Funnels. Payment systems. Landing pages. Follow-up automations."
+      - day: "6"
+        action: "Deliver"
+        detail: "Execute the webinar / launch event."
+      - day: "7"
+        action: "Collect & Optimize"
+        detail: "Process deposits, bookings, follow-ups. Analyze results."
+    result: "$1M NZD in 7 days (Liam's case study)"
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+    reinforced_chunks: ["chunk_642"]
+    reinforced_by: "INS-LO-030"
+
+  - id: MET-LO-003
+    name: "Explore Command Method"
+    description: >
+      Non-technical approach to building automations using Claude Code's
+      intelligence. Simply describe the task and let Claude figure out
+      the implementation.
+    steps:
+      - step: 1
+        action: "Identify a task from your Task Audit"
+      - step: 2
+        action: "Tell Claude: 'I am doing [task]. /explore. I want to automate this. Can you help me figure it out?'"
+      - step: 3
+        action: "Claude searches web, codebase, and business context to propose solution"
+      - step: 4
+        action: "Walk through implementation step-by-step with Claude"
+      - step: 5
+        action: "Set up on schedule (cron job) if recurring"
+      - step: 6
+        action: "Cross task off the audit list permanently"
+    prerequisite: "Must have Context and Data layers set up first"
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: MET-LO-004
+    name: "AI Workforce Sales Methodology"
+    description: >
+      How to position and sell AI workforce building as a service
+      to businesses. Includes discovery, proposal, and implementation.
+    steps:
+      - step: 1
+        action: "Identify target companies with manual-heavy departments"
+      - step: 2
+        action: "Map their current workflows and pain points"
+      - step: 3
+        action: "Scope AI agent workforce to replace/augment specific departments"
+      - step: 4
+        action: "Use Claude Code to generate proposals and slide decks from call transcripts"
+      - step: 5
+        action: "Build AI workforce using n8n/Make/Relevance AI"
+      - step: 6
+        action: "Deploy, monitor, and iterate"
+    business_model: "Agency model — build AI workforces for clients"
+    company: "Morningside AI (Liam's agency)"
+    source: "How to Build and Sell AI Agent Workforces"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+
+  # ---- INS-LO-038 + INS-LO-041 (Pipeline Run 2, chunks 636-655) ----
+
+  - id: MET-LO-005
+    name: "Metodologia de Vendas para Agência de IA (4 Etapas)"
+    description: >
+      Processo estruturado de vendas para agências de IA, do primeiro
+      contato ao onboarding. Quatro etapas sequenciais com regra crítica
+      na etapa de discovery: 80% escuta, 20% fala.
+    steps:
+      - step: 1
+        name: "Lead Generation"
+        actions:
+          - "Identificar empresas com departamentos manual-heavy"
+          - "Usar LinkedIn, comunidades e referrals como canais primários"
+          - "Criar conteúdo demonstrando capacidade (case studies > posts teóricos)"
+      - step: 2
+        name: "Discovery Call"
+        actions:
+          - "REGRA: 80% do tempo OUVINDO, 20% falando"
+          - "Mapear workflows atuais e pain points"
+          - "Identificar tarefas repetitivas e departamentos com overhead humano"
+          - "Nunca propor solução na call de discovery — apenas coletar informação"
+        heuristic_ref: "HEUR-LO-011"
+      - step: 3
+        name: "Proposal"
+        actions:
+          - "Gerar proposta usando Claude Code a partir do transcript da discovery"
+          - "Precificar agentes a 40-60% do custo humano equivalente"
+          - "Stackear 3-5 agentes por cliente ($1.5-3K cada)"
+          - "Mostrar ROI claro: custo AI vs custo headcount atual"
+        heuristic_ref: "HEUR-LO-009, HEUR-LO-010"
+      - step: 4
+        name: "Onboarding & Deploy"
+        actions:
+          - "Construir AI workforce usando n8n/Make/Relevance AI"
+          - "Deploy incremental (1 agente por vez, validar antes de escalar)"
+          - "Monitorar performance e iterar"
+          - "Coletar case study com números reais para próxima venda"
+        heuristic_ref: "HEUR-LO-013"
+    insight_ref: "INS-LO-038, INS-LO-041"
+    source: "How to Build and Sell AI Agent Workforces"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    reinforced_chunks: ["chunk_651", "chunk_653"]
+
+  # ---- New from Autonomous Run 2026-03-16, chunks 656-690 ----
+
+  - id: MET-LO-006
+    name: "AI Workforce Monetization Path (4 Stages)"
+    description: >
+      Sequência de monetização para construir negócio de AI workforce do zero.
+      Cada etapa gera fluxo de caixa que financia a próxima.
+    stages:
+      - stage: 1
+        name: "Diagnose"
+        product: "AI Workforce Assessment (audit + relatório)"
+        price: "$2-5K one-time"
+        purpose: "Posicionamento como trusted advisor antes de qualquer implementação"
+      - stage: 2
+        name: "Design & Implement"
+        product: "Single chatbot ($2-5K) or Full Workforce ($10-50K+)"
+        price: "Varia por escopo — 1 agente a departamento inteiro"
+        purpose: "Entrega do produto principal com margem alta"
+      - stage: 3
+        name: "Manage & Scale"
+        product: "Monthly retainer (3-5 agents)"
+        price: "$4.5-15K/mo com 80%+ margin"
+        purpose: "Receita recorrente escalável — base de revenue previsível"
+      - stage: 4
+        name: "Expand"
+        product: "Novos departamentos ou novos clientes via referrals"
+        price: "Upsell interno ou novo cliente com case study da Etapa 1-3"
+        purpose: "Compounding do portfólio de clientes"
+    quote: "Your journey to monetization follows a simple progression. Diagnose, design, deliver, and scale."
+    insight_ref: "LO-017"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_678"]
+
+  - id: MET-LO-007
+    name: "Cold Email Niche Testing Framework"
+    description: >
+      Metodologia de aquisição de clientes via cold email para agência de AI workforce.
+      Fórmula: 4 nichos × 500 emails × 30 dias → identificar vencedor → dobrar.
+    steps:
+      - step: 1
+        action: "Escolher 4 nichos de serviços (ex: contadores, corretores, clínicas, agências)"
+      - step: 2
+        action: "Escrever 1 email claro e focado em resultados por niche"
+        template: "'I help [niche] replace [specific process] with an AI workforce that runs 24/7 for less than the cost of one employee.'"
+      - step: 3
+        action: "Enviar 500 emails por niche (2000 total)"
+      - step: 4
+        action: "Rastrear por 30 dias: taxa de abertura, respostas, calls agendadas"
+      - step: 5
+        action: "Identificar niche vencedor (melhor performance em todos os 3 metrics)"
+      - step: 6
+        action: "Dobrar down no vencedor — todo esforço de prospecting vai para este niche"
+    success_metrics: "Open rate, reply rate, calls booked"
+    quote: "Choose four service niches, write one clear results-driven email per niche, send 500 emails per niche and track for 30 days."
+    insight_ref: "LO-019"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_679"]
+
+  - id: MET-LO-008
+    name: "Agent Prompt Structure Formula (6 Steps)"
+    description: >
+      Fórmula para criar prompts de agentes que funcionam consistentemente em produção.
+      Seis componentes obrigatórios que definem identidade, inputs, responsabilidades e outputs.
+    steps:
+      - step: 1
+        name: "Define Role"
+        action: "Quem é o agente e qual é sua função (título, empresa, missão)"
+      - step: 2
+        name: "Define Expected Inputs"
+        action: "O que o agente recebe para processar (formato, canal, tipo de dado)"
+      - step: 3
+        name: "Define Responsibility"
+        action: "O que o agente faz com os inputs e como faz (step-by-step)"
+      - step: 4
+        name: "Add Tools"
+        action: "Adicionar tools via forward slash — quais APIs/integrações o agente pode usar"
+      - step: 5
+        name: "Add Considerations"
+        action: "Edge cases, restrições, regras especiais (o que fazer quando X acontece)"
+      - step: 6
+        name: "Define Output Format"
+        action: "Como e onde o agente deve entregar o resultado"
+    quote: "Define the agents role clearly. Get clear on inputs. Define its responsibility — what it's supposed to do and how. Add tools. Add important considerations. Define output format."
+    insight_ref: "LO-021"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_673"]
+
+  - id: MET-LO-009
+    name: "Warm Outreach First-Client Formula"
+    description: >
+      Metodologia de aquisição do primeiro cliente via rede warm que minimiza pressão de vendas
+      e maximiza alcance pedindo referrals em vez de vender diretamente.
+    approach: "Não vender diretamente — pedir referrals. Reduz pressão, expande alcance."
+    steps:
+      - step: 1
+        action: "Listar contatos da rede que têm negócios ou conhecem donos de negócios"
+      - step: 2
+        action: "Enviar mensagem personalizada — não pitch, pedido de referral"
+        template: "'Hey [nome], estou construindo sistemas de AI workforce que automatizam [operação específica], oferecendo alguns assessments complementares para construir cases. Você conhece alguém que poderia se beneficiar?'"
+      - step: 3
+        action: "Para cada resposta positiva: oferecer assessment gratuito (complimentary) em troca de case study"
+      - step: 4
+        action: "Executar assessment, entregar resultado real, coletar case study com números"
+      - step: 5
+        action: "Usar case study para fechar próximos clientes pagantes"
+    psychology: "Pedir referral = low pressure + high reach. Complementary assessment = low risk para o cliente, high value para você (case study)."
+    quote: "The key is that you're not selling to them directly. You're asking them for referrals, which essentially lowers the pressure and expands your reach."
+    insight_ref: "LO-025"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_679"]
+
+metadata:
+  total_items: 9
+  source_person: "Liam Ottley"
+  source_count: 3
+  extraction_date: "2026-03-13"
+  updated: "2026-03-16"
+  version: "1.2.0"

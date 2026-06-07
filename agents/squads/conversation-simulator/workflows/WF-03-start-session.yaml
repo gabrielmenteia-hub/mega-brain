@@ -1,0 +1,55 @@
+id: WF-03
+name: Início de Sessão
+version: 1.0.0
+trigger: user_starts_session
+
+description: >
+  Fluxo de criação de sessão. Verifica rate limit, inicializa estado
+  e dispara primeira mensagem da personagem para abrir a conversa.
+
+steps:
+  - id: create-session
+    task: T-01
+    executor: session-manager
+    inputs:
+      user_id: "{{user.id}}"
+      scenario: "{{request.scenario}}"
+      character: "{{request.character}}"
+      mode: "{{request.mode}}"
+      user_plan: "{{user.plan}}"
+    outputs: [session_id, blocked, character_state]
+
+  - id: check-rate-limit
+    condition: "{{create-session.blocked}} == true"
+    if_true: return paywall_response
+    if_false: continue
+
+  - id: opening-message
+    task: T-03
+    executor: character-engine
+    description: Personagem abre a conversa com primeira mensagem
+    inputs:
+      history: []
+      persona: "{{request.character}}"
+      interest_level: "{{create-session.character_state.interest_level}}"
+      turn_count: 0
+      last_test_turn: null
+      coach_score: null
+    outputs: [opening_message]
+
+quality_gates:
+  - id: QG-S1
+    check: "session created successfully"
+    blocks: T-03
+  - id: QG-S2
+    check: "rate limit not exceeded"
+    blocks: session creation
+
+response_format:
+  session_id: "{{create-session.session_id}}"
+  opening_message: "{{opening-message.character_response}}"
+  character_info:
+    name: "{{persona.name}}"
+    age: "{{persona.age}}"
+    scenario: "{{request.scenario}}"
+    mode: "{{request.mode}}"

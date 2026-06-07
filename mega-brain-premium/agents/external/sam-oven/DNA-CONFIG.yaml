@@ -1,0 +1,100 @@
+# DNA-CONFIG — Sam Ovens Agent
+# Pesos, maturidade e configuração do agente mind-clone
+# Pipeline MCE v1.0 | Atualizado: 2026-03-16
+
+agent:
+  nome: "Sam Ovens"
+  slug: "sam-oven"
+  tipo: "MINDS"  # Mind-clone externo
+  categoria: "external"
+  versao: "1.0.0"
+  updated: "2026-03-16"
+  maturidade: 72  # 72% — base sólida, 25 fontes pendentes de processamento
+  maturidade_barra: "████████████████████████████░░░░░░░░░░░░░  72%"
+
+corpus:
+  fonte_principal: "Setterlun University"
+  cursos:
+    - id: "SETTERLUN-OC"
+      nome: "The Offer Code"
+      chunks_processados: 8
+    - id: "SETTERLUN-PO"
+      nome: "Purple Ocean Method"
+      chunks_processados: 6
+    - id: "SETTERLUN-BD"
+      nome: "Business DNA"
+      chunks_processados: 0  # pendente — 7 módulos em inbox
+  total_chunks: 14
+  chunks_pendentes: 25  # 25 transcrições originais não processadas
+
+dna_layers:
+  L1_filosofias:
+    total: 8
+    peso: 1.0
+    arquivo: "knowledge/external/dna/persons/sam-oven/FILOSOFIAS.yaml"
+  L2_modelos_mentais:
+    total: 6
+    peso: 0.9
+    arquivo: "knowledge/external/dna/persons/sam-oven/MODELOS-MENTAIS.yaml"
+  L3_heuristicas:
+    total: 7
+    peso: 0.85
+    arquivo: "knowledge/external/dna/persons/sam-oven/HEURISTICAS.yaml"
+  L4_frameworks:
+    total: 3
+    peso: 0.9
+    arquivo: "knowledge/external/dna/persons/sam-oven/FRAMEWORKS.yaml"
+  L5_metodologias:
+    total: 1
+    peso: 0.8
+    arquivo: "knowledge/external/dna/persons/sam-oven/METODOLOGIAS.yaml"
+  total_entries: 25
+
+insights:
+  total: 27
+  HIGH: 24
+  MEDIUM: 3
+  LOW: 0
+  arquivo: "artifacts/mce/sam-oven/INSIGHTS-STATE.json"
+
+voice_dna:
+  arquivo: "knowledge/external/dna/persons/sam-oven/VOICE-DNA.yaml"
+  certainty: 9.0
+  authority: 8.5
+  warmth: 3.5
+  directness: 9.5
+  teaching_focus: 9.5
+  confidence: 9.0
+
+behavioral_patterns:
+  total: 5
+  arquivo: "agents/external/sam-oven/SOUL.md"
+
+identity:
+  master_obsession: "Eliminação do Desnecessário para Resultado Máximo"
+  master_obsession_intensity: 10
+  value_hierarchy_total: 5
+  tier1_values: 3
+  tier2_values: 2
+  paradoxes: 2
+
+agent_files:
+  agent_md: "agents/external/sam-oven/AGENT.md"
+  soul_md: "agents/external/sam-oven/SOUL.md"
+  memory_md: "agents/external/sam-oven/MEMORY.md"
+  dna_config: "agents/external/sam-oven/DNA-CONFIG.yaml"
+
+knowledge_refs:
+  dossier: "knowledge/external/dossiers/persons/DOSSIER-SAM-OVEN.md"
+  sources:
+    - "knowledge/external/sources/sam-oven/07-PRICING-OFERTAS.md"
+    - "knowledge/external/sources/sam-oven/PURPLE-OCEAN.md"
+  theme_dossiers:
+    - "knowledge/external/dossiers/themes/DOSSIER-07-PRICING.md"
+    - "knowledge/external/dossiers/themes/DOSSIER-POSICIONAMENTO-PURPLE-OCEAN.md"
+
+pipeline_mce:
+  versao: "1.0"
+  run_date: "2026-03-16"
+  state_file: ".claude/mission-control/mce/sam-oven/pipeline_state.yaml"
+  artifacts_dir: "artifacts/mce/sam-oven/"

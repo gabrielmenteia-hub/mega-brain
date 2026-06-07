@@ -1,0 +1,156 @@
+##############################################################################
+# MENTAL-MODELS - Liam Ottley
+# Layer 2: Thinking and decision frameworks
+# Source: 3 YouTube podcasts (24,287 words)
+# Generated: 2026-03-13
+##############################################################################
+
+mental_models:
+
+  - id: MM-LO-001
+    name: "Bandwidth Trap / Operator Trap"
+    description: >
+      Most founders spend 80% of time IN the business (must-dos, maintenance)
+      and only 20% ON the business (growth, new initiatives). The AIOS goal
+      is to reverse this ratio to 20/80. Being stuck in the operator trap
+      means zero bandwidth for growth, making you vulnerable when the market
+      moves fast.
+    application: "Diagnose current bandwidth split. If >50% ITB, prioritize automation."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: MM-LO-002
+    name: "The Wrapper Model"
+    description: >
+      AIOS is NOT a business model — it's a methodology that wraps around
+      your existing business model as layers. The cube (business model) sits
+      in the center, and the AIOS wraps around it. Thicker wrapper =
+      more efficient founder. The wrapper grows layer by layer, not all at once.
+    application: "Evaluate thickness of your current AI wrapper. Each layer should compound."
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+
+  - id: MM-LO-003
+    name: "Three Historical Shifts"
+    description: >
+      Business history has only three fundamental shifts: (1) Industrial Revolution
+      changed how we MAKE things, (2) Internet changed how we REACH people,
+      (3) AIOS changes how we RUN everything. Each shift created massive
+      winners among early adopters.
+    application: "Position AI adoption as existential, not optional. Same magnitude as internet adoption."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+    reinforced_chunks: ["chunk_637"]
+    reinforced_by: "INS-LO-025"
+
+  - id: MM-LO-004
+    name: "Compound Automation Flywheel"
+    description: >
+      Each task automated permanently frees bandwidth. Freed bandwidth
+      enables automating more tasks. This creates a compounding flywheel
+      where week after week the founder systematically buys back their
+      own time. Unlike one-off productivity hacks, AIOS gains are permanent.
+    application: "Start with highest-ROI tasks. Each automation accelerates the next."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: MM-LO-005
+    name: "Context OS vs ChatGPT"
+    description: >
+      ChatGPT requires re-explaining everything from scratch every time
+      (like onboarding a new employee each conversation). Context OS means
+      the AI knows your business like a co-founder — team, strategy,
+      products, history. This eliminates the biggest friction of AI adoption.
+    application: "Building context layer is prerequisite to everything else. Skip it and nothing works."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: MM-LO-006
+    name: "Build or Enjoy Decision"
+    description: >
+      Once bandwidth is freed, founders face a choice: (1) Pour freed time
+      into new initiatives and growth, or (2) Enjoy the freedom you originally
+      wanted when starting the business. Both are valid. The point is having
+      the choice, not being trapped.
+    application: "After automation phase, consciously decide: expand or enjoy. Don't default back into operator trap."
+    source: "The Biggest Shift in Business Since the Internet Just Happened"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/The Biggest Shift in Business Since the Internet Just Happened [youtube.com_watch_v=oC1h922cDoY].txt"
+
+  - id: MM-LO-007
+    name: "AI Workforce Department Model"
+    description: >
+      AI agents can form digital teams organized by department: marketing,
+      sales, operations, creative, customer support. Each department has
+      specialized agents that collaborate. This replaces the traditional
+      hire-per-function model with build-per-function using AI.
+    application: "Map your departments. Identify which can be partially or fully staffed by AI agents."
+    source: "How to Build and Sell AI Agent Workforces"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+
+  # ---- INS-LO-032, INS-LO-037 (Pipeline Run 2, chunks 636-655) ----
+
+  - id: MM-LO-008
+    name: "AIOS é Metodologia, Não Modelo"
+    description: >
+      O AIOS não depende de nenhum modelo de IA específico (GPT, Claude, Gemini).
+      É uma metodologia que se envolve ao redor de qualquer modelo. Quando o
+      modelo melhora, o sistema inteiro melhora automaticamente. Quem constrói
+      em cima de um modelo específico fica preso; quem constrói a metodologia
+      é agnóstico e resiliente.
+    application: "Nunca acoplar o sistema a um provider. Construir camadas abstratas que aceitem qualquer LLM."
+    insight_ref: "INS-LO-032"
+    source: "What Is an AI Operating System"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+    reinforced_chunks: ["chunk_644"]
+
+  - id: MM-LO-009
+    name: "Dois Modelos de Agência: Dev Customizado vs AI Workforce"
+    description: >
+      Existem dois caminhos para uma agência de IA: (1) Custom Development —
+      construir soluções sob medida por projeto, alta margem mas difícil de
+      escalar; (2) AI Workforce — construir e vender forças de trabalho de IA
+      como serviço recorrente (retainer mensal). O modelo Workforce escala
+      melhor porque gera receita recorrente e permite stackear agentes por cliente.
+    application: "Escolher modelo com base no estágio. Custom Dev para começar e ganhar cases; Workforce para escalar receita recorrente."
+    insight_ref: "INS-LO-037"
+    source: "How to Build and Sell AI Agent Workforces"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    reinforced_chunks: ["chunk_650"]
+
+  # ---- New from Autonomous Run 2026-03-16, chunks 656-690 ----
+
+  - id: MM-LO-010
+    name: "Authority Flywheel"
+    description: >
+      Um ciclo auto-reforçador onde: trabalho cria resultados → resultados geram histórias →
+      histórias compartilhadas em LinkedIn/YouTube atraem clientes → novos clientes geram
+      mais resultados. Cada win documentado alimenta o flywheel. O oposto do "claim perfection"
+      — autentica construindo credibilidade progressiva com prova, não promessas.
+    application: "Documentar cada build, resultado e insight como história. Publicar consistentemente. Deixar o flywheel compor."
+    quote: "Every win and every insight is a story worth sharing. Documenting your journey creates a self-reinforcing loop."
+    insight_ref: "LO-020"
+    source: "How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/How to Build and Sell AI Agent Workforces as a Beginner FULL COURSE [youtube.com_watch_v=pTTvyQDK_tk].txt"
+    new_chunks: ["chunk_680"]
+
+  - id: MM-LO-011
+    name: "Skills = Conhecimento Ensinável e Reutilizável"
+    description: >
+      Skills são módulos de documentação de workflow que ensinam o Claude a executar
+      tarefas específicas. O insight mental key: cada skill criada transforma conhecimento
+      tácito (na cabeça do fundador) em conhecimento explícito (reutilizável pelo AI).
+      Uma skill criada uma vez é executável infinitamente — o conhecimento compõe.
+    application: "Para cada nova tarefa ensinada ao Claude, criar um SKILL.md. Nunca re-explicar a mesma coisa duas vezes."
+    quote: "Skills are like little docs that you can get Claude to create which document a workflow. These are a key piece of why this thing is chosen to take off."
+    insight_ref: "LO-012"
+    source: "What Is an AI Operating System (And Why Every Business Will Need One)"
+    raiz: "knowledge/external/inbox/liam-ottley/podcasts/What Is an AI Operating System (And Why Every Business Will Need One) [youtube.com_watch_v=DXcVT07bQ6g].txt"
+    new_chunks: ["chunk_668"]
+
+metadata:
+  total_items: 11
+  source_person: "Liam Ottley"
+  source_count: 3
+  extraction_date: "2026-03-13"
+  updated: "2026-03-16"
+  version: "1.2.0"

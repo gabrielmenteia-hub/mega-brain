@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fenômeno PAM™ — Torne-se Magnético e Impossível de Ignorar em 60 Dias</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── RESET & BASE ─────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      background-color: #0A0A0A;
+      color: #F5F5F5;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── TYPOGRAPHY ───────────────────────────────────────────────── */
+    h1, h2, h3, .headline {
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      letter-spacing: 0.03em;
+      line-height: 1.05;
+    }
+    .gold    { color: #C9A84C; }
+    .fire    { color: #E8431A; }
+    .muted   { color: #888888; }
+    .body-sm { font-size: 0.875rem; color: #888888; }
+
+    /* ─── LAYOUT ───────────────────────────────────────────────────── */
+    .container {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+    .container--wide {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 20px;
+    }
+
+    /* ─── SECTIONS ─────────────────────────────────────────────────── */
+    .section--dark   { background-color: #0A0A0A; }
+    .section--mid    { background-color: #111111; }
+    .section--accent { background-color: #0D0D0D; border-top: 1px solid #1A1A1A; border-bottom: 1px solid #1A1A1A; }
+
+    /* ─── DIVIDER ──────────────────────────────────────────────────── */
+    .divider {
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(90deg, #C9A84C, #E8431A);
+      margin: 0 auto 24px;
+      border-radius: 2px;
+    }
+    .divider--left { margin: 0 0 24px; }
+
+    /* ─── BUTTONS ──────────────────────────────────────────────────── */
+    .btn-cta {
+      display: inline-block;
+      background-color: #E8431A;
+      color: #FFFFFF;
+      font-family: 'Bebas Neue', Anton, Impact, sans-serif;
+      font-size: 1.35rem;
+      letter-spacing: 0.08em;
+      padding: 18px 48px;
+      border-radius: 4px;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 24px rgba(232, 67, 26, 0.35);
+      width: 100%;
+      text-align: center;
+    }
+    .btn-cta:hover {
+      background-color: #FF5A2C;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(232, 67, 26, 0.5);
+    }
+    .btn-cta:active { transform: translateY(0); }
+    .btn-cta--lg { font-size: 1.6rem; padding: 22px 60px; }
+    .btn-cta--sm { font-size: 1.1rem; padding: 14px 32px; }
+    .btn-sub {
+      display: block;
+      margin-top: 10px;
+      font-size: 0.75rem;
+      color: #888888;
+      text-align: center;
+    }
+
+    /* ─── BADGE ────────────────────────────────────────────────────── */
+    .badge {
+      display: inline-block;
+      background: rgba(201, 168, 76, 0.12);
+      border: 1px solid rgba(201, 168, 76, 0.35);
+      color: #C9A84C;
+      font-size: 0.7rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 5px 14px;
+      border-radius: 2px;
+      margin-bottom: 20px;
+    }
+
+    /* ─── TOP BAR ──────────────────────────────────────────────────── */
+    .topbar {
+      background: linear-gradient(90deg, #0D0D0D, #111111);
+      border-bottom: 1px solid #1E1E1E;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: #888888;
+    }
+    .topbar strong { color: #C9A84C; }
+
+    /* ─── STICKY CTA BAR ──────────────────────────────────────────── */
+    .sticky-bar {
+      position: fixed;
+      bottom: 0; left: 0; right: 0;
+      background: rgba(10,10,10,0.95);
+      border-top: 1px solid #1E1E1E;
+      padding: 12px 20px;
+      z-index: 999;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      backdrop-filter: blur(8px);
+    }
+    .sticky-bar__text { font-size: 0.82rem; color: #888888; line-height: 1.3; }
+    .sticky-bar__text strong { color: #F5F5F5; }
+    .sticky-bar__cta {
+      flex-shrink: 0;
+      background-color: #E8431A;
+      color: #fff;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      padding: 12px 28px;
+      border-radius: 4px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: background 0.2s, transform 0.15s;
+      box-shadow: 0 2px 12px rgba(232,67,26,0.4);
+    }
+    .sticky-bar__cta:hover { background-color: #FF5A2C; transform: translateY(-1px); }
+    @media (max-width: 480px) {
+      .sticky-bar { flex-direction: column; text-align: center; padding: 10px 16px; }
+      .sticky-bar__cta { width: 100%; text-align: center; }
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 1 — HERO
+    ═══════════════════════════════════════════════════════════════ */
+    #hero {
+      background: linear-gradient(180deg, #0A0A0A 0%, #0F0F0F 100%);
+      padding: 72px 0 80px;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #hero::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 700px; height: 700px;
+      background: radial-gradient(ellipse, rgba(201, 168, 76, 0.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-eyebrow {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #C9A84C;
+      margin-bottom: 24px;
+      font-weight: 500;
+    }
+    .hero-headline {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      color: #F5F5F5;
+      margin-bottom: 12px;
+    }
+    .hero-headline span { color: #C9A84C; }
+    .hero-subheadline {
+      font-size: clamp(1.4rem, 4vw, 2.4rem);
+      color: #E8431A;
+      margin-bottom: 28px;
+    }
+    .hero-description {
+      font-size: 1.05rem;
+      color: #BBBBBB;
+      max-width: 640px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .vsl-wrapper {
+      max-width: 720px;
+      margin: 0 auto 44px;
+    }
+    .vsl-player {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #111111 0%, #1A1A1A 100%);
+      border: 1px solid #2A2A2A;
+      border-radius: 6px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+    }
+    .vsl-player::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(201,168,76,0.03), transparent);
+    }
+    .vsl-play-btn {
+      width: 72px; height: 72px;
+      background: rgba(232, 67, 26, 0.9);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      margin-bottom: 16px;
+      transition: transform 0.2s, background 0.2s;
+      box-shadow: 0 0 40px rgba(232,67,26,0.4);
+    }
+    .vsl-play-btn:hover { transform: scale(1.08); background: rgba(232,67,26,1); }
+    .vsl-play-btn svg { fill: #fff; margin-left: 5px; }
+    .vsl-label {
+      font-size: 0.8rem;
+      color: #555555;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .hero-cta-wrap { max-width: 520px; margin: 0 auto; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 2 — PROBLEMA
+    ═══════════════════════════════════════════════════════════════ */
+    #problema {
+      padding: 80px 0;
+      background-color: #0F0F0F;
+      border-top: 1px solid #1A1A1A;
+    }
+    #problema h2 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    #problema .intro-text {
+      font-size: 1.05rem;
+      color: #BBBBBB;
+      max-width: 720px;
+      margin: 0 auto 48px;
+      text-align: center;
+      line-height: 1.8;
+    }
+    .pain-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 20px;
+      margin-bottom: 48px;
+    }
+    .pain-card {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+      padding: 28px 24px;
+      transition: border-color 0.2s;
+    }
+    .pain-card:hover { border-color: #2A2A2A; }
+    .pain-card__icon {
+      font-size: 1.6rem;
+      margin-bottom: 12px;
+    }
+    .pain-card__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.05em;
+      color: #F5F5F5;
+      margin-bottom: 8px;
+    }
+    .pain-card__desc {
+      font-size: 0.9rem;
+      color: #888888;
+      line-height: 1.6;
+    }
+    .mechanism-box {
+      background: linear-gradient(135deg, #111111, #0D0D0D);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 40px 36px;
+      max-width: 720px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .mechanism-box h3 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      margin-bottom: 16px;
+    }
+    .mechanism-box p {
+      font-size: 1rem;
+      color: #BBBBBB;
+      line-height: 1.75;
+      margin-bottom: 12px;
+    }
+    .pam-pillars {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+      margin-top: 24px;
+    }
+    .pam-pillar {
+      background: rgba(201,168,76,0.08);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 4px;
+      padding: 10px 20px;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.08em;
+      color: #C9A84C;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 3 — FALSAS SOLUÇÕES
+    ═══════════════════════════════════════════════════════════════ */
+    #falsas-solucoes {
+      padding: 80px 0;
+      background-color: #0A0A0A;
+    }
+    #falsas-solucoes h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    #falsas-solucoes .section-sub {
+      font-size: 1rem;
+      color: #888888;
+      text-align: center;
+      max-width: 540px;
+      margin: 0 auto 48px;
+    }
+    .false-sol-list { display: flex; flex-direction: column; gap: 16px; }
+    .false-sol-item {
+      background: #0D0D0D;
+      border: 1px solid #1E1E1E;
+      border-left: 3px solid #2A2A2A;
+      border-radius: 4px;
+      padding: 24px 28px;
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 20px;
+      align-items: start;
+      transition: border-left-color 0.2s;
+    }
+    .false-sol-item:hover { border-left-color: #E8431A; }
+    .false-sol-item__x {
+      width: 28px; height: 28px;
+      background: rgba(232,67,26,0.12);
+      border: 1px solid rgba(232,67,26,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #E8431A;
+      font-size: 0.85rem;
+      font-weight: 700;
+    }
+    .false-sol-item__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.15rem;
+      letter-spacing: 0.04em;
+      color: #F5F5F5;
+      margin-bottom: 6px;
+    }
+    .false-sol-item__desc {
+      font-size: 0.9rem;
+      color: #888888;
+      line-height: 1.6;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 4 — OFERTA
+    ═══════════════════════════════════════════════════════════════ */
+    #oferta {
+      padding: 80px 0;
+      background-color: #0F0F0F;
+      border-top: 1px solid #1A1A1A;
+    }
+    #oferta h2 {
+      font-size: clamp(2.2rem, 6vw, 3.4rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    #oferta .section-sub {
+      font-size: 1rem;
+      color: #888888;
+      text-align: center;
+      max-width: 580px;
+      margin: 0 auto 48px;
+    }
+    .mockup-placeholder {
+      max-width: 620px;
+      margin: 0 auto 48px;
+      aspect-ratio: 16/7;
+      background: linear-gradient(135deg, #111111 0%, #1A1A1A 100%);
+      border: 1px dashed #2A2A2A;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #333333;
+      font-size: 0.8rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+    .modules-list { display: flex; flex-direction: column; gap: 12px; margin-bottom: 40px; }
+    .module-item {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+      padding: 20px 24px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 16px;
+      align-items: center;
+    }
+    .module-item__num {
+      width: 36px; height: 36px;
+      background: linear-gradient(135deg, rgba(201,168,76,0.15), rgba(232,67,26,0.08));
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      color: #C9A84C;
+      flex-shrink: 0;
+    }
+    .module-item__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.04em;
+      color: #F5F5F5;
+    }
+    .module-item__days {
+      font-size: 0.72rem;
+      color: #C9A84C;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+    .offer-extras {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .offer-extra-card {
+      background: rgba(201,168,76,0.04);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 6px;
+      padding: 20px;
+      text-align: center;
+    }
+    .offer-extra-card__icon { font-size: 1.8rem; margin-bottom: 10px; }
+    .offer-extra-card__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: #C9A84C;
+      margin-bottom: 6px;
+    }
+    .offer-extra-card__desc { font-size: 0.82rem; color: #888888; }
+    .price-box {
+      background: linear-gradient(135deg, #111111, #0D0D0D);
+      border: 1px solid rgba(201,168,76,0.25);
+      border-radius: 8px;
+      padding: 40px 36px;
+      text-align: center;
+      max-width: 520px;
+      margin: 0 auto;
+    }
+    .price-from {
+      font-size: 0.82rem;
+      color: #555555;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      text-decoration: line-through;
+      margin-bottom: 4px;
+    }
+    .price-main {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(3.5rem, 10vw, 5rem);
+      color: #F5F5F5;
+      letter-spacing: 0.02em;
+      line-height: 1;
+      margin-bottom: 4px;
+    }
+    .price-main sup { font-size: 0.45em; vertical-align: super; color: #C9A84C; }
+    .price-installment {
+      font-size: 0.85rem;
+      color: #888888;
+      margin-bottom: 28px;
+    }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 5 — BENEFÍCIOS
+    ═══════════════════════════════════════════════════════════════ */
+    #beneficios {
+      padding: 80px 0;
+      background-color: #0A0A0A;
+    }
+    #beneficios h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 16px;
+    }
+    .benefit-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 16px 0;
+      border-bottom: 1px solid #161616;
+    }
+    .benefit-item:last-child { border-bottom: none; }
+    .benefit-item__check {
+      width: 22px; height: 22px;
+      background: rgba(201,168,76,0.12);
+      border: 1px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+      color: #C9A84C;
+      font-size: 0.7rem;
+    }
+    .benefit-item__text { font-size: 0.95rem; color: #BBBBBB; line-height: 1.5; }
+    .benefit-item__text strong { color: #F5F5F5; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 6 — DEPOIMENTOS
+    ═══════════════════════════════════════════════════════════════ */
+    #depoimentos {
+      padding: 80px 0;
+      background-color: #0F0F0F;
+      border-top: 1px solid #1A1A1A;
+    }
+    #depoimentos h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .depo-sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888888;
+      margin-bottom: 48px;
+    }
+    .depo-sub strong { color: #C9A84C; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+    }
+    .depo-card {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .depo-card__video {
+      width: 100%;
+      aspect-ratio: 16/9;
+      background: linear-gradient(135deg, #161616 0%, #1C1C1C 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+    }
+    .depo-card__play {
+      width: 48px; height: 48px;
+      background: rgba(232,67,26,0.85);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 24px rgba(232,67,26,0.35);
+    }
+    .depo-card__play svg { fill: #fff; margin-left: 4px; }
+    .depo-card__body { padding: 20px; }
+    .depo-card__quote {
+      font-size: 0.88rem;
+      color: #BBBBBB;
+      line-height: 1.6;
+      margin-bottom: 12px;
+      font-style: italic;
+    }
+    .depo-card__quote::before { content: '"'; color: #C9A84C; font-style: normal; margin-right: 2px; }
+    .depo-card__quote::after  { content: '"'; color: #C9A84C; font-style: normal; margin-left: 2px; }
+    .depo-card__name { font-weight: 600; font-size: 0.82rem; color: #F5F5F5; }
+    .depo-card__result { font-size: 0.75rem; color: #C9A84C; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 7 — BÔNUS
+    ═══════════════════════════════════════════════════════════════ */
+    #bonus {
+      padding: 80px 0;
+      background-color: #0A0A0A;
+    }
+    #bonus h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    #bonus .section-sub {
+      text-align: center;
+      font-size: 0.9rem;
+      color: #888888;
+      margin-bottom: 48px;
+    }
+    .bonus-list { display: flex; flex-direction: column; gap: 20px; }
+    .bonus-item {
+      background: linear-gradient(135deg, #111111, #0D0D0D);
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 8px;
+      padding: 28px 32px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 24px;
+      align-items: center;
+    }
+    @media (max-width: 600px) { .bonus-item { grid-template-columns: 1fr; gap: 12px; } }
+    .bonus-item__num {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2.4rem;
+      color: rgba(201,168,76,0.25);
+      line-height: 1;
+      min-width: 40px;
+    }
+    .bonus-item__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.3rem;
+      letter-spacing: 0.04em;
+      color: #C9A84C;
+      margin-bottom: 6px;
+    }
+    .bonus-item__desc { font-size: 0.9rem; color: #888888; line-height: 1.6; }
+    .bonus-item__value {
+      text-align: right;
+      flex-shrink: 0;
+    }
+    .bonus-item__value-label { font-size: 0.65rem; color: #555555; text-transform: uppercase; letter-spacing: 0.1em; }
+    .bonus-item__value-amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      color: #C9A84C;
+      line-height: 1;
+    }
+    .bonus-total {
+      background: rgba(201,168,76,0.06);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 6px;
+      padding: 20px 28px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-top: 24px;
+      flex-wrap: wrap;
+      gap: 12px;
+    }
+    .bonus-total__label { font-size: 0.85rem; color: #888888; }
+    .bonus-total__amount {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 2rem;
+      color: #C9A84C;
+    }
+    .bonus-total__you-pay { font-size: 0.8rem; color: #E8431A; font-weight: 600; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 8 — OBJEÇÕES
+    ═══════════════════════════════════════════════════════════════ */
+    #objecoes {
+      padding: 80px 0;
+      background-color: #0F0F0F;
+      border-top: 1px solid #1A1A1A;
+    }
+    #objecoes h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .obj-list { display: flex; flex-direction: column; gap: 16px; max-width: 760px; margin: 0 auto; }
+    .obj-item {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+    .obj-item__q {
+      padding: 20px 24px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      cursor: pointer;
+    }
+    .obj-item__icon {
+      width: 24px; height: 24px;
+      background: rgba(232,67,26,0.1);
+      border: 1px solid rgba(232,67,26,0.25);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      font-size: 0.75rem;
+      color: #E8431A;
+      font-weight: 700;
+      margin-top: 2px;
+    }
+    .obj-item__q-text {
+      font-size: 0.95rem;
+      color: #BBBBBB;
+      line-height: 1.5;
+      font-style: italic;
+    }
+    .obj-item__a {
+      padding: 0 24px 20px 62px;
+      font-size: 0.93rem;
+      color: #888888;
+      line-height: 1.7;
+    }
+    .obj-item__a strong { color: #C9A84C; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 9 — GARANTIA
+    ═══════════════════════════════════════════════════════════════ */
+    #garantia {
+      padding: 80px 0;
+      background-color: #0A0A0A;
+    }
+    .garantia-box {
+      max-width: 760px;
+      margin: 0 auto;
+      background: linear-gradient(135deg, #111111, #0D0D0D);
+      border: 1px solid rgba(201,168,76,0.2);
+      border-radius: 8px;
+      padding: 48px 40px;
+      text-align: center;
+    }
+    .garantia-seal {
+      width: 100px; height: 100px;
+      background: rgba(201,168,76,0.08);
+      border: 2px solid rgba(201,168,76,0.3);
+      border-radius: 50%;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      margin: 0 auto 28px;
+      font-family: 'Bebas Neue', sans-serif;
+      letter-spacing: 0.05em;
+      line-height: 1.1;
+    }
+    .garantia-seal__top { font-size: 0.65rem; color: #888888; letter-spacing: 0.12em; }
+    .garantia-seal__days { font-size: 2.4rem; color: #C9A84C; }
+    .garantia-seal__bottom { font-size: 0.65rem; color: #888888; letter-spacing: 0.08em; }
+    .garantia-box h2 {
+      font-size: clamp(2rem, 5vw, 3rem);
+      margin-bottom: 12px;
+    }
+    .garantia-box .intro { font-size: 1rem; color: #BBBBBB; margin-bottom: 32px; line-height: 1.7; }
+    .garantia-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      text-align: left;
+    }
+    .garantia-item {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+      padding: 18px;
+    }
+    .garantia-item__icon { font-size: 1.4rem; margin-bottom: 8px; }
+    .garantia-item__title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.05em;
+      color: #C9A84C;
+      margin-bottom: 6px;
+    }
+    .garantia-item__desc { font-size: 0.82rem; color: #888888; line-height: 1.5; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 10 — FAQ
+    ═══════════════════════════════════════════════════════════════ */
+    #faq {
+      padding: 80px 0;
+      background-color: #0F0F0F;
+      border-top: 1px solid #1A1A1A;
+    }
+    #faq h2 {
+      font-size: clamp(2rem, 5.5vw, 3.2rem);
+      text-align: center;
+      margin-bottom: 48px;
+    }
+    .faq-list { display: flex; flex-direction: column; gap: 12px; max-width: 760px; margin: 0 auto; }
+    .faq-item {
+      background: #111111;
+      border: 1px solid #1E1E1E;
+      border-radius: 6px;
+    }
+    .faq-item__q {
+      padding: 20px 24px;
+      font-weight: 600;
+      font-size: 0.93rem;
+      color: #F5F5F5;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      user-select: none;
+    }
+    .faq-item__q::after {
+      content: '+';
+      color: #C9A84C;
+      font-size: 1.2rem;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .faq-item.open .faq-item__q::after { content: '−'; }
+    .faq-item__a {
+      display: none;
+      padding: 0 24px 20px;
+      font-size: 0.9rem;
+      color: #888888;
+      line-height: 1.7;
+      border-top: 1px solid #1A1A1A;
+    }
+    .faq-item.open .faq-item__a { display: block; }
+
+    /* ═══════════════════════════════════════════════════════════════
+       SECTION 11 — CTA FINAL
+    ═══════════════════════════════════════════════════════════════ */
+    #cta-final {
+      padding: 100px 0;
+      background: linear-gradient(180deg, #0A0A0A 0%, #0D0D0D 100%);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    #cta-final::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 800px; height: 400px;
+      background: radial-gradient(ellipse, rgba(232,67,26,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    #cta-final h2 {
+      font-size: clamp(2.4rem, 7vw, 4.2rem);
+      margin-bottom: 16px;
+    }
+    #cta-final p {
+      font-size: 1.05rem;
+      color: #BBBBBB;
+      max-width: 580px;
+      margin: 0 auto 40px;
+      line-height: 1.75;
+    }
+    .cta-final-wrap { max-width: 520px; margin: 0 auto; }
+    .cta-urgency {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 16px;
+      font-size: 0.8rem;
+      color: #555555;
+    }
+    .cta-urgency__dot {
+      width: 6px; height: 6px;
+      background: #E8431A;
+      border-radius: 50%;
+      animation: pulse-dot 1.8s ease-in-out infinite;
+    }
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50%       { opacity: 0.4; transform: scale(0.6); }
+    }
+
+    /* ─── FOOTER ───────────────────────────────────────────────────── */
+    footer {
+      padding: 32px 20px;
+      text-align: center;
+      border-top: 1px solid #1A1A1A;
+      font-size: 0.75rem;
+      color: #444444;
+    }
+    footer a { color: #555555; text-decoration: none; }
+    footer a:hover { color: #888888; }
+
+    /* ─── RESPONSIVE ───────────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .module-item { grid-template-columns: auto 1fr; }
+      .module-item__days { display: none; }
+      .bonus-item { grid-template-columns: 1fr; }
+      .bonus-item__value { text-align: left; }
+      .garantia-box { padding: 36px 24px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ── TOP BAR ──────────────────────────────────────────────────────── -->
+<div class="topbar">
+  <strong>⚡ OFERTA POR TEMPO LIMITADO</strong> — Vagas se esgotando. Garanta seu acesso agora com todos os bônus inclusos.
+</div>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 1 — HERO
+═══════════════════════════════════════════════════════════════════ -->
+<section id="hero">
+  <div class="container">
+    <p class="hero-eyebrow">Descoberto em 4.100 homens que já eram magnéticos — sem saber</p>
+    <h1 class="hero-headline">
+      O <span>Fenômeno PAM™</span> Mapeia<br>
+      os 3 Bastidores Invisíveis<br>
+      que Separam Homens Ignorados<br>
+      de Homens Impossíveis de Ignorar
+    </h1>
+    <p class="hero-subheadline">Você não precisa ser consertado. Precisa ser desbloqueado.</p>
+    <p class="hero-description">
+      Frases prontas ensinam o que fazer. O PAM™ revela o que você já carrega — e que nunca foi ativado. Em 60 dias, você não vai parecer diferente. Você vai <em>ser</em> diferente. E as pessoas ao redor vão perceber antes de você.
+    </p>
+
+    <!-- VSL Placeholder -->
+    <div class="vsl-wrapper">
+      <div class="vsl-player">
+        <div class="vsl-play-btn">
+          <svg width="24" height="24" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+        </div>
+        <span class="vsl-label">Assista ao vídeo antes de continuar</span>
+      </div>
+    </div>
+
+    <!-- CTA -->
+    <div class="hero-cta-wrap">
+      <a href="#oferta" class="btn-cta btn-cta--lg">
+        COMECE SUA TRANSFORMAÇÃO AGORA E SAIA DO ANONIMATO SOCIAL
+      </a>
+      <span class="btn-sub">🔒 Pagamento 100% seguro · PIX, Boleto ou Cartão · Acesso imediato</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 2 — PROBLEMA
+═══════════════════════════════════════════════════════════════════ -->
+<section id="problema" class="section--dark">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Eram <span class="fire">23h17 de uma sexta.</span></h2>
+    <p class="intro-text">
+      Lucas estava encostado na parede do bar — copo na mão, roupa nova, cabelo feito. Tinha se preparado. <em>Dessa vez seria diferente.</em> A dois metros dele, um cara mais baixo, tênis comum, camisa básica, falava com três mulheres ao mesmo tempo. Elas riam. Tocavam no braço dele. Pediam opinião. Lucas assistiu por quatorze minutos antes de ir embora. No táxi, o pensamento de sempre: <strong>"O que esse cara tem que eu não tenho?"</strong>
+    </p>
+    <p class="intro-text" style="margin-top:-24px;">
+      Se você leu isso e reconheceu a cena — não pela festa, mas pela pergunta — você está no lugar certo. Porque a resposta não é o que você pensa. E nunca foi.
+    </p>
+
+    <div class="pain-grid">
+      <div class="pain-card">
+        <div class="pain-card__icon">👻</div>
+        <div class="pain-card__title">Invisibilidade Social</div>
+        <div class="pain-card__desc">Você entra em qualquer ambiente e ninguém te nota. Os olhares passam direto, as conversas ficam no superficial.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card__icon">🔄</div>
+        <div class="pain-card__title">Ciclo de Rejeição</div>
+        <div class="pain-card__desc">Tentou de tudo: apps, técnicas de sedução, cursos caros. O resultado é sempre o mesmo — mais frustração, mais dúvidas.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card__icon">🎭</div>
+        <div class="pain-card__title">Medo de Parecer Forçado</div>
+        <div class="pain-card__desc">Você sente que tentar ser magnético vai te fazer parecer artificial — e isso paralisa qualquer movimento.</div>
+      </div>
+      <div class="pain-card">
+        <div class="pain-card__icon">🧠</div>
+        <div class="pain-card__title">Autossabotagem Constante</div>
+        <div class="pain-card__desc">Procrastinação, bloqueios e autocrítica. Você tenta impressionar pelo intelecto ou status — e ainda assim não funciona.</div>
+      </div>
+    </div>
+
+    <!-- Mecanismo PAM -->
+    <div class="mechanism-box">
+      <div class="divider"></div>
+      <h3>E se existisse um método que atua <span class="gold">nos bastidores</span> do seu magnetismo?</h3>
+      <p>
+        O <strong>Fenômeno Presença Multidimensional™ (PAM)</strong> é o único protocolo que trabalha simultaneamente nos três pilares do magnetismo real — ao invés de focar apenas em comportamentos superficiais que qualquer mulher detecta em segundos.
+      </p>
+      <p class="muted" style="font-size:0.88rem;">Não é mais um curso de frases prontas. É reprogramação de base.</p>
+      <div class="pam-pillars">
+        <div class="pam-pillar">🔱 Identidade Interna</div>
+        <div class="pam-pillar">👁 Domínio Não-Verbal</div>
+        <div class="pam-pillar">🌐 Rotina Social</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 2.5 — FOUNDER STORY
+═══════════════════════════════════════════════════════════════════ -->
+<section id="origem" style="padding:80px 0;background-color:#0A0A0A;">
+  <div class="container">
+    <div class="divider"></div>
+    <p style="font-size:0.72rem;letter-spacing:0.2em;text-transform:uppercase;color:#C9A84C;text-align:center;margin-bottom:20px;font-weight:500;">A Origem do Fenômeno PAM™</p>
+    <h2 style="font-size:clamp(2rem,5.5vw,3.2rem);text-align:center;margin-bottom:48px;">O magnetismo <span class="gold">sempre existiu.</span><br>Só nunca havia sido <span class="fire">mapeado.</span></h2>
+
+    <div style="max-width:720px;margin:0 auto;">
+      <div style="background:linear-gradient(135deg,#111111,#0D0D0D);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:40px 36px;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:0;right:0;width:200px;height:200px;background:radial-gradient(ellipse,rgba(201,168,76,0.04),transparent);pointer-events:none;"></div>
+
+        <p style="font-size:1.05rem;color:#BBBBBB;line-height:1.85;margin-bottom:20px;">
+          Durante anos, estudamos homens que as pessoas descrevem como <strong style="color:#F5F5F5;">"naturalmente carismáticos"</strong>. Pedimos para eles explicarem o que faziam. Eles não sabiam. Usavam palavras como "é natural", "acontece", "não penso nisso".
+        </p>
+        <p style="font-size:1.05rem;color:#BBBBBB;line-height:1.85;margin-bottom:20px;">
+          Então mudamos a abordagem. Em vez de perguntar, observamos. Filmamos. Analisamos cada micro-comportamento — postura, ritmo de voz, direção do olhar, tempo de pausa antes de responder, o que faziam com as mãos quando ouviam alguém.
+        </p>
+        <p style="font-size:1.05rem;color:#BBBBBB;line-height:1.85;margin-bottom:20px;">
+          O padrão apareceu depois de <strong style="color:#F5F5F5;">dezenas de análises</strong>. Não era beleza. Não era dinheiro. Não era nem o que eles diziam. Era a <strong style="color:#C9A84C;">combinação de três camadas operando simultaneamente</strong> — identidade interna, linguagem corporal e presença social — de forma inconsciente e sincronizada.
+        </p>
+        <p style="font-size:1.05rem;color:#BBBBBB;line-height:1.85;margin-bottom:32px;">
+          O Fenômeno PAM™ não foi inventado. Foi <strong style="color:#F5F5F5;">descoberto</strong>. E depois tornado ensinável pela primeira vez. O que homens magnéticos fazem no piloto automático, você vai aprender a fazer de forma consciente — até que vire piloto automático também.
+        </p>
+
+        <div style="border-top:1px solid #1E1E1E;padding-top:24px;display:flex;gap:32px;flex-wrap:wrap;justify-content:center;">
+          <div style="text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#C9A84C;line-height:1;">4.100+</div>
+            <div style="font-size:0.75rem;color:#888888;letter-spacing:0.08em;text-transform:uppercase;">homens mapeados</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#C9A84C;line-height:1;">3</div>
+            <div style="font-size:0.75rem;color:#888888;letter-spacing:0.08em;text-transform:uppercase;">camadas do magnetismo</div>
+          </div>
+          <div style="text-align:center;">
+            <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#C9A84C;line-height:1;">7 dias</div>
+            <div style="font-size:0.75rem;color:#888888;letter-spacing:0.08em;text-transform:uppercase;">para primeira mudança visível</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 3 — FALSAS SOLUÇÕES
+═══════════════════════════════════════════════════════════════════ -->
+<section id="falsas-solucoes">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Por que <span class="fire">outras soluções falham</span></h2>
+    <p class="section-sub">Você não é o problema. O método que você usou até hoje é que era errado.</p>
+
+    <div class="false-sol-list">
+      <div class="false-sol-item">
+        <div class="false-sol-item__x">✕</div>
+        <div>
+          <div class="false-sol-item__title">Frases Prontas de Sedução</div>
+          <div class="false-sol-item__desc">Sempre acabam parecendo forçadas, instantaneamente desmascaradas por mulheres — e mantêm você preso ao ciclo de rejeição do qual você quer sair.</div>
+        </div>
+      </div>
+      <div class="false-sol-item">
+        <div class="false-sol-item__x">✕</div>
+        <div>
+          <div class="false-sol-item__title">Treinos Pick Up Artist Superficiais</div>
+          <div class="false-sol-item__desc">Apenas te deixam ainda mais cético e frustrado, reforçando sua sensação de ser alguém improvisando um papel que nunca encaixa de verdade.</div>
+        </div>
+      </div>
+      <div class="false-sol-item">
+        <div class="false-sol-item__x">✕</div>
+        <div>
+          <div class="false-sol-item__title">Consultorias de Imagem Caras</div>
+          <div class="false-sol-item__desc">Mudam só o exterior, ignorando totalmente sua essência e rotina — diferente do Fenômeno PAM™, que transforma sua base, não só a embalagem.</div>
+        </div>
+      </div>
+      <div class="false-sol-item">
+        <div class="false-sol-item__x">✕</div>
+        <div>
+          <div class="false-sol-item__title">Conteúdo Aleatório de Autodesenvolvimento (DIY)</div>
+          <div class="false-sol-item__desc">Você até entende, tenta aplicar de tudo, mas nunca vê resultados concretos — só perda de tempo e mais dúvidas. Informação sem estrutura é paralisia.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 4 — OFERTA
+═══════════════════════════════════════════════════════════════════ -->
+<section id="oferta">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>O que você vai <span class="gold">receber hoje</span></h2>
+    <p class="section-sub">Acesso imediato a tudo que você precisa para sair do anonimato e se tornar uma presença que não pode ser ignorada.</p>
+
+    <!-- Mockup -->
+    <div class="mockup-placeholder">[ INSERIR MOCKUP DO PRODUTO ]</div>
+
+    <!-- Módulos -->
+    <h3 style="font-family:'Bebas Neue',sans-serif;font-size:1.4rem;letter-spacing:0.06em;text-align:center;margin-bottom:20px;color:#888888;">PROTOCOLO PRESENÇA IRRESISTÍVEL™ — 5 MÓDULOS</h3>
+    <div class="modules-list">
+      <div class="module-item">
+        <div class="module-item__num">1</div>
+        <div>
+          <div class="module-item__title">Reset da Identidade Magnética</div>
+          <div style="font-size:0.82rem;color:#888888;">A base de tudo — reprogramação de como você se vê e como o mundo te enxerga</div>
+        </div>
+        <div class="module-item__days">7 dias</div>
+      </div>
+      <div class="module-item">
+        <div class="module-item__num">2</div>
+        <div>
+          <div class="module-item__title">Postura, Voz e Linguagem Não-Verbal</div>
+          <div style="font-size:0.82rem;color:#888888;">Os sinais invisíveis que comunicam poder e atração antes de você dizer uma palavra</div>
+        </div>
+        <div class="module-item__days">15 dias</div>
+      </div>
+      <div class="module-item">
+        <div class="module-item__num">3</div>
+        <div>
+          <div class="module-item__title">Socialização Avançada e Impacto na Vida Real</div>
+          <div style="font-size:0.82rem;color:#888888;">Como criar impacto imediato em qualquer ambiente — festas, trabalho, vida cotidiana</div>
+        </div>
+        <div class="module-item__days">21 dias</div>
+      </div>
+      <div class="module-item">
+        <div class="module-item__num">4</div>
+        <div>
+          <div class="module-item__title">Rotina Mental e Quebra de Autossabotagem</div>
+          <div style="font-size:0.82rem;color:#888888;">Elimine os bloqueios internos que sabotam seu magnetismo mesmo quando você "faz tudo certo"</div>
+        </div>
+        <div class="module-item__days">contínuo</div>
+      </div>
+      <div class="module-item">
+        <div class="module-item__num">5</div>
+        <div>
+          <div class="module-item__title">Fórmula da Expansão Autêntica do Círculo Social</div>
+          <div style="font-size:0.82rem;color:#888888;">Construa uma rede social de alto valor sem forçar — de forma natural e sustentável</div>
+        </div>
+        <div class="module-item__days">+60 dias</div>
+      </div>
+    </div>
+
+    <!-- Extras inclusos -->
+    <div style="margin-top:32px;margin-bottom:48px;">
+      <div class="offer-extras">
+        <div class="offer-extra-card">
+          <div class="offer-extra-card__icon">🔒</div>
+          <div class="offer-extra-card__title">Comunidade Secreta</div>
+          <div class="offer-extra-card__desc">Acesso por 90 dias à comunidade com suporte direto e acompanhamento real</div>
+        </div>
+        <div class="offer-extra-card">
+          <div class="offer-extra-card__icon">🎯</div>
+          <div class="offer-extra-card__title">Mentoria 1-1 Gratuita</div>
+          <div class="offer-extra-card__desc">Suporte individual caso você sinta que está forçando um personagem</div>
+        </div>
+        <div class="offer-extra-card">
+          <div class="offer-extra-card__icon">⚡</div>
+          <div class="offer-extra-card__title">Acesso Imediato</div>
+          <div class="offer-extra-card__desc">Login e senha por e-mail assim que o pagamento for confirmado</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Preço -->
+    <div class="price-box">
+      <p class="price-from" style="text-decoration:none;font-size:0.78rem;color:#555;margin-bottom:2px;">App de relacionamento: R$89/mês = R$1.068/ano para colher rejeição</p>
+      <p class="price-from">Fenômeno PAM™: uma vez. Para sempre.</p>
+      <div class="price-main"><sup>R$</sup>197</div>
+      <p class="price-installment">ou em até 12x no cartão · PIX com desconto · Boleto à vista</p>
+      <a href="#" class="btn-cta btn-cta--lg">
+        QUERO MEU ACESSO AGORA — R$197
+      </a>
+      <span class="btn-sub">🔒 Ambiente seguro · Garantia tripla de 60 dias · Sem risco</span>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 5 — BENEFÍCIOS
+═══════════════════════════════════════════════════════════════════ -->
+<section id="beneficios">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Como vai ser a sua vida<br><span class="gold">60 dias depois</span></h2>
+    <p style="text-align:center;color:#888888;font-size:0.9rem;max-width:540px;margin:0 auto 48px;">Não o que você vai aprender. O que você vai <em>viver</em>.</p>
+    <div class="benefits-grid">
+      <div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Você entra num ambiente e, sem dizer uma palavra, <strong>sente que pertence</strong> — porque o seu corpo já comunica isso antes de você abrir a boca</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Mulheres que você achava fora do seu alcance começam a <strong>puxar conversa com você primeiro</strong> — sem você ter feito nada "especial"</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Você para de monitorar como está parecendo e começa a <strong>simplesmente estar presente</strong> — e essa diferença é visível para todos ao redor</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Amigos, colegas e pessoas novas começam a <strong>pedir sua opinião, te incluir, te lembrar</strong> — sem que você tenha se esforçado para isso</div>
+        </div>
+      </div>
+      <div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Você acorda na segunda-feira sabendo que <strong>qualquer ambiente é seu território</strong> — não por arrogância, mas por segurança que veio de dentro</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Você para de usar apps de relacionamento como muleta e começa a <strong>criar conexões reais no mundo real</strong> — onde a concorrência é zero</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Sua ex, um conhecido, alguém que te conhece há anos <strong>pergunta o que você mudou</strong> — sem conseguir colocar o dedo exatamente no quê</div>
+        </div>
+        <div class="benefit-item">
+          <div class="benefit-item__check">✓</div>
+          <div class="benefit-item__text">Pela primeira vez, você <strong>escolhe</strong> — não é escolhido ou descartado. Você tem opções. E isso muda tudo na forma como você se move pelo mundo</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 6 — DEPOIMENTOS
+═══════════════════════════════════════════════════════════════════ -->
+<section id="depoimentos">
+  <div class="container--wide">
+    <div class="divider"></div>
+    <h2>O que nossos <span class="gold">clientes dizem</span></h2>
+    <p class="depo-sub">Mais de <strong>4.100 homens transformados</strong> pelo Fenômeno PAM™</p>
+
+    <div class="testimonials-grid">
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">Na semana 2, minha ex me mandou mensagem perguntando o que eu tinha feito diferente. Eu não tinha feito nada "diferente". O PAM™ tinha.</p>
+          <div class="depo-card__name">Rafael M., 31 anos · São Paulo</div>
+          <div class="depo-card__result">Semana 2 — mudança percebida por terceiros</div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">Fui à mesma festa, com as mesmas pessoas, com a mesma roupa que uso sempre. Em 3 semanas, duas mulheres me abordaram. Antes isso não acontecia em 6 meses.</p>
+          <div class="depo-card__name">Marcos T., 34 anos · Belo Horizonte</div>
+          <div class="depo-card__result">Semana 3 — mesmo ambiente, resultado diferente</div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">Estava no app há 2 anos. Cancelei no dia 18 do protocolo. Não precisei mais. As conexões que fiz em 60 dias valem mais do que tudo que o app me deu em 2 anos.</p>
+          <div class="depo-card__name">Diego F., 29 anos · Curitiba</div>
+          <div class="depo-card__result">Dia 18 — cancelou o app. Não precisou mais.</div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">Meu chefe me chamou pra conversa na semana 4 e perguntou se eu queria liderar o time novo. Vim pelo magnetismo com mulheres. O impacto foi em tudo.</p>
+          <div class="depo-card__name">André L., 37 anos · Rio de Janeiro</div>
+          <div class="depo-card__result">Semana 4 — promoção inesperada no trabalho</div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">No dia 7 percebi que parei de checar o telefone em conversas. No dia 14, percebi que as pessoas começavam a me perguntar coisas. No dia 30, entendi o que estava acontecendo.</p>
+          <div class="depo-card__name">Bruno K., 28 anos · Florianópolis</div>
+          <div class="depo-card__result">Progressão dia a dia documentada</div>
+        </div>
+      </div>
+      <div class="depo-card">
+        <div class="depo-card__video">
+          <div class="depo-card__play">
+            <svg width="18" height="18" viewBox="0 0 24 24"><polygon points="5,3 19,12 5,21"/></svg>
+          </div>
+        </div>
+        <div class="depo-card__body">
+          <p class="depo-card__quote">Tentei 4 cursos antes. Todos me ensinavam o que falar. O PAM™ foi o único que me ensinou como existir. Parece filosófico, mas é literal. É diferente.</p>
+          <div class="depo-card__name">Thiago R., 33 anos · Campinas</div>
+          <div class="depo-card__result">4 tentativas anteriores — só o PAM™ funcionou</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 7 — BÔNUS
+═══════════════════════════════════════════════════════════════════ -->
+<section id="bonus">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Bônus <span class="gold">exclusivos</span> inclusos</h2>
+    <p class="section-sub">Tudo isso entra junto, sem custo adicional, para garantir sua transformação completa.</p>
+
+    <div class="bonus-list">
+      <div class="bonus-item">
+        <div class="bonus-item__num">#1</div>
+        <div>
+          <div class="bonus-item__title">Guia Prático de Resgate Pós-Rejeição</div>
+          <div class="bonus-item__desc">Te ajuda a rapidamente resgatar a autoconfiança depois de qualquer rejeição, impedindo que você recaia nos antigos padrões de autossabotagem que paralisam a evolução.</div>
+        </div>
+        <div class="bonus-item__value">
+          <div class="bonus-item__value-label">valor</div>
+          <div class="bonus-item__value-amount">R$247</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-item__num">#2</div>
+        <div>
+          <div class="bonus-item__title">Manual de Conversas de Conexão</div>
+          <div class="bonus-item__desc">Saia do papo superficial e comece a criar desejo espontâneo — facilitando conexões reais em encontros e no dia a dia, sem roteiros decorados.</div>
+        </div>
+        <div class="bonus-item__value">
+          <div class="bonus-item__value-label">valor</div>
+          <div class="bonus-item__value-amount">R$197</div>
+        </div>
+      </div>
+      <div class="bonus-item">
+        <div class="bonus-item__num">#3</div>
+        <div>
+          <div class="bonus-item__title">Comunidade Secreta com Mentoria (90 dias)</div>
+          <div class="bonus-item__desc">Cerque-se de homens na mesma jornada e receba acompanhamento personalizado para destravar qualquer bloqueio — reforçando o tripé do Fenômeno PAM™.</div>
+        </div>
+        <div class="bonus-item__value">
+          <div class="bonus-item__value-label">valor</div>
+          <div class="bonus-item__value-amount">R$397</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="bonus-total">
+      <div>
+        <div class="bonus-total__label">Valor total dos bônus</div>
+        <div class="bonus-total__amount">R$841</div>
+      </div>
+      <div style="text-align:right;">
+        <div class="bonus-total__label">Você paga apenas</div>
+        <div style="font-family:'Bebas Neue',sans-serif;font-size:2.4rem;color:#E8431A;">R$197</div>
+        <div class="bonus-total__you-pay">Todos os bônus inclusos, sem custo extra</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 8 — OBJEÇÕES
+═══════════════════════════════════════════════════════════════════ -->
+<section id="objecoes">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Suas dúvidas, <span class="fire">respondidas</span></h2>
+
+    <div class="obj-list">
+      <div class="obj-item">
+        <div class="obj-item__q">
+          <div class="obj-item__icon">?</div>
+          <div class="obj-item__q-text">"Mas custa caro, já gastei muito com outras tentativas…"</div>
+        </div>
+        <div class="obj-item__a">
+          O investimento é apenas <strong>R$197</strong> — com garantia tripla, bônus no valor de R$841 e suporte individual, esse valor é muito inferior ao que você provavelmente já desperdiçou em apps, consultorias e cursos que não entregaram. E aqui você tem entrega comprovada com + de 4.100 casos reais.
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-item__q">
+          <div class="obj-item__icon">?</div>
+          <div class="obj-item__q-text">"Não tenho tempo para mais um programa longo e chato."</div>
+        </div>
+        <div class="obj-item__a">
+          O Fenômeno PAM™ é objetivo e foi desenhado para se integrar à sua rotina existente. Você vê <strong>evolução visível em até 7 dias</strong>, resultados reais em 60 dias ou menos — sem consumir horas do seu dia.
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-item__q">
+          <div class="obj-item__icon">?</div>
+          <div class="obj-item__q-text">"Será que funciona pra mim? Já tentei de tudo e nada adiantou."</div>
+        </div>
+        <div class="obj-item__a">
+          São mais de <strong>4.100 homens transformados</strong>. E garantido: ou sua evolução acontece, ou todo o investimento volta para você, sem perguntas. O problema não era você — era o método que você usava.
+        </div>
+      </div>
+      <div class="obj-item">
+        <div class="obj-item__q">
+          <div class="obj-item__icon">?</div>
+          <div class="obj-item__q-text">"Tenho medo de parecer artificial ou piorar minha insegurança."</div>
+        </div>
+        <div class="obj-item__a">
+          A sequência foi estruturada para <strong>proteger sua autenticidade</strong>. Na dúvida, você recebe mentoria 1-1 gratuita até destravar. Mudança real, sem forçar personagem — esse é o núcleo do PAM™.
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 9 — GARANTIA
+═══════════════════════════════════════════════════════════════════ -->
+<section id="garantia">
+  <div class="container">
+    <div class="garantia-box">
+      <div class="garantia-seal">
+        <div class="garantia-seal__top">GARANTIA</div>
+        <div class="garantia-seal__days">60</div>
+        <div class="garantia-seal__bottom">DIAS</div>
+      </div>
+      <div class="divider"></div>
+      <h2>Arrisque <span class="gold">zero.</span><br>Conquiste <span class="fire">máximo.</span></h2>
+      <p class="intro">
+        Você está seguro para sair definitivamente do medo de não ser suficiente. O Fenômeno PAM™ faz o risco desaparecer completamente — você investe, e a transformação acontece ou seu dinheiro volta.
+      </p>
+      <div class="garantia-grid">
+        <div class="garantia-item">
+          <div class="garantia-item__icon">⚡</div>
+          <div class="garantia-item__title">Satisfação em 7 Dias</div>
+          <div class="garantia-item__desc">Sinta evolução na autoconfiança nos 7 primeiros dias ou devolução de 100% do investimento — sem perguntas.</div>
+        </div>
+        <div class="garantia-item">
+          <div class="garantia-item__icon">🎯</div>
+          <div class="garantia-item__title">Transformação em 60 Dias</div>
+          <div class="garantia-item__desc">Não conseguiu resultados claros em 60 dias? Todo o seu investimento devolvido. Sem burocracia.</div>
+        </div>
+        <div class="garantia-item">
+          <div class="garantia-item__icon">🛡</div>
+          <div class="garantia-item__title">Autenticidade Protegida</div>
+          <div class="garantia-item__desc">Se em alguma etapa parecer forçado, você recebe mentoria 1-1 gratuita até chegar onde deseja.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 10 — FAQ
+═══════════════════════════════════════════════════════════════════ -->
+<section id="faq">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>Perguntas <span class="gold">frequentes</span></h2>
+
+    <div class="faq-list">
+      <div class="faq-item open">
+        <div class="faq-item__q">Como recebo acesso ao Protocolo Presença Irresistível™?</div>
+        <div class="faq-item__a">Você recebe login e senha por e-mail imediatamente após a confirmação do pagamento. O acesso é no ambiente online exclusivo, disponível 24h por dia em qualquer dispositivo.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Qual é a garantia exatamente?</div>
+        <div class="faq-item__a">Garantia tripla: satisfação real em 7 dias (100% do valor de volta), transformação visível em até 60 dias (100% do valor de volta), e acompanhamento 1-1 gratuito caso haja sensação de forçar personagem em qualquer etapa.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Este programa serve para meu perfil?</div>
+        <div class="faq-item__a">É perfeito para homens entre 27 e 38 anos que sentem invisibilidade social, insegurança, e querem conquistar mulheres de alto valor e expandir seu círculo social — com métodos práticos e reais, sem perder autenticidade.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Terei suporte durante o processo?</div>
+        <div class="faq-item__a">Sim. Você terá acesso à Comunidade Secreta + mentoria e suporte direto da equipe durante 90 dias. Nenhuma dúvida fica sem resposta.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Em quanto tempo vejo os resultados?</div>
+        <div class="faq-item__a">Mudanças claras já surgem nos primeiros 7 dias. A transformação social plena acontece em até 60 dias seguindo o protocolo PAM™ — e isso está coberto pela garantia.</div>
+      </div>
+      <div class="faq-item">
+        <div class="faq-item__q">Como faço o pagamento?</div>
+        <div class="faq-item__a">O investimento é de apenas R$197. Você pode pagar via PIX (com desconto), cartão de crédito em até 12x ou boleto bancário. Tudo em ambiente seguro e criptografado.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════════════════════════════════════════════════════════
+     SEÇÃO 11 — CTA FINAL
+═══════════════════════════════════════════════════════════════════ -->
+<section id="cta-final">
+  <div class="container">
+    <div class="divider"></div>
+    <h2>
+      Você já tem o que precisa.<br>
+      O PAM™ remove o que está<br>
+      <span class="gold">bloqueando</span> o que já existe em você.
+    </h2>
+    <p>
+      Mais de 4.100 homens descobriram isso. Nenhum deles era diferente de você — só chegaram antes. O que muda a partir de hoje é que você tem o mapa que eles usaram. A janela em que isso ainda é vantagem competitiva está aberta. Por quanto tempo, não sabemos.
+    </p>
+    <div class="cta-final-wrap">
+      <a href="#" class="btn-cta btn-cta--lg">
+        GARANTA SUA VAGA — VAGAS LIMITADAS!
+      </a>
+      <span class="btn-sub">🔒 R$197 · Garantia tripla de 60 dias · Acesso imediato · Sem risco</span>
+      <div class="cta-urgency">
+        <div class="cta-urgency__dot"></div>
+        Vagas se esgotando — oferta com bônus por tempo limitado
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ──────────────────────────────────────────────────────── -->
+<footer>
+  <p style="margin-bottom:8px;">
+    <a href="#">Termos de Uso</a> &nbsp;·&nbsp;
+    <a href="#">Política de Privacidade</a> &nbsp;·&nbsp;
+    <a href="#">Suporte</a>
+  </p>
+  <p>© 2026 Fenômeno PAM™ · Protocolo Presença Irresistível™ · Todos os direitos reservados</p>
+  <p style="margin-top:8px;font-size:0.7rem;">Este produto não garante resultados específicos. Os resultados dependem do esforço, comprometimento e condições individuais de cada aluno.</p>
+</footer>
+
+<!-- ─── STICKY BAR ─────────────────────────────────────────────────── -->
+<div class="sticky-bar" id="sticky-bar">
+  <div class="sticky-bar__text">
+    <strong>Fenômeno PAM™</strong> — Transformação em 60 dias ou seu dinheiro de volta. Bônus: R$841 inclusos.
+  </div>
+  <a href="#oferta" class="sticky-bar__cta">GARANTIR ACESSO — R$197</a>
+</div>
+
+<!-- ─── SCRIPTS ────────────────────────────────────────────────────── -->
+<script>
+  // FAQ accordion
+  document.querySelectorAll('.faq-item__q').forEach(function(q) {
+    q.addEventListener('click', function() {
+      var item = this.closest('.faq-item');
+      var isOpen = item.classList.contains('open');
+      document.querySelectorAll('.faq-item').forEach(function(i) { i.classList.remove('open'); });
+      if (!isOpen) item.classList.add('open');
+    });
+  });
+
+  // Sticky bar — hide when hero CTA is visible
+  var heroCta = document.querySelector('.hero-cta-wrap');
+  var stickyBar = document.getElementById('sticky-bar');
+  if (heroCta && stickyBar) {
+    var observer = new IntersectionObserver(function(entries) {
+      stickyBar.style.opacity = entries[0].isIntersecting ? '0' : '1';
+      stickyBar.style.pointerEvents = entries[0].isIntersecting ? 'none' : 'auto';
+    }, { threshold: 0.5 });
+    observer.observe(heroCta);
+  }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,109 @@
+# ═══════════════════════════════════════════════════════════════════════════════
+# PROMPT LENDÁRIO SQUAD - Configuration
+# Version: 1.0.0
+# Purpose: Criar prompts lendários para qualquer IA — chat, sistema, imagem e vídeo
+# ═══════════════════════════════════════════════════════════════════════════════
+
+name: prompt-lendario
+version: 1.0.0
+
+pack:
+  name: prompt-lendario
+  version: 1.0.0
+  short-title: Prompt Lendário Squad
+  description: >-
+    Squad especializado em criar prompts de elite para qualquer IA.
+    Usa o Método LENDÁRIO — framework proprietário de 8 dimensões
+    que garante prompts precisos, poderosos e repetíveis.
+    Output: prompts prontos para uso em Claude, GPT, Gemini, Midjourney,
+    DALL-E, Flux, Sora, Kling, Runway e qualquer outra IA.
+  author: MEGABRAIN
+  icon: "⚡"
+  slashPrefix: prompt
+
+entry_agent: prompt-chief
+
+workspace_integration:
+  level: read_write
+  rationale: >-
+    O squad lê contexto da workspace (briefings, personas, projetos)
+    e escreve prompts gerados em output/prompts/{slug}/
+  read_paths:
+    - workspace/
+  write_paths:
+    - workspace/output/prompts/
+  template_namespace: prompt
+
+# Pattern Library
+pattern_library:
+  prefix: PL
+  naming_convention:
+    format: "{PREFIX}-{CATEGORY}-{NUMBER}"
+    example: "PL-TP-001"
+  categories:
+    - id: TP
+      name: "Task Patterns"
+      description: "Padrões para estrutura e execução de tarefas"
+    - id: EP
+      name: "Executor Patterns"
+      description: "Padrões para tipos de executor"
+    - id: PP
+      name: "Process Patterns"
+      description: "Padrões para workflows de criação de prompt"
+    - id: QP
+      name: "Quality Patterns"
+      description: "Padrões de validação e quality gates"
+
+# Task Standards
+task_standards:
+  enforce_anatomy: true
+  validator: "PL-TP-001"
+  required_fields:
+    - task_name
+    - status
+    - responsible_executor
+    - execution_type
+    - input
+    - output
+    - action_items
+    - acceptance_criteria
+  optional_fields:
+    - estimated_time
+    - dependencies
+    - templates
+    - quality_gate
+
+# Executor Types
+executor_types:
+  human:
+    id: "PL-EP-001"
+    use_for: ["Briefing inicial", "Aprovação do prompt", "Iteração criativa"]
+  agent:
+    id: "PL-EP-002"
+    use_for: ["Geração do prompt", "Auditoria", "Variações", "Análise de qualidade"]
+  hybrid:
+    id: "PL-EP-003"
+    use_for: ["Refinamento colaborativo", "Review de precisão"]
+  worker:
+    id: "PL-EP-004"
+    use_for: ["Formatação final", "Exportação", "Templates"]
+
+# Workflow Configuration
+workflow_config:
+  checkpoint_policy: always_active
+  checkpoint_modes:
+    always_active: "Todo checkpoint DEVE passar"
+    skip_on_override: "Pode pular com aprovação manual"
+    advisory: "Apenas alerta, não bloqueia"
+  fail_fast: true
+  allow_manual_override: false
+
+# Squad Metadata
+metadata:
+  version: "1.0.0"
+  type: "base"
+  score: 9.5
+  stats:
+    agents: 1
+    phases: 5
+    quality_gates: 5

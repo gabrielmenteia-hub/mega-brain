@@ -1,0 +1,80 @@
+id: conversation-simulator
+name: Conversation Simulator Squad
+version: 1.0.0
+slug: conversation-simulator
+created_by: genesis-squad
+created_at: 2026-04-04
+
+description: >
+  Squad para simulação de conversas com Coach IA para desenvolvimento
+  de comunicação masculina assertiva. Baseado em 6 livros especializados
+  com 89 conceitos unificados e busca semântica.
+
+nicho: Desenvolvimento de Comunicação Masculina / Social Skills
+objetivo: Treinar homens a serem mais assertivos e diferenciados na abordagem
+
+agents:
+  - id: simulation-chief
+    tier: 1
+    role: Orquestrador principal do squad
+  - id: character-engine
+    tier: 2
+    role: Geração de respostas das personagens IA
+  - id: coach-analyzer
+    tier: 2
+    role: Análise multidimensional das mensagens do usuário
+  - id: knowledge-retriever
+    tier: 2
+    role: Busca semântica nos 89 conceitos
+  - id: progress-tracker
+    tier: 2
+    role: XP, níveis e skills do usuário
+  - id: feedback-writer
+    tier: 3
+    role: Narrativa do Coach em linguagem natural
+  - id: session-manager
+    tier: 3
+    role: Estado e contexto da sessão
+
+workflows:
+  - id: WF-01
+    name: Fluxo Principal de Conversa (Modo Livre)
+  - id: WF-02
+    name: Fluxo Guiado (PRO/MASTER)
+  - id: WF-03
+    name: Início de Sessão
+  - id: WF-04
+    name: Encerramento de Sessão
+
+commands:
+  - "*simulate [cenário] [personagem] [modo]"
+  - "*analyze [mensagem]"
+  - "*progress"
+  - "*library [query]"
+  - "*status"
+  - "*end"
+
+plans:
+  free:
+    sessions_per_day: 3
+    scenarios: 1
+    characters: 2
+    coach_mode: post_only
+    guided_mode: false
+  pro:
+    price_brl: 29.90
+    sessions_per_day: unlimited
+    scenarios: all
+    characters: 10
+    coach_mode: pre_and_post
+    guided_mode: true
+  master:
+    price_brl: 79.90
+    sessions_per_day: unlimited
+    scenarios: all_plus_custom
+    characters: all_plus_custom
+    coach_mode: realtime
+    guided_mode: true
+    voice_mode: future
+
+quality_gate_minimum: 7.0
