@@ -262,7 +262,11 @@
       "Bash(powershell -Command \"Get-Command gh -ErrorAction SilentlyContinue | Select-Object Source\")",
       "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" --version)",
       "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" auth status)",
-      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create simplex --private --source=. --remote=origin --description \"Simplex — bovine cattle management platform \\(FastAPI + Next.js + Supabase\\)\")"
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create simplex --private --source=. --remote=origin --description \"Simplex — bovine cattle management platform \\(FastAPI + Next.js + Supabase\\)\")",
+      "Bash(rtk du *)",
+      "Read(//d/mega-brain-data/**)",
+      "Bash(cp -r d:/MEGABRAIN/inbox d:/MEGABRAIN/knowledge d:/MEGABRAIN/artifacts d:/MEGABRAIN/logs d:/MEGABRAIN/agents/persons .)",
+      "Bash(\"/c/Program Files/GitHub CLI/gh.exe\" repo create mega-brain-data --private --source=. --remote=origin --description \"Layer 3 \\(personal data\\) backup for mega-brain — DO NOT make public\")"
     ],
     "deny": [
       "Bash(rm -rf *)",
@@ -281,7 +285,8 @@
       "C:\\Users\\Gabriel\\Downloads",
       "d:\\MEGABRAIN\\Simplex\\.claude",
       "d:\\MEGABRAIN\\Simplex\\.claude\\sessions",
-      "C:\\Users\\Gabriel\\AppData\\Local\\Temp"
+      "C:\\Users\\Gabriel\\AppData\\Local\\Temp",
+      "d:\\mega-brain-data"
     ]
   },
   "hooks": {
